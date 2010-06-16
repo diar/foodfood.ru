@@ -315,7 +315,11 @@
             <div class="clear"></div>
         </div>
         <div id="google_dialog" class="dialog_box dialog box_shadow">
+            <div class="caption">
+                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0" />
+                <div class="clear"></div>
             <div id="map_canvas" style="width:700px; height:500px"></div>
+            </div>
         </div>
     </xsl:template>
 

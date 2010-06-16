@@ -197,7 +197,7 @@
 }
 
 #google_dialog {
-    padding:10px;
+    margin-left:-350px;
     width:700px;
     height:540px
 }
