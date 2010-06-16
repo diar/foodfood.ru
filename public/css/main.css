@@ -329,14 +329,13 @@
     margin-top:3px;
     font-size:12px;
     line-height:13px;
-    font-style:italic;
     color:#000;
     padding-left:30px;
     overflow:hidden;
 }
 
 #restaurant_review .lq {
-    padding-right:5px;
+
 }
 
 #restaurant_article .caption {

@@ -106,10 +106,10 @@
                         <xsl:value-of select="worktime/time_end"/> <br />
                         <xsl:choose>
                             <xsl:when test="worktime/opened=1">
-                                <span style="color:FF6600">открыто</span>
+                                <span>Открыто</span>
                             </xsl:when>
                             <xsl:otherwise>
-                                <span>закрыто</span>
+                                <span style="color:#FF6600">Закрыто</span>
                             </xsl:otherwise>
                         </xsl:choose>
                     </div>
@@ -195,7 +195,7 @@
                             <xsl:value-of select="//person/person_text" />
                         </div>
                         <div class="clear"></div>
-                        <div class="more"><a href="/{//site/city}/persons">Все люди</a></div>
+                        
                     </div>
                 </div>
                 <!-- Средняя колонка -->
@@ -210,7 +210,7 @@
                         <div class="caption">Отзывы</div>
                         <div class="reviews">
                             <xsl:if test="count(reviews/item)=0">
-                                <div style="padding:10px 0;">Еще никто не оставлял отзывов..</div>
+                                <div style="padding:10px 0;">Ты можешь оставить отзыв первым!</div>
                             </xsl:if>
                             <xsl:apply-templates select="reviews/item" />
                             <div class="form">

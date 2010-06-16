@@ -430,7 +430,6 @@ html {
 #restaurant_by_mood {
     display:none;
     margin-top:-1px;
-    height:700px;
     padding:27px;
     padding-top: 3px;
 }
@@ -640,6 +639,7 @@ html {
 }
 
 .person_block {
+
     font-size:12px;
 }
 .person_block .caption {
@@ -669,6 +669,7 @@ html {
 .person_block .more {
     float:right;
     font-size:14px;
+    color: #FF6600;
 }
 #copyright {
     height:45px;
