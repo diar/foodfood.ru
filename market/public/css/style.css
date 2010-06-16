@@ -1,0 +1,583 @@
+@charset "utf-8";
+/*
+    Document    : desktop
+    Author      : valmon, z-mode
+    Description : Основной CSS файл
+
+
+    Основные цвета сайта:
+    Оранжевый : #FF6600;
+    Зелёный : #009900;
+
+ Reset
+-------------------------------------------------------------------*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,
+blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,
+font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,dl,dt,dd,
+ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+    border:0;
+    outline:0;
+    font-weight:inherit;
+    font-style:inherit;
+    font-size:100%;
+    font-family:inherit;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+}
+::selection {background: #f60;color:#fff}
+:focus {
+    outline:0;
+}
+
+html {
+    width:100%;
+}
+
+body {
+    line-height:1;
+    font-family:Arial;
+    color:#000;
+    background:#fff;
+    font-size:14px;
+    width:100%;
+    width:expression(document.body.clientWidth < 952? "952px": "auto" );
+}
+
+ol,ul {
+    list-style:none;
+}
+
+table {
+    border-collapse:collapse;
+    border:none;
+    empty-cells:show;
+    border-spacing:0;
+}
+
+caption,th,td {
+    text-align:left;
+    font-weight:normal;
+}
+
+blockquote:before,blockquote:after,q:before,q:after {
+    content:"";
+}
+
+blockquote,q {
+    quotes:"" "";
+}
+
+a {
+    text-decoration:underline;
+    color:inherit;
+}
+a:hover {
+    text-decoration:none;
+}
+
+table td {
+    margin:0;
+    padding:0;
+}
+
+/* Основные блоки
+-------------------------------------------------------------------*/
+
+#container {W
+            width: 100%;
+}
+
+#header {
+    width:100%;
+    height:179px;
+    background:url(/market/public/images/header_bg.png) repeat-x;
+}
+
+#header #logo {
+    float:left;
+    padding:60px 0 0 20px;
+}
+
+#header #banner_top {
+    float:right;
+    padding:40px 20px 0 0;
+}
+
+#menu_top {
+    height:18px;
+    background: #FF6600;
+    padding:7px 0 0 30px;
+}
+
+#menu_top a {
+    padding:3px 13px;
+    margin-right:20px;
+}
+#menu_top a.active {
+    font-size:14px;
+    background:#fff;
+    -moz-border-radius:3px 3px 0 0;
+    -webkit-border-radius:3px 3px 0 0 ;
+    border-radius:3px 3px 0 0;
+    text-decoration:none;
+    padding:4px 13px;
+}
+
+#info_block {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+#info_block table {
+    width:100%;
+}
+
+#info_block table td {
+    vertical-align:top;
+}
+#info_block .first_col {
+    padding-left:20px;
+
+}
+.select {
+    background:url(/market/public/images/select_new.jpg) no-repeat;
+    width:283px;
+    height:30px;
+    font-size:21px;
+    padding: 5px 0 0 5px;
+    margin-top:10px;
+    cursor:pointer;
+}
+#locate_select {
+    background: #fff;
+    width:275px;
+    position:absolute;
+    margin-top:-30px;
+    font-size:21px;
+    opacity:0;
+}
+.district {
+    opacity:0;
+}
+.remember {
+    padding-left:128px;
+    margin-top:10px;
+}
+
+.trash {
+    background:url(/market/public/images/trash_block_bg.jpg) repeat-y;
+    width:193px;
+}
+.money {
+    padding-top:10px;
+    font-size:18px;
+    padding-left:30px;
+}
+
+.money .rub {
+    font-size:44px;
+}
+
+.money .rub sup{
+    font-size:14px;
+    font-style:italic;
+}
+
+.money .edit {
+    padding:5px 0 5px 5px;
+    font-size:14px;
+}
+.order {
+    padding:10px 0 5px 0;
+    text-align:center;
+    border-top:2px solid #ffffff;
+    font-style:italic;
+    font-size:21px;
+}
+.order a {
+    font-style:italic;
+    font-size:21px;
+    color:#000000;
+}
+
+.trash_description {
+    padding:5px;
+    line-height:24px;
+    width:210px;
+}
+
+#login_block {
+    text-align: right;
+    font-family: Tahoma, Arial, Helvetica;
+    line-height: 17px;
+    font-size: 11px;
+    float:right;
+    margin-right:30px;
+    padding-left:20px;
+    padding-top:13px;
+}
+
+.navigation {
+    background:#000000;
+    margin:10px 10px;
+    height:45px;
+
+}
+
+.navigation .back {
+    background:url(/market/public/images/back.jpg) 0 0 no-repeat;
+    width:24px;
+    height:24px;
+    position:absolute;
+    left:30px;
+    margin-top:10px;
+}
+
+.navigation .menu {
+    margin-left:20%;
+}
+
+.navigation .menu li {
+    margin-top:15px;
+    float:left;
+    font-size:16px;
+    color:#fff;
+    font-weight:bold;
+    margin-right:20px;
+}
+.navigation .menu li.active {
+    background: #fff;
+    color:#000;
+}
+.navigation .next {
+    background:url(/market/public/images/next.jpg) 0 -24px no-repeat;
+    width:24px;
+    height:24px;
+    position:absolute;
+    right:30px;
+    margin-top:10px;
+}
+.navigation .pages  {
+    font-size:18px;
+    color:#666666;
+    position:absolute;
+    margin-top:15px;
+    right:80px;
+
+}
+#menu_list {
+    min-height:500px;
+}
+.tags {
+    margin:0 40px;
+    padding:5px 0;
+    height:30px;
+    background:#EAEAEA;
+}
+
+.tags .menu_tag {
+    margin: 5px;
+}
+
+.tags .menu_tag.current {
+    background: #f60;
+    color:#fff;
+}
+
+.echo {
+    margin:0 20px;
+}
+.echo .caption.green {
+    margin-top:15px;
+    border-bottom:2px solid #009900;
+}
+.echo .caption.orange {
+    margin-top:15px;
+    border-bottom:2px solid #FF6600;
+}
+.echo .caption .title {
+    width:300px;
+    margin:0 auto;
+    text-align:center;
+    top:3px;
+    position:relative;
+    background:#ffffff;
+}
+
+.echo .caption.green .title a{
+    color:#009900;
+}
+.echo .caption.orange .title a{
+    color:#ff6600;
+}
+
+.echo .delivery_desc {
+    float: left;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.echo .status {
+    margin-top:6px;
+    float: right;
+    font-size:12px;
+    color: #009900;
+}
+
+.echo .status.green {color: #009900;}
+.echo .status.orange {color: #ff6600;}
+.echo .list {margin-top:10px;}
+/********************************* ITEM ******************************/
+
+.item  {
+    float:left;
+    margin:10px 30px 5px 0;
+    width:205px;
+}
+.item .title {
+    margin:3px 0;
+}
+.item .foto img {
+    width:183px;
+}
+.item .item_tags {float:left;}
+.item .item_tags .tag_item {
+    width:18px;
+    height:18px;
+    background:#999999;
+    float:left;
+    margin:1px;
+}
+.item .reviews {float:right;font-size:10px;}
+.item .description {
+    font-size:12px;
+    padding:3px 0;
+}
+.item .price {
+    float:left;
+    text-align:right;
+    padding-left:10px;
+}
+
+.item .price .new {
+    color: #ff6600;
+    font-size:24px;
+}
+
+.item .price .old {
+    font-size:12px;
+    text-decoration:line-through;
+}
+
+.item .price span {
+    font-size:10px;
+    text-decoration:none;
+}
+
+.item .get {float:right;}
+
+.item .buy {
+    background:0;
+    border:0;
+    background:url(/market/public/images/buy_bg.jpg) no-repeat;
+    font-size:14px;
+    font-style:italic;
+    width:80px;
+    height:32px;
+}
+
+/******************************** CLASS *****************************/
+.font21px {
+    font-size:21px;
+}
+.font12px {
+    font-size:12px;
+}
+
+.clear {
+    clear:both;
+}
+
+
+
+.rounded {
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+}
+
+.rounded_left {
+    -webkit-border-top-left-radius:3px;
+    -webkit-border-bottom-left-radius:3px;
+    -moz-border-radius:3px 0 0 3px;
+    border-radius:3px 0 0 3px;
+}
+
+.rounded_right {
+    -webkit-border-top-right-radius:3px;
+    -webkit-border-bottom-right-radius:3px;
+    -moz-border-radius:0 3px 3px 0;
+    border-radius:0 3px 3px 0;
+}
+
+.rounded_bottom {
+    -webkit-border-bottom-left-radius:3px;
+    -webkit-border-bottom-right-radius:3px;
+    -moz-border-radius:0 0 3px 3px;
+    border-radius:0 0 3px 3px;
+}
+
+.box_shadow {
+    -moz-box-shadow:2px 2px 3px #969696;
+    -webkit-box-shadow:2px 2px 3px #969696;
+}
+
+.box_shadow_not_ie {
+    -moz-box-shadow:2px 2px 3px #969696;
+    -webkit-box-shadow:2px 2px 3px #969696;
+    box-shadow:2px 2px 3px #969696;
+}
+
+.text_shadow {
+    text-shadow:#aaa 1px 1px 1px;
+}
+
+/* Диалоги
+- ---------------------------------------------------------------------*/
+.dialog_box {
+    position:absolute;
+    left:50%;
+    margin-left:-220px;
+    top:200px;
+    width:440px;
+    background:#fff;
+    border:4px solid #86a515;
+    z-index:100000;
+    display:none;
+}
+
+.dialog .caption {
+    height:34px;
+    width:100%;
+}
+
+.dialog .close_button {
+    width:18px;
+    height:18px;
+    background:#86a515;
+    float:right;
+    cursor:pointer;
+    margin: 8px 8px 0 0;
+}
+
+.dialog .title {
+    font-size:25px;
+    width:100%;
+    color:#86a515;
+    text-align:center;
+}
+
+.dialog .message {
+    margin-top:10px;
+    width:100%;
+    text-align:center;
+    color:#ff6600;
+    height:16px;
+}
+
+.dialog .form_dialog {
+    width:auto;
+    padding:0 23px;
+}
+
+.dialog .form_input {
+    width:100%;
+    font-size:24px;
+    border:1px solid #000;
+    text-align:center;
+    height:44px;
+}
+
+.dialog .form_loader {
+    display:none;
+    float:left;
+    position:absolute;
+    padding-left:5px;
+}
+
+.dialog .label {
+    font-size:11px;
+    color:#505050;
+    text-align:center;
+    margin:8px 0 3px;
+}
+#auth_dialog {
+    height:360px;
+    text-align:center;
+}
+
+#auth_dialog #remain_me {
+    float:right;
+    font-size:11px;
+    margin:8px 0 0 5px;
+}
+#registration_dialog {
+    height:447px;
+    text-align:center;
+}
+
+#passwd_dialog {
+    height:240px;
+    text-align:center;
+}
+#auth_dialog #auth_submit,
+#registration_dialog #registration_submit,
+#passwd_dialog #passwd_submit{
+    width:195px;
+    height:55px;
+    background:url(/public/images/auth_button);
+    border:none;
+    cursor:pointer;
+    color:#FFF;
+    font-size:14px;
+    text-shadow:-1px 0 0 #777;
+    display:block;
+    margin:0 auto;
+}
+
+#auth_dialog #auth_submit:active,
+#registration_dialog #registration_submit:active,
+#passwd_dialog #passwd_submit:active{
+    background:url(/public/images/auth_button_active);
+}
+#order_dialog {
+    width:600px;
+    margin-left:-300px;
+    padding:10px;
+}
+#order_dialog #dish_order_items{
+    width:100%;
+    margin: 20px 0;
+}
+#order_dialog #dish_order_items td{
+    border: 1px solid gray;
+    padding:8px;
+}
+#order_dialog .gen_price {
+    margin-bottom: 10px;
+    font-size:22px;
+}
+/******************************** Вывод сообщения *****************************/
+#message_dialog {
+    display:none;
+    position: absolute;
+    left:40px;
+    top:0px;
+    width:300px;
+    background:gray;
+    padding:25px 12px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
+    -moz-border-radius:0 0 5px 5px;
+    border-radius:0 0 5px 5px;
+}

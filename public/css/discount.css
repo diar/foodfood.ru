@@ -1,0 +1,512 @@
+@charset "utf-8";
+/* 
+    Document    : desktop
+    Created on  : 24.02.2010, 3:01:58
+    Author      : valmon, z-mode
+    Description : main CSS file
+*/
+
+/* Reset
+-------------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td { padding: 0; margin: 0; }
+img { border:0px; }
+
+
+/* Основные блоки
+-------------------------------------------------------------------*/
+html, body {
+    font-family: Tahoma,Arial;
+    width:100%;
+    height:100%;
+    min-width:900px;
+    min-height:600px;
+}
+.dialog {
+    display:none;
+    position: absolute;
+    z-index:100;
+    background:white;
+}
+.dialog_border {
+    background: #96dc00;
+    display:none;
+    position: absolute;
+    z-index:99;
+    opacity:0.5;
+}
+.dialog_caption {
+    height:30px;
+    font-size:14px;
+    background: #ffc814;
+}
+.dialog_caption_text {
+    float:left;
+    line-height:30px;
+    padding-left:10px;
+}
+.dialog_caption_close {
+    float:right;
+    margin:5px 10px 0 0;
+    color:black;
+    text-decoration:none;
+    border-bottom: 1px black dashed;
+}
+.dialog_window {
+    padding:15px;
+}
+#dialog_login {
+    width:300px;
+    height:200px;
+}
+.form_el_description {
+    font-size:14px;
+    padding:10px 0;
+    color:#222;
+}
+.form_el_input {
+    width:100%;
+}
+.form_el_button {
+    width:40%;
+    background: #ffc814;
+    border:2px solid #ffc814;
+    cursor:pointer;
+}
+.form_el_button:hover {
+    background: #96dc00;
+}
+div.clear {
+    clear: both;
+}
+/* Страница Скидки
+-------------------------------------------------------------------*/
+#discount_body {
+    min-width:1100px;
+    background: #e65916;
+}
+#discount_logo {
+    float:left;
+    width:225px;
+    text-align:right;
+    padding:34px 0 0 123px;
+}
+#discount_logo div {
+    width:225px;
+    font-size:14px;
+    line-height:26px;
+    color:gray;
+}
+#discount_menu {
+    float:right;
+    padding:162px 350px 0 0;
+}
+#discount_menu a {
+    color:black;
+    font-size:18px;
+    margin-left:50px;
+}
+#discount_footer {
+    float:left;
+    color:#444;
+    height:44px;
+    height:150px;
+}
+#discount_header {
+    width:100%;
+    height:191px;
+    background: white url(/public/images/discount_header.jpg) no-repeat right;
+}
+#discount_copyright {
+    padding-left:130px;
+    font-size: 11px;
+    font-family: Verdana,Tahoma;
+    padding-top:8px;
+    color:white;
+    width:320px;
+    float:left;
+}
+#discount_left {
+    height:630px;
+    width:320px;
+    float:left;
+    font-size: 32px;
+    font-weight: normal;
+}
+#discount_happy {
+    padding:15px 0 0 21px;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: normal;
+    width:320px;
+    background: url(/public/images/discount_cur.gif) no-repeat;
+}
+.discount_input {
+    padding:2px;
+    width:100%;
+    border:2px solid #e9e8c4;
+    margin-top:12px;
+    font-size:30px;
+    color:#b0b0b0;
+}
+.discount_input:focus {
+    border:2px solid #93d124;
+}
+.discount_fish {
+    float:left;
+    margin-top:10px;
+}
+.discount_button {
+    cursor:pointer;
+    float:right;
+    width:144px;
+    height:44px;
+    border:none;
+    margin-top:12px;
+    font-size:24px;
+    font-weight:bold;
+    font-style:italic;
+    color:#444;
+    background:#93d124;
+}
+#discount_invite {
+    padding-top:40px;
+    width:320px;
+    line-height:30px;
+}
+#discount_invite a {
+    color:black;
+    text-decoration:underline;
+}
+
+#discount_center {
+    width:460px;
+    float:left;
+}
+
+#discount_right {
+    float:left;
+    width:305px;
+    height:305px;
+    margin-top:80px;
+}
+#discount_lcur {
+    float:left;
+    width:18px;
+    height:60px;
+    margin-top:240px;
+    background: url(/public/images/discount_lcur.gif) no-repeat bottom left;
+}
+#discount_tip {
+    float:left;
+    background: #fffed7;
+    width:287px;
+    height:335px;
+}
+
+#discount_tip .caption {
+    font-size: 25px;
+    font-style: italic;
+    font-weight:normal;
+    color:#da640c;
+}
+
+#discount_tip p {
+    padding:8px 0;
+    font-size: 14px;
+}
+
+#discount_tip p.min {
+    padding:10px 0;
+    font-size: 10px;
+}
+
+.discount_window {
+    margin-top:60px;
+    background:#fffed7;
+    width:460px;
+}
+
+.discount_window .caption {
+    line-height:30px;
+    font-size: 32px;
+    font-family: Calibri,Arial,Tahoma;
+    color:#da640c;
+}
+
+.discount_window .mini {
+    line-height:24px;
+    font-size: 26px;
+    font-weight:normal;
+}
+
+.discount_window .count {
+    text-align:right;
+    color:#835b1e;
+    font-size:14px;
+    font-weight:normal;
+    float:right;
+    width:65px;
+}
+
+.discount_window .counter {
+    background:#e9e8c4;
+    padding:4px 6px;
+}
+
+#discount_restoran {
+    padding-top:122px;
+    font-size: 24px;
+    line-height: 24px;
+    width:320px;
+}
+#discount_invite_button {
+    padding:12px;
+}
+#discount_content {
+    height:630px;
+    padding-left:130px;
+    background: url(/public/images/discount_back.jpg) repeat-x;
+}
+#window_about p {
+    padding: 5px 0;
+}
+#window_contact a {
+    line-height:64px;
+    font-size:18px;
+    color:black;
+}
+#discount_message {
+    width:320px;
+    height:240px;
+}
+#discount_loader {
+    position:absolute;
+    top:20px;
+    left: 20px;
+    display:none;
+}
+#selectMenu a{
+    font-size: 26px;
+    font-family: Calibri,Arial,Tahoma;
+    color:white;
+}
+#selectMenu a#currentOption{
+    margin-left: -10px;
+    padding-left: 10px;
+    position:absolute;
+    width: 290px;
+    color:#da640c;
+    font-size: 26px;
+    z-index: 2;
+}
+a#currentOption:hover #selectMenu a:hover{
+    text-decoration: none;
+}
+#selectMenu #options {
+    margin-left: -10px;
+    z-index: 1;
+    display:none;
+    position:absolute;
+    background:#93d124;
+    width: 280px;
+    padding: 30px 10px 10px 10px;
+}
+#selectMenu #options div.option {
+    padding: 5px 0;
+}
+
+
+/********* EDIT RESTAURANT INFO *************/
+
+#titleEdit{
+    margin: 20px 0 0 23px;
+}
+
+#discount_left.edit {
+    width:450px;
+}
+#discount_right.edit {
+    width:480px;
+    margin-top:50px;
+}
+#formEdit {
+    margin-left:-90px;
+    *position:absolute;
+    *left:125px;
+    margin-top:20px;
+}
+#formEdit .input{
+    background:url('/public/images/discount_input.png') no-repeat;
+    float:left;
+    padding:2px 10px;
+    padding-top:6px;
+    width:188px;
+    height:18px;
+}
+#formEdit .input input{
+    background:none;
+    outline:0;
+    color:#535353;
+    font-family:Tahoma,Arial;
+    font-size:12px;
+    border:0;
+    width:188px;
+    *margin-top:-35px;
+
+}
+#formEdit .input input:active,
+#formEdit .input input:focus{
+    border:0;
+}
+#formEdit .textarea {
+    background:url('/public/images/discount_textarea.png') no-repeat;
+    padding:5px 10px;
+    float:left;
+    width:189px;
+    height:98px;
+}
+#formEdit textarea{
+    outline:0;
+    background:none;
+    color:#535353;
+    font-family:Tahoma,Arial;
+    font-size:12px;
+    width:100%;
+    max-width:189px;
+    max-height:90px;
+    height:90px;
+    border:0;
+    overflow:auto;
+    overflow-x:hidden;
+
+}
+#formEdit .shortInput {
+    background:url('/public/images/discount_short_input.png') no-repeat;
+    float:left;
+    padding:2px 10px;
+    padding-top:6px;
+    width:65px;
+    height:18px;
+}
+#formEdit .shortInput input{
+    background:none;
+    outline:0;
+    color:#535353;
+    font-family:Tahoma,Arial;
+    font-size:12px;
+    border:0;
+    float:left;
+    width:65px;
+    height:15px;
+    border:none;
+}
+#formEdit .shortInput input:active,
+#formEdit .shortInput input:focus{
+    border:0;
+}
+
+#formEdit .caption{
+    font-family:Tahoma,Arial;
+    font-size:11px;
+    width:200px;
+    text-align:right;
+    float:left;
+    height:20px;
+    padding-top:5px;
+    padding-right:20px;
+}
+.tahoma24px000000{
+    font-family:Tahoma,Arial;
+    font-size:24px;
+    color:#000000;
+}
+.tahoma14px000000{
+    font-family:Tahoma,Arial;
+    font-size:14px;
+    color:#000000;
+}
+.tahoma18px000000boldItalic{
+    font-family:Tahoma,Arial;
+    font-size:18px;
+    font-style:italic;
+    color:#000000;
+}
+.tahoma24px000000boldItalic{
+    font-family:Tahoma,Arial;
+    font-size:24px;
+    font-style:italic;
+    color:#000000;
+}
+.help{
+    font-family:Tahoma,Arial;
+    font-size:11px;
+    width:100px;
+    text-align:left;
+    float:left;
+    height:20px;
+    padding-top:5px;
+    padding-left:20px;
+}
+.delimiter{
+    height:5px;
+    clear:both;
+}
+.number {
+    float:left;
+    background:url('/public/images/discount_number_bg.png') no-repeat;
+    width:21px;
+    height:25px;
+    padding: 3px 0 0 7px;
+    font-size:18px;
+}
+.list{
+    margin:10px 0 30px;
+}
+.text{
+    height:28px;
+    padding-left:10px;
+    float:left;
+    padding-top:5px;
+}
+#edit_rest_submit {
+    background:url('/public/images/discount_submit.png') no-repeat;
+    border: 0;
+    width:195px;
+    height:32px;
+    cursor:pointer;
+}
+#discount_content.edit{
+    height: 680px;
+}
+.question {
+    margin-left:-50px;
+}
+.question .icon {
+    float:left;
+}
+.question .contact {
+    float:left;
+    padding-left:30px;
+    padding-top:5px;
+}
+
+.photo_upload {
+    float: left;
+}
+.MultiFile-wrap{
+    float:left;
+    font-size: 12px;
+}
+.MultiFile-wrap a{
+    color:green;
+}
+.MultiFile-wrap a:hover{
+    text-decoration: none;
+}

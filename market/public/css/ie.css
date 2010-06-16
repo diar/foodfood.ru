@@ -1,0 +1,12 @@
+@charset "utf-8";
+.clear {
+    clear:both;
+    height:1px;
+}
+.rounded {
+    border-radius: 3px;
+    /*behavior: url(/public/css/border-radius.htc); */
+}
+.box_shadow {
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=145, Strength=3);
+}

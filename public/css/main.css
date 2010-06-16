@@ -1,0 +1,474 @@
+@charset "utf-8";
+/*
+    Document    : desktop
+    Author      : valmon, z-mode
+    Description : CSS файл для главной страницы*/
+#recomended {
+    height: 391px;
+    background:#c8c8c8;
+}
+
+#recomended_title {
+    float:left;
+    font-size:18px;
+    color:#fff;
+    background:url(/public/images/caption_green_bg.jpg) repeat-x;
+    width:290px;
+}
+
+#recomended_title div.text {
+    float:left;
+    padding:8px 0px 7px 40px;
+}
+
+#arrows {
+    height:30px;
+    float:right;
+    width:60px;
+    cursor:pointer;
+}
+
+#arrows div.back,#arrows div.next {
+    float:left;
+    width:24px;
+    height:24px;
+    margin:5px 0 0 3px;
+}
+
+#arrows div.back {
+    background:url(/public/images/icons/recomended_arrow_back.jpg) 0 0 no-repeat;
+}
+#arrows div.back:active {
+    margin:6px 1px 0 2px;
+}
+#arrows div.next {
+    background:url(/public/images/icons/recomended_arrow_next.jpg) 0 -24px no-repeat;
+}
+
+#arrows div.next:active {
+    margin:6px 0 0 4px;
+}
+
+#recomended_container {
+    height:310px;
+    width:922px;
+    overflow:hidden;
+    position:relative;
+    padding:10px 0 0 20px;
+    background:url(/public/images/loader_gray2.gif) no-repeat center;
+}
+
+#recomended_gallery {
+    width:5000px;
+}
+
+#recomended_gallery .item {
+    width:228px;
+    height:310px;
+    float:left;
+    margin-right:20px;
+    z-index:-1;
+    display:none;
+}
+
+#recomended_gallery div.img {
+    background:#fff;
+    width:220px;
+    height:220px;
+    padding:4px;
+}
+
+#recomended_gallery a.container {
+    display:block;
+    width:220px;
+    height:220px;
+    overflow:hidden;
+}
+
+
+.name {
+    padding-top:10px;
+    padding-bottom:6px;
+}
+
+#additional {
+    width:100%;
+}
+
+#additional td {
+    vertical-align:top;
+}
+
+#additional .caption {
+    font-size:18px;
+    font-style:normal !important;
+    color:#fff;
+    padding:8px 10px 7px 40px;
+}
+
+.additional_content {
+    width:100%;
+    height:380px;
+}
+
+.additional_left,.additional_center,.additional_right {
+    padding:10px 0 0;
+}
+
+.additional_hide_bar {
+    height:10px;
+    width:100%;
+}
+
+.additional_hide_bar img {
+    cursor:pointer;
+    float:right;
+}
+
+#restaurant_new .caption {
+    background:url(/public/images/caption_orange_bg.jpg) repeat-x;
+    width:240px;
+}
+
+#restaurant_new .shadow {
+    margin-top:24px;
+}
+
+#restaurant_new .ribbon {
+    width:290px;
+    height:243px;
+    padding:20px 0 0 35px;
+}
+
+#restaurant_new a.container {
+    display:block;
+    width:220px;
+    height:170px;
+    overflow:hidden;
+    margin-left: 6px;
+}
+
+#restaurant_new .border {
+    width:220px;
+    background:#fff;
+    padding:3px;
+}
+
+#restaurant_new .opened {
+    background:url(/public/images/new_place.png) no-repeat;
+    width:239px;
+    height:29px;
+    padding-top:33px;
+    font-size:18px;
+    font-weight:bold;
+    color:#d84705;
+    text-align:center;
+}
+
+#restaurant_new	.box_for_shadow {
+    width:230px;
+    height:250px;
+}
+
+#restaurant_discount .caption {
+    background:url(/public/images/caption_orange_bg.jpg) repeat-x;
+    float:right;
+    width:135px;
+	padding-right:80px;
+}
+
+#restaurant_discount .discount {
+    height:35px;
+    cursor:pointer;
+    margin:0 20px 0 -60px;
+    padding:5px 5px 5px 8px;
+}
+
+#restaurant_discount .discount .description {
+    display: none;
+}
+
+#restaurant_discount .discount:active .count {
+	margin:1px 0 0 1px;
+}
+
+#restaurant_discount .discount:active .rest_caption {
+    padding-left:16px;
+}
+
+
+#restaurant_discount .discount .left {
+    font-size:10px;
+    color:gray;
+}
+
+#restaurant_discount .discount .rest_caption {
+    float:left;
+    padding-left:17px;
+    width:130px;
+}
+
+#restaurant_discount .discount .rest_caption .left {
+    padding-top:3px;
+}
+
+
+#restaurant_discount .discounts {
+    padding-top:5px;
+    float:right;
+}
+
+#restaurant_discount .discounts .count {
+    float:left;
+    text-align:center;
+    width:48px;
+    height:34px;
+    color:#FFF;
+    font-size:9px;
+    line-height:10px;
+    background:#d84705;
+    padding:1px 1px 1px 2px;
+	text-align: center;
+	padding-top:5px;
+}
+
+#restaurant_discount .discounts .sale5 {
+	background:url(/public/images/sale5.jpg) no-repeat;
+}
+#restaurant_discount .discounts .sale15 {
+	background:url(/public/images/sale15.jpg) no-repeat;
+}
+#restaurant_discount .discounts .sale20 {
+	background:url(/public/images/sale20.jpg) no-repeat;
+}
+
+#restaurant_discount .discounts .percent {
+    font-size:14px;
+    line-height:14px;
+}
+
+#restaurant_discount .more {
+    padding-top:10px;
+    font-size:18px;
+    padding-left:20px;
+    background:url(/public/images/icons/discounts_small.jpg) 0 12px no-repeat;
+}
+#posters_tomorrow {
+    display:none;
+}
+#restaurant_poster .caption {
+	background:url(/public/images/caption_orange_bg.jpg) repeat-x;
+    width:80%;
+}
+
+#restaurant_poster .poster_block {
+    float:left;
+    display:none;
+}
+
+#restaurant_poster .rest_caption {
+    display:block;
+    font-size:18px;
+}
+
+#restaurant_poster .poster_title {
+    margin-top:5px;
+    display:block;
+    color:#E27B09;
+    font-size:14px;
+}
+
+#restaurant_poster .text {
+    margin-top:5px;
+    width:170px;
+    font-size:12px;
+    line-height: 14px;
+}
+
+#restaurant_poster .more {
+    width:80%;
+    text-align:right;
+    padding-top:10px;
+    padding-left:20px;
+    font-size:18px;
+}
+.posters_link {
+    color:#fff;
+    text-decoration: none;
+    border-bottom: 1px dashed #fff;
+}
+#restaurant_review .caption {
+    background:url(/public/images/caption_white_bg.jpg) repeat-x;
+    color:#d84705;
+
+	width:240px;
+}
+
+#restaurant_review .caption a {
+    color:#d84705;
+}
+
+#restaurant_review .reviews {
+
+    width:280px;
+}
+
+#restaurant_review .review {
+    width:280px;
+    font-size:12px;
+    padding-left:30px;
+    padding-top:10px;
+}
+
+#restaurant_review .user {
+    padding-left:20px;
+    background:url(/public/images/icons/user_icon.gif) no-repeat;
+}
+
+#restaurant_review .text {
+    margin-top:3px;
+    font-size:12px;
+    line-height:13px;
+    font-style:italic;
+    color:#000;
+    padding-left:30px;
+    overflow:hidden;
+}
+
+#restaurant_review .lq {
+    padding-right:5px;
+}
+
+#restaurant_article .caption {
+    color:#fff;
+    background:url(/public/images/caption_green_bg.jpg) repeat-x;
+    width:80%;
+}
+
+#restaurant_article .caption a {
+    color:#fff;
+}
+
+#restaurant_article .article_block {
+    float:left;
+    display:none;
+    width:270px;
+}
+
+#restaurant_article .date {
+    background: #fff;
+    border:1px solid #fff;
+    float:left;
+    width:44px;
+    padding-top: 5px;
+    text-align:center;
+    font-size:11px;
+}
+#restaurant_article .date .number{
+    font-size:24px;
+    color:#333;
+}
+#restaurant_article .date .month{
+    font-size:9px;
+    background:#090;
+    margin-top:4px;
+    color:#fff;
+    padding:2px 0;
+}
+
+#restaurant_article .article_description {
+    font-size:9px;
+}
+
+#restaurant_article .article_title {
+    display:block;
+    font-size:14px;
+    color:#000;
+    width: 190px;
+}
+
+#restaurant_article .text {
+    width:170px;
+    margin-top:5px;
+    margin-bottom:5px;
+    font-size:12px;
+    line-height: 13px;
+}
+
+#restaurant_dostavka {
+
+}
+
+#restaurant_dostavka .caption {
+    background:url(/public/images/caption_white_bg.jpg) repeat-x;
+    float:right;
+    width:135px;
+	padding-right:80px;
+}
+
+#restaurant_dostavka .caption a {
+    color:#489615;
+}
+
+#restaurant_dostavka .dostavka_li {
+    background:url(/public/images/icons/small_dostavka.png) 0 5px no-repeat;
+    font-size:12px;
+    padding:5px 0 5px 30px;
+	line-height:30px;
+}
+
+#restaurant_dostavka .dostavka_li span {
+    font-size:11px;
+    color:#555;
+    padding-right:5px;
+}
+
+#restaurant_dostavka ul {
+    padding-top:15px;
+    float:right;
+    padding-right:100px;
+}
+
+#restaurant_banner_mini {
+    text-align:right;
+}
+
+#additional2_content {
+    height:454px;
+    background:#c8c8c8;
+}
+
+#recomended_gallery div.img img.rest_image,#restaurant_new .border img {
+    width:220px;
+}
+
+.name a,#restaurant_discount .discount a {
+    font-size:16px;
+}
+
+.commentCount,.commentCount a {
+    font-size:12px;
+}
+
+.additional_left,#restaurant_review {
+    width:300px;
+}
+
+#restaurant_poster .poster,#restaurant_article .article {
+    margin-top:15px;
+}
+#restaurant_poster .poster {
+	height:90px;
+}
+
+#restaurant_poster .poster_icon,
+#restaurant_article .article_icon {
+    float:left;
+    width:76px;
+}
+
+#restaurant_poster .poster_text,#restaurant_article .article_text {
+    float:left;
+    padding-left:15px;
+    padding-right:10px;
+}

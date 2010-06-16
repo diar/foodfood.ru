@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+#topMenu a:hover {
+    background:#ffffff;
+    border-radius: 3px;
+}
+
+.clear {
+    clear:both;
+    height:1px;
+}
+
+#search_menu a {
+    display:block;
+    float:left;
+    padding:3px 13px;
+    margin-left:10px;
+}
+
+#search_menu a:hover {
+    background:#fac213;
+    border-radius: 3px;
+}
+.rounded {
+    border-radius: 3px;
+    /*behavior: url(/public/css/border-radius.htc); */
+}
+.box_shadow {
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=145, Strength=3);
+}
+/**** НОВОЕ МЕСТО ****/
+#restaurant_new .box_for_shadow  {
+    width: 230px;
+    border-right: 2px solid #999;
+    border-bottom: 2px solid #999;
+}
+#cursor_top {
+    position:relative;
+}
+#restaurant_info .news_item .text_block  {
+    width:225px;
+}
+
+
+
+/********РЕЙТИНГ ***********/
+.rating_complete {
+	background:#FFD9A6;
+	height:18px;
+	margin:3px 0 0 1px;
+	max-width:143px;
+	position:absolute;
+	margin-left:-63px;
+	margin-top:0px;
+}

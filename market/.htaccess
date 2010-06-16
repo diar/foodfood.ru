@@ -1,0 +1,18 @@
+AddDefaultCharset UTF-8
+Options -Indexes
+Options +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /market/
+RewriteRule ^public/(.*)$ public/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php
+</IfModule>
+
+php_flag display_errors On
+php_flag magic_quotes_gpc 0
+php_flag magic_quotes_runtime 0
+php_value short_open_tag On
+php_value output_buffering On

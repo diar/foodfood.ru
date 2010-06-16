@@ -1,0 +1,1035 @@
+@charset "utf-8";
+/* 
+    Document    : desktop
+    Author      : valmon, z-mode
+    Description : CSS файл для всех страниц, отличных от главной
+*/
+
+
+
+#restaurant {
+    margin:0 16px 0 20px;
+}
+#restaurant_info {
+}
+#restaurant_info .left_col,#restaurant_info .center_col{
+    float:left;
+}
+#restaurant_info .right_col {
+    float:right;
+    width:206px;
+}
+
+#restaurant_info .center_col{
+    min-width: 290px;
+    width:33%;
+}
+
+#restaurant_info .left_col {
+    min-width:420px;
+    width:33%;
+}
+
+
+#restaurant #restaurant_info {
+    vertical-align: top;
+    margin:0 auto;
+    max-width:1480px;
+}
+/***** MAIN_INFO BLOCK ******/
+
+#restaurant_info .main_info {height:110px;}
+.main_info .rest_logo {
+    float:left;
+    padding-right:10px;
+}
+
+.main_info .rest_info {
+    font-size:11px;
+    float:left;
+}
+.rest_info  div {padding-bottom:2px;}
+.main_info .bold {
+    font-weight:bold;
+    color:#ff6600;
+}
+.main_info .work_time {
+    color:#555555;
+    font-weight:bold;
+    font-size:12px;
+    text-align:center;
+    float:right;
+    margin-right:20px;
+}
+
+
+
+/****************************/
+#restaurant_info {}
+
+#restaurant_info .photos{
+    width:420px;
+}
+#restaurant_info .photos .main_container{
+    width:360px;
+    height:260px;
+    overflow:hidden;
+    background:url(/public/images/loader.gif) no-repeat center;
+}
+#restaurant_info .photos .main{
+    width:360px;
+    margin-bottom: 6px;
+}
+#restaurant_info .photos .mini{
+    width:55px;
+    height:55px;
+    float:left;
+    margin-top:2px;
+    margin-right:6px;
+    cursor:pointer;
+    display:none;
+}
+#restaurant_info .photos .mini.active{
+    margin: 0 4px 0 -2px;
+    border:2px #ff6600 solid;
+}
+#restaurant_info .news .caption{
+    font-size:18px;
+    font-style:italic;
+}
+#restaurant_info .news_item{
+    margin:10px 0;
+}
+#restaurant_info .news_item .photo{
+    margin-right:10px;
+    float:left;
+}
+#restaurant_info .news_item .photo img{
+    width:76px;
+}
+#restaurant_info .news_item .text_block {
+    margin-left:85px;
+    width:250px;
+    max-width:250px;
+}
+#restaurant_info .news_item .text{
+    font-size:11px;
+    padding-top:5px;
+}
+
+#restaurant_info .news_item .title{
+    font-size:16px;
+    font-weight:bold;
+}
+#restaurant_info .links .discount_description{
+    display:none;
+}
+#restaurant_info .links,#restaurant_menu .links{
+    min-width: 206px;
+    width:206px;
+}
+#restaurant_info .links .caption,#restaurant_menu .links .caption{
+    font-size:18px;
+    color:#e27b09;
+}
+#restaurant_menu .links ul,#restaurant_menu .links ul{
+    list-style: none;
+    margin-top:15px;
+    font-size:14px;
+}
+#restaurant_info .links .link,#restaurant_menu .links .link{
+    padding-left: 35px;
+    padding-bottom:10px;
+    background-position: 10px 0;
+}
+#restaurant_info .links .link a,#restaurant_menu .links .link a{
+    color:black;
+}
+
+#restaurant_info .menu_link,#restaurant_menu .menu_link{
+    margin-top:20px;
+    font-size:14px;
+    padding-left:35px;
+    line-height:30px;
+    vertical-align:bottom;
+    cursor:default;
+}
+#restaurant_info .menu_link a,#restaurant_menu .menu_link a{
+    border-bottom:1px dotted #000;
+    text-decoration:none;
+}
+#restaurant_info .menu_link a:hover,#restaurant_menu .menu_link a:hover{
+    border-bottom:none;
+}
+#restaurant_info .menu_link .sub_menu_link,#restaurant_menu .menu_link .sub_menu_link {
+    margin-left:-15px;
+    margin-top:0;
+    font-size:12px;
+}
+#restaurant_info .menu_link .sub_menu_link li,#restaurant_menu .menu_link .sub_menu_link li{
+    padding-bottom:3px;
+    padding-left:23px;
+    line-height:normal;
+    cursor:default;
+}
+#restaurant_info .review_link{
+    margin-top:20px;
+    font-size:12px;
+    color:#361d93;
+}
+#restaurant_info .review_link a{
+    font-size:20px;
+    color:#361d93;
+    line-height:26px;
+}
+#restaurant_info .googleMap,
+#restaurant_info .description,
+#restaurant_info .restBanner {
+    padding-top:20px;
+}
+#restaurant_info .restBanner {
+    padding-left:35px;
+}
+#restaurant_info .googleMap .map{
+    width:359px;
+    height:286px;
+    background:#fbffbb;
+}
+
+#google_dialog {
+    padding:10px;
+    width:435px;
+    height:420px;
+}
+
+.restaurant_header {
+    line-height:59px;
+    height:59px;
+    background:#000;
+    font-size:16px;
+    color:#FFF;
+}
+
+.restaurant_header .nav {
+    width:12px;
+    margin-bottom:-5px;
+}
+
+.restaurant_header .back {
+    float:left;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/show_rest_back.jpg) no-repeat 0 0;
+    margin:18px 0 0 20px;
+}
+
+.restaurant_header .next {
+    float:right;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/show_rest_next.jpg) no-repeat 0 0;
+    margin:18px 20px 0 0;
+}
+
+.restaurant_header .next.active {
+    background-position: 0 -24px;
+
+}
+.restaurant_header .next.active:active {
+    margin:19px 20px 0 0;
+}
+.restaurant_header .back.active {
+    background-position: 0 -24px;
+
+}
+.restaurant_header .back.active:active {
+    margin:19px 0 0 20px;
+}
+.restaurant_header .caption {
+    color:#FFF;
+    font-size:24px;
+    padding-left:20px;
+    float:left;
+}
+
+.restaurant_header .rest_rating {
+    float:right;
+    margin-right:20px;
+    margin-top:15px;
+}
+
+.work_time {
+    width: 80px;
+    height:35px;
+    padding-left:30px;
+    float:right;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.work_time.closed{
+    background:url(/public/images/icons/closed_icon.png) no-repeat 0 0;
+}
+.work_time.opened{
+    background:url(/public/images/icons/opened_icon.png) no-repeat 0 0;
+}
+
+.work_time span {
+    color: #009900;
+}
+
+.rest_params {
+    margin:30px 0 15px 0;
+    font-size:12px;
+    line-height:17px;
+    width:365px;
+}
+.rest_params .param_type {
+    font-weight:bold;
+}
+
+.rest_description {
+    font-family: Verdana, Arial, Tahoma;
+    font-size:12px;
+    line-height:14px;
+    margin: 15px 15px 15px 0;
+    width:365px;
+    text-align:justify;
+}
+
+.rest_contacts {
+    margin: 15px 0;
+}
+
+.rest_contacts .phone {
+    font-weight:bold;
+    background:url(/public/images/icons/phone_icon.png) no-repeat;
+    height:21px;
+    padding-left:20px;
+    line-height:21px;
+    vertical-align:bottom;
+    margin:10px 0;
+}
+
+.rest_contacts .address {
+    padding-left:20px;
+    margin:10px 0;
+    font-size:12px;
+}
+.rest_contacts .map_link {
+    padding-left:15px;
+}
+.rest_contacts .map_link a{
+    text-decoration:none;
+    border-bottom: 1px dashed #000000;
+}
+
+.rest_contacts .metro {
+    background:url(../images/icons/metro_icon.png) no-repeat;
+    height:21px;
+    padding-left:20px;
+    vertical-align:bottom;
+    margin:5px 0;
+    font-size:12px;
+}
+.rest_contacts .ostanovka {
+    background:url(../images/icons/ostanovka_icon.png) no-repeat;
+    height:21px;
+    padding-left:20px;
+    vertical-align:bottom;
+    margin:5px 0;
+    font-size:12px;
+}
+
+.rest_reviews {
+    margin:20px 0 10px 0;
+}
+.rest_reviews .caption {
+    background: url(/public/images/icons/reviews_icon.jpg) no-repeat;
+    height:30px;
+    line-height:30px;
+    vertical-align:bottom;
+    color:#ff6600;
+    font-size:18px;
+    font-style:italic;
+    padding-left:50px;
+}
+.rest_reviews .review {
+
+}
+.rest_reviews .review {
+    margin:10px 0;
+
+}
+.rest_reviews .review .user{
+    background:url(/public/images/icons/user_icon.gif) no-repeat;
+    padding-left:20px;
+    font-size:11px;
+    font-weight:bold;
+    line-height:15px;
+}
+
+.rest_reviews .review .text {
+    margin-top:3px;
+    padding-left:30px;
+    font-size:12px;
+    line-height:13px;
+    font-style:italic;
+    color:#000;
+    width:315px;
+}
+
+.rest_reviews .form {
+}
+.rest_reviews .form textarea {
+    border: #000000 1px solid;
+    width:97%;
+    height:120px;
+    padding:5px;
+
+
+}
+
+.rest_reviews .form input {
+    border:0;
+    background:none;
+    background:url(/public/images/submit_button_reviews.jpg) no-repeat;
+    width:71px;
+    height:22px;
+    float:right;
+    font-size:12px;
+    font-family:Tahoma,Arial;
+    color:#ffffff;
+    margin-top:5px;
+    margin-bottom:10px;
+	margin-left:10px;
+}
+.rest_reviews .form input:active {
+    background:url(/public/images/submit_button_reviews.jpg) 1px 1px no-repeat;
+}
+
+
+
+/************************ RESTAURANT_MENU ************************/
+
+#restaurant_menu {
+
+}
+
+#restaurant_menu .left_col {
+    float:left;
+    width:70%;
+}
+
+#restaurant_menu .right_col {
+    position:absolute;
+    right:20px;
+    width:206px;
+}
+
+#restaurant_menu .menu_info {
+}
+
+#restaurant_menu .menu_info .logo {
+    float:left;
+    background:#FFFFFF;
+    padding:2px;
+}
+
+#restaurant_menu .menu_info .text {
+    padding-left:10px;
+    float:left;
+    font-size:11px;
+    padding-top:3px;
+    line-height:14px;
+}
+
+#restaurant_menu .menu_info .text span{
+    font-weight:bold;
+
+}
+#restaurant_menu .menu_list {
+    margin-top:20px;
+}
+
+#restaurant_menu .item_of_type .caption{ 
+    font-size:18px;
+    font-style:italic;
+    padding:10px 0;
+}
+
+#restaurant_menu .item_of_type table .header {
+    font-size:16px;
+    color:#FFFFFF;
+    font-style:italic;
+    background:#ff6600;
+    height:35px;
+
+}
+#restaurant_menu .item_of_type table  .secondRow {
+    background:#cdcdcd;
+}
+
+#restaurant_menu .item_of_type table th {
+    vertical-align:middle;
+    padding-left:30px;
+}
+#restaurant_menu .item_of_type table th.price {
+    padding:0;
+}
+
+#restaurant_menu .item_of_type table td {
+    padding:5px;
+    padding-left:30px;
+
+}
+#restaurant_menu .item_of_type .title {font-size:16px;}
+#restaurant_menu .item_of_type .price {width:150px;text-align:center; font-size:16px;}
+#restaurant_menu .item_of_type .portion {text-align:center; font-size:16px;}
+#restaurant_menu .item_of_type table td.description {
+    font-size:11px;
+    padding:0;
+    padding-left:30px;
+    padding-bottom:7px;
+}
+
+#restaurant_menu .item_of_type .img {float:right;padding-right:5px;width:24px;height:24px;overflow:hidden;}
+#restaurant_menu .item_of_type .img img:active {
+    padding:1px 0 0 1px;
+} 
+
+.trash .caption {
+    background:url(/public/images/trash_caption_bg.jpg) no-repeat;
+    padding:22px 0 0 80px;
+    color:#FFFFFF;
+    height:27px;
+    font-size:16px;
+    font-style:italic;
+}
+
+.trash .items {
+    margin-top:7px;
+    font-style:italic;
+}
+.trash .items th{
+    color:#656464;
+    font-size:10px;
+
+    padding-bottom:7px;
+}
+
+.trash .items {
+    font-size:11px;
+    color:#000000;
+}
+
+.trash .items .title {width:100px;padding-left:5px;}
+.trash .items .count {}
+.trash .items .price {text-align:center;}
+.trash .items td.title,.trash .items td.price {vertical-align:middle;}
+.trash .items td.count {background:#c8c8c8;width:30px;padding:3px;vertical-align:middle;}
+.trash .items td.count .number {float:left; line-height:30px;}
+.trash .items .count .actions {
+    float:right;
+}
+.trash .items .count .actions div {
+    padding:1px;
+}
+
+
+.trash .items .top {
+    border-top: 1px solid #656464;
+    height:3px;
+}
+.trash .items .bottom {
+    border-bottom: 1px solid #656464;
+    height:3px;
+}
+/************************ /RESTAURANT_MENU ************************/
+
+
+
+/************************ PERSONS ************************/
+
+#persons_list {
+    border-bottom: 1px dotted #8c8c8c;
+    padding-bottom:10px;
+    margin:20px auto;
+    overflow:hidden;
+    height:108px;
+    position:relative;
+}
+
+#persons_list .item {
+    margin: 2px 2px 20px 20px;
+    cursor : pointer;
+    vertical-align:top;
+    float:left;
+}
+#persons_list .item.current {
+    margin: 0 0 20px 18px;
+    border:2px #ff6600 solid;
+}
+#persons_list .item .img img,#persons_list .item .img{
+    width:53px;
+}
+#person {
+    min-height: 468px;
+    margin: 40px 0 0 20px;
+}
+#person .left {
+    width:400px;
+    float:left;
+    margin-right:20px;
+}
+
+#person .left .img,
+#person .left .img img {
+    width:300px;
+}
+#person .left .img img {
+    border-right:5px solid #ff6600;
+}
+#person .right .name {
+    font-size:36px;
+    padding-top:30px;
+    font-family:Tahoma,Arial;
+    float:left;
+}
+
+#person .right .date {
+    padding-top:25px;
+    float: left;
+    font-size:12px;
+    color:#999999;
+}
+
+#person .right .job {
+    color: #999999;
+    font-size:12px;
+    padding-top:10px;
+}
+
+#person .right {
+    float:left;
+    width:50%;
+}
+.interview {
+    padding: 40px;
+    height:300px;
+}
+.interview .int {
+    margin-top:10px;
+}
+.interview .quest {
+    border-bottom: 1px #000 dashed;
+    font-size:14px;
+    cursor:pointer;
+}
+.interview .quest.active {
+    border-bottom: none;
+    font-size:14px;
+    cursor:pointer;
+}
+.interview .answer {
+    font-size:14px;
+    padding:10px 30px;
+    display:none;
+    margin-bottom: -8px;
+}
+/************************ /PERSONS ************************/
+
+
+
+/************************ Типовые страницы ************************/
+
+.somepage {
+    margin:0 auto;
+    max-width:1480px;
+    margin-top:20px;
+    min-height: 400px;
+    line-height:18px;
+}
+
+
+.somepage .title {
+    padding-left:30px;
+    background:url(/public/images/page_title_bg.jpg) repeat-x;
+    height:86px;
+}
+
+.somepage .title .caption{
+    padding-top:10px;
+    float:left;
+    font-size:24px;
+    width:550px;
+}
+
+.somepage .title .date{
+    padding-top:20px;
+    float:left;
+    font-family:Tahoma;
+    font-size:11px;
+    width:90px;
+}
+
+.somepage .text_block {
+    padding-left:30px;
+    padding-top:20px;
+    font-family:Tahoma,Arial;
+    width:60%;
+}
+
+.text_block p{
+    padding:10px 0;
+}
+
+.text_block .img_with_alt {
+    text-align:center;
+}
+
+.img_with_alt img {
+
+}
+.img_with_alt .alt {
+    padding-left:200px;
+    font-size:12px;
+    font-style:italic;
+}
+.quote {
+    padding:15px 0;
+}
+
+.quote .name {
+    width:200px;
+    font-size:12px;
+    float:left;
+}
+.quote .text {margin-left:200px;font-style:italic;}
+
+
+table.table_layout {
+    font-size:12px;
+    color:#000000;
+}
+table.table_layout th {
+    background:#b4b4b4;
+    color:#000000;
+    padding:5px 10px;
+    border: 1px solid #b4b4b4;
+}
+
+
+table.table_layout td {
+    border: 1px solid #b4b4b4;
+    border-top:0;
+    color:#000000;
+    padding:5px 10px;
+}
+
+
+/************************ /Типовые страницы ************************/
+
+/************************ DISCOUNTS *******************************/
+
+.select_percent {
+    float:right;
+    margin-right:40px;
+    font-size:12px;
+}
+.select_percent div {
+    float:left;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    margin:20px 5px 0 5px;
+    padding:2px 4px;
+    line-height:normal;
+}
+
+.select_percent .percent50 {
+    border-bottom-color: #ff3300;
+    cursor:pointer;
+}
+
+.select_percent .percent35 {
+    border-bottom-color: #ff6600;
+    cursor:pointer;
+}
+
+.select_percent .percent15 {
+    border-bottom-color: #ff9900;
+    cursor:pointer;
+}
+
+.select_percent .percent5 {
+    border-bottom-color: #ffcc00;
+    cursor:pointer;
+}
+.select_percent .all {
+    border-bottom-color: #ffffff;
+    cursor:pointer;
+}
+
+.discount_list  {
+    padding:20px 40px;
+    min-height: 490px;
+    width:80%;
+}
+
+.discount_list .percent50 {
+    background: #ff3300;
+}
+
+.discount_list .percent35 {
+    background: #ff6600;
+}
+
+.discount_list .percent15 {
+    background: #ff9900;
+}
+
+.discount_list .percent5 {
+    background: #ffcc00;
+}
+
+.discount_list .item{
+    width:350px; 
+    margin-bottom: 15px;
+    float:left;
+}
+
+.discount_list  .percent {
+    text-align:center;
+    width:48px;
+    height:34px;
+    color:#FFF;
+    line-height:10px;
+    padding:1px 1px 1px 2px;
+    text-align: center;
+    padding-top:7px;
+    float:left;
+}
+
+.discount_list  .percent span {
+    font-size:14px;
+}
+
+.discount_list  .count {
+    font-size:14px;
+    color:#666666;
+    padding-top:3px;
+    font-weight:normal;
+}
+
+.discount_list  .name {
+    float:left;
+    font-size:22px;
+    padding-left:10px;
+}
+
+.iphone {
+    width:340px;
+    height:478px;
+    background:url(/public/images/iphone.jpg) no-repeat;
+    position:absolute;
+    right: 0;
+}
+/************************ /DISCOUNTS *******************************/
+
+
+/************************ AFISHA_INDEX *******************************/
+.mounth_list {
+    width: 300px;
+    float:left;
+    height:48px;
+    background:url(../images/icons/afisha_date_list_bg.png) #999999 repeat-x;
+}
+
+.mounth_list .back{
+    float:left;
+    margin:0 40px;
+    margin-top:12px;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/back_icon.png) no-repeat 0 0;
+}
+
+.mounth_list .mounth {
+    float:left;
+}
+
+.mounth_list .next{
+    float:right;
+    margin-top:12px;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/next_icon.png) no-repeat 0 0;
+    float:right;
+}
+.afisha_list{
+
+}
+.afisha_list .date_list {
+    color:#504f4f;
+    font-size:14px;
+    margin: 20px 0;
+    height:48px;
+    background:url(../images/icons/afisha_date_list_bg.png) #999999 repeat-x;
+}
+.afisha_list .date_list .back{
+    float:left;
+    margin:0 40px;
+    margin-top:12px;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/back_icon.png) no-repeat 0 0;
+}
+.afisha_list .date_list .next{
+    float:right;
+    margin-top:12px;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/next_icon.png) no-repeat 0 0;
+    position:absolute;
+    right:0;
+    margin-right:40px;
+    margin-top:-36px;
+}
+.afisha_list .date_list .items {
+    height:48px;
+    overflow:hidden;
+    width:85%;
+}
+
+.afisha_list .date_list .items .inner {
+    width:9999px;
+}
+
+.afisha_list .date_list .item{
+    padding:6px 20px;
+    float:left;
+    font-size:12px;
+    cursor:pointer;
+}
+.afisha_list .date_list .item.current {
+    background:url(/public/images/icons/afisha_current_date_bg.png);
+}
+.afisha_list .date_list .item div {
+    font-size:14px;
+    padding-bottom:10px;
+    text-transform: uppercase;
+}
+
+.by_date {
+    margin:20px 0;
+    padding:20px 0 0 0;
+    min-height:300px;
+}
+
+.by_date.tomorrow {
+    background:url(/public/images/gray_bg_box_top.jpg) repeat-x #c8c8c8;
+}
+.by_date .bottom {
+    background:url(/public/images/gray_bg_box_bottom.jpg) repeat-x #c8c8c8 bottom;
+    width:100%;
+    height:20px;
+}
+.afisha_list .current_date {
+    float:left;
+    margin:0 20px;
+}
+
+.afisha_list .list {
+    float:left;
+    width:80%;
+}
+.afisha_list .list .item {
+    float:left;
+    margin:0 40px 20px 0;
+    width:380px;
+    height: 85px;
+}
+.afisha_list .list .foto {
+    float:left;
+}
+.afisha_list .list .info {
+    width:220px;
+    padding-left:10px;
+    float:left;
+}
+.afisha_list .list .info .caption{
+    font-size:18px;
+}
+.afisha_list .list .info .rest_name{
+    font-weight:bold;
+    font-size:12px;
+    color:#de6e0a;
+}
+.afisha_list .list .info .description {
+    padding-top:10px;
+}
+.afisha_list .right_banner {
+    width:204px;
+    background:#666666;
+    height:321px;
+    position:absolute;
+    right: 10px;
+    margin-top:-20px;
+}
+/************************ /AFISHA_INDEX *******************************/
+
+
+/***********calendar*************/
+.calendar_layout {
+    float:left;
+    width:44px;
+    padding-top: 5px;
+    text-align:center;
+    font-size:11px;
+}
+.calendar_layout .calendar {
+    background: #fff;
+    border:1px solid #fff;
+}
+.calendar_layout .month{
+    font-size:24px;
+    color:#333;
+}
+.calendar_layout .number{
+    font-size:9px;
+    background:#090;
+    margin-top:4px;
+    color:#fff;
+    padding:2px 0;
+}
+.calendar_layout .text {
+    padding-top:5px;
+}
+
+/*********** /calendar *************/
+/***********CLASS*************/
+
+/***********CLASS*************/
+.caption{
+    font-size:18px;
+    text-align:left;
+    font-weight:normal;
+}
+.banner240n350{
+    background:#6e6e6e;
+    width:240px;
+    height:350px
+}
+.color6a9822{color:#6a9822;}
+.orange {color:#ff6600}
+.green {color:#009900}
+.colore27b09{color:#e27b09;}
+.paddingTop20px {padding-top:20px;}
+
+.marginTop20px {height:20px;}
+.marginTop10px {height:10px;}
+.marginTop15px {height:15px;}
+.float_left {float:left;}
+
+.alignCenter{text-align:center;}
+.widthAuto {width:auto;max-width:none;}
