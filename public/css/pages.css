@@ -261,10 +261,11 @@
 .work_time {
     width: 80px;
     height:35px;
-    padding-left:30px;
+    padding-left:40px;
     float:right;
     font-size:11px;
     margin-top:5px;
+    margin-right: 80px;
 }
 
 .work_time.closed{
@@ -276,6 +277,7 @@
 
 .work_time span {
     color: #009900;
+    line-height: 20px;
 }
 
 .rest_params {
@@ -346,7 +348,7 @@
 }
 .rest_reviews .caption {
     background: url(/public/images/icons/reviews_icon.jpg) no-repeat;
-    height:30px;
+    height:32px;
     line-height:30px;
     vertical-align:bottom;
     color:#ff6600;

@@ -214,7 +214,7 @@
                 </ul>
             </div>
             <div id="footer_center">
-                <div class="title">Привет <xsl:value-of select="//statistic/people" />-й посетитель!</div>
+                <div class="title">Привет, <xsl:value-of select="//statistic/people" />-й посетитель!</div>
                 <div class="text">
                     На портале представлены <xsl:value-of select="//statistic/restaurant" /> кафе и
                     ресторанов города Казани с меню, фотографиями и отзывами.
@@ -245,7 +245,7 @@
                                 <xsl:value-of select="//person/person_post" /><br />
                                 <br />
                                 <xsl:value-of select="//person/person_text" />
-                                <div class="more"><a href="/{//site/city}/persons">FF люди</a></div>
+                               
                             </div>
                             <div class="clear"></div>
 
