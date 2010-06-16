@@ -21,7 +21,7 @@ $(document).ready(function(){
     */
     if (typeof(rest_page_activate)!='undefined') {
         $('.main_container a').lightBox();
-
+        map_init();
         $('#restaurant_info .photos .main').load(function(){
             $(this).animate({
                 'opacity':1

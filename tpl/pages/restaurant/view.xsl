@@ -16,9 +16,36 @@
     <!-- Код страницы -->
     <xsl:template match="content">
         <!-- Информация о ресторане -->
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             rest_page_activate = true;
             current_rest_id = <xsl:value-of select="restaurant/id" />;
+            function map_init() {
+                var latlng = new google.maps.LatLng(55.779952+0.000700,49.213343);
+                var latlng_marker = new google.maps.LatLng(55.779952,49.213343);
+                var myOptions = {
+                zoom: 16,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                var infowindow = new google.maps.InfoWindow({
+                content: '<img src="http://foodfood.ru/public/images/logo.png" style="width:100px;" /><br />'+
+                'Информация о шоколаднице'
+                });
+                var marker_image = 'http://foodfood.ru/public/images/poster_icon.jpg';
+                var marker = new google.maps.Marker({
+                position: latlng_marker,
+                map: map,
+                size:50,
+                icon: marker_image,
+                title: 'Шоколадница'
+                });
+                infowindow.open(map,marker);
+                google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+                });
+            }
         </script>
         <xsl:apply-templates select="restaurant" />
     </xsl:template >
@@ -157,14 +184,14 @@
                         <xsl:value-of select="rest_description" disable-output-escaping="yes" />
                     </div>
                     <div class="rest_contacts">
-                    <xsl:if test="rest_phone != ''">
-                        <div class="phone"><xsl:value-of select="rest_phone" /></div>
-                     </xsl:if>
-                     <xsl:if test="rest_address != ''">
-                        <div class="address">
-                            <xsl:value-of select="rest_address" />  <span class="map_link"><a href="#">Карта проезда</a></span>
-                        </div>
-                     </xsl:if>
+                        <xsl:if test="rest_phone != ''">
+                            <div class="phone"><xsl:value-of select="rest_phone" /></div>
+                        </xsl:if>
+                        <xsl:if test="rest_address != ''">
+                            <div class="address">
+                                <xsl:value-of select="rest_address" />  <span class="map_link"><a href="#">Карта проезда</a></span>
+                            </div>
+                        </xsl:if>
                         <xsl:choose>
                             <xsl:when test="rest_metro!=''">
                                 <div class="metro"><xsl:value-of select="rest_metro" /></div>
@@ -288,11 +315,7 @@
             <div class="clear"></div>
         </div>
         <div id="google_dialog" class="dialog_box dialog box_shadow">
-            <div class="caption">
-                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" />
-                <div class="clear"></div>
-                <xsl:value-of select="rest_google_code" disable-output-escaping="yes" />
-            </div>
+            <div id="map_canvas" style="width:700px; height:500px"></div>
         </div>
     </xsl:template>
 
