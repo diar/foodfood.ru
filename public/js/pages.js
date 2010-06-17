@@ -21,7 +21,6 @@ $(document).ready(function(){
     */
     if (typeof(rest_page_activate)!='undefined') {
         $('.main_container a').lightBox();
-
         $('#restaurant_info .photos .main').load(function(){
             $(this).animate({
                 'opacity':1
@@ -103,6 +102,7 @@ $(document).ready(function(){
         // Показать карту google
         $('.map_link a').click(function(){
             $.showDialog('google_dialog');
+            map_init();
             return false;
         });
     }

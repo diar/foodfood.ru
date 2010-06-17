@@ -9,7 +9,6 @@ $.showDialog = function (id) {
     } else {
         scrolling = document.documentElement.scrollTop + 150;
     }
-	
     $('#'+id).css('top',scrolling);
     $('.dialog:not(#'+id+')').fadeOut(500,function(){
         $('#'+id).fadeIn(500);
