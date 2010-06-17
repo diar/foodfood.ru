@@ -323,9 +323,8 @@ $(document).ready(function(){
         $.showDialog('discount_dialog');
         return false;
     });
-
-
-    /* ---------------------------------------------------------------------
+	
+	/* ---------------------------------------------------------------------
     * НОВАЯ АФИША!!!
     */
 	z = 0;
@@ -338,7 +337,7 @@ $(document).ready(function(){
 		$("#mounth").animate({scrollLeft: z*150},300);
 	});
 	$("#mounth_list .next").click(function(){
-
+	
 		if (z<mounth) z++;
 		$("#mounth").animate({scrollLeft: z*150},300);
 	});
