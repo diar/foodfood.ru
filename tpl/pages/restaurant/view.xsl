@@ -21,7 +21,7 @@
             rest_page_activate = true;
             current_rest_id = <xsl:value-of select="restaurant/id" />;
             function map_init() {
-                var latlng = new google.maps.LatLng(55.779952+0.000700,49.213343);
+                var latlng = new google.maps.LatLng(55.779952+0.002000,49.213343);
                 var latlng_marker = new google.maps.LatLng(55.779952,49.213343);
                 var myOptions = {
                 zoom: 16,
@@ -30,14 +30,12 @@
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
                 var infowindow = new google.maps.InfoWindow({
-                content: '<img src="http://foodfood.ru/public/images/logo.png" style="width:100px;" /><br />'+
-                'Информация о шоколаднице'
+                content: $($('#map_text').html()).get(0)
                 });
-                var marker_image = 'http://foodfood.ru/public/images/poster_icon.jpg';
+                var marker_image = $('#map_marker img').attr('src');
                 var marker = new google.maps.Marker({
                 position: latlng_marker,
                 map: map,
-                size:50,
                 icon: marker_image,
                 title: 'Шоколадница'
                 });
@@ -320,6 +318,24 @@
                 <div class="clear"></div>
             <div id="map_canvas" style="width:700px; height:500px"></div>
             </div>
+        </div>
+        <div id="map_text" style="display:none;">
+            <div style="height:200px; width:500px;font-size:14px;">
+                <img src="/public/images/logo.png" style="width:100px;height:80px;" />
+                <div>
+                Информация о ресторане
+                </div>
+            </div>
+        </div>
+        <div id="map_marker" style="display:none;">
+            <xsl:choose>
+                <xsl:when test="rest_logo=''">
+                    <img src="/public/images/icons/rest_logo_icon.gif" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <img src="/upload/image/rest_logo/{rest_uri}.jpg" />
+                </xsl:otherwise>
+            </xsl:choose>
         </div>
     </xsl:template>
 
