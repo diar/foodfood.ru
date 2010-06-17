@@ -32,7 +32,7 @@ class poster_Page extends View {
     public static function indexAction ($id) {
         for ($i=-4;$i<5;$i++) {
             $date['week'] = String::toWeek(date('w',time()+$i*60*60*24));
-            $date['day'] = date('d/m',time()+$i*60*60*24);
+            $date['day'] = date('d',time()+$i*60*60*24);
             $date['offset'] = $i;
             $dates[]=$date;
         }
