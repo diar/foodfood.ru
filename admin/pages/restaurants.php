@@ -246,7 +246,12 @@ class Restaurants extends AdminModule {
                 'value' => $record['rest_description'],
                 )
         );
-
+        
+        $form->addfield(array('name' => 'google_location',
+                'caption' => 'Расположение на Google Map',
+                'pattern' => 'html',
+                'value' => 'text htmnl')
+        );
         $form->addfield(array('name' => 'rest_google_code',
                 'caption' => 'Страница google карты',
                 'pattern' => 'textarea',

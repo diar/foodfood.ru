@@ -95,7 +95,6 @@ Class FormValidator {
         else {
             return true;
         }
-
     }
 
     private function field_text_validate($field) {
@@ -470,6 +469,10 @@ Class FormValidator {
     }
 
     private function field_submit_validate() {
+        return '';
+    }
+    
+    private function field_html_validate() {
         return '';
     }
     
