@@ -205,11 +205,11 @@ class FormBuilder {
 
     public function field_hidden_build($field) {
         $value = $field['value'];
-        $this->_form.= '<tr><td></td><td><input type="hidden" name="'.$field['name'].'" value="'.$value.'"></td></tr>';
+        $this->_form.= '<tr style="display:none"><td></td><td><input type="hidden" '.$field['css_class'].' name="'.$field['name'].'" value="'.$value.'"></td></tr>';
     }
     public function field_html_build($field) {
         $value = $field['value'];
-        $this->_form.= '<tr><td>'.$field['caption'].'</td><td>'.$value.'</td></tr>';
+        $this->_form.= '<tr><td>'.$field['caption'].'</td><td style="padding:10px;0">'.$value.'</td></tr>';
     }
 
     public function field_confirm_build($field) {

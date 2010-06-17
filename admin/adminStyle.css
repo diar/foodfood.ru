@@ -390,3 +390,15 @@ textarea {
 #add_worktime {
     margin:20px 20px 0 5px;
 }
+#google_map_dialog {
+    position:absolute;
+    left:50%;
+    margin-left:-300px;
+    top:200px;
+    width:600px;
+    height: 500px;
+    background:#fff;
+    border:4px solid #86a515;
+    z-index:100000;
+    display:none;
+}

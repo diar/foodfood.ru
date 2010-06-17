@@ -246,18 +246,20 @@ class Restaurants extends AdminModule {
                 'value' => $record['rest_description'],
                 )
         );
-        
-        $form->addfield(array('name' => 'google_location',
+        $google_map_text =  '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.
+                            '<script type="text/javascript" src="/admin/js/map.js"></script>'.
+                            "Текущее расположение <span id='google_location_html_position'>".
+                            "($record[rest_google_x], $record[rest_google_y])</span> ".
+                            '<a href="#" id="change_google_map">изменить</a>';
+        $form->addfield(array('name' => 'google_location_html',
                 'caption' => 'Расположение на Google Map',
                 'pattern' => 'html',
-                'value' => 'text htmnl')
+                'value' => $google_map_text)
         );
-        $form->addfield(array('name' => 'rest_google_code',
-                'caption' => 'Страница google карты',
-                'pattern' => 'textarea',
-                'css_class' => '',
-                'value' => $record['rest_google_code']
-                )
+        $form->addfield(array('name' => 'google_location',
+                'pattern' => 'hidden',
+                'css_class' => 'google_location',
+                'value' => "($record[rest_google_x], $record[rest_google_y])")
         );
         $form->addfield(array('name' => 'in_market',
                 'caption' => 'Участвует в FoodFood Market',
@@ -266,7 +268,6 @@ class Restaurants extends AdminModule {
                 'checked' => $record['in_market'])
         );
         $form->addfield(array('name' => 'edit',
-
                 'caption' => 'Сохранить',
                 'css_class' => 'ui_button',
                 'pattern' => 'submit')
