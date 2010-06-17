@@ -42,40 +42,57 @@
                     <div class="next"></div>
                 </div>
                 <div class="clear"></div>
-                <div class="by_date today">
-                    <div class="current_date">
-                        <div class="calendar_layout today">
-                            <div class="calendar box_shadow">
-                                <div class="month"><xsl:value-of select="//date_today/day" /></div>
-                                <div class="number" style="background:#ff6600"><xsl:value-of select="//date_today/month" /></div>
-                            </div>
-                            <div class="text">сегодня</div>
+                
+                <div class="anounce_block">
+                	<div class="left">
+                    	<div class="caption">Новости</div>
+                        <div class="list">
+                        	<xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
                         </div>
                     </div>
-                    <div class="list">
-                        <xsl:apply-templates select="poster_today/item" />
-                        <div class="clear"></div>
+                    <div class="center">
+	                    <div class="caption">АКЦИИ</div>
+                        <div class="list">
+                        	<xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                        </div>
                     </div>
-                    <div class="right_banner"></div>
+                    <div class="right">
+	                    <div class="caption">АФИША</div>
+                        <div class="list">
+                        	<xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                            <xsl:call-template name="poster_item" />
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="clear"></div>
-                <div class="by_date tomorrow">
-                    <div class="current_date">
-                        <div class="calendar_layout">
-                            <div class="calendar box_shadow">
-                                <div class="month"><xsl:value-of select="//date_tomorrow/day" /></div>
-                                <div class="number"><xsl:value-of select="//date_tomorrow/month" /></div>
-                            </div>
-                            <div class="text">завтра</div>
-                        </div>
-                    </div>
-                    <div class="list">
-                        <xsl:apply-templates select="poster_tomorrow/item" />
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="bottom"></div>
-                </div>
+                
             </div>
         </div>
     </xsl:template>
@@ -135,5 +152,19 @@
             </div>
         </div>
     </xsl:template>
-
+	
+    <xsl:template name="poster_item">
+    	<div class="item">
+            <div class="img">
+                <img src="/public/images/poster_icon.jpg" />
+            </div>
+            <div class="info">
+                <div class="title"><a href="#">Тематические дни</a></div>
+                <div class="rest_title">Итальяно</div>
+                <div class="description">Идет неделя Итальянской кухни и мы рады предложить вам новое...</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+    </xsl:template>
 </xsl:stylesheet>

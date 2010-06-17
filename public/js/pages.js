@@ -375,7 +375,6 @@ $(document).ready(function(){
         $.showDialog('discount_dialog');
         return false;
     });
-
 });
 
 /*
