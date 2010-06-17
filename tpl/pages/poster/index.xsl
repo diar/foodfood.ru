@@ -19,14 +19,19 @@
             poster_page_activate = true;
         </script>
         <div id="additional">
-            <div class="restaurant_header rounded">
-                <div class="caption">
-                    <div class="title">Афиша</div>
-                </div>
-            </div>
-
             <div class="afisha_list">
-            	
+            	<div id="mounth_list">
+                	<div class="back"></div>
+                    <div id="mounth">
+                    	<div id="mounths_conteiner">
+                        	<div class="item">сентябрь 2010</div>
+                            <div class="item">октябрь 2010</div>
+                            <div class="item">ноябрь 2010</div>
+                            <div class="item">декабрь 2010</div>
+                        </div>
+                    </div>
+                    <div class="next"></div>
+                </div>
                 <div class="date_list">
                     <div class="back"></div>
                     <div class="items">
@@ -78,8 +83,8 @@
 
     <xsl:template match="dates/item">
         <div class="item" offset="{offset}">
-            <div><xsl:value-of select="week" /></div>
-            <xsl:value-of select="day" />
+            <div><xsl:value-of select="day" /><sup><xsl:value-of select="week" /></sup></div>
+            
         </div>
     </xsl:template>
 

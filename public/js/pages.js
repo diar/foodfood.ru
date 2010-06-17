@@ -323,6 +323,25 @@ $(document).ready(function(){
         $.showDialog('discount_dialog');
         return false;
     });
+
+
+    /* ---------------------------------------------------------------------
+    * НОВАЯ АФИША!!!
+    */
+	z = 0;
+	mounth = -1;
+	$("#mounths_conteiner .item").each(function(){
+		mounth++;
+	});
+	$("#mounth_list .back").click(function(){
+		if (z>0) z--;
+		$("#mounth").animate({scrollLeft: z*150},300);
+	});
+	$("#mounth_list .next").click(function(){
+
+		if (z<mounth) z++;
+		$("#mounth").animate({scrollLeft: z*150},300);
+	});
 });
 
 /*

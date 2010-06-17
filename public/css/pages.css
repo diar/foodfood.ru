@@ -840,33 +840,49 @@ table.table_layout td {
 
 
 /************************ AFISHA_INDEX *******************************/
-.mounth_list {
+#mounth_list {
     width: 300px;
     float:left;
     height:48px;
-    background:url(../images/icons/afisha_date_list_bg.png) #999999 repeat-x;
+    background:url(../images/icons/mounth_list_bg.png) #999999 repeat-x;
 }
 
-.mounth_list .back{
+#mounth_list .back{
     float:left;
-    margin:0 40px;
+    margin:0 30px 0 40px;
     margin-top:12px;
     width:24px;
     height:24px;
     background:url(/public/images/icons/back_icon.png) no-repeat 0 0;
 }
 
-.mounth_list .mounth {
+#mounth_list #mounth {
     float:left;
+	font-size:19px;
+	text-transform:uppercase;
+	line-height:48px;
+	width:150px;
+	overflow:hidden;
 }
 
-.mounth_list .next{
+#mounth_list #mounths_conteiner {
+	width:3000px;
+}
+
+#mounths_conteiner .item{
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#mounth_list .next{
     float:right;
     margin-top:12px;
     width:24px;
     height:24px;
     background:url(/public/images/icons/next_icon.png) no-repeat 0 0;
     float:right;
+	margin-right:10px;
 }
 .afisha_list{
 
@@ -877,10 +893,11 @@ table.table_layout td {
     margin: 20px 0;
     height:48px;
     background:url(../images/icons/afisha_date_list_bg.png) #999999 repeat-x;
+	margin-left:301px;
 }
 .afisha_list .date_list .back{
     float:left;
-    margin:0 40px;
+    margin:0 10px;
     margin-top:12px;
     width:24px;
     height:24px;
@@ -900,27 +917,38 @@ table.table_layout td {
 .afisha_list .date_list .items {
     height:48px;
     overflow:hidden;
-    width:85%;
+    width:80%;
 }
 
 .afisha_list .date_list .items .inner {
-    width:9999px;
+    width:auto;
 }
 
 .afisha_list .date_list .item{
-    padding:6px 20px;
+    padding:2px 20px;
     float:left;
     font-size:12px;
     cursor:pointer;
 }
 .afisha_list .date_list .item.current {
-    background:url(/public/images/icons/afisha_current_date_bg.png);
+    background:#ffffff;
 }
+
 .afisha_list .date_list .item div {
-    font-size:14px;
+    font-size:43px;
     padding-bottom:10px;
     text-transform: uppercase;
+	color:#FFFFFF;
 }
+.afisha_list .date_list .item.current div {
+	color:#000000;
+}
+
+.afisha_list .date_list .item div  sup{
+	font-size:19px;
+	color:#000000;
+}
+
 
 .by_date {
     margin:20px 0;
