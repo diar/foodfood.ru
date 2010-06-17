@@ -858,7 +858,7 @@ table.table_layout td {
 
 #mounth_list #mounth {
     float:left;
-	font-size:19px;
+	font-size:18px;
 	text-transform:uppercase;
 	line-height:48px;
 	width:150px;
@@ -921,10 +921,11 @@ table.table_layout td {
 }
 
 .afisha_list .date_list .items .inner {
-    width:auto;
+    width:5000px;
 }
 
 .afisha_list .date_list .item{
+    width:75px;
     padding:2px 20px;
     float:left;
     font-size:12px;

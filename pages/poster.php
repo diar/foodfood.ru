@@ -30,17 +30,21 @@ class poster_Page extends View {
      * Вывод полного списка
     */
     public static function indexAction ($id) {
-        for ($i=-4;$i<5;$i++) {
-            $date['week'] = String::toWeek(date('w',time()+$i*60*60*24));
-            $date['day'] = date('d',time()+$i*60*60*24);
-            $date['offset'] = $i;
+        for ($i=1;$i<32;$i++) {
+            $datetime = mktime(0, 0, 0, date('m'), $i, String::getDate());
+            $date['week'] = String::toWeek(date('w',$datetime));
+            $date['day'] = $i<10 ? '0'.$i : $i;
             $dates[]=$date;
         }
-
+        for ($i=1;$i<13;$i++) {
+            $pos = $i<10 ? '0'.$i : $i;
+            $months[]=Array('position'=>$pos,'word'=>String::toMonth($i, true).' '.String::getDate());
+        }
         self::$page['site']['page'] = 'Афиша';
         self::$page['content']['banner']['type'] = 'vertical';
         self::$page['content']['banner']['class'] = 'right_banner';
         self::$page['content']['dates'] = $dates;
+        self::$page['content']['months'] = $months;
         self::$page['content']['poster_today'] = MD_Poster::getPostersToday();
         self::$page['content']['poster_tomorrow'] = MD_Poster::getPostersTomorrow();
         // Показываем страницу
@@ -60,10 +64,11 @@ class poster_Page extends View {
      * Вывод полного списка
     */
     public static function dateAjaxAction ($id) {
-        $date = date('Y:m:d',time()+$_POST['offset']*60*60*24);
+        $date = $_POST['date'];
+        $datetime = mktime(0, 0, 0, $_POST['month'], $_POST['day'], String::getDate());
         self::$page['site']['city'] = CityPlugin::getCity();
-        self::$page['date']['month']=String::toMonth(date('m',time()+$_POST['offset']*60*60*24));
-        self::$page['date']['day']=date('d',time()+$_POST['offset']*60*60*24);
+        self::$page['date']['month']=String::toMonth(date('m',$datetime));
+        self::$page['date']['day']=date('d',$datetime);
         self::$page['poster'] = MD_Poster::getPostersToDate($date);
         // Показываем страницу
         self::showXSLT('pages/poster/to_date');

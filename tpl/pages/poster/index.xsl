@@ -12,22 +12,22 @@
     <xsl:template match="/">
         <xsl:apply-templates select="root" />
     </xsl:template >
-
+    
     <!-- Код страницы -->
     <xsl:template match="content">
         <script type="text/javascript">
             poster_page_activate = true;
+            current_year = <xsl:value-of select="//date_today/year" />;
+            current_month = <xsl:value-of select="//date_today/month_number" />;
+            current_day = <xsl:value-of select="//date_today/day" />;
         </script>
         <div id="additional">
             <div class="afisha_list">
-            	<div id="mounth_list">
-                	<div class="back"></div>
+                <div id="mounth_list">
+                    <div class="back"></div>
                     <div id="mounth">
-                    	<div id="mounths_conteiner">
-                        	<div class="item">сентябрь 2010</div>
-                            <div class="item">октябрь 2010</div>
-                            <div class="item">ноябрь 2010</div>
-                            <div class="item">декабрь 2010</div>
+                        <div id="mounths_conteiner">
+                            <xsl:apply-templates select="months/item" />
                         </div>
                     </div>
                     <div class="next"></div>
@@ -77,14 +77,18 @@
                     <div class="bottom"></div>
                 </div>
             </div>
-
         </div>
     </xsl:template>
 
     <xsl:template match="dates/item">
-        <div class="item" offset="{offset}">
+        <div class="item" offset="{day}">
             <div><xsl:value-of select="day" /><sup><xsl:value-of select="week" /></sup></div>
-            
+        </div>
+    </xsl:template>
+
+    <xsl:template match="months/item">
+        <div class="item" position="{position}">
+            <div><xsl:value-of select="word" /></div>
         </div>
     </xsl:template>
 

@@ -6,6 +6,11 @@ var person_item_count = 0;
 var person_item_offset = 0;
 var person_item_position = 0;
 var person_item_visible = 0;
+var poster_month_position = 0;
+var poster_month_count = 0;
+var poster_day_position = 0;
+var poster_day_count = 0;
+var poster_day_visible = 0;
 $(document).ready(function(){
     // Проверка и обработка ширины экрана
     check_window_width ();
@@ -264,6 +269,29 @@ $(document).ready(function(){
     * Если находимся на странице вывода афиш
     */
     if (typeof(poster_page_activate)!='undefined') {
+        // Месяцы
+        $("#mounth_list .back").click(function(){
+            if (poster_month_position>0) {
+                poster_month_position--;
+                $("#mounth").animate({
+                    scrollLeft: poster_month_position*150
+                },250);
+            }
+        });
+        $("#mounth_list .next").click(function(){
+            if (poster_month_position<poster_month_count) {
+                poster_month_position++;
+                $("#mounth").animate({
+                    scrollLeft: poster_month_position*150
+                },250);
+            }
+        });
+        poster_month_position = current_month-1;
+        poster_month_count = $("#mounths_conteiner .item").length -1;
+        $("#mounth").animate({
+            scrollLeft: (current_month-1)*150
+        },250);
+        // Дни
         $('.date_list .item').click(function(){
             $('.date_list .item.current').removeClass('current');
             $(this).addClass('current');
@@ -273,15 +301,17 @@ $(document).ready(function(){
             $('.by_date.today').animate({
                 'min-height':500
             },300);
-            offset=$(this).attr('offset');
+            month = poster_month_position+1;
+            if (month<10) month='0'+month;
+            date=''+current_year+'.'+month+'.'+$(this).attr('offset');
             $('.by_date.today').html($loader);
             $.post('/'+site_city+'/poster/date/',{
-                'offset':offset
+                'date':date,'day':$(this).attr('offset'),'month':month
             },function(data){
                 $('.by_date.today').html(data);
             });
         });
-
+        
         $('#poster_follow').click(function(){
             if(user_auth!='1') {
                 $.alert('Вы должны войти на сайт',true);
@@ -296,6 +326,28 @@ $(document).ready(function(){
                 });
             }
             return false;
+        });
+        $('.date_list .item[offset="'+current_day+'"]').click();
+         $(".date_list .items").animate({
+            scrollLeft: (current_day-1)*115
+        },250);
+        poster_day_position = current_day-1;
+        poster_day_count = $(".date_list .item").length -poster_day_visible;
+        $(".date_list .back").click(function(){
+            if (poster_day_position>0) {
+                poster_day_position--;
+                $(".date_list .items").animate({
+                    scrollLeft: poster_day_position*115
+                },250);
+            }
+        });
+        $(".date_list .next").click(function(){
+            if (poster_day_position<poster_day_count) {
+                poster_day_position++;
+                $(".date_list .items").animate({
+                    scrollLeft: poster_day_position*115
+                },250);
+            }
         });
     }
 
@@ -324,24 +376,6 @@ $(document).ready(function(){
         return false;
     });
 
-
-    /* ---------------------------------------------------------------------
-    * НОВАЯ АФИША!!!
-    */
-	z = 0;
-	mounth = -1;
-	$("#mounths_conteiner .item").each(function(){
-		mounth++;
-	});
-	$("#mounth_list .back").click(function(){
-		if (z>0) z--;
-		$("#mounth").animate({scrollLeft: z*150},300);
-	});
-	$("#mounth_list .next").click(function(){
-
-		if (z<mounth) z++;
-		$("#mounth").animate({scrollLeft: z*150},300);
-	});
 });
 
 /*
@@ -352,6 +386,8 @@ function check_window_width () {
     by_mood_check_width ();
     if (typeof(person_page_activate)!='undefined')
         persons_check_width ();
+    if (typeof(poster_page_activate)!='undefined')
+        poster_day_check_width ();
 }
 /*
  * Обработка ширины блоков ресторанов при поиске
@@ -382,6 +418,13 @@ function persons_check_width () {
     person_item_visible=(Math.ceil(($(document).width()-33)/75)-1);//340
     $('#persons_list').width(person_item_visible*75);
     person_item_count = $('#persons_list .item').length;
+}
+/*
+ * Обработка ширины блоков лиц foodfood
+ */
+function poster_day_check_width () {
+    poster_day_visible=(Math.ceil(($('.date_list .items').width())/115)-1);
+    $('.date_list .items').width(poster_day_visible*115);
 }
 /*
  * Обработка ширины блоков лиц foodfood

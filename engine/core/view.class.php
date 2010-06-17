@@ -66,7 +66,9 @@ class View {
         }
         self::$page['menu'] = $menu;
         self::$page['user'] = User::getParams();
+        self::$page['date_today']['year'] = String::getDate();
         self::$page['date_today']['month']=String::toMonth(date('m'));
+        self::$page['date_today']['month_number']=date('m');
         self::$page['date_today']['day']=date('d');
         self::$page['date_today']['week']=String::toWeek(date('w'));
         self::$page['date_tomorrow']['month']=String::toMonth(date('m',time()+60*60*24));
