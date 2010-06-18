@@ -699,10 +699,9 @@ html {
     clear:both;
 }
 
-#loader {
+.loader {
     width:48px;
     height:48px;
-    display:none;
     margin:200px auto auto;
 }
 

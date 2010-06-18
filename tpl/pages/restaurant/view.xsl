@@ -312,6 +312,7 @@
                             </xsl:if>
                         </div>
                     </div>
+                    <img src="/public/images/rest_banner.jpg" style="width:206px;margin-top:10px;" />
                 </div>
             </div>
             <div class="clear"></div>

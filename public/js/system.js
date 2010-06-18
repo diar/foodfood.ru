@@ -1,6 +1,6 @@
 //----------------- Системные функции ----------
-$loader = '<div id="loader"><img src="/public/images/loader.gif" alt="Загрузка..." /></div>';
-$loader_gray = '<div id="loader"><img src="/public/images/loader_gray.gif" alt="Загрузка..." /></div>';
+$loader = '<div class="loader"><img src="/public/images/loader.gif" alt="Загрузка..." /></div>';
+$loader_gray = '<div class="loader"><img src="/public/images/loader_gray.gif" alt="Загрузка..." /></div>';
 
 // Показать диалог
 $.showDialog = function (id) {
