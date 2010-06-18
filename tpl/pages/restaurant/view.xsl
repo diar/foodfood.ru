@@ -268,7 +268,7 @@
                                 <li class="link"><a href="#">Забронировать столик</a></li>
                                 <li class="link"><a href="#">Заказать банкет</a></li>
                             </ul>
-                            <xsl:if test="have_menu = 1">
+                            <xsl:if test="false">
                                 <div class="menu_link menu_icon">
                                     <a href="#">
                                         <xsl:attribute name="href">
