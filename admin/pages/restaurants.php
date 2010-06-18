@@ -339,7 +339,7 @@ class Restaurants extends AdminModule {
         }
         // Сохранение фотографии
         if (!empty($_FILES['rest_photo']['name'])) {
-            $file = File::saveFile('rest_photo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/restaurant/');
+            $file = File::saveFile('rest_photo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/restaurant');
             if (!empty($file)) {
                 $data['rest_photo'] = 1;
             } else {
@@ -350,7 +350,7 @@ class Restaurants extends AdminModule {
             $data['rest_photo']=0;
         }
         if (!empty($_FILES['rest_logo']['name'])) {
-            $file = File::saveFile('rest_logo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/rest_logo/');
+            $file = File::saveFile('rest_logo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/rest_logo');
             if (!empty($file)) {
                 $data['rest_logo'] = 1;
             } else {
@@ -387,7 +387,7 @@ class Restaurants extends AdminModule {
         }
         // Сохранение фотографии
         if (!empty($_FILES['rest_photo']['name'])) {
-            $file = File::saveFile('rest_photo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/restaurant/');
+            $file = File::saveFile('rest_photo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/restaurant');
             if (!empty($file)) {
                 $data['rest_photo'] = 1;
             } else {
@@ -398,7 +398,7 @@ class Restaurants extends AdminModule {
             unset($data['rest_photo']);
         }
         if (!empty($_FILES['rest_logo']['name'])) {
-            $file = File::saveFile('rest_logo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/rest_logo/');
+            $file = File::saveFile('rest_logo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/rest_logo');
             if (!empty($file)) {
                 $data['rest_logo'] = 1;
             } else {
