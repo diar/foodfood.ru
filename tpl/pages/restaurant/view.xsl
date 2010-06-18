@@ -23,8 +23,8 @@
             function map_init() {
                 x_coord = <xsl:value-of select="restaurant/rest_google_x" />;
                 y_coord = <xsl:value-of select="restaurant/rest_google_y" />;
-                var latlng = new google.maps.LatLng(x_coord,y_coord);
-                var latlng_marker = new google.maps.LatLng(x_coord+0.002000,y_coord);
+                var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
+                var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
                 var myOptions = {
                 zoom: 16,
                 center: latlng,
