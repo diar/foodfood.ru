@@ -23,8 +23,8 @@
             function map_init() {
             x_coord = '<xsl:value-of select="restaurant/rest_google_x" />';
             y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
-            if (x_coord!='') {x_coord = parseInt(x_coord);} else {x_coord = 0;}
-            if (y_coord!='') {y_coord = parseInt(y_coord);} else {y_coord = 0;}
+            if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseInt(x_coord);} else {x_coord = 0;}
+            if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseInt(y_coord);} else {y_coord = 0;}
             var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
             var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
             var myOptions = {
