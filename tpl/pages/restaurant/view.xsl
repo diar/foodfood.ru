@@ -23,8 +23,8 @@
             function map_init() {
             x_coord = '<xsl:value-of select="restaurant/rest_google_x" />';
             y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
-            x_coord = parseInt(x_coord);
-            y_coord = parseInt(y_coord);
+            if (x_coord!='') {x_coord = parseInt(x_coord);} else {x_coord = 0;}
+            if (y_coord!='') {y_coord = parseInt(y_coord);} else {y_coord = 0;}
             var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
             var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
             var myOptions = {
@@ -333,7 +333,7 @@
                         </xsl:if>
                         <xsl:if test="rest_address != ''">
                             <div class="address">
-                                <xsl:value-of select="rest_address" />  <span class="map_link"><a href="#">Карта проезда</a></span>
+                                <xsl:value-of select="rest_address" />
                             </div>
                         </xsl:if>
                         <xsl:choose>
