@@ -69,7 +69,7 @@ class poster_Page extends View {
         self::$page['site']['city'] = CityPlugin::getCity();
         self::$page['date']['month']=String::toMonth(date('m',$datetime));
         self::$page['date']['day']=date('d',$datetime);
-        self::$page['poster'] = MD_Poster::getPostersToDate($date);
+        self::$page['content'] = MD_Poster::getPostersToDate($date);
         // Показываем страницу
         self::showXSLT('pages/poster/to_date');
     }

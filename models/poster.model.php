@@ -36,7 +36,7 @@ class MD_Poster extends Model {
      */
     public static function getRestaurantPosters ($rest_id) {
         // Получаем список элементов афиши
-        $posters = self::getAll('date>=CURDATE() AND rest_id='.DB::quote($rest_id),'date DESC',array(
+        $posters = self::getAll('(date>=CURDATE() OR date_end>=CURDATE()) AND rest_id='.DB::quote($rest_id),'date DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
         if (!empty($posters)) foreach ($posters as &$poster) {
@@ -52,7 +52,7 @@ class MD_Poster extends Model {
         // Получаем список элементов афиши
         $date=self::quote($date);
         $posters = self::getAll(
-                'is_hidden=0 AND (date='.$date.' or '.
+                'is_hidden=0 AND poster_type = "poster" AND (date='.$date.' or '.
                 '(date<='.$date.' and date_end>='.$date.') or '.
                 '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
                 '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
@@ -60,10 +60,28 @@ class MD_Poster extends Model {
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
-        if (!empty($posters)) foreach ($posters as &$poster) {
-                $poster['date_month'] = String::toMonth($poster['date_month']);
-            }
-        return $posters;
+        $news = self::getAll(
+                'is_hidden=0 AND poster_type = "news" AND (date='.$date.' or '.
+                '(date<='.$date.' and date_end>='.$date.') or '.
+                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
+                '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
+                ')'
+                ,'rest_rating DESC',array(
+                'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
+        ));
+        $actions = self::getAll(
+                'is_hidden=0 AND poster_type = "action" AND (date='.$date.' or '.
+                '(date<='.$date.' and date_end>='.$date.') or '.
+                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
+                '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
+                ')'
+                ,'rest_rating DESC',array(
+                'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
+        ));
+        $poster_array['posters']['items'] = $posters;
+        $poster_array['actions']['items'] = $actions;
+        $poster_array['news']['items'] = $news;
+        return $poster_array;
     }
     /**
      * Получить афиши на сегодня
@@ -76,30 +94,6 @@ class MD_Poster extends Model {
                 '(date<=CURDATE() and date_end>=CURDATE()) or '.
                 '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK(CURDATE())) or '.
                 '(repeat_week=1 and DAYOFWEEK(CURDATE())>repeat_week_start and DAYOFWEEK(CURDATE())-1<=repeat_week_end)'.
-                ')'
-                ,'rest_rating DESC',array(
-                'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
-        ));
-        if (!empty($posters)) foreach ($posters as &$poster) {
-                $poster['date_month'] = String::toMonth($poster['date_month']);
-                if (strlen($poster['anounce'])>60) {
-                    $poster['anounce'] = mb_substr($poster['anounce'],0,60,'UTF-8').'...';
-                }
-            }
-        return $posters;
-    }
-    /**
-     * Получить афиши на завтра
-     * @return array
-     */
-    public static function getPostersTomorrow ($params=null) {
-        $date = DB::quote(date('Y:m:d',time()+60*60*24));
-        // Получаем список элементов афиши
-        $posters = self::getAll(
-                'is_hidden=0 AND (date='.$date.' or '.
-                '(date<='.$date.' and date_end>='.$date.') or '.
-                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
                 ')'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'

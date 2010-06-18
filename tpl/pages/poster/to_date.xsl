@@ -15,24 +15,29 @@
         <script type="text/javascript">
             poster_page_activate = true;
         </script>
-        <div class="current_date">
-            <div class="calendar_layout today">
-                <div class="calendar box_shadow">
-                    <div class="month"><xsl:value-of select="//date/day" /></div>
-                    <div class="number" style="background:#ff6600"><xsl:value-of select="//date/month" /></div>
-                </div>
+        <div class="left">
+            <div class="caption">Новости</div>
+            <div class="list">
+                <xsl:apply-templates select="content/news/items/item" />
             </div>
         </div>
-        <div class="list">
-            <xsl:apply-templates select="poster/item" />
-            <div class="clear"></div>
+        <div class="center">
+            <div class="caption">АКЦИИ</div>
+            <div class="list">
+                <xsl:apply-templates select="content/actions/items/item" />
+            </div>
         </div>
-        <div class="right_banner"></div>
+        <div class="right">
+            <div class="caption">АФИША</div>
+            <div class="list">
+                <xsl:apply-templates select="content/posters/items/item" />
+            </div>
+        </div>
     </xsl:template>
 
-     <xsl:template match="poster/item">
+    <xsl:template match="items/item">
         <div class="item">
-            <div class="foto box_shadow">
+            <div class="img">
                 <xsl:choose>
                     <xsl:when test="img=''">
                         <img src="/public/images/poster_icon.jpg" alt="{title}" />
@@ -43,13 +48,16 @@
                 </xsl:choose>
             </div>
             <div class="info">
-                <div class="caption"><a href="/{//site/city}/poster/view/{rest_poster_id}">
+                <div class="title">
+                    <a href="/{//site/city}/poster/view/{rest_poster_id}">
                         <xsl:value-of select="title" />
-                </a></div>
-                <div class="rest_name"><xsl:value-of select="rest_title" /></div>
+                    </a>
+                </div>
+                <div class="rest_title"><xsl:value-of select="rest_title" /></div>
                 <div class="description"><xsl:value-of select="anounce" /></div>
             </div>
+            <div class="clear"></div>
         </div>
     </xsl:template>
-    
+
 </xsl:stylesheet>

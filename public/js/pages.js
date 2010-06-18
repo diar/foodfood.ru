@@ -308,7 +308,7 @@ $(document).ready(function(){
             $.post('/'+site_city+'/poster/date/',{
                 'date':date,'day':$(this).attr('offset'),'month':month
             },function(data){
-                $('.by_date.today').html(data);
+                $('.anounce_block').html(data);
             });
         });
         
