@@ -327,7 +327,26 @@
             <div style="height:200px; width:500px;font-size:14px;">
                 <img src="/public/images/logo.png" style="width:100px;height:80px;" />
                 <div>
-                    Информация о ресторане
+                    <div class="rest_contacts">
+                        <xsl:if test="rest_phone != ''">
+                            <div class="phone"><xsl:value-of select="rest_phone" /></div>
+                        </xsl:if>
+                        <xsl:if test="rest_address != ''">
+                            <div class="address">
+                                <xsl:value-of select="rest_address" />  <span class="map_link"><a href="#">Карта проезда</a></span>
+                            </div>
+                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="rest_metro!=''">
+                                <div class="metro"><xsl:value-of select="rest_metro" /></div>
+                            </xsl:when>
+                        </xsl:choose>
+                        <xsl:choose>
+                            <xsl:when test="rest_ostanovka!=''">
+                                <div class="ostanovka"><xsl:value-of select="rest_ostanovka" /></div>
+                            </xsl:when>
+                        </xsl:choose>
+                    </div>
                 </div>
             </div>
         </div>
