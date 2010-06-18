@@ -18,7 +18,7 @@ class error_Page extends View {
      * Ошибка 404
     */
     public static function indexAction ($id) {
-        echo "Ошибка 404 : страница не найдена";
+        self::showXSLT('pages/error/404');
     }
 
     /*
