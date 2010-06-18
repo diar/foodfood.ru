@@ -23,8 +23,8 @@
             function map_init() {
             x_coord = '<xsl:value-of select="restaurant/rest_google_x" />';
             y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
-            if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseInt(x_coord);} else {x_coord = 0;}
-            if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseInt(y_coord);} else {y_coord = 0;}
+            if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseFloat(x_coord);} else {x_coord = 0;}
+            if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseFloat(y_coord);} else {y_coord = 0;}
             var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
             var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
             var myOptions = {
@@ -191,7 +191,8 @@
                         </xsl:if>
                         <xsl:if test="rest_address != ''">
                             <div class="address">
-                                <xsl:value-of select="rest_address" />  <span class="map_link"><a href="#">Карта проезда</a></span>
+                                <xsl:value-of select="rest_address" />
+                                <span class="map_link"><a href="#">Карта проезда</a></span>
                             </div>
                         </xsl:if>
                         <xsl:choose>
@@ -205,7 +206,6 @@
                             </xsl:when>
                         </xsl:choose>
                     </div>
-
                     <div class="person_block">
                         <div class="caption">Приятного аппетита желает:</div>
                         <div class="photo">
@@ -325,9 +325,10 @@
             </div>
         </div>
         <div id="map_text" style="display:none;">
-            <div style="height:200px; width:500px;font-size:14px;">
+            <div style="height:200px; width:300px;font-size:14px;">
                 <img src="/public/images/logo.png" style="width:100px;height:80px;" />
                 <div>
+                    <div><xsl:value-of select="rest_title" /></div>
                     <div class="rest_contacts">
                         <xsl:if test="rest_phone != ''">
                             <div class="phone"><xsl:value-of select="rest_phone" /></div>
@@ -376,12 +377,15 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
-            <div class="text_block"><div class="title"><a href="#"><xsl:value-of select="title" /></a></div>
+            <div class="text_block">
+                <div class="title">
+                    <a href="/{//site/city}/poster/view/{rest_poster_id}"><xsl:value-of select="title" /></a>
+                </div>
             <div class="text"><xsl:value-of select="anounce" /></div></div>
         </div>
         <div class="clear"></div>
     </xsl:template>
-
+    
     <!-- Список отзывов -->
     <xsl:template match="reviews/item">
         <div class="review">
