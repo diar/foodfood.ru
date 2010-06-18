@@ -21,22 +21,10 @@
             rest_page_activate = true;
             current_rest_id = <xsl:value-of select="restaurant/id" />;
             function map_init() {
-            <xsl:choose>
-                <xsl:when test="restaurant/rest_google_x!=''">
-                    x_coord = <xsl:value-of select="restaurant/rest_google_x" />;
-                </xsl:when>
-                <xsl:otherwise>
-                    x_coord = 0;
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:choose>
-                <xsl:when test="restaurant/rest_google_y!=''">
-                    y_coord = <xsl:value-of select="restaurant/rest_google_y" />;
-                </xsl:when>
-                <xsl:otherwise>
-                    y_coord = 0;
-                </xsl:otherwise>
-            </xsl:choose>
+            x_coord = '<xsl:value-of select="restaurant/rest_google_x" />';
+            y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
+            x_coord = parseInt(x_coord);
+            y_coord = parseInt(y_coord);
             var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
             var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
             var myOptions = {
