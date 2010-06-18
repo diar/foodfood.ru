@@ -21,30 +21,44 @@
             rest_page_activate = true;
             current_rest_id = <xsl:value-of select="restaurant/id" />;
             function map_init() {
-                x_coord = <xsl:value-of select="restaurant/rest_google_x" />;
-                y_coord = <xsl:value-of select="restaurant/rest_google_y" />;
-                var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
-                var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
-                var myOptions = {
-                zoom: 16,
-                center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                var infowindow = new google.maps.InfoWindow({
-                content: $($('#map_text').html()).get(0)
-                });
-                var marker_image = $('#map_marker img').attr('src');
-                var marker = new google.maps.Marker({
-                position: latlng_marker,
-                map: map,
-                icon: marker_image,
-                title: 'Шоколадница'
-                });
-                infowindow.open(map,marker);
-                google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map,marker);
-                });
+            <xsl:choose>
+                <xsl:when test="restaurant/rest_google_x!=''">
+                    x_coord = <xsl:value-of select="restaurant/rest_google_x" />;
+                </xsl:when>
+                <xsl:otherwise>
+                    x_coord = 0;
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="restaurant/rest_google_y!=''">
+                    y_coord = <xsl:value-of select="restaurant/rest_google_y" />;
+                </xsl:when>
+                <xsl:otherwise>
+                    y_coord = 0;
+                </xsl:otherwise>
+            </xsl:choose>
+            var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
+            var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
+            var myOptions = {
+            zoom: 16,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            var infowindow = new google.maps.InfoWindow({
+            content: $($('#map_text').html()).get(0)
+            });
+            var marker_image = $('#map_marker img').attr('src');
+            var marker = new google.maps.Marker({
+            position: latlng_marker,
+            map: map,
+            icon: marker_image,
+            title: 'Шоколадница'
+            });
+            infowindow.open(map,marker);
+            google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+            });
             }
         </script>
         <xsl:apply-templates select="restaurant" />
@@ -222,7 +236,7 @@
                             <xsl:value-of select="//person/person_text" />
                         </div>
                         <div class="clear"></div>
-                        
+
                     </div>
                 </div>
                 <!-- Средняя колонка -->
@@ -318,14 +332,14 @@
             <div class="caption">
                 <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0" />
                 <div class="clear"></div>
-            <div id="map_canvas" style="width:700px; height:500px"></div>
+                <div id="map_canvas" style="width:700px; height:500px"></div>
             </div>
         </div>
         <div id="map_text" style="display:none;">
             <div style="height:200px; width:500px;font-size:14px;">
                 <img src="/public/images/logo.png" style="width:100px;height:80px;" />
                 <div>
-                Информация о ресторане
+                    Информация о ресторане
                 </div>
             </div>
         </div>
