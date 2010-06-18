@@ -276,6 +276,7 @@ $(document).ready(function(){
                 $("#mounth").animate({
                     scrollLeft: poster_month_position*150
                 },250);
+                get_poster ();
             }
         });
         $("#mounth_list .next").click(function(){
@@ -284,6 +285,7 @@ $(document).ready(function(){
                 $("#mounth").animate({
                     scrollLeft: poster_month_position*150
                 },250);
+                get_poster ();
             }
         });
         poster_month_position = current_month-1;
@@ -295,21 +297,7 @@ $(document).ready(function(){
         $('.date_list .item').click(function(){
             $('.date_list .item.current').removeClass('current');
             $(this).addClass('current');
-            $('.by_date.tomorrow').animate({
-                'height':'hide'
-            },300);
-            $('.by_date.today').animate({
-                'min-height':500
-            },300);
-            month = poster_month_position+1;
-            if (month<10) month='0'+month;
-            date=''+current_year+'.'+month+'.'+$(this).attr('offset');
-            $('.by_date.today').html($loader);
-            $.post('/'+site_city+'/poster/date/',{
-                'date':date,'day':$(this).attr('offset'),'month':month
-            },function(data){
-                $('.anounce_block').html(data);
-            });
+            get_poster ();
         });
         
         $('#poster_follow').click(function(){
@@ -328,7 +316,7 @@ $(document).ready(function(){
             return false;
         });
         $('.date_list .item[offset="'+current_day+'"]').click();
-         $(".date_list .items").animate({
+        $(".date_list .items").animate({
             scrollLeft: (current_day-1)*115
         },250);
         poster_day_position = current_day-1;
@@ -459,7 +447,21 @@ function comment_rest(rest_id,text){
         });
     }
 }
-
+function get_poster () {
+    month = poster_month_position+1;
+    if (month<10) month='0'+month;
+    day = $('.date_list .item.current').attr('offset');
+    date=''+current_year+'.'+month+'.'+day;
+    $('.anounce_block').html($loader);
+    $.post('/'+site_city+'/poster/date/',{
+        'date':date,
+        'day':day,
+        'month':month
+    },function(data){
+        $('.anounce_block').html(data);
+    });
+    return false;
+}
 function trash_itogo() {
     itogo = 0;
     $("#list_trash td.price").each(function(){
