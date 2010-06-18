@@ -55,7 +55,7 @@ class MD_Poster extends Model {
                 'is_hidden=0 AND poster_type = "poster" AND (date='.$date.' or '.
                 '(date<='.$date.' and date_end>='.$date.') or '.
                 '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
+                '(repeat_week=1 and DAYOFWEEK('.$date.')>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
                 ')'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
@@ -64,7 +64,7 @@ class MD_Poster extends Model {
                 'is_hidden=0 AND poster_type = "news" AND (date='.$date.' or '.
                 '(date<='.$date.' and date_end>='.$date.') or '.
                 '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
+                '(repeat_week=1 and DAYOFWEEK('.$date.')>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
                 ')'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
@@ -73,7 +73,7 @@ class MD_Poster extends Model {
                 'is_hidden=0 AND poster_type = "action" AND (date='.$date.' or '.
                 '(date<='.$date.' and date_end>='.$date.') or '.
                 '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
+                '(repeat_week=1 and DAYOFWEEK('.$date.')>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
                 ')'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
