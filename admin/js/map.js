@@ -76,6 +76,11 @@ function map_init() {
     };
     map = new google.maps.Map(document.getElementById("google_map"), myOptions);
     geocoder = new google.maps.Geocoder();
+    marker = new google.maps.Marker({
+        map: map,
+        draggable:true,
+        position: latlng
+    });
     cur_address = 'Казань, '+$('#rest_addressfield').val();
     $("#google_address").val(cur_address);
 }

@@ -116,6 +116,24 @@ class Restaurants extends AdminModule {
                 'css_class' => ''
                 )
         );
+
+        $google_map_text =  '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.
+                '<script type="text/javascript" src="/admin/js/map.js"></script>'.
+                "Текущее расположение <span id='google_location_html_position'>".
+                "(0, 0)</span> ".
+                '<a href="#" id="change_google_map">изменить</a>';
+
+        $form->addfield(array('name' => 'google_location_html',
+                'caption' => 'Расположение на Google Map',
+                'pattern' => 'html',
+                'value' => $google_map_text)
+        );
+        $form->addfield(array('name' => 'google_location',
+                'pattern' => 'hidden',
+                'css_class' => 'google_location',
+                'value' => "(0, 0)")
+        );
+
         $form->addfield(array('name' => 'in_market',
                 'caption' => 'Участвует в FoodFood Market',
                 'pattern' => 'checkbox',
@@ -137,6 +155,17 @@ class Restaurants extends AdminModule {
         if (!empty($_POST)) {
             $record = $_POST;
             $record['in_market']=!empty($record['in_market']) ? 1 : 0;
+            // Работа с координатами google Maps
+            $google_location = str_replace(')', '', $record['google_location']);
+            $google_location = str_replace('(', '', $google_location);
+            $google_location = explode (',',$google_location);
+            if (!empty($google_location[1])) {
+                $record['rest_google_x'] = $google_location[0];
+                $record['rest_google_y'] = $google_location[1];
+            } else {
+                $record['rest_google_x'] = 0;
+                $record['rest_google_y'] = 0;
+            }
         } else {
             $record = DBP::getRecord(self::getDbTable(),"id =".$id);
         }
@@ -247,10 +276,11 @@ class Restaurants extends AdminModule {
                 )
         );
         $google_map_text =  '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.
-                            '<script type="text/javascript" src="/admin/js/map.js"></script>'.
-                            "Текущее расположение <span id='google_location_html_position'>".
-                            "($record[rest_google_x], $record[rest_google_y])</span> ".
-                            '<a href="#" id="change_google_map">изменить</a>';
+                '<script type="text/javascript" src="/admin/js/map.js"></script>'.
+                "Текущее расположение <span id='google_location_html_position'>".
+                "($record[rest_google_x], $record[rest_google_y])</span> ".
+                '<a href="#" id="change_google_map">изменить</a>';
+
         $form->addfield(array('name' => 'google_location_html',
                 'caption' => 'Расположение на Google Map',
                 'pattern' => 'html',
@@ -290,10 +320,24 @@ class Restaurants extends AdminModule {
         $data = array();
         unset($_POST['submit']);
         unset($_POST['confirm']);
+        unset($_POST['google_location_html']);
         $data = $_POST;
         $data['rest_uri'] = str_replace('-', '_', $data['rest_uri']);
         $data['rest_uri'] = str_replace(' ', '_', $data['rest_uri']);
         $data['in_market']=!empty($data['in_market']) ? 1 : 0;
+        // Работа с координатами google Maps
+        $google_location = str_replace(')', '', $data['google_location']);
+        unset($data['google_location']);
+        $google_location = str_replace('(', '', $google_location);
+        $google_location = explode (',',$google_location);
+        if (!empty($google_location[1])) {
+            $data['rest_google_x'] = $google_location[0];
+            $data['rest_google_y'] = $google_location[1];
+        } else {
+            $data['rest_google_x'] = 0;
+            $data['rest_google_y'] = 0;
+        }
+        // Сохранение фотографии
         if (!empty($_FILES['rest_photo']['name'])) {
             $file = File::saveFile('rest_photo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/restaurant/');
             if (!empty($file)) {
@@ -326,8 +370,22 @@ class Restaurants extends AdminModule {
         $data = array();
         unset($_POST['edit']);
         unset($_POST['confirm']);
+        unset($_POST['google_location_html']);
         $data = $_POST;
         $data['in_market']=!empty($data['in_market']) ? 1 : 0;
+        // Работа с координатами google Maps
+        $google_location = str_replace(')', '', $data['google_location']);
+        unset($data['google_location']);
+        $google_location = str_replace('(', '', $google_location);
+        $google_location = explode (',',$google_location);
+        if (!empty($google_location[1])) {
+            $data['rest_google_x'] = $google_location[0];
+            $data['rest_google_y'] = $google_location[1];
+        } else {
+            $data['rest_google_x'] = 0;
+            $data['rest_google_y'] = 0;
+        }
+        // Сохранение фотографии
         if (!empty($_FILES['rest_photo']['name'])) {
             $file = File::saveFile('rest_photo', $_POST['rest_uri'],  Config::getValue('path','upload').'image/restaurant/');
             if (!empty($file)) {

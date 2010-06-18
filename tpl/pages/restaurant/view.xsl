@@ -21,8 +21,10 @@
             rest_page_activate = true;
             current_rest_id = <xsl:value-of select="restaurant/id" />;
             function map_init() {
-                var latlng = new google.maps.LatLng(55.779952+0.002000,49.213343);
-                var latlng_marker = new google.maps.LatLng(55.779952,49.213343);
+                x_coord = <xsl:value-of select="restaurant/rest_google_x" />;
+                y_coord = <xsl:value-of select="restaurant/rest_google_y" />;
+                var latlng = new google.maps.LatLng(x_coord,y_coord);
+                var latlng_marker = new google.maps.LatLng(x_coord+0.002000,y_coord);
                 var myOptions = {
                 zoom: 16,
                 center: latlng,
