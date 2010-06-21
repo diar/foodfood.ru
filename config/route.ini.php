@@ -6,3 +6,4 @@ action.vk = restaurant
 action.restaurant = view
 action.menu = view
 action.content = view
+action.news = view

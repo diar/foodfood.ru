@@ -5,7 +5,7 @@
  * @version 0.2
  * Страница ресторана, по умолчанию действие View
  */
-class content_Page extends View {
+class news_Page extends View {
 
     /*
      * Инициализация контроллера
@@ -24,13 +24,13 @@ class content_Page extends View {
     }
     
     /*
-     * Показ одной афиши
+     * Показ одной новости
     */
     public static function viewAction ($id) {
-        $content = MD_Content::getContent($id);
-        self::$page['site']['page'] = $content['content_title'];
-        self::$page['content']['page'] = $content;
-        self::showXSLT('pages/content/view');
+        $content = MD_News::get($id);
+        self::$page['site']['page'] = $content['title'];
+        self::$page['content'] = $content;
+        self::showXSLT('pages/news/view');
     }
 
 }
