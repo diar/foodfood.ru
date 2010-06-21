@@ -25,7 +25,7 @@
             y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
             if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseFloat(x_coord);} else {x_coord = 0;}
             if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseFloat(y_coord);} else {y_coord = 0;}
-            var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
+            var latlng = new google.maps.LatLng(x_coord+0.003000,y_coord);
             var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
             var myOptions = {
             zoom: 16,
@@ -320,11 +320,10 @@
             <div class="clear"></div>
         </div>
         <div id="google_dialog" class="dialog_box dialog box_shadow">
-            <div class="caption">
-                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0" />
+                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0 -20px 0 0;" />
                 <div class="clear"></div>
-                <div id="map_canvas" style="width:700px; height:500px"></div>
-            </div>
+                <div id="map_canvas" style="width:700px; height:535px"></div>
+                <div style="width:100%;height:35px;background:#fff;position:relative;top:-35px;"></div>
         </div>
         <div id="map_text" style="display:none;">
             <div style="height:200px; width:300px;font-size:14px;">

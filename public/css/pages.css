@@ -199,7 +199,9 @@
 #google_dialog {
     margin-left:-350px;
     width:700px;
-    height:540px
+    height:540px;
+    padding:0 20px;
+    overflow:hidden;
 }
 
 .restaurant_header {
@@ -265,7 +267,7 @@
     float:right;
     font-size:11px;
     margin-top:5px;
-	margin-right:80px;
+    margin-right:80px;
 }
 
 .work_time.closed{
@@ -932,16 +934,16 @@ table.table_layout td {
 }
 
 .afisha_list #today {
-	font-size:28px;
-	line-height:44px;
-	color:#ffffff;
-	padding-left:0;
-	padding-right:0;
-	width:115px;
-	text-align:center;
+    font-size:28px;
+    line-height:44px;
+    color:#ffffff;
+    padding-left:0;
+    padding-right:0;
+    width:115px;
+    text-align:center;
 }
 #today.current {
-	color:#000000;
+    color:#000000;
 }
 .afisha_list .date_list .item.current {
     background:#ffffff;
@@ -998,7 +1000,7 @@ table.table_layout td {
 .anounce_block .item .rest_title {
     font-size:13px;
     color:#ff6600;
-	padding:3px 0;
+    padding:3px 0;
 }
 .anounce_block .item .description {
     font-size:13px;
