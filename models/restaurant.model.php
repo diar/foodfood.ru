@@ -615,7 +615,7 @@ class MD_Restaurant extends Model {
             $time_end=intval($time_end_arr[0])*60+intval($time_end_arr[1]);
             $time_current=intval(date('H'))*60+intval(date('i'));
             if(($time_current>$time_start and $time_current<$time_end) or
-                    ($time_start>$time_end and $time_current>$time_start and $time_current>$time_end) or
+                    ($time_start>$time_end and !($time_current<$time_start and $time_current>$time_end)) or
                     ($time_start==$time_end)
             ) {
                 $worktime['opened']=true;
