@@ -5,7 +5,7 @@
         header('Location: /ie/index_ru.html', true, 303);
     }
 
-    define('DEBUG','');
+    //define('DEBUG','');
     /* -- Запуск ядра -- */
     include_once ('engine/core/engine.class.php');
     Engine::initModule();
