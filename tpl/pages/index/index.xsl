@@ -122,7 +122,6 @@
                             <div style="margin-top:15px;margin-left:20px;">Пока никто не оставлял отзывов...</div>
                         </xsl:otherwise>
                     </xsl:choose>
-
                 </td>
                 <td class="additional_center" id="restaurant_article">
                     <!-- Статьи -->

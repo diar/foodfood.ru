@@ -38,6 +38,8 @@ class index_Page extends View {
         $recomended['banner']['class'] = 'banner240n320';
         // Получаем новый ресторан
         $new_rest=MD_Restaurant::getNew();
+        // Получаем список последних новостей
+        $news=MD_News::getAll(null, 'id DESC LIMIT 0,10');
         // Получаем список статей и афиш
         $articles=MD_Article::getArticleBlocks(array('count'=>20));
         $posters=MD_Poster::getPosterBlocksWeek(array('count'=>20));
@@ -54,6 +56,7 @@ class index_Page extends View {
         self::$page['content']['posters'] = $posters;
         self::$page['content']['recomended'] = $recomended;
         self::$page['content']['new_rest'] = $new_rest;
+        self::$page['content']['news'] = $news;
 
         // Показываем страницу
         self::showXSLT('pages/index/index');

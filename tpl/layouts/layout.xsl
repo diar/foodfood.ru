@@ -207,10 +207,7 @@
             <div id="footer_left">
                 <div class="caption rounded_right">Добавка</div>
                 <ul>
-                    <li><a href="#">Введена услуга доставки еды</a></li>
-                    <li><a href="#">Новый адрес редакции</a></li>
-                    <li><a href="#">Функция добавления ресторана</a></li>
-                    <li><a href="#">Новый ресторан Паприкас</a></li>
+                    <xsl:apply-templates select="//content/news/item" />
                 </ul>
             </div>
             <div id="footer_center">
@@ -245,10 +242,8 @@
                                 <xsl:value-of select="//person/person_post" /><br />
                                 <br />
                                 <xsl:value-of select="//person/person_text" />
-                               
                             </div>
                             <div class="clear"></div>
-
                         </xsl:when>
                     </xsl:choose>
                 </div>
@@ -270,6 +265,10 @@
         <iframe class="{class}" src="/{//site/city}/banner/{type}/" frameborder="0" scrolling="no"></iframe>
     </xsl:template>
 
+    <xsl:template match="//news/item">
+        <li><a href="/{//site/city}/news/{id}"><xsl:value-of select="title" /></a></li>
+    </xsl:template>
+    
     <!-- Ссылка на ресторан -->
     <xsl:template name="rest_link">
         <xsl:param name="id" />
