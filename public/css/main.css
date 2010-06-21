@@ -250,8 +250,10 @@
 #restaurant_discount .more {
     padding-top:10px;
     font-size:18px;
-    padding-left:20px;
-    background:url(/public/images/icons/discounts_small.jpg) 0 12px no-repeat;
+	line-height:26px;
+    padding-left:36px;
+	margin-left:-22px;
+    background:url(/public/images/icons/discounts_small.jpg) 0 0 no-repeat;
 }
 #posters_tomorrow {
     display:none;
