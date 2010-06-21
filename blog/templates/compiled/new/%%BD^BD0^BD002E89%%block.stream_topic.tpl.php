@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:32:33
+<?php /* Smarty version 2.6.19, created on 2010-06-19 08:25:44
          compiled from block.stream_topic.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'block.stream_topic.tpl', 8, false),array('function', 'router', 'block.stream_topic.tpl', 14, false),)), $this); ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-27 19:22:46
+<?php /* Smarty version 2.6.19, created on 2010-06-16 20:45:13
          compiled from menu.people.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'router', 'menu.people.tpl', 3, false),array('function', 'hook', 'menu.people.tpl', 10, false),)), $this); ?>

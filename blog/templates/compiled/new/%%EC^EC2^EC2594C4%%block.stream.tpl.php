@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:32:26
+<?php /* Smarty version 2.6.19, created on 2010-06-16 23:20:21
          compiled from block.stream.tpl */ ?>
 			<div class="block stream">
 

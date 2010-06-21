@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:32:26
+<?php /* Smarty version 2.6.19, created on 2010-06-16 23:20:21
          compiled from topic_list.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'cfg', 'topic_list.tpl', 13, false),array('function', 'router', 'topic_list.tpl', 15, false),array('function', 'date_format', 'topic_list.tpl', 74, false),array('modifier', 'escape', 'topic_list.tpl', 15, false),)), $this); ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-30 10:34:14
+<?php /* Smarty version 2.6.19, created on 2010-06-17 22:35:04
          compiled from blog_list.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'cfg', 'blog_list.tpl', 6, false),array('function', 'router', 'blog_list.tpl', 18, false),array('modifier', 'escape', 'blog_list.tpl', 19, false),)), $this); ?>

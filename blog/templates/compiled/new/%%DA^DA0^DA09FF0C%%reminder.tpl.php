@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-06-02 09:04:12
+<?php /* Smarty version 2.6.19, created on 2010-06-17 16:39:13
          compiled from actions/ActionLogin/reminder.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'router', 'actions/ActionLogin/reminder.tpl', 4, false),)), $this); ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-06-04 19:34:28
+<?php /* Smarty version 2.6.19, created on 2010-06-18 07:55:59
          compiled from actions/ActionPeople/online.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'router', 'actions/ActionPeople/online.tpl', 22, false),array('function', 'date_format', 'actions/ActionPeople/online.tpl', 23, false),)), $this); ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:32:26
+<?php /* Smarty version 2.6.19, created on 2010-06-16 20:45:13
          compiled from system_message.tpl */ ?>
 <?php if ($this->_tpl_vars['aMsgError']): ?>
 <div id="system_messages_error">

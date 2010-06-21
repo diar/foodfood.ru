@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:35:28
+<?php /* Smarty version 2.6.19, created on 2010-06-18 06:03:27
          compiled from actions/ActionError/index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'cfg', 'actions/ActionError/index.tpl', 8, false),)), $this); ?>

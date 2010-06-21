@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:51:08
+<?php /* Smarty version 2.6.19, created on 2010-06-18 04:18:46
          compiled from actions/ActionBlog/topic.tpl */ ?>
 <?php if ($this->_tpl_vars['oUserCurrent']): ?>
 	<?php $_smarty_tpl_vars = $this->_tpl_vars;

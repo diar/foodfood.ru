@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-30 15:57:55
+<?php /* Smarty version 2.6.19, created on 2010-06-17 14:31:52
          compiled from actions/ActionSearch/opensearch.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'cfg', 'actions/ActionSearch/opensearch.tpl', 2, false),array('function', 'router', 'actions/ActionSearch/opensearch.tpl', 5, false),)), $this); ?>

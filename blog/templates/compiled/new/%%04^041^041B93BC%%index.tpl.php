@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-06-05 01:12:23
+<?php /* Smarty version 2.6.19, created on 2010-06-18 06:19:32
          compiled from actions/ActionComments/index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'header.tpl', 'smarty_include_vars' => array('showWhiteBack' => true)));

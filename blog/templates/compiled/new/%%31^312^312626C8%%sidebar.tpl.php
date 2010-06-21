@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2010-05-26 20:39:31
+<?php /* Smarty version 2.6.19, created on 2010-06-16 20:45:20
          compiled from actions/ActionProfile/sidebar.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'router', 'actions/ActionProfile/sidebar.tpl', 7, false),array('modifier', 'escape', 'actions/ActionProfile/sidebar.tpl', 20, false),)), $this); ?>
