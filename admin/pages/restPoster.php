@@ -81,9 +81,9 @@ class restPoster extends AdminModule {
         $id = ELEMENT_ID;
         if (!empty($_POST)) {
             $record = $_POST;
-        } else {
-            $record = DBP::getRecord('rest_poster',"id =".$id);
             $record['repeat_week']=!empty($record['repeat_week']) ? 1 : 0;
+        } else {
+            $record = DBP::getRecord(self::getDbTable(),"id =".$id);
             switch($record['poster_type']) {
                 case 'action'   : $record['poster_type'] = 1;
                     break;
@@ -96,79 +96,77 @@ class restPoster extends AdminModule {
 
         $form = Form::newForm('rest_poster','posterForm',DBP::getPrefix().self::getDbTable());
 
-        $form->addfield(array('name' => 'title',
+        $form->addfield(array(
+                'name' => 'title',
                 'caption' => 'Название',
                 'pattern' => 'text',
                 'is_required' => true,
                 'maxlength' => '255',
                 'css_class' => 'caption',
                 'value' => $record['title']
-                )
-        );
-        $form->addfield(array('name' => 'img',
+        ));
+        $form->addfield(array(
+                'name' => 'img',
                 'caption' => 'Изображение',
                 'pattern' => 'file',
                 'formats' => array('jpg','png','jpeg','gif'),
                 'maxlength' => '255',
-                'css_class' => 'caption')
-        );
-        $form->addfield(array('name' => 'date',
+                'css_class' => 'caption'
+        ));
+        $form->addfield(array(
+                'name' => 'date',
                 'caption' => 'Дата начала (гггг-мм-дд)',
                 'pattern' => 'text',
                 'maxlength' => '255',
                 'is_required' => true,
                 'css_class' => 'caption datepicker',
                 'value' => $record['date']
-                )
-        );
+        ));
 
-        $form->addfield(array('name' => 'date_end',
+        $form->addfield(array(
+                'name' => 'date_end',
                 'caption' => 'Дата окончания',
                 'pattern' => 'text',
                 'maxlength' => '255',
                 'css_class' => 'caption datepicker',
-                'value' => $record['date_end'])
-        );
-        $form->addfield(array('name' => 'repeat_week',
+                'value' => $record['date_end']
+        ));
+        $form->addfield(array(
+                'name' => 'repeat_week',
                 'caption' => 'Повторять каждую неделю',
                 'pattern' => 'checkbox',
                 'css_class' => 'caption',
-                'checked' => $record['repeat_week'])
-        );
-        $form->addfield(array('name' => 'poster_type',
+                'checked' => $record['repeat_week']
+        ));
+        $form->addfield(array(
+                'name' => 'poster_type',
                 'caption' => 'Тип',
                 'pattern' => 'select',
                 'selected'=>$record['poster_type'],
                 'options' => array(1=>'акция',2=>'афиша',3=>'новость'),
-                'css_class' => 'caption')
-        );
+                'css_class' => 'caption'
+        ));
 
-        $form->addfield(array('name' => 'anounce',
+        $form->addfield(array(
+                'name' => 'anounce',
                 'caption' => 'Краткий текст',
                 'pattern' => 'textarea',
                 'is_required' => true,
                 'value' => $record['anounce']
-                )
-        );
+        ));
 
-        $form->addfield(array('name' => 'text',
+        $form->addfield(array(
+                'name' => 'text',
                 'caption' => 'Описание',
                 'pattern' => 'editor',
                 'value' => $record['text']
-                )
-        );
-
-        $form->addfield(array('name' => 'id',
-                'pattern' => 'hidden',
-                'value' => $id
-                )
-        );
+        ));
 
         $form->addfield(array('name' => 'edit',
                 'caption' => 'Сохранить',
                 'css_class' => 'ui_button',
-                'pattern' => 'submit')
-        );
+                'pattern' => 'submit'
+        ));
 
         self::validate($form,$id,true);
     }
@@ -218,7 +216,6 @@ class restPoster extends AdminModule {
         $data = array();
         $id = ELEMENT_ID;
         unset($_POST['edit']);
-        unset($_POST['id']);
         $data = $_POST;
         switch($data['poster_type']) {
             case 1   : $data['poster_type'] = 'action';
