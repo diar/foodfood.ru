@@ -24,9 +24,10 @@
 			<div class="logo404"><a href="/"><img src="/public/images/logo404.jpg" /></a></div>
 			<div class="text404">
 				<div class="title404">Страница не найдена</div>
-				<div class="text404">Страница, которую вы запросили, отсутствует на нашем портале.<br />
+				<div class="text404a">Страница, которую вы запросили, отсутствует на нашем портале.<br />
 Возможно, вы ошиблись при наборе адреса или перешли по неверной ссылке.
 </div>
+	<div class="clear"></div>
 				<div class="menu404">
                   <a href="/kazan/poster">Афиша</a>
                   <a href="/kazan/discount">Скидки</a>

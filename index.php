@@ -6,6 +6,6 @@
     }
 
     //define('DEBUG','');
-    /* -- Запуск ядра -- */
+    /* -- Запуск ядра -- */ 
     include_once ('engine/core/engine.class.php');
     Engine::initModule();
