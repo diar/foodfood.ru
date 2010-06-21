@@ -270,9 +270,9 @@
                                 <li class="link"><a href="#">Забронировать столик</a></li>
                                 <li class="link"><a href="#">Заказать банкет</a></li>
                             </ul>
-                            <xsl:if test="have_menu=1">
-                                <div class="menu_link menu_icon">
-                                    <a href="#">
+                            <div class="menu_link menu_icon">
+                                <xsl:if test="have_menu=1">
+                                    <a>
                                         <xsl:attribute name="href">
                                             <xsl:text>/</xsl:text>
                                             <xsl:value-of select="//site/city" />
@@ -288,9 +288,11 @@
                                         </xsl:attribute>
                                         <xsl:text>Меню пожалуйста!</xsl:text>
                                     </a>
+                                </xsl:if>
+                                <xsl:if test="have_menu_map=1">
                                     <ul class="sub_menu_link">
                                         <li class="bar_icon">
-                                            <a href="#">
+                                            <a>
                                                 <xsl:attribute name="href">
                                                     <xsl:text>/</xsl:text>
                                                     <xsl:value-of select="//site/city" />
@@ -308,8 +310,8 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
-                            </xsl:if>
+                                </xsl:if>
+                            </div>
                         </div>
                     </div>
                     <img src="/public/images/rest_banner.jpg" style="width:206px;margin-top:10px;" />
@@ -385,7 +387,7 @@
         </div>
         <div class="clear"></div>
     </xsl:template>
-    
+
     <!-- Список отзывов -->
     <xsl:template match="reviews/item">
         <div class="review">

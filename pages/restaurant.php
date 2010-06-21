@@ -52,6 +52,7 @@ class restaurant_Page extends View {
         $payments = MD_Restaurant::getRestaurantPayments($restaurant['id']);
         $worktime = MD_Restaurant::getRestaurantWorktime($restaurant['id']);
         $have_menu = MD_Restaurant::haveMenu($restaurant['id']);
+        $have_menu_map = MD_Restaurant::haveMenuMap($restaurant['id']);
         $mood_title = DB::getValue('list_mood','title',"uri = '$mood'");
         // Добавляем переменные xslt
         self::$page['site']['page'] = $restaurant['rest_title'];
@@ -71,6 +72,7 @@ class restaurant_Page extends View {
         self::$page['content']['restaurant']['payments'] = $payments;
         self::$page['content']['restaurant']['worktime'] = $worktime;
         self::$page['content']['restaurant']['have_menu'] = $have_menu;
+        self::$page['content']['restaurant']['have_menu_map'] = $have_menu_map;
         self::$page['content']['navigate']['next'] = $next;
         self::$page['content']['navigate']['prev'] = $prev;
         self::$page['content']['navigate']['mood'] = $mood;

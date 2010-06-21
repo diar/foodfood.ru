@@ -449,7 +449,8 @@ class Restaurants extends AdminModule {
         foreach ($records as &$record) {
             $editLink = self::getLink(PAGE, 'goEdit', $record['id']);
             $delLink = self::getLink(PAGE,'delete', $record['id']);
-            $record['control']="<a href='$editLink'>Редактировать</a> | <a href='$delLink'>Удалить</a>";
+            $delLink = "if (confirm(\"Вы уверены, что хотите удалить ресторан?\")) { location.href=\"$delLink\" }";
+            $record['control']="<a href='$editLink'>Редактировать</a> | <a href='#' onclick='$delLink'>Удалить</a>";
             if ($record['is_hidden']) $checked = '';
             else $checked = 'checked';
             unset($record['is_hidden']);

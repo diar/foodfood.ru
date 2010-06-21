@@ -668,7 +668,12 @@ class MD_Restaurant extends Model {
     }
 
     public static function haveMenu ($rest_id) {
-        $return = DB::getCount(self::getPrefix().'rest_menu','rest_id ='.$rest_id);
+        $return = DB::getCount(self::getPrefix().'rest_menu','is_bar_map=0 AND rest_id ='.$rest_id);
+        if  (intval($return) > 0) return true;
+        else return false;
+    }
+    public static function haveMenuMap ($rest_id) {
+        $return = DB::getCount(self::getPrefix().'rest_menu','is_bar_map=1 AND rest_id ='.$rest_id);
         if  (intval($return) > 0) return true;
         else return false;
     }
