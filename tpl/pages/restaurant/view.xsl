@@ -25,7 +25,7 @@
             y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
             if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseFloat(x_coord);} else {x_coord = 0;}
             if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseFloat(y_coord);} else {y_coord = 0;}
-            var latlng = new google.maps.LatLng(x_coord+0.003000,y_coord);
+            var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
             var latlng_marker = new google.maps.LatLng(x_coord,y_coord);
             var myOptions = {
             zoom: 16,
