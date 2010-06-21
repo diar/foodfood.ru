@@ -114,21 +114,28 @@ class discounts extends AdminModule {
     public static function saveForRest() {
         Debug::disable();
         $records = DB::fetchAll(
-                "SELECT discount_percent, discount_secret, discount_activated, discount_counter ".
+                "SELECT discount_counter, discount_percent, discount_secret, discount_activated ".
                 "FROM ".DBP::getPrefix()."rest_discount AS ds ".
                 "LEFT JOIN ".DBP::getPrefix()."discount_list AS ls ON ls.discount_id=ds.id ".
                 "WHERE rest_id=".self::getRestId()
         );
-        foreach ($records as &$record) {
-            $record['discount_percent'] = $record['discount_percent'].' %';
-            $record['discount_secret_rest'] = substr($record['discount_secret'], 0, 2);
-            $record['discount_secret_user'] = substr($record['discount_secret'], 2, 3);
-            unset($record['discount_secret']);
+        if (!empty($records)) {
+            foreach ($records as &$record) {
+                $record['discount_percent'] = $record['discount_percent'].' %';
+                $record['discount_secret_rest'] = substr($record['discount_secret'], 0, 2);
+                $record['discount_secret_user'] = substr($record['discount_secret'], 2, 3);
+                unset($record['discount_secret']);
+            }
+
+            $caption = Array(Array('номер','процент','активирован','код 1','код 2'));
+        } else {
+            $records=Array(array());
         }
+        $records = array_merge($caption, $records);
 
-        $path = 'discount_list'.time().'.xlsx';
+        $path = 'discount_list'.time().'.xls';
 
-        File::saveXLSX($records,Config::getValue('path','tmp').$path,"Список скидок foodfood","foodfood.ru");
+        File::saveXLS($records,Config::getValue('path','tmp').$path,"Список скидок foodfood","foodfood.ru");
 
         header('Location: /tmp/'.$path, true, 303);
     }
@@ -136,21 +143,27 @@ class discounts extends AdminModule {
     public static function saveForOff() {
         Debug::disable();
         $records = DB::fetchAll(
-                "SELECT discount_percent, discount_secret, discount_activated, discount_counter ".
+                "SELECT discount_counter, discount_percent, discount_secret, discount_activated ".
                 "FROM ".DBP::getPrefix()."rest_discount AS ds ".
                 "LEFT JOIN ".DBP::getPrefix()."discount_list AS ls ON ls.discount_id=ds.id ".
                 "WHERE rest_id=".self::getRestId()
         );
-        foreach ($records as &$record) {
-            $record['discount_percent'] = $record['discount_percent'].' %';
-            $record['discount_secret_rest'] = substr($record['discount_secret'], 0, 2);
-            $record['discount_secret_user'] = '___';
-            unset($record['discount_secret']);
+        if (!empty($records)) {
+            foreach ($records as &$record) {
+                $record['discount_percent'] = $record['discount_percent'].' %';
+                $record['discount_secret_rest'] = substr($record['discount_secret'], 0, 2);
+                $record['discount_secret_user'] = '___';
+                unset($record['discount_secret']);
+            }
+
+            $caption = Array(Array('номер','процент','активирован','код 2','код 2'));
+        } else {
+            $records=Array(array());
         }
+        $records = array_merge($caption, $records);
+        $path = 'discount_list'.time().'.xls';
 
-        $path = 'discount_list'.time().'.xlsx';
-
-        File::saveXLSX($records,Config::getValue('path','tmp').$path,"Список скидок foodfood","foodfood.ru");
+        File::saveXLS($records,Config::getValue('path','tmp').$path,"Список скидок foodfood","foodfood.ru");
 
         header('Location: /tmp/'.$path, true, 303);
     }
