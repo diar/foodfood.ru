@@ -18,13 +18,13 @@
         <div class="restaurant_header margin020 rounded">
         	<div class="margin0autoMax-width1600">
             <div class="caption">
-                <div class="title"><xsl:value-of select="title" /></div>
+                <div class="title"><xsl:value-of select="page/title" /></div>
             </div>
             </div>
         </div>
         <div class="somepage">
             <div class="text_block">
-                <xsl:value-of select="text" disable-output-escaping="yes" />
+                <xsl:value-of select="page/text" disable-output-escaping="yes" />
             </div>
         </div>
 
