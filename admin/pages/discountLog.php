@@ -51,11 +51,11 @@ class discountLog extends AdminModule {
 
     public static function showJSON() {
         Debug::disable();
-        $page = $_POST['page'];
-        $limit = $_POST['rows'];
+        $page = 1;
+        $limit = 10;
         // Получаем кол-во записей
         $records = DBP::fetch(
-                'SELECT COUNT(*) AS count FROM '.
+                'SELECT COUNT(*) FROM '.
                 DBP::getPrefix().'discount_send AS sn '.
                 'LEFT JOIN '.DBP::getPrefix().'rest_discount AS ds ON sn.partner_id=ds.id '.
                 'WHERE ds.rest_id='.self::getRestId().' ORDER BY send_date DESC'
@@ -107,10 +107,31 @@ class discountLog extends AdminModule {
         foreach ($records as &$record) {
             $record['phone'] = preg_replace("/[0-9]{4}$/",'****',$record['phone']);
         }
-
+        $caption = Array(Array('имя','e-mail','номер','дата отправки','код','номер'));
+        $records = array_merge($caption, $records);
         $path = 'discount_log'.time().'.xlsx';
 
         File::saveXLSX($records,Config::getValue('path','tmp').$path,"Отчет по скидкам foodfood","foodfood.ru");
+
+        header('Location: /tmp/'.$path, true, 303);
+    }
+
+    public static function showXLS() {
+        $records = DBP::fetchAll(
+                'SELECT sn.name,sn.email,sn.phone,sn.send_date,sn.ident,ds.discount_percent, sn.id FROM '.
+                DBP::getPrefix().'discount_send AS sn '.
+                'LEFT JOIN '.DBP::getPrefix().'rest_discount AS ds ON sn.partner_id=ds.id '.
+                'WHERE ds.rest_id='.self::getRestId().' ORDER BY send_date DESC'
+        );
+        foreach ($records as &$record) {
+            $record['phone'] = preg_replace("/[0-9]{4}$/",'****',$record['phone']);
+        }
+
+        $caption = Array(Array('имя','e-mail','номер','дата отправки','код','номер'));
+        $records = array_merge($caption, $records);
+        $path = 'discount_log'.time().'.xls';
+
+        File::saveXLS($records,Config::getValue('path','tmp').$path,"Отчет по скидкам foodfood","foodfood.ru");
 
         header('Location: /tmp/'.$path, true, 303);
     }
