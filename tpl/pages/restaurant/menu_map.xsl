@@ -113,29 +113,27 @@
                                 <li class="link"><a href="#">Заказать банкет</a></li>
                             </ul>
                             <div class="menu_link menu_icon">
-                                <xsl:if test="have_menu=1">
+                                <xsl:if test="restaurant/have_menu=1">
                                     <a>
                                         <xsl:attribute name="href">
                                             <xsl:text>/</xsl:text>
                                             <xsl:value-of select="//site/city" />
                                             <xsl:text>/menu/</xsl:text>
                                             <xsl:choose>
-                                                <xsl:when test="rest_uri!=''">
-                                                    <xsl:value-of select="rest_uri" />
+                                                <xsl:when test="restaurant/rest_uri!=''">
+                                                    <xsl:value-of select="restaurant/rest_uri" />
                                                 </xsl:when>
-                                                <xsl:when test="rest_uri=''">
-                                                    <xsl:value-of select="id" />
+                                                <xsl:when test="restaurant/rest_uri=''">
+                                                    <xsl:value-of select="restaurant/id" />
                                                 </xsl:when>
                                             </xsl:choose>
                                         </xsl:attribute>
                                         <xsl:text>Меню пожалуйста!</xsl:text>
                                     </a>
                                 </xsl:if>
-                                <xsl:if test="have_menu_map=1">
-                                    <ul class="sub_menu_link">
-                                        <li class="bar_icon">Карта бара</li>
-                                    </ul>
-                                </xsl:if>
+                                <ul class="sub_menu_link">
+                                    <li class="bar_icon">Карта бара</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
