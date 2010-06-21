@@ -36,8 +36,8 @@
                 <xsl:attribute name="class">
                     <xsl:choose>
                         <xsl:when test="discount_percent>15">percent sale20 rounded shadow_box</xsl:when>
-                        <xsl:when test="discount_percent>5">percent sale20 rounded shadow_box</xsl:when>
-                        <xsl:when test="discount_percent>0">percent sale20 rounded shadow_box</xsl:when>
+                        <xsl:when test="discount_percent>5">percent sale15 rounded shadow_box</xsl:when>
+                        <xsl:when test="discount_percent>0">percent sale5 rounded shadow_box</xsl:when>
                     </xsl:choose>
                 </xsl:attribute>
                 <xsl:value-of select="discount_percent" /><span>%</span>

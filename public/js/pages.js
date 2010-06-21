@@ -448,10 +448,16 @@ function comment_rest(rest_id,text){
     }
 }
 function get_poster () {
+	currentDate  = new Date();
+	
     month = poster_month_position+1;
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
+	if ((month == currentDate.getMonth()+1) && (day == currentDate.getDate())) {
+		$('.date_list .item.current').attr("id","today");
+	}
     date=''+current_year+'.'+month+'.'+day;
+	$("#today").html('сегодня');
     $('.anounce_block').html($loader);
     $.post('/'+site_city+'/poster/date/',{
         'date':date,
