@@ -356,7 +356,7 @@ $(document).ready(function(){
         $('#discount_submit').attr('partner',$(this).attr('partner'));
         title = $(this).find('.name a').html();
         percent = $(this).attr('percent');
-        description = $(this).parent().find('.discount_description').html();
+        description = $(this).find('.discount_description').html();
         $('#discount_dialog .name').html(title);
         $('#discount_dialog .description_discount').html(description);
         $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');

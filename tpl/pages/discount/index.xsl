@@ -25,7 +25,6 @@
             <div class="discount_list">
                 <xsl:apply-templates select="discounts/item" />
             </div>
-
             <div class="clear"></div>
         </div>
     </xsl:template>
@@ -51,7 +50,7 @@
                 <div class="count">осталось: <xsl:value-of select="discount_count" /></div>
             </div>
             <div class="discount_description" style="display:none;">
-                <xsl:value-of select="partner/discount_description" disable-output-escaping="yes" />
+                <xsl:value-of select="discount_description" disable-output-escaping="yes" />
             </div>
             <div class="clear"></div>
         </div>
