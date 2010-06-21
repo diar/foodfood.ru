@@ -27,15 +27,16 @@ class menu_Page extends View {
      * Вывод меню
     */
     public static function viewAction ($uri) {
-
         $restaurant=is_numeric($uri) ? MD_Restaurant::getById($uri) : MD_Restaurant::getByUri($uri);
         $menu = MD_Restaurant::getRestaurantMenu($restaurant['id']);
         $tags = MD_Restaurant::getRestaurantTags($restaurant['id']);
+        $have_menu_map = MD_Restaurant::haveMenuMap($restaurant['id']);
         if (empty($menu)) View::showError();
         self::$page['site']['page'] = $restaurant['rest_title'];
         self::$page['content']['restaurant'] = $restaurant;
         self::$page['content']['restaurant']['tags'] = $tags;
         self::$page['content']['menu_list'] = $menu;
+        self::$page['content']['restaurant']['have_menu_map'] = $have_menu_map;
         self::showXSLT('pages/restaurant/menu');
     }
 
@@ -48,10 +49,11 @@ class menu_Page extends View {
         $menu = MD_Restaurant::getRestaurantMenuMap($restaurant['id']);
         if (empty($menu)) View::showError();
         $tags = MD_Restaurant::getRestaurantTags($restaurant['id']);
-
+        $have_menu = MD_Restaurant::haveMenu($restaurant['id']);
         self::$page['site']['page'] = $restaurant['rest_title'];
         self::$page['content']['restaurant'] = $restaurant;
         self::$page['content']['restaurant']['tags'] = $tags;
+        self::$page['content']['restaurant']['have_menu'] = $have_menu;
         self::$page['content']['menu_list'] = $menu;
         self::showXSLT('pages/restaurant/menu_map');
     }

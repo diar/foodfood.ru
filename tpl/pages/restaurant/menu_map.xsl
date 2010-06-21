@@ -113,10 +113,29 @@
                                 <li class="link"><a href="#">Заказать банкет</a></li>
                             </ul>
                             <div class="menu_link menu_icon">
-                                <a href="/{//site/city}/menu/{restaurant/rest_uri}">Меню пожалуйста!</a>
-                                <ul class="sub_menu_link">
-                                    <li class="bar_icon">Карта бара</li>
-                                </ul>
+                                <xsl:if test="have_menu=1">
+                                    <a>
+                                        <xsl:attribute name="href">
+                                            <xsl:text>/</xsl:text>
+                                            <xsl:value-of select="//site/city" />
+                                            <xsl:text>/menu/</xsl:text>
+                                            <xsl:choose>
+                                                <xsl:when test="rest_uri!=''">
+                                                    <xsl:value-of select="rest_uri" />
+                                                </xsl:when>
+                                                <xsl:when test="rest_uri=''">
+                                                    <xsl:value-of select="id" />
+                                                </xsl:when>
+                                            </xsl:choose>
+                                        </xsl:attribute>
+                                        <xsl:text>Меню пожалуйста!</xsl:text>
+                                    </a>
+                                </xsl:if>
+                                <xsl:if test="have_menu_map=1">
+                                    <ul class="sub_menu_link">
+                                        <li class="bar_icon">Карта бара</li>
+                                    </ul>
+                                </xsl:if>
                             </div>
                         </div>
                     </div>
@@ -134,11 +153,11 @@
                                 </tr>
                             </table>
                             <table id="itogo">
-                            	<tr>
-	                                <td colspan="3" class="bottom"></td>
+                                <tr>
+                                    <td colspan="3" class="bottom"></td>
                                 </tr>
                                 <tr>
-                                	<td class='title'>Итого</td>
+                                    <td class='title'>Итого</td>
                                     <td></td>
                                     <td id="priceItogo" class="price">0</td>
                                 </tr>
