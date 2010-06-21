@@ -363,7 +363,7 @@ class Restaurants extends AdminModule {
         if (trim($data['rest_description'])=='<br />') {
             $data['rest_description']='';
         }
-        DBP::insert('rest',$data);
+        DBP::insert(self::getRestId(),$data);
     }
 
     public static function saveEdit() {
@@ -411,7 +411,7 @@ class Restaurants extends AdminModule {
         if (trim($data['rest_description'])=='<br />') {
             $data['rest_description']='';
         }
-        DBP::update('rest',$data,'id ='.self::getRestId());
+        DBP::update(self::getRestId(),$data,'id ='.self::getRestId());
 
     }
 

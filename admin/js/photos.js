@@ -68,10 +68,20 @@ $(document).ready(function () {
     // Обработка нажатия на изображение
     $('.photo_item').click(function(e){
         if (!e.ctrlKey) {
-            $('.photo_item').removeClass('active');
+            $('.photo_item.active').removeClass('active');
             $(this).addClass('active');
+            // Получаем адрес сайта
+            var loc = document.location.hostname;
+            $('#photo_info').html('<p>Адрес картинки: http://'+loc+$(this).find('img').attr('src')+'</p>');
         } else {
             $(this).toggleClass('active');
+            if ($('.photo_item.active').length>1) {
+                $('#photo_info').html('<p>Выделено '+$('.photo_item.active').length+' фотографий</p>');
+            } else if ($('.photo_item.active').length==1) {
+                $('#photo_info').html('<p>Адрес картинки: http://'+loc+$(this).find('img').attr('src')+'</p>');
+            } else {
+                $('#photo_info').html('');
+            }
         }
         del_disable ();
     });

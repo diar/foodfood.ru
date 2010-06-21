@@ -53,28 +53,31 @@ class MD_Poster extends Model {
         $date=self::quote($date);
         $posters = self::getAll(
                 'is_hidden=0 AND poster_type = "poster" AND (date='.$date.' or '.
-                '(date<='.$date.' and date_end>='.$date.') or '.
-                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
-                ')'
+                '(date<='.$date.' and date_end>='.$date.') or (repeat_week=1 AND '.
+                '(DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
+                '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
+                '(repeat_week_end<repeat_week_start and DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1>=repeat_week_end ) or '.
+                '(repeat_week_end=repeat_week_start)))'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
         $news = self::getAll(
                 'is_hidden=0 AND poster_type = "news" AND (date='.$date.' or '.
-                '(date<='.$date.' and date_end>='.$date.') or '.
-                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
-                ')'
+                '(date<='.$date.' and date_end>='.$date.') or (repeat_week=1 AND '.
+                '(DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
+                '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
+                '(repeat_week_end<repeat_week_start and DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1>=repeat_week_end ) or '.
+                '(repeat_week_end=repeat_week_start)))'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
         $actions = self::getAll(
                 'is_hidden=0 AND poster_type = "action" AND (date='.$date.' or '.
-                '(date<='.$date.' and date_end>='.$date.') or '.
-                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                '(repeat_week=1 and DAYOFWEEK('.$date.')>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
-                ')'
+                '(date<='.$date.' and date_end>='.$date.') or (repeat_week=1 AND '.
+                '(DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
+                '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
+                '(repeat_week_end<repeat_week_start and DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1>=repeat_week_end ) or '.
+                '(repeat_week_end=repeat_week_start)))'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));

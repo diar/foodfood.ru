@@ -127,7 +127,8 @@ Class FormValidator {
             $this->is_valid[] = false;
         }
         else {
-            $value = preg_replace("/[^0-9]/",'',$value);
+            $value = preg_replace("/[^0-9\,]/",'',$value);
+            $value = preg_replace("/\,[ ]*[7-8]/",', +7',$value);
             $value = preg_replace("/^[7-8]/",'+7',$value);
             $this->_vars[$name] = htmlentities($value, ENT_QUOTES);
             $this->is_valid[] = true;

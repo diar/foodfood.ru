@@ -45,8 +45,6 @@ class poster_Page extends View {
         self::$page['content']['banner']['class'] = 'right_banner';
         self::$page['content']['dates'] = $dates;
         self::$page['content']['months'] = $months;
-        self::$page['content']['poster_today'] = MD_Poster::getPostersToday();
-        self::$page['content']['poster_tomorrow'] = MD_Poster::getPostersTomorrow();
         // Показываем страницу
         self::showXSLT('pages/poster/index');
     }

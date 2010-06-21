@@ -23,6 +23,8 @@
             </div>
             <div style="clear:both"></div>
         </div>
+        <h3>Информация</h3>
+        <div id="photo_info"></div>
         <iframe id="frame" style="display:none" name="frame"></iframe>
     </xsl:template>
 
