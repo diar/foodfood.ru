@@ -326,7 +326,7 @@
         </div>
         <div id="map_text" style="display:none;">
             <div style="height:200px; width:300px;font-size:14px;">
-                <img src="/public/images/logo.png" style="width:100px;height:80px;" />
+                <img src="/public/images/logo_small.png" />
                 <div>
                     <div><xsl:value-of select="rest_title" /></div>
                     <div class="rest_contacts">
