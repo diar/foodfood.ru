@@ -891,7 +891,7 @@ table.table_layout td {
     font-size:14px;
     margin: 20px 0;
     height:48px;
-    background:url(../images/icons/afisha_date_list_bg.png) #999999 repeat-x;
+    background:#c8c8c8;
     margin-left:301px;
 }
 .afisha_list .date_list .back{
@@ -929,6 +929,19 @@ table.table_layout td {
     float:left;
     font-size:12px;
     cursor:pointer;
+}
+
+.afisha_list #today {
+	font-size:28px;
+	line-height:44px;
+	color:#ffffff;
+	padding-left:0;
+	padding-right:0;
+	width:115px;
+	text-align:center;
+}
+#today.current {
+	color:#000000;
 }
 .afisha_list .date_list .item.current {
     background:#ffffff;
