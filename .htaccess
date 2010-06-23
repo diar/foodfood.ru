@@ -5,11 +5,21 @@ Options +FollowSymLinks
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www.foodfood.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^www.fydfyd.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^www.fudfud.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^fydfyd.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^fudfud.ru$ [NC]
+RewriteRule ^(.*)$ http://foodfood.ru/$1 [R=301,L]
+
 RewriteRule ^public/(.*)$ public/$1 [L]
 RewriteRule ^upload/(.*)$ upload/$1 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php
+
 </IfModule>
 
 php_flag display_errors On
