@@ -36,8 +36,6 @@ body {
     color:#000;
     background:#fff;
     font-size:14px;
-    min-width:1000px;
-    width:expression(document.body.clientWidth < 1004? "1004px": "auto" );
 }
 
 ol,ul {
@@ -75,6 +73,10 @@ table td {
     padding:0;
 }
 
+#discounts {
+    padding-top:5px;
+}
+
 #discounts .caption {
     background:url(/public/images/caption_orange_bg.jpg) repeat-x;
     float:right;
@@ -85,14 +87,6 @@ table td {
     height:35px;
     cursor:pointer;
     padding:5px 5px 5px 8px;
-}
-
-#discounts .discount:active .count {
-    margin:1px 0 0 1px;
-}
-
-#discounts .discount:active .rest_caption {
-    padding-left:16px;
 }
 
 #discounts .discount .left {
@@ -108,12 +102,6 @@ table td {
 
 #discounts .discount .rest_caption .left {
     padding-top:3px;
-}
-
-
-#discounts {
-    padding-top:5px;
-    float:right;
 }
 
 #discounts .count {
