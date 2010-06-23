@@ -453,7 +453,7 @@ class MD_Restaurant extends Model {
     public static function getRestaurantPhotos ($id,$params=null) {
         empty ($params['count']) ? $count=20 : $count=$params['count'];
         empty ($params['offset']) ? $offset=0 : $offset=$params['offset'];
-        $photos = self::getAll("rest_id = ".DB::quote($id),null,array('table'=>'rest_photo'));
+        $photos = self::getAll("rest_id = ".DB::quote($id),'`order`',array('table'=>'rest_photo'));
         return $photos;
     }
     /**
