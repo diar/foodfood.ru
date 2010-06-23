@@ -7,10 +7,6 @@ RewriteEngine On
 RewriteBase /
 
 RewriteCond %{HTTP_HOST} ^www.foodfood.ru$ [NC]
-RewriteCond %{HTTP_HOST} ^www.fydfyd.ru$ [NC]
-RewriteCond %{HTTP_HOST} ^www.fudfud.ru$ [NC]
-RewriteCond %{HTTP_HOST} ^fydfyd.ru$ [NC]
-RewriteCond %{HTTP_HOST} ^fudfud.ru$ [NC]
 RewriteRule ^(.*)$ http://foodfood.ru/$1 [R=301,L]
 
 RewriteRule ^public/(.*)$ public/$1 [L]
