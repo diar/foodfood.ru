@@ -3,7 +3,7 @@
  * @package PapipuEngine
  * @author valmon, z-mode
  * @version 0.2
- * Страница получения скидок
+ * Страница виджетов
  */
 class widget_Page extends View {
 
@@ -27,5 +27,20 @@ class widget_Page extends View {
 
         // Показываем страницу
         self::showXSLT('pages/widget/discount');
+    }
+
+    /*
+     * Афиша
+    */
+    public static function posterAction ($id) {
+        Debug::disable();
+        Cache::disable();
+        $posters=MD_Poster::getPosterBlocksWeek(array('count'=>8));
+
+        // Добавляем переменные xslt
+        self::$page['content']['posters'] = $posters;
+
+        // Показываем страницу
+        self::showXSLT('pages/widget/poster');
     }
 }

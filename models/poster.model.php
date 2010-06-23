@@ -94,9 +94,9 @@ class MD_Poster extends Model {
         // Получаем список элементов афиши
         $posters = self::getAll(
                 'is_hidden=0 AND (date=CURDATE() or '.
-                '(date<=CURDATE() and date_end>=CURDATE()) or '.
-                '(repeat_week=1 and DAYOFWEEK(date)=DAYOFWEEK(CURDATE())) or '.
-                '(repeat_week=1 and DAYOFWEEK(CURDATE())>repeat_week_start and DAYOFWEEK(CURDATE())-1<=repeat_week_end)'.
+                '(date<=CURDATE() and date_end>=CURDATE()) or (repeat_week=1 AND '.
+                '(DAYOFWEEK(date)=DAYOFWEEK(CURDATE()) or '.
+                '(DAYOFWEEK(CURDATE())-1>=repeat_week_start and DAYOFWEEK(CURDATE())-1<=repeat_week_end) or '.
                 ')'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'

@@ -12,6 +12,12 @@
 
     <!-- Список ресторанов -->
     <xsl:template match="content">
+        <script type="text/javascript" src="http://img.yandex.net/webwidgets/1/WidgetApi.js"></script>
+        <script type="text/javascript">
+            widget.onload=function(){
+            widget.adjustIFrameHeight();
+            }
+        </script>
         <link rel="stylesheet" type="text/css" href="/public/css/widget.css" />
         <div id="discounts">
             <xsl:apply-templates select="discounts/item" />
@@ -34,7 +40,7 @@
                 <span class="percent"><xsl:value-of select="discount_percent" /> %</span>
             </div>
             <div class="rest_caption">
-                <a href="/kazan/restaurant/{rest_uri}" target="_blank" class="get_discount">
+                <a href="/{//site/city}/restaurant/{rest_uri}" target="_blank" class="get_discount">
                     <xsl:value-of select="rest_title" />
                 </a>
                 <div class="left">Осталось: <xsl:value-of select="discount_count" /></div>

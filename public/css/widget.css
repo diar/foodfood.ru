@@ -132,3 +132,7 @@ table td {
     font-size:14px;
     line-height:14px;
 }
+.poster {
+    margin:4px 0;
+}
+.poster:first-letter { color: red }
