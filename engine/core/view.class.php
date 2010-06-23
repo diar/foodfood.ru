@@ -44,7 +44,7 @@ class View {
      */
     public static function initView () {
         //Подсчет статистики
-        $people_count = DB::fetch('SELECT SUM(count) FROM `statistic`');
+        $people_count = DB::getCount('statistic');
         $rest_count = DB::getCount(Model::getPrefix().'rest','is_hidden=0');
         //Переменные роутера
         self::$page['route'] = Array (
@@ -74,7 +74,7 @@ class View {
         self::$page['date_tomorrow']['month']=String::toMonth(date('m',time()+60*60*24));
         self::$page['date_tomorrow']['day']=date('d',time()+60*60*24);
         self::$page['date_tomorrow']['week']=String::toWeek(date('w',time()+60*60*24));
-        self::$page['statistic']['people']=$people_count['SUM(count)'];
+        self::$page['statistic']['people']=$people_count;
         self::$page['statistic']['restaurant']=$rest_count;
     }
 
