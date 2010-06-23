@@ -15,7 +15,7 @@
                 <input type="file" name="img" id="image" />
             </form>
             <div id="photo_panel">
-                <input type="button" id="photo_delete" value="Удалить выделенное" />
+                <input type="button" id="photo_delete" value="удалить выделенное" />
             </div>
             <div style="clear:both"></div>
             <div id="photos">

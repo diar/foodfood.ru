@@ -174,7 +174,7 @@
     background:url(/public/images/caption_orange_bg.jpg) repeat-x;
     float:right;
     width:135px;
-	padding-right:80px;
+    padding-right:80px;
 }
 
 #restaurant_discount .discount {
@@ -189,7 +189,7 @@
 }
 
 #restaurant_discount .discount:active .count {
-	margin:1px 0 0 1px;
+    margin:1px 0 0 1px;
 }
 
 #restaurant_discount .discount:active .rest_caption {
@@ -228,18 +228,18 @@
     line-height:10px;
     background:#d84705;
     padding:1px 1px 1px 2px;
-	text-align: center;
-	padding-top:5px;
+    text-align: center;
+    padding-top:5px;
 }
 
 #restaurant_discount .discounts .sale5 {
-	background:url(/public/images/sale5.jpg) no-repeat;
+    background:url(/public/images/sale5.jpg) no-repeat;
 }
 #restaurant_discount .discounts .sale15 {
-	background:url(/public/images/sale15.jpg) no-repeat;
+    background:url(/public/images/sale15.jpg) no-repeat;
 }
 #restaurant_discount .discounts .sale20 {
-	background:url(/public/images/sale20.jpg) no-repeat;
+    background:url(/public/images/sale20.jpg) no-repeat;
 }
 
 #restaurant_discount .discounts .percent {
@@ -250,16 +250,16 @@
 #restaurant_discount .more {
     padding-top:10px;
     font-size:18px;
-	line-height:26px;
+    line-height:26px;
     padding-left:36px;
-	margin-left:-22px;
+    margin-left:-22px;
     background:url(/public/images/icons/discounts_small.jpg) 0 0 no-repeat;
 }
 #posters_tomorrow {
     display:none;
 }
 #restaurant_poster .caption {
-	background:url(/public/images/caption_orange_bg.jpg) repeat-x;
+    background:url(/public/images/caption_orange_bg.jpg) repeat-x;
     width:80%;
 }
 
@@ -299,11 +299,13 @@
     text-decoration: none;
     border-bottom: 1px dashed #fff;
 }
+#restaurant_review {
+    padding-bottom:10px;
+}
 #restaurant_review .caption {
     background:url(/public/images/caption_white_bg.jpg) repeat-x;
     color:#d84705;
-
-	width:240px;
+    width:240px;
 }
 
 #restaurant_review .caption a {
@@ -337,11 +339,11 @@
 }
 
 #restaurant_review .lq {
-<<<<<<< HEAD
-    
-=======
+    <<<<<<< HEAD
 
->>>>>>> b48f383e5e2a06a9c9cce7127787b4c4f51e84b3
+    =======
+
+    >>>>>>> b48f383e5e2a06a9c9cce7127787b4c4f51e84b3
 }
 
 #restaurant_article .caption {
@@ -408,7 +410,7 @@
     background:url(/public/images/caption_white_bg.jpg) repeat-x;
     float:right;
     width:135px;
-	padding-right:80px;
+    padding-right:80px;
 }
 
 #restaurant_dostavka .caption a {
@@ -419,7 +421,7 @@
     background:url(/public/images/icons/small_dostavka.png) 0 5px no-repeat;
     font-size:12px;
     padding:5px 0 5px 30px;
-	line-height:30px;
+    line-height:30px;
 }
 
 #restaurant_dostavka .dostavka_li span {
@@ -463,7 +465,7 @@
     margin-top:15px;
 }
 #restaurant_poster .poster {
-	height:90px;
+    height:90px;
 }
 
 #restaurant_poster .poster_icon,
