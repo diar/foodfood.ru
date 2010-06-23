@@ -134,5 +134,6 @@ table td {
 }
 .poster {
     margin:4px 0;
+    line-height: 16px;
 }
 .poster:first-letter { color: red }
