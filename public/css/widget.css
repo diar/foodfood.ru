@@ -1,0 +1,146 @@
+@charset "utf-8";
+/*
+    Document    : desktop
+    Author      : valmon, z-mode
+    Description : Основной CSS файл
+
+
+    Основные цвета сайта:
+    Оранжевый : #FF6600;
+    Зелёный : #009900;
+
+ Reset
+-------------------------------------------------------------------*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,
+blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,
+font,img,ins,kbd,q,s,samp,small,strike,sub,tt,var,dl,dt,dd,
+ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+    border:0;
+    outline:0;
+    font-weight:inherit;
+    font-style:inherit;
+    font-size:100%;
+    font-family:inherit;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+}
+
+:focus {
+    outline:0;
+}
+
+body {
+    line-height:1;
+    font-family:Tahoma,Arial;
+    color:#000;
+    background:#fff;
+    font-size:14px;
+    min-width:1000px;
+    width:expression(document.body.clientWidth < 1004? "1004px": "auto" );
+}
+
+ol,ul {
+    list-style:none;
+}
+
+table {
+    border-collapse:collapse;
+    border:none;
+    empty-cells:show;
+    border-spacing:0;
+    width:100%;
+}
+
+caption,th,td {
+    text-align:left;
+    font-weight:normal;
+}
+
+blockquote:before,blockquote:after,q:before,q:after {
+    content:"";
+}
+
+blockquote,q {
+    quotes:"" "";
+}
+
+a {
+    text-decoration:underline;
+    color:#000;
+}
+
+table td {
+    margin:0;
+    padding:0;
+}
+
+#discounts .caption {
+    background:url(/public/images/caption_orange_bg.jpg) repeat-x;
+    float:right;
+    width:135px;
+}
+
+#discounts .discount {
+    height:35px;
+    cursor:pointer;
+    padding:5px 5px 5px 8px;
+}
+
+#discounts .discount:active .count {
+    margin:1px 0 0 1px;
+}
+
+#discounts .discount:active .rest_caption {
+    padding-left:16px;
+}
+
+#discounts .discount .left {
+    font-size:10px;
+    color:gray;
+}
+
+#discounts .discount .rest_caption {
+    float:left;
+    padding-left:17px;
+    width:130px;
+}
+
+#discounts .discount .rest_caption .left {
+    padding-top:3px;
+}
+
+
+#discounts {
+    padding-top:5px;
+    float:right;
+}
+
+#discounts .count {
+    float:left;
+    text-align:center;
+    width:48px;
+    height:34px;
+    color:#FFF;
+    font-size:9px;
+    line-height:10px;
+    background:#d84705;
+    padding:1px 1px 1px 2px;
+    text-align: center;
+    padding-top:5px;
+}
+
+#discounts .sale5 {
+    background:url(/public/images/sale5.jpg) no-repeat;
+}
+#discounts .sale15 {
+    background:url(/public/images/sale15.jpg) no-repeat;
+}
+#discounts .sale20 {
+    background:url(/public/images/sale20.jpg) no-repeat;
+}
+
+#discounts .percent {
+    font-size:14px;
+    line-height:14px;
+}

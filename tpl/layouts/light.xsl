@@ -89,4 +89,31 @@
             <div class="right"><a href="">О проекте</a>    <a href="">Реклама</a> <a href="http://bpirok.ru"><img src="/public/images/icons/bp_icon.jpg" /></a></div>
         </div>
     </xsl:template>
+
+    <!-- Ссылка на ресторан -->
+    <xsl:template name="rest_link">
+        <xsl:param name="id" />
+        <xsl:param name="uri" />
+        <xsl:param name="title" />
+        <xsl:param name="class" />
+        <a>
+            <xsl:attribute name="class">
+                <xsl:value-of select="$class"/>
+            </xsl:attribute>
+            <xsl:attribute name="href">
+                <xsl:text>/</xsl:text>
+                <xsl:value-of select="//site/city" />
+                <xsl:text>/restaurant/</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$uri!=''">
+                        <xsl:value-of select="$uri" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$id" />
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:value-of select="$title" />
+        </a>
+    </xsl:template>
 </xsl:stylesheet>
