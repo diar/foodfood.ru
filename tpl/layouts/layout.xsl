@@ -102,7 +102,7 @@
         <div id="login_block">
             <xsl:choose>
                 <xsl:when test="//user/is_auth=1">
-                    <a href="/blog/profile/"><xsl:value-of select="//user/user_login" /></a>
+                    <a href="/blog/profile/{//user/user_login}"><xsl:value-of select="//user/user_login" /></a>
                     <xsl:text> (</xsl:text>
                     <a href="/{//site/city}/auth/logout" style="text-decoration:none;">выход</a>
                     <xsl:text>) </xsl:text><br /><xsl:text>Настройки </xsl:text>
