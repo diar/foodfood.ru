@@ -29,7 +29,7 @@
             <a href="/{//site/city}/restaurant/{rest_uri}" target="_blank" class="restaurant">
                 <xsl:value-of select="rest_title" />
             </a> →
-            <a class="poster_title" href="/{//site/city}/poster/view/{rest_poster_id}">
+            <a class="poster_title" href="/{//site/city}/poster/view/{rest_poster_id}" target="_blank">
                 <xsl:value-of select="title" />
             </a>
         </p>
