@@ -32,7 +32,7 @@ ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
 
 body {
     line-height:1;
-    font-family:Tahoma,Arial;
+    font-family:Verdana,Arial,Tahoma;
     color:#000;
     background:#fff;
     font-size:14px;
@@ -133,6 +133,7 @@ table td {
     line-height:14px;
 }
 .poster {
+    font-size:13px;
     margin:4px 0;
     line-height: 16px;
 }
