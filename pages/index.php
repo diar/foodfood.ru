@@ -48,7 +48,7 @@ class index_Page extends View {
         $articles=MD_Article::getArticleBlocks(array('count'=>20));
         $posters=MD_Poster::getPosterBlocksWeek(array('count'=>20));
         // Получаем список скидок
-        $discounts=MD_Discount::getDiscountBlock(array('count'=>20));
+        $discounts=MD_Discount::getDiscountBlock(array('count'=>7));
         // Получаем список отзывов
         $reviews=MD_Restaurant::getRestaurantsReviews(array('count'=>5));
 

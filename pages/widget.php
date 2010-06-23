@@ -20,7 +20,7 @@ class widget_Page extends View {
     public static function discountAction ($id) {
         Debug::disable();
         Cache::disable();
-        $discounts=MD_Discount::getDiscountBlock(array('count'=>20));
+        $discounts=MD_Discount::getDiscountBlock(array('count'=>5));
 
         // Добавляем переменные xslt
         self::$page['content']['discounts'] = $discounts;

@@ -34,7 +34,7 @@
                 <span class="percent"><xsl:value-of select="discount_percent" /> %</span>
             </div>
             <div class="rest_caption">
-                <a href="#" onclick="parent.document.location.href='http://foodfood.ru/kazan/restaurant/{rest_uri}';">
+                <a href="#" class="get_discount">
                     <xsl:value-of select="rest_title" />
                 </a>
                 <div class="left">Осталось: <xsl:value-of select="discount_count" /></div>

@@ -22,8 +22,9 @@ class MD_Discount extends Model {
      * @return array
      */
     public static function getDiscountBlock ($params=null) {
+        empty ($params['count']) ? $count=20 : $count=$params['count'];
         $discounts=self::getAll(
-                'discount_count>0','discount_percent DESC LIMIT 0,7',
+                'discount_count>0','discount_percent DESC LIMIT 0,'.$count,
                 array('select'=>'rest_id,rest_uri,discount_count,rest_title,discount_percent,discount_description')
         );
         return $discounts;
