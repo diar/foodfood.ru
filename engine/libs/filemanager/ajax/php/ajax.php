@@ -41,7 +41,7 @@ if (DEV) {
 }
 
 
-//if (!isset($_SESSION['admin'])) {exit;}			// Do not forget to add your user authorization
+if (!isset($_SESSION['admin']['superadmin'])) {exit;}			// Do not forget to add your user authorization
 
 
 define('DIR_SEP', '/');
@@ -277,7 +277,7 @@ switch($mode) {
 			unlink($cfg['root'] . $dir . $files[$i]);
 			file_exists($_thumb = $cfg['root'] . $cfg['thumb']['dir']  . DIR_SEP. $dir . DIR_SEP . $files[$i])? unlink($_thumb): null;
 		}
-
+	
 		$reply['files'] = listFiles($dir);
 		break;
 
