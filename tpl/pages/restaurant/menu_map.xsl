@@ -92,8 +92,8 @@
                             </xsl:choose>
                         </div>
                         <div class="text">
-                            <span>Кухня:</span> <xsl:value-of select="cooks" /><br />
-                            <span>Средняя сумма счета:</span> <xsl:value-of select="check" /> р.<br />
+                            <span>Кухня:</span> <xsl:value-of select="restaurant/cooks" /><br />
+                            <span>Средняя сумма счета:</span> <xsl:value-of select="restaurant/check" /> р.<br />
                             <span>Меню обновлено недавно</span> <br />
                         </div>
                     </div>
