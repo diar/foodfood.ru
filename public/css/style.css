@@ -1068,7 +1068,7 @@ html {
 
 #discount_dialog .right {
     float:left;
-    width:	308px;
+    width: 308px;
 }
 
 #discount_dialog  .discount_percent {
@@ -1082,6 +1082,11 @@ html {
 
 #discount_dialog  .discount_percent div {
     float:left;
+}
+
+#discount_dialog  .message {
+    margin-left:-200px;
+    width:500px;
 }
 
 .discount_percent .number {
