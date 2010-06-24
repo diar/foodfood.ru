@@ -183,112 +183,24 @@ class MD_Poster extends Model {
         } else return null;
     }
     /**
-     * Получить афиши по блокам (для главной)
+     * Получить блок афиши
      * @return array
      */
-    public static function getPosterBlocksToday ($params) {
+    public static function getPosterBlockToday ($params) {
         $count = !empty($params['count']) ? $params['count'] : 20;
-        // Получаем список элементов афиши
         $posters = self::getAll(
                 'is_hidden=0 AND (date=CURDATE() or '.
-                '(date<=CURDATE() and date_end>=CURDATE())'.
-                ') GROUP BY rest_uri',
-                'RAND(), rest_rating DESC', array(
-                'limit'=>'0,'.$count,'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
-                )
-        );
-        if (count($posters)<$count) {
-            $posters_second = self::getAll(
-                    'is_hidden=0 AND repeat_week=1 AND ('.
-                    '(DAYOFWEEK(date)=DAYOFWEEK(CURDATE())) or '.
-                    '(DAYOFWEEK(CURDATE())>repeat_week_start OR DAYOFWEEK(CURDATE())-1<=repeat_week_end)'.
-                    ') GROUP BY rest_uri',
-                    'RAND(), rest_rating DESC', array(
-                    'limit'=>'0,'.$count,'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
-                    )
-            );
-            if (count($posters_second)>0) {
-                $posters_second=array_merge($posters, $posters_second);
-                $posters = Array();
-                foreach($posters_second as $poster) {
-                    if (empty($posters[$poster['rest_poster_id']])) {
-                        $posters[$poster['rest_poster_id']]=$poster;
-                    }
-                }
-            }
-        }
-
-        // Заворачиваем элементы афиши в блоки
-        $i = 0;
-        if (!empty ($posters)) {
-            foreach ($posters as $poster) {
-                $poster['date_month'] = String::toMonth($poster['date_month']);
-                if (strlen($poster['anounce'])>60) {
-                    $poster['anounce'] = mb_substr($poster['anounce'],0,60,'UTF-8').'...';
-                }
-                $block[$i%3] = $poster;
-                $i++;
-                if ($i%3==0 || count($posters)==$i) {
-                    $poster_blocks[]=$block;
-                    $block=Array();
-                }
-            }
-            return $poster_blocks;
-        } else return null;
-    }
-    /**
-     * Получить афиши по блокам (для главной)
-     * @return array
-     */
-    public static function getPosterBlocksTomorrow ($params) {
-        $date=self::quote(date('Y:m:d',time()+60*60*24));
-        $count = !empty($params['count']) ? $params['count'] : 20;
-        // Получаем список элементов афиши
-        $posters = self::getAll(
-                'is_hidden=0 AND (date='.$date.' or '.
-                '(date<='.$date.' and date_end>='.$date.')'.
-                ') GROUP BY rest_uri',
-                'RAND(), rest_rating DESC', array(
-                'limit'=>'0,'.$count,'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
-                )
-        );
-        if (count($posters)<$count) {
-            $posters_second = self::getAll(
-                    'is_hidden=0 AND repeat_week=1 AND ('.
-                    '(DAYOFWEEK(date)=DAYOFWEEK('.$date.')) or '.
-                    '(DAYOFWEEK('.$date.')>repeat_week_start OR DAYOFWEEK('.$date.')-1<=repeat_week_end)'.
-                    ') GROUP BY rest_uri',
-                    'RAND(), rest_rating DESC', array(
-                    'limit'=>'0,'.$count,'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
-                    )
-            );
-            if (count($posters_second)>0) {
-                $posters_second=array_merge($posters, $posters_second);
-                $posters = Array();
-                foreach($posters_second as $poster) {
-                    if (empty($posters[$poster['rest_poster_id']])) {
-                        $posters[$poster['rest_poster_id']]=$poster;
-                    }
-                }
-            }
-        }
-        // Заворачиваем элементы афиши в блоки
-        $i = 0;
-        if (!empty ($posters)) {
-            foreach ($posters as $poster) {
-                $poster['date_month'] = String::toMonth($poster['date_month']);
-                if (strlen($poster['anounce'])>60) {
-                    $poster['anounce'] = mb_substr($poster['anounce'],0,60,'UTF-8').'...';
-                }
-                $block[$i%3] = $poster;
-                $i++;
-                if ($i%3==0 || count($posters)==$i) {
-                    $poster_blocks[]=$block;
-                    $block=Array();
-                }
-            }
-            return $poster_blocks;
-        } else return null;
+                '(date<=CURDATE() and date_end>=CURDATE()) or (repeat_week=1 AND '.
+                '(DAYOFWEEK(date)=DAYOFWEEK(CURDATE()) or '.
+                '(DAYOFWEEK(CURDATE())-1>=repeat_week_start and DAYOFWEEK(CURDATE())-1<=repeat_week_end) or '.
+                '(repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK(CURDATE())<=repeat_week_start and DAYOFWEEK(CURDATE())-1>repeat_week_end)) OR '.
+                '(repeat_week_end=repeat_week_start))))'
+                ,'RAND(), rest_rating DESC',
+                array(
+                'limit'=>'0,'.$count,
+                'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
+        ));
+        return $posters;
     }
 
     /**

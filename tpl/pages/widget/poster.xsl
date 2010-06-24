@@ -20,11 +20,11 @@
             }
         </script>
         <div id="discounts">
-            <xsl:apply-templates select="posters/item/item" />
+            <xsl:apply-templates select="posters/item" />
         </div>
     </xsl:template>
 
-    <xsl:template match="posters/item/item">
+    <xsl:template match="posters/item">
         <p class="poster">
             <a href="/{//site/city}/restaurant/{rest_uri}" target="_blank" class="restaurant">
                 <xsl:value-of select="rest_title" />

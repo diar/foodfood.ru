@@ -35,7 +35,7 @@ class widget_Page extends View {
     public static function posterAction ($id) {
         Debug::disable();
         Cache::disable();
-        $posters=MD_Poster::getPosterBlocksWeek(array('count'=>8));
+        $posters=MD_Poster::getPosterBlockToday(array('count'=>8));
 
         // Добавляем переменные xslt
         self::$page['content']['posters'] = $posters;
