@@ -139,7 +139,7 @@ class MD_Discount extends Model {
                 date('d.m.Y',time()+60*60*24).'. № '.$sms_code['discount_counter'].' код '.$code;
         $result=Sms::sendSms($phone, $sms_text);
 
-        if ($result and $result['status']=='accepted') {
+        if (!empty($result) && !empty($result['status']) && $result['status']=='accepted') {
             DB::update(
                     Model::getPrefix().'discount_list', Array('discount_activated'=>1), 
                     'id='.$sms_code['discount_list_id']

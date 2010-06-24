@@ -15,6 +15,9 @@
 
     <!-- Скидки -->
     <xsl:template match="content">
+        <script type="text/javascript">
+            discount_page_activate = true;
+        </script>
         <div id="additional">
             <div class="restaurant_header rounded">
                 <div class="caption">

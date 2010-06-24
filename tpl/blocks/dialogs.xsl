@@ -85,9 +85,9 @@
             </div>
             <div class="right">
                 <div class="message" id="discount_message"></div>
+                <img class="form_loader" style="margin-left:-60px;" id="discount_loader" src="/public/images/loader.gif" alt="загрузка.." />
                 <div class="form">
                     <div class="inputs">
-                        <img class="form_loader" style="margin-left:10px;" id="discount_loader" src="/public/images/loader.gif" alt="загрузка.." />
                         <div id="discount_form" class="ajax_form form_dialog">
                             <div class="label">имя:</div>
                             <input type="text" class="form_input rounded" value="{//user/user_login}"

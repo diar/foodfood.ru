@@ -342,27 +342,30 @@ $(document).ready(function(){
     /* ---------------------------------------------------------------------
     * Если находимся на странице вывода скидок
     */
-    $('.select_percent div').click(function(){
-        per = $(this).attr('class');
-        if(per!='all'){
-            $('.discount_list .item').hide();
-            $('.discount_list .item:has(.'+per+')').show();
-        } else {
-            $('.discount_list .item').show();
-        }
-    });
-    // Нажатие на кнопку со скидкой
-    $('.discount_list .item').click(function(){
-        $('#discount_submit').attr('partner',$(this).attr('partner'));
-        title = $(this).find('.name a').html();
-        percent = $(this).attr('percent');
-        description = $(this).find('.discount_description').html();
-        $('#discount_dialog .name').html(title);
-        $('#discount_dialog .description_discount').html(description);
-        $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');
-        $.showDialog('discount_dialog');
-        return false;
-    });
+    if (typeof(discount_page_activate)!='undefined') {
+        $('.select_percent div').click(function(){
+            per = $(this).attr('class');
+            if(per!='all'){
+                $('.discount_list .item').hide();
+                $('.discount_list .item:has(.'+per+')').show();
+            } else {
+                $('.discount_list .item').show();
+            }
+        });
+        // Нажатие на кнопку со скидкой
+        $('.discount_list .item').click(function(){
+            $('#discount_submit').attr('partner',$(this).attr('partner'));
+            title = $(this).find('.name a').html();
+            percent = $(this).attr('percent');
+            description = $(this).find('.discount_description').html();
+            $('#discount_dialog .name').html(title);
+            $('#discount_dialog .description_discount').html(description);
+            $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');
+            $.showDialog('discount_dialog');
+            return false;
+        });
+        check_discount_anchor ();
+    }
 });
 
 /*
@@ -448,16 +451,16 @@ function comment_rest(rest_id,text){
     }
 }
 function get_poster () {
-	currentDate  = new Date();
+    currentDate  = new Date();
 	
     month = poster_month_position+1;
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
-	if ((month == currentDate.getMonth()+1) && (day == currentDate.getDate())) {
-		$('.date_list .item.current').attr("id","today");
-	}
+    if ((month == currentDate.getMonth()+1) && (day == currentDate.getDate())) {
+        $('.date_list .item.current').attr("id","today");
+    }
     date=''+current_year+'.'+month+'.'+day;
-	$("#today").html('сегодня');
+    $("#today").html('сегодня');
     $('.anounce_block').html($loader);
     $.post('/'+site_city+'/poster/date/',{
         'date':date,
@@ -475,4 +478,11 @@ function trash_itogo() {
         itogo = itogo+item_price;
     });
     $("#priceItogo").html(itogo);
+}
+function check_discount_anchor () {
+    anchor = get_anchor ();
+    if (anchor.match(/get-.*/i)) {
+        current_discount = anchor.replace(/get-/,'');
+        $('.discount_list .item[partner="'+current_discount+'"]').click();
+    }
 }

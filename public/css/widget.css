@@ -34,7 +34,6 @@ body {
     line-height:1;
     font-family:Verdana,Arial,Tahoma;
     color:#000;
-    background:#fff;
     font-size:14px;
 }
 
@@ -85,7 +84,6 @@ table td {
 
 #discounts .discount {
     height:35px;
-    cursor:pointer;
     padding:5px 5px 5px 8px;
 }
 
