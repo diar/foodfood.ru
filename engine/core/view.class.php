@@ -136,6 +136,7 @@ class View {
      * @return null
      */
     public static function showError () {
+        header("HTTP/1.0 404 Not Found");
         self::showPage('error','index');
         die();
     }
