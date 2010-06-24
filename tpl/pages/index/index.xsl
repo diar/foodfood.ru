@@ -91,8 +91,9 @@
                                             </xsl:when>
                                         </xsl:choose>
                                     </xsl:attribute>
-                            <xsl:value-of select="new_rest/rest_title" /></div>
+                            <xsl:value-of select="new_rest/rest_title" />
                             	</a>
+                            </div>
                         </div>
 
                     </div>
