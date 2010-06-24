@@ -76,7 +76,23 @@
                                     </xsl:choose>
                                 </a>
                             </div>
-                            <div class="opened"><xsl:value-of select="new_rest/rest_title" /></div>
+                            <div class="opened">
+                            	<a>
+                                	<xsl:attribute name="href">
+                                        <xsl:text>/</xsl:text>
+                                        <xsl:value-of select="//site/city" />
+                                        <xsl:text>/restaurant/</xsl:text>
+                                        <xsl:choose>
+                                            <xsl:when test="new_rest/rest_uri!=''">
+                                                <xsl:value-of select="new_rest/rest_uri" />
+                                            </xsl:when>
+                                            <xsl:when test="new_rest/rest_uri=''">
+                                                <xsl:value-of select="new_rest/id" />
+                                            </xsl:when>
+                                        </xsl:choose>
+                                    </xsl:attribute>
+                            <xsl:value-of select="new_rest/rest_title" /></div>
+                            	</a>
                         </div>
 
                     </div>
