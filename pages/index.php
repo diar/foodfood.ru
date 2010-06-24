@@ -50,7 +50,7 @@ class index_Page extends View {
         // Получаем список скидок
         $discounts=MD_Discount::getDiscountBlock(array('count'=>7));
         // Получаем список отзывов
-        $reviews=MD_Restaurant::getRestaurantsReviews(array('count'=>5));
+        $reviews=MD_Restaurant::getRestaurantsReviews(array('count'=>4));
 
         // Добавляем переменные xslt
         self::$page['site']['page'] = 'Главная';
