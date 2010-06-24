@@ -7,3 +7,4 @@ action.restaurant = view
 action.menu = view
 action.content = view
 action.news = view
+action.sitemap = sitemap

@@ -18,8 +18,13 @@ class sitemap_Page extends View {
      * Скидки
     */
     public static function sitemapAction ($id) {
+        header('Content-type: text/xml');
         // Добавляем переменные xslt
-        self::$page['content'] = array();
+        $url = array(
+            array('loc'=>'http://foodfood.ru/','priority'=>'1','changefreq'=>'hourly')
+        );
+
+        self::$page['content'] = $url;
 
         // Показываем страницу
         self::showXSLT('pages/sitemap/sitemap');
