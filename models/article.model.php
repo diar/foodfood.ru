@@ -30,7 +30,7 @@ class MD_Article extends Model {
                 Array(
                     'join'=>'blog_topic_content','left'=>'topic_id','right'=>'topic_id',
                     'select'=>'topic_title,blog_topic.topic_id,topic_text_short,topic_count_comment,'.
-                    'DAY(topic_date_add) AS topic_date_add_day,MONTH(topic_date_add) AS topic_date_add_month', 'order' => 'topic_date_add'
+                    'DAY(topic_date_add) AS topic_date_add_day,MONTH(topic_date_add) AS topic_date_add_month', 'order' => 'topic_date_add DESC'
                 )
         );
         // Заворачиваем элементы статей в блоки
