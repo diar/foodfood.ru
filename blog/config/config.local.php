@@ -22,10 +22,10 @@
 /**
  * Настройка базы данных
  */
-$config['db']['params']['host'] = '88.82.75.4';
+$config['db']['params']['host'] = 'localhost';
 $config['db']['params']['port'] = '3306';
-$config['db']['params']['user'] = 'z-mode';
-$config['db']['params']['pass'] = '150878';
+$config['db']['params']['user'] = 'root';
+$config['db']['params']['pass'] = 'mustdie';
 $config['db']['params']['type']   = 'mysql';
 $config['db']['params']['dbname'] = 'foodfood';
 $config['db']['table']['prefix'] = 'blog_';
