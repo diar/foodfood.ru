@@ -92,9 +92,9 @@
                             </xsl:choose>
                         </div>
                         <div class="text">
-                            <span>Кухня:</span> Американская, Еврейская<br />
-                            <span>Средняя сумма счета:</span> 500 р.<br />
-                            <span>Актуальность меню:</span> обновлено недавно<br />
+                            <span>Кухня:</span> <xsl:value-of select="cooks" /><br />
+                            <span>Средняя сумма счета:</span> <xsl:value-of select="check" /> р.<br />
+                            <span>Меню обновлено недавно</span> <br />
                         </div>
                     </div>
                     <div class="clear"></div>
