@@ -165,6 +165,11 @@
     text-align:center;
 }
 
+#restaurant_new .opened a {
+    color:#d84705;
+    text-decoration: none;
+}
+
 #restaurant_new	.box_for_shadow {
     width:230px;
     height:250px;
