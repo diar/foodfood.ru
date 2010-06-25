@@ -494,7 +494,8 @@
     font-size:11px;
     padding:0;
     padding-left:30px;
-    padding-bottom:7px;
+    padding-bottom:10px;
+	vertical-align:top;
 }
 
 #restaurant_menu .item_of_type .img {float:right;padding-right:5px;width:24px;height:24px;overflow:hidden;}
