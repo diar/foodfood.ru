@@ -340,7 +340,7 @@
                 <a class="article_title" href="/blog/restaurant/foodfood/{topic_id}.html">
                     <xsl:value-of select="title" />
                 </a>
-                <div class="text"><xsl:value-of select="text" /></div>
+                <div class="text"><xsl:value-of select="text" disable-output-escaping="yes" /></div>
                 <div class="article_description">
                     <a href="/blog/restaurant/foodfood/{topic_id}.html">
                         <xsl:value-of select="comment_count" />
