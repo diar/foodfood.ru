@@ -20,6 +20,7 @@
             current_year = <xsl:value-of select="//date_today/year" />;
             current_month = <xsl:value-of select="//date_today/month_number" />;
             current_day = <xsl:value-of select="//date_today/day" />;
+            current_week = '<xsl:value-of select="//date_today/week" />';
         </script>
         <div id="additional">
             <div class="afisha_list">
@@ -55,7 +56,7 @@
     </xsl:template>
 
     <xsl:template match="months/item">
-        <div class="item" position="{position}">
+        <div class="item" month="{month}" year="{year}">
             <div><xsl:value-of select="word" /></div>
         </div>
     </xsl:template>

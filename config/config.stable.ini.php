@@ -39,7 +39,7 @@ user.backend = ls
 user.table_ls = user
 
 ; Настройка отладки
-debug.enable = true
+debug.enable = false
 
 ; Настройки отображения
 view.engine = xslt
