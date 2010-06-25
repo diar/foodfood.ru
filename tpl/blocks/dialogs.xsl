@@ -116,7 +116,7 @@
                 <div class="name">кафе-галерея FLUER</div>
                 <div class="button"> <input type="button" id="discount_submit" value="Скидка!" /></div>
             </div>
-            <div style="text-align:center;font-size:11px; margin-bottom:5px;">Скидка бесплатна иa действительна в течении 24 часов при предъявлении SMS официанту. 
+            <div style="text-align:center;font-size:11px; margin-bottom:5px;">Скидка бесплатна и действительна в течении 24 часов при предъявлении SMS официанту. 
             <a href="/{//site/city}/content/rules">Правила</a>.</div>
         </div>
     </xsl:template>
