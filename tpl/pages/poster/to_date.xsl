@@ -49,15 +49,49 @@
             </div>
             <div class="info">
                 <div class="title">
-                    <a href="/{//site/city}/poster/view/{rest_poster_id}">
-                        <xsl:value-of select="title" />
-                    </a>
+                    <xsl:comment>
+                        <a href="/{//site/city}/poster/view/{rest_poster_id}"></a>
+                    </xsl:comment>
+                    <xsl:value-of select="title" />
                 </div>
-                <div class="rest_title"><xsl:value-of select="rest_title" /></div>
+                <div class="rest_title">
+                    <xsl:call-template name="rest_link">
+                        <xsl:with-param name="id" select="rest_id" />
+                        <xsl:with-param name="uri" select="rest_uri" />
+                        <xsl:with-param name="title" select="rest_title" />
+                    </xsl:call-template>
+                </div>
                 <div class="description"><xsl:value-of select="anounce" /></div>
             </div>
             <div class="clear"></div>
         </div>
+    </xsl:template>
+
+    <!-- Ссылка на ресторан -->
+    <xsl:template name="rest_link">
+        <xsl:param name="id" />
+        <xsl:param name="uri" />
+        <xsl:param name="title" />
+        <xsl:param name="class" />
+        <a style="color:inherit;">
+            <xsl:attribute name="class">
+                <xsl:value-of select="$class"/>
+            </xsl:attribute>
+            <xsl:attribute name="href">
+                <xsl:text>/</xsl:text>
+                <xsl:value-of select="//site/city" />
+                <xsl:text>/restaurant/</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$uri!=''">
+                        <xsl:value-of select="$uri" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$id" />
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:value-of select="$title" />
+        </a>
     </xsl:template>
 
 </xsl:stylesheet>
