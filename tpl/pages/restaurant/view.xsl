@@ -246,6 +246,10 @@
                                 <form action="" method="post">
                                     <textarea name="text" class="rounded"></textarea>
                                     <input type="submit" value="Отправить" />
+                                    <div style="padding-top:10px;">
+                                        <input type="checkbox" style="float:none;margin:0;height:14px;width:14px;" />
+                                        <span>отправить администратору</span>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -320,10 +324,10 @@
             <div class="clear"></div>
         </div>
         <div id="google_dialog" class="dialog_box dialog box_shadow">
-                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0 -20px 0 0;" />
-                <div class="clear"></div>
-                <div id="map_canvas" style="width:700px; height:535px"></div>
-                <div style="width:100%;height:35px;background:#fff;position:relative;top:-35px;"></div>
+            <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0 -20px 0 0;" />
+            <div class="clear"></div>
+            <div id="map_canvas" style="width:700px; height:535px"></div>
+            <div style="width:100%;height:35px;background:#fff;position:relative;top:-35px;"></div>
         </div>
         <div id="map_text" style="display:none;">
             <div style="height:200px; width:300px;font-size:14px;">

@@ -15,6 +15,9 @@ RewriteRule ^(.*)$ http://foodfood.ru/$1 [R=301,L]
 RewriteCond %{HTTP_HOST} ^[w\.]*fydfyd.ru$ [NC]
 RewriteRule ^(.*)$ http://foodfood.ru/$1 [R=301,L]
 
+RewriteCond %{HTTP_HOST} ^[w\.]*ffmarket.ru$ [NC]
+RewriteRule ^(.*)$ http://foodfood.ru/market/$1 [R=301,L]
+
 RewriteRule ^public/(.*)$ public/$1 [L]
 RewriteRule ^upload/(.*)$ upload/$1 [L]
 

@@ -115,6 +115,7 @@
 #restaurant_info .news_item .text{
     font-size:11px;
     padding-top:5px;
+    line-height: 13px;
 }
 
 #restaurant_info .news_item .title{
@@ -349,7 +350,7 @@
 }
 .rest_reviews .caption {
     background: url(/public/images/icons/reviews_icon.jpg) no-repeat;
-    height:30px;
+    height:32px;
     line-height:30px;
     vertical-align:bottom;
     color:#ff6600;
@@ -376,7 +377,7 @@
     margin-top:3px;
     padding-left:30px;
     font-size:12px;
-    line-height:13px;
+    line-height:15px;
     font-style:italic;
     color:#000;
     width:315px;
@@ -493,7 +494,8 @@
     font-size:11px;
     padding:0;
     padding-left:30px;
-    padding-bottom:7px;
+    padding-bottom:10px;
+	vertical-align:top;
 }
 
 #restaurant_menu .item_of_type .img {float:right;padding-right:5px;width:24px;height:24px;overflow:hidden;}
@@ -867,7 +869,7 @@ table.table_layout td {
 }
 
 #mounth_list #mounths_conteiner {
-    width:3000px;
+    width:6000px;
 }
 
 #mounths_conteiner .item{

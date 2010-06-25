@@ -288,10 +288,10 @@ $(document).ready(function(){
                 get_poster ();
             }
         });
-        poster_month_position = current_month-1;
+        poster_month_position = current_month+11;
         poster_month_count = $("#mounths_conteiner .item").length -1;
         $("#mounth").animate({
-            scrollLeft: (current_month-1)*150
+            scrollLeft: (current_month-1)*150+12*150
         },250);
         // Дни
         $('.date_list .item').click(function(){
@@ -452,15 +452,16 @@ function comment_rest(rest_id,text){
 }
 function get_poster () {
     currentDate  = new Date();
-	
-    month = poster_month_position+1;
+    year = current_year - 1 + parseInt((poster_month_position / 12));
+    month = (poster_month_position%12)+1;
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
-    if ((month == currentDate.getMonth()+1) && (day == currentDate.getDate())) {
-        $('.date_list .item.current').attr("id","today");
+    if ((parseInt(month) == parseInt(current_month)) && (parseInt(year) == parseInt(current_year))) {
+        $('.date_list .item.current[offset="'+current_day+'"]').attr("id","today").html('сегодня');
+    } else {
+        $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","y");
     }
-    date=''+current_year+'.'+month+'.'+day;
-    $("#today").html('сегодня');
+    date=''+year+'.'+month+'.'+day;
     $('.anounce_block').html($loader);
     $.post('/'+site_city+'/poster/date/',{
         'date':date,
