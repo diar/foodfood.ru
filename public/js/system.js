@@ -5,9 +5,9 @@ $loader_gray = '<div class="loader"><img src="/public/images/loader_gray.gif" al
 // Показать диалог
 $.showDialog = function (id) {
     if(!$.browser.msie) {
-        scrolling = $(document).scrollTop()+200;
+        scrolling = $(document).scrollTop()+100;
     } else {
-        scrolling = document.documentElement.scrollTop + 150;
+        scrolling = document.documentElement.scrollTop + 50;
     }
     $('#'+id).css('top',scrolling);
     $('.dialog:not(#'+id+')').fadeOut(500,function(){

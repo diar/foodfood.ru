@@ -115,6 +115,7 @@
 #restaurant_info .news_item .text{
     font-size:11px;
     padding-top:5px;
+    line-height: 13px;
 }
 
 #restaurant_info .news_item .title{
@@ -867,7 +868,7 @@ table.table_layout td {
 }
 
 #mounth_list #mounths_conteiner {
-    width:3000px;
+    width:6000px;
 }
 
 #mounths_conteiner .item{

@@ -46,11 +46,11 @@ class MD_Article extends Model {
                 $article['comment_count'] = String::toDeclension(
                         $topic['topic_count_comment'],'комментарий','комментария','комментариев'
                 );
-                $block[$i] = $article;
+                $block[$i%3] = $article;
                 $i++;
-                if ($i==3 || count($topics)==$i) {
-                    $i=0;
+                if ($i%3==0 || count($topics)==$i) {
                     $article_blocks[]=$block;
+                    $block=array();
                 }
             }
             return $article_blocks;
