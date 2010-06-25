@@ -349,7 +349,7 @@
 }
 .rest_reviews .caption {
     background: url(/public/images/icons/reviews_icon.jpg) no-repeat;
-    height:30px;
+    height:32px;
     line-height:30px;
     vertical-align:bottom;
     color:#ff6600;
@@ -376,7 +376,7 @@
     margin-top:3px;
     padding-left:30px;
     font-size:12px;
-    line-height:13px;
+    line-height:15px;
     font-style:italic;
     color:#000;
     width:315px;
