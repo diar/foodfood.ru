@@ -115,6 +115,7 @@
 #restaurant_info .news_item .text{
     font-size:11px;
     padding-top:5px;
+    line-height: 13px;
 }
 
 #restaurant_info .news_item .title{
