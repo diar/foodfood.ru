@@ -304,7 +304,16 @@
     <!-- Список отзывов -->
     <xsl:template match="reviews/item">
         <div class="review">
-            <div class="user"><xsl:value-of select="user_login" /> говорит о «<xsl:value-of select="rest_title" />»:</div>
+            <div class="from">
+                <a href="/blog/profile/{user_login}" class="user"><xsl:value-of select="user_login" /></a>
+                говорит о «
+                <xsl:call-template name="rest_link">
+                    <xsl:with-param name="id" select="rest_id" />
+                    <xsl:with-param name="uri" select="rest_uri" />
+                    <xsl:with-param name="title" select="rest_title" />
+                </xsl:call-template>
+                »:
+            </div>
             <div class="text">
                 <span class="lq">«</span><xsl:value-of select="text" /><span class="rq">»</span>
             </div>
