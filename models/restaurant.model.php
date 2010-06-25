@@ -658,7 +658,7 @@ class MD_Restaurant extends Model {
                 'text!=\'\'',Model::getPrefix().'rest_comment.id DESC LIMIT 0,'.$count,
                 array(
                 'table'=>Model::getPrefix().'rest_comment', 'no_prefix'=>true,
-                'select'=>'rest_title,user_login,text',
+                'select'=>'rest_title,user_login,text,rest_id,rest_uri',
                 'join'=>Array('user',Model::getPrefix().'rest'),
                 'left'=>Array('user_id','rest_id'),
                 'right'=>Array('user_id','id')

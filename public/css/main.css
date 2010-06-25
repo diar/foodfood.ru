@@ -164,6 +164,9 @@
     color:#d84705;
     text-align:center;
 }
+#restaurant_new .opened a {
+    text-decoration: none;
+}
 
 #restaurant_new	.box_for_shadow {
     width:230px;
@@ -324,7 +327,7 @@
     padding-top:10px;
 }
 
-#restaurant_review .user {
+#restaurant_review .from {
     padding-left:20px;
     background:url(/public/images/icons/user_icon.gif) no-repeat;
 }
@@ -339,11 +342,7 @@
 }
 
 #restaurant_review .lq {
-    <<<<<<< HEAD
-
-    =======
-
-    >>>>>>> b48f383e5e2a06a9c9cce7127787b4c4f51e84b3
+    margin-left: -7px;
 }
 
 #restaurant_article .caption {
