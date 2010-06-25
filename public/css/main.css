@@ -279,6 +279,7 @@
 #restaurant_poster .rest_caption {
     display:block;
     font-size:18px;
+    width:165px;
 }
 
 #restaurant_poster .poster_title {
