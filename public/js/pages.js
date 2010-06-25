@@ -299,7 +299,6 @@ $(document).ready(function(){
             $(this).addClass('current');
             get_poster ();
         });
-        
         $('#poster_follow').click(function(){
             if(user_auth!='1') {
                 $.alert('Вы должны войти на сайт',true);
@@ -457,7 +456,7 @@ function get_poster () {
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
     if ((parseInt(month) == parseInt(current_month)) && (parseInt(year) == parseInt(current_year))) {
-        $('.date_list .item.current[offset="'+current_day+'"]').attr("id","today").html('сегодня');
+        $('.date_list .item[offset="'+current_day+'"]').attr("id","today").html('сегодня');
     } else {
         $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","y");
     }
