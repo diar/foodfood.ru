@@ -248,7 +248,7 @@
                                     <input type="submit" value="Отправить" />
                                     <div style="padding-top:10px;">
                                         <input type="checkbox" style="float:none;margin:0;height:14px;width:14px;" />
-                                        <span>отправить администратору</span>
+                                        <span>отправить ресторатору</span>
                                     </div>
                                 </form>
                             </div>
