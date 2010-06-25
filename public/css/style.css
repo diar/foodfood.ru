@@ -434,6 +434,10 @@ html {
     padding-top: 3px;
 }
 
+#restaurant_by_mood .message{
+    font-size: 20px;
+}
+
 .restaurant_navigate {
     line-height:59px;
     height:59px;

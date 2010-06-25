@@ -155,6 +155,11 @@ class index_Page extends View {
         $page_width = $_POST['width'];
         $offset = $_POST['offset'];
         $item_count = ceil(($page_width-54)/234);
+        if (preg_match('/[a-z]/i',$_POST['text'])) {
+            echo '<div class="message">Вводите поисковые запросы на русском языке. '.
+                    'Например: не <span style="color:#f60">"IQ"</span>, а <span style="color:#f60">"Айкью"</span>.</div>';
+            return false;
+        }
         switch ($_POST['search_by']) {
             case  'search_by_rest' :
                 $restaurants = MD_Restaurant::searchRestaurantByTitle (
