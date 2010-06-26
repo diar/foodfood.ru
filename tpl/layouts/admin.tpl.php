@@ -39,7 +39,6 @@
 
                             <?endforeach;?>
                         </ul>
-
                         <? $z = 0;
                         foreach ($menu as $item) : $z++; ?>
 
