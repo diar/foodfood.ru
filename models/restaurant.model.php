@@ -28,9 +28,9 @@ class MD_Restaurant extends Model {
                         $item['rest_comment_count'],'отзыв','отзыва','отзывов'
                 );
                 if ($item['rest_rating']>0)
-                $item['rating_complete'] = intval($item['rest_rating']/143*100);
-                else 
-                $item['rating_complete'] = 0;
+                    $item['rating_complete'] = intval($item['rest_rating']/143*100);
+                else
+                    $item['rating_complete'] = 0;
             }
         }
         return $recomended;
@@ -201,20 +201,92 @@ class MD_Restaurant extends Model {
     public static function searchRestaurantByTitle ($tags,$text,$params=null) {
         empty ($params['count']) ? $count=20 : $count=$params['count'];
         empty ($params['offset']) ? $offset=0 : $offset=$params['offset'];
-        // Получаем список ресторанов по поиску
+        // -- Получаем список ресторанов по поиску (точное соответствие)
         $by_text=self::getAll(
                 'is_hidden=0 AND `rest_title` LIKE  "%'.DB::escape($text).'%"',
                 'rest_rating DESC, rest_order DESC',Array('select'=>'id')
         );
         if (!empty($by_text)) {
-            foreach ($by_text as &$text) {
-                $text = $text['rest_id'];
+            foreach ($by_text as &$item) {
+                $item = $item['rest_id'];
+            }
+            // Получаем список ресторанов по тэгам
+            $by_tag = self::getRestListByTags($tags,$by_text);
+            // Получаем рестораны
+            return self::getRestaurantsByIds($by_tag,$params);
+        }
+        // -- Пытаемся найти похожие записи
+        // ----- Сначала преобразуем на русский язык
+        $rus_text = str_replace(
+                array(
+                'Ph','ph','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
+                'R','S','T','U','V','W','Y','Z','a','b','c','d','e','f','g','h',//34
+                'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z'//51
+                ), array (
+                'Ф','ф','А','Б','С','Д','Е','Ф','Ж','Х','И','Ж','К','Л','М','Н','О','П','К','Р',//20
+                    'С','Т','У','В','В','Й','З','а','б','с','д','е','ф','ж','х','и','ж','к',//38
+                    'л','м','н','о','п','к','р','с','т','у','в','в','й','з'
+                ),$text
+        );
+        // ----- Получаем первую букву слова
+        $char = mb_substr($rus_text,0,2);
+        // ----- Ищем рестораны, начинающиеся с этой буквы
+        $by_text=self::getAll(
+                'is_hidden=0 AND `rest_title` LIKE  "'.DB::escape($char).'%"',
+                'rest_rating DESC, rest_order DESC',Array('select'=>'rest_title')
+        );
+        $percent = 0;
+        $new_text = '';
+        if (!empty($by_text)) {
+            foreach ($by_text as &$item) {
+                similar_text($item['rest_title'], $rus_text,$perc);
+                if ($perc>$percent) {
+                    $percent=$perc;
+                    $new_text = $item['rest_title'];
+                }
+            }
+            if ($percent>70) {
+                return 'Возможно вы имели ввиду '.
+                        '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
+                        '\')" class="highlight">'.$new_text.'</a>';
             }
         }
-        // Получаем список ресторанов по тэгам
-        $by_tag = self::getRestListByTags($tags,$by_text);
-        // Получаем рестораны
-        return self::getRestaurantsByIds($by_tag,$params);
+        // -- Пытаемся найти по второму алфавиту
+        // ----- Сначала преобразуем на русский язык
+        $rus_text = str_replace(
+                array(
+                'Ph','ph','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
+                'R','S','T','U','V','W','Y','Z','a','b','c','d','e','f','g','h',//34
+                'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z'//51
+                ), array (
+                'Ф','ф','Эй','Б','К','Д','И','Ф','Дж','Х','Ай','Дж','К','Л','М','Н','О','П','Кью','Р',//20
+                    'С','Т','Ю','В','У','Я','З','эй','б','к','д','и','ф','дж','х','ай','дж','к',//38
+                    'л','м','н','о','п','кью','р','с','т','ю','в','у','я','з'
+                ),$text
+        );
+        // ----- Получаем первую букву слова
+        $char = mb_substr($rus_text,0,2);
+        // ----- Ищем рестораны, начинающиеся с этой буквы
+        $by_text=self::getAll(
+                'is_hidden=0 AND `rest_title` LIKE  "'.DB::escape($char).'%"',
+                'rest_rating DESC, rest_order DESC',Array('select'=>'rest_title')
+        );
+        if (!empty($by_text)) {
+            foreach ($by_text as &$item) {
+                similar_text($item['rest_title'], $rus_text,$perc);
+                if ($perc>$percent) {
+                    $percent=$perc;
+                    $new_text = $item['rest_title'];
+                }
+            }
+            if ($percent>40) {
+                return 'Возможно вы имели ввиду '.
+                        '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
+                        '\')" class="highlight">'.$new_text.'</a>';
+            } else {
+                return null;
+            }
+        }
     }
     /**
      * Поиск ресторанов по кухне
