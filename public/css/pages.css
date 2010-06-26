@@ -79,6 +79,7 @@
 #restaurant_info .photos .main{
     width:360px;
     margin-bottom: 6px;
+    display: none;
 }
 #restaurant_info .photos .mini{
     width:55px;
