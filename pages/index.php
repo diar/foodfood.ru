@@ -155,6 +155,7 @@ class index_Page extends View {
         $page_width = $_POST['width'];
         $offset = $_POST['offset'];
         $item_count = ceil(($page_width-54)/234);
+        $page_count = 0;
         switch ($_POST['search_by']) {
             case  'search_by_rest' :
                 $restaurants = MD_Restaurant::searchRestaurantByTitle (

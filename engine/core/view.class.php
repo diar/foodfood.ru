@@ -196,15 +196,7 @@ class View {
      * @return null
      */
     public static function showXSLT ($tpl) {
-        $cache = md5(serialize(self::$page).$tpl);
-        $result=Cache::getValue($cache);
-        if ($result) {
-            echo $result;
-        } else {
-            echo self::getXSLT(self::$page,$tpl);
-            Cache::setValue($cache,$result);
-            echo $result;
-        }
+        echo self::getXSLT(self::$page,$tpl);
     }
     /**
      * Получить переменную
