@@ -45,7 +45,7 @@ debug.enable = false
 view.engine = xslt
 
 ; Настройка кэша
-cache.use       = false
+cache.use       = true
 ; Вид кеширования file : files, memory : memcach
 cache.type      = file
 cache.prefix    = kazan
