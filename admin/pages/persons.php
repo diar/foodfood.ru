@@ -10,6 +10,7 @@ class persons extends AdminModule {
      * @return null
      */
     public static function initModule () {
+        self::addAction('add', 'Добавить лицо',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
     }

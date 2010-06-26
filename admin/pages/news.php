@@ -8,6 +8,7 @@ class news extends AdminModule {
     protected static $_DB_table = 'news';
 
     public static function initModule () {
+        self::addAction('add', 'Добавить новость',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
     }

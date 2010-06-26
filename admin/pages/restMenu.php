@@ -8,7 +8,7 @@ class restMenu extends AdminModule {
     protected static $_DB_table = 'rest_menu';
 
     public static function initModule () {
-
+        self::addAction('add', 'Добавить блюдо',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
     }
@@ -195,7 +195,7 @@ class restMenu extends AdminModule {
         $list = Form::showJqGrid(
                 array(
                 'url'=>'/admin/admin.php?page=restMenu&action=showJSON',
-                'table'=>'gridlist','pager'=>'gridpager','width'=>'800','height'=>'240'
+                'table'=>'gridlist','pager'=>'gridpager','width'=>'800','height'=>'400'
                 ),
                 array(
                 array('title'=>'id'),
