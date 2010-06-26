@@ -80,26 +80,19 @@ table td {
     background:url(/public/images/caption_orange_bg.jpg) repeat-x;
     float:right;
     width:135px;
+    font-size: 13px;
+    font-family: Arial;
 }
 
 #discounts .discount {
-    height:35px;
-    padding:5px 5px 5px 8px;
+    height:30px;
 }
 
 #discounts .discount .left {
     font-size:10px;
     color:gray;
-}
-
-#discounts .discount .rest_caption {
-    float:left;
-    padding-left:17px;
-    width:130px;
-}
-
-#discounts .discount .rest_caption .left {
     padding-top:3px;
+
 }
 
 #discounts .count {
@@ -108,6 +101,7 @@ table td {
     width:48px;
     height:34px;
     color:#FFF;
+    font-family: Verdana, Arial;
     font-size:9px;
     line-height:10px;
     background:#d84705;
@@ -116,20 +110,6 @@ table td {
     padding-top:5px;
 }
 
-#discounts .sale5 {
-    background:url(/public/images/sale5.jpg) no-repeat;
-}
-#discounts .sale15 {
-    background:url(/public/images/sale15.jpg) no-repeat;
-}
-#discounts .sale20 {
-    background:url(/public/images/sale20.jpg) no-repeat;
-}
-
-#discounts .percent {
-    font-size:14px;
-    line-height:14px;
-}
 .poster {
     font-size:13px;
     margin:4px 0;
