@@ -25,12 +25,15 @@ $(document).ready(function(){
     * Если находимся на странице вывода ресторана
     */
     if (typeof(rest_page_activate)!='undefined') {
-        $('.main_container a').lightBox();
-        $('#restaurant_info .photos .main').load(function(){
-            $(this).animate({
-                'opacity':1
-            },300);
+        $('.main_container a').lightBox({
+            imageLoading: '/public/js/libs/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnClose:'/public/js/libs/lightbox/images/lightbox-btn-close.gif',
+            imageBtnPrev: '/public/js/libs/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext: '/public/js/libs/lightbox/images/lightbox-btn-next.gif',
+            imageBlank:   '/public/js/libs/lightbox/images/lightbox-blank.gif',
+            fixedNavigation:true
         });
+        $('#restaurant_info .photos .main').first().show().addClass('current');;
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
             $('#discount_submit').attr('partner',$(this).attr('partner'));
@@ -60,11 +63,9 @@ $(document).ready(function(){
             min = this;
             $('#restaurant_info .photos .mini.active').removeClass('active');
             $(min).addClass('active');
-            $('#restaurant_info .photos .main').animate({
-                'opacity':0.01
-            },300,function(){
-                $('#restaurant_info .photos .main').attr('src',$(min).attr('rel'));
-                $('#restaurant_info .main_container a').attr('href',$(min).attr('rel'));
+            $('#restaurant_info .photos .main.current').removeClass('current').fadeOut(300,function(){
+                $('#restaurant_info .photos .main[src="'+$(min).attr('rel')+'"]').fadeIn(300).addClass('current');
+                $('#restaurant_info .photos .main[src="'+$(min).attr('rel')+'"] a').attr('href',$(min).attr('rel'));
             });
 
             restaurant_photo_position = parseInt($(min).attr('pos'))-restaurant_photo_offset;
