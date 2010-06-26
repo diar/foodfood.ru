@@ -82,7 +82,6 @@
                         </xsl:choose>
                         <div class="back"></div>
                     </a>
-
                     <div>
                         <div class="caption">
                             <div class="title"><xsl:value-of select="mood_title" /> <xsl:if test="mood_title != ''">: </xsl:if>  <xsl:value-of select="rest_title" /></div>
@@ -147,7 +146,6 @@
             <div class="clear"></div>
             <div class="clear marginTop20px"></div>
             <!-- Вывод  информации по ресторану -->
-
             <div id="restaurant_info">
                 <!-- Левая колонка -->
                 <div class="left_col">
@@ -394,7 +392,10 @@
     <!-- Список отзывов -->
     <xsl:template match="reviews/item">
         <div class="review">
-            <div class="user"><xsl:value-of select="user_login" /> говорит:</div>
+            <div class="user">
+                <a href="/blog/profile/{user_login}"><xsl:value-of select="user_login" /></a>
+                говорит:
+            </div>
             <div class="text">« <xsl:value-of select="text" /> »</div>
         </div>
     </xsl:template>

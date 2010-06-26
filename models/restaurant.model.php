@@ -201,6 +201,7 @@ class MD_Restaurant extends Model {
     public static function searchRestaurantByTitle ($tags,$text,$params=null) {
         empty ($params['count']) ? $count=20 : $count=$params['count'];
         empty ($params['offset']) ? $offset=0 : $offset=$params['offset'];
+        $text = strtolower($text);
         // -- Получаем список ресторанов по поиску (точное соответствие)
         $by_text=self::getAll(
                 'is_hidden=0 AND `rest_title` LIKE  "%'.DB::escape($text).'%"',
@@ -219,12 +220,10 @@ class MD_Restaurant extends Model {
         // ----- Сначала преобразуем на русский язык
         $rus_text = str_replace(
                 array(
-                'Ph','ph','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
-                'R','S','T','U','V','W','Y','Z','a','b','c','d','e','f','g','h',//34
+                'ph','a','b','c','d','e','f','g','h',//34
                 'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z'//51
                 ), array (
-                'Ф','ф','А','Б','С','Д','Е','Ф','Ж','Х','И','Ж','К','Л','М','Н','О','П','К','Р',//20
-                    'С','Т','У','В','В','Й','З','а','б','с','д','е','ф','ж','х','и','ж','к',//38
+                'ф','а','б','с','д','е','ф','ж','х','и','ж','к',//38
                     'л','м','н','о','п','к','р','с','т','у','в','в','й','з'
                 ),$text
         );
@@ -248,20 +247,53 @@ class MD_Restaurant extends Model {
             if ($percent>70) {
                 return 'Возможно вы имели ввиду '.
                         '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
-                        '\')" class="highlight">'.$new_text.'</a>';
+                        '\')" class="highlight">'.$new_text.'</a> ?';
             }
         }
         // -- Пытаемся найти по второму алфавиту
         // ----- Сначала преобразуем на русский язык
         $rus_text = str_replace(
                 array(
-                'Ph','ph','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
-                'R','S','T','U','V','W','Y','Z','a','b','c','d','e','f','g','h',//34
+                'ph','a','b','c','d','e','f','g','h',//34
                 'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z'//51
                 ), array (
-                'Ф','ф','Эй','Б','К','Д','И','Ф','Дж','Х','Ай','Дж','К','Л','М','Н','О','П','Кью','Р',//20
-                    'С','Т','Ю','В','У','Я','З','эй','б','к','д','и','ф','дж','х','ай','дж','к',//38
+                'ф','эй','б','к','д','и','ф','дж','х','ай','дж','к',//38
                     'л','м','н','о','п','кью','р','с','т','ю','в','у','я','з'
+                ),$text
+        );
+        // ----- Получаем первую букву слова
+        $char = mb_substr($rus_text,0,2);
+        // ----- Ищем рестораны, начинающиеся с этой буквы
+        $by_text=self::getAll(
+                'is_hidden=0 AND `rest_title` LIKE  "'.DB::escape($char).'%"',
+                'rest_rating DESC, rest_order DESC',Array('select'=>'rest_title')
+        );
+        if (!empty($by_text)) {
+            foreach ($by_text as &$item) {
+                similar_text($item['rest_title'], $rus_text,$perc);
+                if ($perc>$percent) {
+                    $percent=$perc;
+                    $new_text = $item['rest_title'];
+                }
+            }
+            if ($percent>45) {
+                return 'Возможно вы имели ввиду '.
+                        '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
+                        '\')" class="highlight">'.$new_text.'</a> ?';
+            }
+        }
+        // -- Пытаемся найти по третьему алфавиту
+        // ----- Сначала преобразуем на русский язык
+        if (!preg_match('/^[a-z]*$/i', $text)) return null;
+        $rus_text = str_replace(
+                array(
+                'q','w','e','r','t','y','u','i','o','p','[',']',
+                    'a','s','d','f','g','h','j','k','l',';','\'',
+                    'z','x','c','v','b','n','m',',','.'
+                ), array (
+                'й','ц','у','к','е','н','г','ш','щ','з','х','ъ',
+                    'ф','ы','в','а','п','р','о','л','д','ж','э',
+                    'я','ч','с','м','и','т','ь','б','ю'
                 ),$text
         );
         // ----- Получаем первую букву слова
@@ -282,7 +314,7 @@ class MD_Restaurant extends Model {
             if ($percent>40) {
                 return 'Возможно вы имели ввиду '.
                         '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
-                        '\')" class="highlight">'.$new_text.'</a>';
+                        '\')" class="highlight">'.$new_text.'</a> ?';
             } else {
                 return null;
             }
