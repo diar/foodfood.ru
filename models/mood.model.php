@@ -23,7 +23,7 @@ class MD_Mood extends Model {
      */
     public static function getMoods () {
         self::setJoinTable(null);
-        $moods = self::getAll(null,'`order`',array('table'=>'list_mood','no_prefix'=>true));
+        $moods = self::getAll(null,null,array('table'=>'list_mood','no_prefix'=>true));
         return $moods;
     }
 
