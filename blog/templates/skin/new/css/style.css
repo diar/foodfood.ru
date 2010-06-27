@@ -67,10 +67,10 @@ h1 span { color: #ccc; }
     color:#000;
     margin-right:20px;
     padding:4px 14px;
-	height:21px;
-	display:block;
-	float:left;
-	color:#fff;
+    height:21px;
+    display:block;
+    float:left;
+    color:#fff;
 }
 
 #topMenu a:hover,#topMenu a.current {
@@ -80,7 +80,7 @@ h1 span { color: #ccc; }
     -webkit-border-radius:3px 3px 0 0 ;
     border-radius:3px 3px 0 0;
     text-decoration:none;
-	color:#000;
+    color:#000;
 }
 #nav { clear: both;  }
 #wrapper { overflow: hidden; zoom: 1; margin-bottom: 30px; padding: 20px 46px 30px 20px; }
@@ -811,11 +811,69 @@ a.profiler.active          { background: #70aae0; color: white; }
 .lite-note a { float: right; font-size: 11px; }
 
 .login-popup { z-index: 100; width: 492px;  }
-.login-popup .input-text { width: 402px; padding: 4px 5px; }
-.login-popup .content { background: #dcdedd url(../images/login-popup-bg.gif) repeat-x; padding: 15px 40px; }
-.login-popup .login-popup-top { height: 14px; background: url(../images/login-popup-top.gif) no-repeat; width: 492px; position: relative; }
-.login-popup .login-popup-bottom { height: 14px; background: url(../images/login-popup-bottom.gif) no-repeat; width: 492px; }
-.login-popup .close-block { position: absolute; top: 10px; right: 10px; width: 14px; height: 14px; background: url(../images/close-block.gif) no-repeat; }
+.login-popup h3 {
+    color: #86A515;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+    padding: 12px 0 15px 0;
+}
+.login-popup a {
+    display :none;
+}
+.login-popup label {
+    display:block;
+    font-size: 11px;
+    width:100%;
+    text-align: center;
+    margin:0;
+}
+.login-popup .input-text { 
+    border: 1px solid black;
+    font-size: 24px;
+    height: 44px;
+    text-align: center;
+    width: 100%;
+    border-bottom-left-radius: 3px 3px;
+    border-bottom-left-radius: 3px 3px;
+    border-bottom-right-radius: 3px 3px;
+    border-bottom-right-radius: 3px 3px;
+    border-top-left-radius: 3px 3px;
+    border-top-left-radius: 3px 3px;
+    border-top-right-radius: 3px 3px;
+    border-top-right-radius: 3px 3px;
+}
+.login-popup .input-checkbox {
+    position:absolute;
+    top : 245px;
+    right: 0px;
+    width:140px;
+}
+.login-popup button {
+    background: url(http://foodfood/public/images/auth_button);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    height: 55px;
+    margin: 5px auto;
+    text-shadow: #777 -1px 0px 0px;
+    width: 195px;
+    float:none;
+}
+.login-popup button span,
+.login-popup button em {
+    background:none;
+    color:#fff;
+}
+.login-popup .content { background: #fff ; padding: 15px 20px; border: 4px solid #86A515;}
+.login-popup .login-popup-top { height: 14px;  width: 492px; position: relative; }
+.login-popup .login-popup-bottom { height: 14px;  width: 492px; }
+.login-popup .close-block {
+    position: absolute; top: 25px; right: 12px;
+    width: 18px; height: 18px; background: url(/public/images/icons/close_icon.jpg) no-repeat;
+}
 
 .upload-image p { margin-bottom: 5px; }
 .upload-image label { color: #aaa; }

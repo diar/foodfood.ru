@@ -4,20 +4,24 @@ $loader_gray = '<div class="loader"><img src="/public/images/loader_gray.gif" al
 
 // Показать диалог
 $.showDialog = function (id) {
-    if(!$.browser.msie) {
-        scrolling = $(document).scrollTop()+100;
-    } else {
-        scrolling = document.documentElement.scrollTop + 50;
+    $body_fill = $('#body_fill');
+    // Показываем затемнение
+    if ($('#body_fill').length==0) {
+        $body_fill = $('<div id="body_fill"></div>');
+        $('body').append($body_fill);
     }
-    $('#'+id).css('top',scrolling);
-    $('.dialog:not(#'+id+')').fadeOut(500,function(){
-        $('#'+id).fadeIn(500);
+    $body_fill.css('opacity',0).show().animate({'opacity':0.5},300);
+    // Показываем диалог
+    $('#'+id).css('top',100);
+    $('.dialog:not(#'+id+')').fadeOut(300,function(){
+        $('#'+id).fadeIn(300);
     });
 };
 
 // Показать диалог
 $.hideDialog = function (id) {
-    $('#'+id).fadeOut(500);
+    $('#body_fill').animate({'opacity':0},300).hide();
+    $('#'+id).fadeOut(300);
 };
 
 // Показать сообщение
