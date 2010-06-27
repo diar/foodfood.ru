@@ -119,12 +119,12 @@ $(document).ready(function(){
     // Нажатие на кнопку отзыв - минус
     $('.rest_rating .minus').click(function(){
         $('.rest_rating .rating_comment').fadeOut();
-        update_rating_form($(this),'lcomment');
+        update_rating_form($(this),-1);
     });
     // Нажатие на кнопку отзыв - плюс
     $('.rest_rating .plus').click(function(){
         $('.rest_rating .rating_comment').fadeOut();
-        update_rating_form($(this),'rcomment');
+        update_rating_form($(this),1);
     });
     // Действие при изменении ширины экрана
     if (!$.browser.msie) {
@@ -184,11 +184,14 @@ function update_rating_form(parent,target){
     rating_form.find('input[type=submit]').click(function(){
         rest_id = $(this).parents('.item').attr('rel');
         text = $(this).parent().find('textarea').val();
-        $.post('/'+site_city+'/restaurant/'+target+'/'+rest_id+'/',{'text':text} ,function (data) {
+        $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/',
+        {'text':text,'target':target},
+        function (data) {
             if (data=='OK') $.alert('Ваш голос учтен',false);
             else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
             else if (data=='ALREADY') $.alert('Вы уже голосовали за этот ресторан',true);
-            else if (data=='LENGTH') $.alert('Длина отзыва не должна превышать 500 символов',true);
+            else if (data=='LENGTH') $.alert('Длина отзыва не должна превышать 1000 символов',true);
+            else if (data=='MAT') $.alert('Ваш отзыв не принят из-за мата',true);
             else $.alert('Ошибка. Попробуйте еще раз',true);
         });
         return false;

@@ -739,7 +739,7 @@ class MD_Restaurant extends Model {
         empty ($params['count']) ? $count=20 : $count=$params['count'];
         empty ($params['offset']) ? $offset=0 : $offset=$params['offset'];
         $reviews = self::getAll(
-                'text!=\'\' AND rest_id='.$id,Model::getPrefix().'rest_comment.id DESC LIMIT 0,'.$count,
+                'rest_id='.$id,Model::getPrefix().'rest_comment.id DESC LIMIT 0,'.$count,
                 array(
                 'table'=>Model::getPrefix().'rest_comment', 'no_prefix'=>true,
                 'join'=>Array('user',Model::getPrefix().'rest'),
@@ -759,7 +759,7 @@ class MD_Restaurant extends Model {
         empty ($params['count']) ? $count=20 : $count=$params['count'];
         empty ($params['offset']) ? $offset=0 : $offset=$params['offset'];
         $reviews = self::getAll(
-                'text!=\'\'',Model::getPrefix().'rest_comment.id DESC LIMIT 0,'.$count,
+                null,Model::getPrefix().'rest_comment.id DESC LIMIT 0,'.$count,
                 array(
                 'table'=>Model::getPrefix().'rest_comment', 'no_prefix'=>true,
                 'select'=>'rest_title,user_login,text,rest_id,rest_uri',

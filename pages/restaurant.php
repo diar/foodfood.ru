@@ -83,23 +83,11 @@ class restaurant_Page extends View {
     }
 
     /*
-     * Уменьшение рейтинга ресторана по ajax
-    */
-    public static function lcommentAjaxAction ($id) {
-        echo MD_Rating::minusRating($id);
-    }
-
-    /*
-     * Увеличение рейтинга ресторана по ajax
-    */
-    public static function rcommentAjaxAction ($id) {
-        echo MD_Rating::plusRating($id);
-    }
-
-    /*
-     * Добавить комментарий для ресторана
+     * Добавить комментарий для ресторана или изменить рэйтинг
     */
     public static function commentAjaxAction ($id) {
-        echo MD_Rating::addComment($id);
+        $text = !empty ($_POST['text']) ? $_POST['text'] : '';
+        $rating_target = !empty ($_POST['target']) ? $_POST['target'] : '';
+        echo MD_Rating::addComment($id,$rating_target,$text);
     }
 }

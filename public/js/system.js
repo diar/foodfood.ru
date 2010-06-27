@@ -200,7 +200,7 @@ function update_rating_without_text(rest_id,target){
     if(user_auth!='1') {
         $.alert('Чтобы оставить отзыв, зайди на сайт или зарегистрируйся!',true);
     } else {
-        $.post('/'+site_city+'/restaurant/'+target+'/'+rest_id+'/' ,function (data) {
+        $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/',{'target':target},function (data) {
             if (data=='OK') $.alert('Ваш голос учтен',false);
             else if (data=='NO_LOGIN') $.alert('Чтобы оставить отзыв, зайди на сайт или зарегистрируйся!',true);
             else if (data=='ALREADY') $.alert('Вы уже голосовали за этот ресторан',true);

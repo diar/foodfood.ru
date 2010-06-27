@@ -100,7 +100,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 
     /*
@@ -138,7 +138,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 
     /*
@@ -232,7 +232,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 
     /*
@@ -269,7 +269,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
     /*
      * Получаем список ресторанов по настроению через ajax
@@ -304,6 +304,6 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 }
