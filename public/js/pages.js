@@ -94,11 +94,11 @@ $(document).ready(function(){
         });
         // Нажатие на кнопку отзыв - минус
         $('.restaurant_header .rest_rating .minus').click(function(){
-            update_rating_without_text(current_rest_id,'lcomment');
+            update_rating_without_text(current_rest_id,-1);
         });
         // Нажатие на кнопку отзыв - плюс
         $('.restaurant_header .rest_rating .plus').click(function(){
-            update_rating_without_text(current_rest_id,'rcomment');
+            update_rating_without_text(current_rest_id,1);
         });
         $('.reviews .form input[type="submit"]').click(function(){
             text = $(this).parents('form').find('textarea').val();
@@ -439,7 +439,7 @@ function comment_rest(rest_id,text){
         $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
     } else {
         $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/' ,{
-            'text':text
+            'text':text,'target':0
         },function (data) {
             if (data=='OK') $.alert('Отзыв добавлен',false);
             else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
