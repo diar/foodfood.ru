@@ -831,6 +831,17 @@ html {
 #passwd_dialog #passwd_submit:active{
     background:url(/public/images/auth_button_active);
 }
+
+#body_fill {
+    display:none;
+    width:100%;
+    height:100%;
+    background: #000;
+    position:fixed;
+    z-index:9999;
+    top:0;
+    left:0;
+}
 /******************************** Вывод сообщения *****************************/
 #message_dialog {
     display:none;
@@ -844,17 +855,6 @@ html {
     -webkit-border-bottom-right-radius:5px;
     -moz-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
-}
-
-#body_fill {
-    display:none;
-    width:100%;
-    height:100%;
-    background: #000;
-    position:fixed;
-    z-index:9999;
-    top:0;
-    left:0;
 }
 
 /*************************************** ЗАКРУГЛЯНИЯ ****************************/
