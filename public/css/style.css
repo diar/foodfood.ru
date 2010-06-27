@@ -692,7 +692,7 @@ html {
 
 #copyright .right {
     float:right;
-    padding:15px 260px 10px 0;
+    padding:15px 160px 10px 0;
 }
 
 #copyright .right a {
@@ -726,7 +726,7 @@ html {
 /* Диалоги
 - ---------------------------------------------------------------------*/
 .dialog_box {
-    position:absolute;
+    position:fixed;
     left:50%;
     margin-left:-220px;
     top:200px;
@@ -844,6 +844,17 @@ html {
     -webkit-border-bottom-right-radius:5px;
     -moz-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
+}
+
+#body_fill {
+    display:none;
+    width:100%;
+    height:100%;
+    background: #000;
+    position:fixed;
+    z-index:9999;
+    top:0;
+    left:0;
 }
 
 /*************************************** ЗАКРУГЛЯНИЯ ****************************/
