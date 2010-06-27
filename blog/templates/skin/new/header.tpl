@@ -1,7 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru">
-
 <head>
 	{hook run='html_head_begin'}
 	<title>{$sHtmlTitle}</title>
@@ -13,7 +11,13 @@
 	
 	<link href="{cfg name='path.static.skin'}/images/favicon.ico" rel="shortcut icon" />
 	<link rel="search" type="application/opensearchdescription+xml" href="{router page='search'}opensearch/" title="{cfg name='view.name'}" />
-	
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("jquery", "1.4.2");
+        </script>
+        <script type="text/javascript" src="/public/js/libs/jquery.keyboard.js"></script>
+        <script type="text/javascript" src="/public/js/libs/md5.js"></script>
+
 	{if $aHtmlRssAlternate}
 		<link rel="alternate" type="application/rss+xml" href="{$aHtmlRssAlternate.url}" title="{$aHtmlRssAlternate.title}">
 	{/if}
