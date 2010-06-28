@@ -74,7 +74,9 @@ table td {
     margin:0;
     padding:0;
 }
-
+.highlight {
+    color:#f60;
+}
 /* Основные блоки
 -------------------------------------------------------------------*/
 html {
@@ -435,6 +437,10 @@ html {
     padding-top: 3px;
 }
 
+#restaurant_by_mood .message{
+    font-size: 20px;
+}
+
 .restaurant_navigate {
     line-height:59px;
     height:59px;
@@ -613,14 +619,15 @@ html {
 #footer_left ul {
     padding:17px 0 0 37px;
     line-height: 18px;
+	width:250px;
 }
+#footer_left ul li {
+padding-bottom:5px;}
 
 #footer_center {
     margin-top:15px;
     width:25%;
     float:left;
-    
-   
 }
 
 #footer_center .title {
@@ -687,7 +694,7 @@ html {
 
 #copyright .right {
     float:right;
-    padding:15px 260px 10px 0;
+    padding:15px 160px 10px 0;
 }
 
 #copyright .right a {
@@ -722,7 +729,7 @@ html {
 /* Диалоги
 - ---------------------------------------------------------------------*/
 .dialog_box {
-    position:absolute;
+    position:fixed;
     left:50%;
     margin-left:-220px;
     top:200px;
@@ -826,6 +833,17 @@ html {
 #registration_dialog #registration_submit:active,
 #passwd_dialog #passwd_submit:active{
     background:url(/public/images/auth_button_active);
+}
+
+#body_fill {
+    display:none;
+    width:100%;
+    height:100%;
+    background: #000;
+    position:fixed;
+    z-index:9999;
+    top:0;
+    left:0;
 }
 /******************************** Вывод сообщения *****************************/
 #message_dialog {

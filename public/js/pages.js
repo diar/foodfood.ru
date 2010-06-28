@@ -11,6 +11,7 @@ var poster_month_count = 0;
 var poster_day_position = 0;
 var poster_day_count = 0;
 var poster_day_visible = 0;
+var week_days = Array('вс','пн','вт','ср','чт','пт','сб');
 $(document).ready(function(){
     // Проверка и обработка ширины экрана
     check_window_width ();
@@ -25,12 +26,16 @@ $(document).ready(function(){
     * Если находимся на странице вывода ресторана
     */
     if (typeof(rest_page_activate)!='undefined') {
-        $('.main_container a').lightBox();
-        $('#restaurant_info .photos .main').load(function(){
-            $(this).animate({
-                'opacity':1
-            },300);
+        $('.main_container a').lightBox({
+            imageLoading: '/public/js/libs/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnClose:'/public/js/libs/lightbox/images/lightbox-btn-close.gif',
+            imageBtnPrev: '/public/js/libs/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext: '/public/js/libs/lightbox/images/lightbox-btn-next.gif',
+            imageBlank:   '/public/js/libs/lightbox/images/lightbox-blank.gif',
+            fixedNavigation:true
         });
+        $('#restaurant_info .photos .main').first().show().addClass('current');
+        ;
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
             $('#discount_submit').attr('partner',$(this).attr('partner'));
@@ -60,11 +65,9 @@ $(document).ready(function(){
             min = this;
             $('#restaurant_info .photos .mini.active').removeClass('active');
             $(min).addClass('active');
-            $('#restaurant_info .photos .main').animate({
-                'opacity':0.01
-            },300,function(){
-                $('#restaurant_info .photos .main').attr('src',$(min).attr('rel'));
-                $('#restaurant_info .main_container a').attr('href',$(min).attr('rel'));
+            $('#restaurant_info .photos .main.current').removeClass('current').fadeOut(300,function(){
+                $('#restaurant_info .photos .main[src="'+$(min).attr('rel')+'"]').fadeIn(300).addClass('current');
+                $('#restaurant_info .photos .main[src="'+$(min).attr('rel')+'"] a').attr('href',$(min).attr('rel'));
             });
 
             restaurant_photo_position = parseInt($(min).attr('pos'))-restaurant_photo_offset;
@@ -93,11 +96,11 @@ $(document).ready(function(){
         });
         // Нажатие на кнопку отзыв - минус
         $('.restaurant_header .rest_rating .minus').click(function(){
-            update_rating_without_text(current_rest_id,'lcomment');
+            update_rating_without_text(current_rest_id,-1);
         });
         // Нажатие на кнопку отзыв - плюс
         $('.restaurant_header .rest_rating .plus').click(function(){
-            update_rating_without_text(current_rest_id,'rcomment');
+            update_rating_without_text(current_rest_id,1);
         });
         $('.reviews .form input[type="submit"]').click(function(){
             text = $(this).parents('form').find('textarea').val();
@@ -299,7 +302,6 @@ $(document).ready(function(){
             $(this).addClass('current');
             get_poster ();
         });
-        
         $('#poster_follow').click(function(){
             if(user_auth!='1') {
                 $.alert('Вы должны войти на сайт',true);
@@ -315,12 +317,19 @@ $(document).ready(function(){
             }
             return false;
         });
+        // получаем афишу на текущий день
         $('.date_list .item[offset="'+current_day+'"]').click();
+        // прокручиваем так, чтобы был виден текущий день
+        if (current_day>poster_day_count) {
+            poster_day_scroll = poster_day_count;
+        } else {
+            poster_day_scroll = current_day;
+        }
+        poster_day_position = poster_day_scroll-1;
         $(".date_list .items").animate({
-            scrollLeft: (current_day-1)*115
+            scrollLeft: (poster_day_scroll)*115
         },250);
-        poster_day_position = current_day-1;
-        poster_day_count = $(".date_list .item").length -poster_day_visible;
+        // нажатие на кнопки прокрутки дней
         $(".date_list .back").click(function(){
             if (poster_day_position>0) {
                 poster_day_position--;
@@ -405,7 +414,7 @@ function by_mood_check_width () {
  * Обработка ширины блоков лиц foodfood
  */
 function persons_check_width () {
-    person_item_visible=(Math.ceil(($(document).width()-33)/75)-1);//340
+    person_item_visible=Math.ceil(($(document).width()-33)/75)-1;
     $('#persons_list').width(person_item_visible*75);
     person_item_count = $('#persons_list .item').length;
 }
@@ -413,7 +422,7 @@ function persons_check_width () {
  * Обработка ширины блоков лиц foodfood
  */
 function poster_day_check_width () {
-    poster_day_visible=(Math.ceil(($('.date_list .items').width())/115)-1);
+    poster_day_visible=Math.ceil(($(document).width() - 410)/115) - 1;
     $('.date_list .items').width(poster_day_visible*115);
 }
 /*
@@ -439,25 +448,27 @@ function comment_rest(rest_id,text){
         $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
     } else {
         $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/' ,{
-            'text':text
+            'text':text,
+            'target':0
         },function (data) {
             if (data=='OK') $.alert('Отзыв добавлен',false);
             else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
             else if (data=='ALREADY') $.alert('Вы уже оставляли отзыв для данного ресторана',true);
             else if (data=='LENGTH') $.alert('Длина отзыва не должна превышать 500 символов',true);
             else if (data=='MAT') $.alert('Ваш отзыв не принят из-за мата',true);
+            else if (data=='FMIN') $.alert('Вы не можете оставлять более 1 отзыва ресторану за 5 минут',true);
             else $.alert('Ошибка. Попробуйте еще раз',true);
         });
     }
 }
 function get_poster () {
-    currentDate  = new Date();
+    // Получаем афишу на выделенный день
     year = current_year - 1 + parseInt((poster_month_position / 12));
     month = (poster_month_position%12)+1;
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
     if ((parseInt(month) == parseInt(current_month)) && (parseInt(year) == parseInt(current_year))) {
-        $('.date_list .item.current[offset="'+current_day+'"]').attr("id","today").html('сегодня');
+        $('.date_list .item[offset="'+current_day+'"]').attr("id","today").html('сегодня');
     } else {
         $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","y");
     }
@@ -469,6 +480,30 @@ function get_poster () {
         'month':month
     },function(data){
         $('.anounce_block').html(data);
+    });
+    // Вычисляем сколько дней в этом месяце
+    if (month == 2 && year % 4 == 0) {
+        poster_day_count = 29;
+    } else if (month == 2) {
+        poster_day_count = 28;
+    } else if ((month <= 7 && month % 2 == 1) || (month > 7 && month % 2 == 0)) {
+        poster_day_count = 31;
+    } else {
+        poster_day_count = 30;
+    }
+    poster_day_count = poster_day_count - poster_day_visible;
+    // прокручиваем так, чтобы был виден текущий день
+    if (poster_day_position>poster_day_count) {
+        poster_day_position = poster_day_count;
+        $(".date_list .items").animate({
+        scrollLeft: (poster_day_position)*115
+    },250);
+    }
+    // заменяем дни недели на кнопках 
+    $(".date_list .item").each(function(){
+        el_date_str = (month + '/'+$(this).attr('offset')+'/'+year);
+        el_date = new Date(Date.parse(el_date_str));
+        $(this).find('sup').html(week_days[el_date.getDay()]);
     });
     return false;
 }

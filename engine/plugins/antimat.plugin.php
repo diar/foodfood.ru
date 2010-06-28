@@ -11,7 +11,6 @@ class AntimatPlugin {
             'хуй','xуй','хyй','xyй','сука','бля',
     );
 
-
     public static function check ($str) {
         return str_replace(self::$antimat, '***', $str);
     }

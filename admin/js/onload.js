@@ -27,7 +27,7 @@ $(document).ready(
             }
         });
 
-        loc = location.href.match(/page=(.*)/);
+        loc = location.href.match(/page=([a-zA-Z]*)/);
         if (typeof(loc[1])!='undefined') {
             $("#menu").tabs("select", $('li[rel="'+loc[1]+'"]').parents('.submenu').attr('id') );
         }

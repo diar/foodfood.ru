@@ -79,6 +79,7 @@
 #restaurant_info .photos .main{
     width:360px;
     margin-bottom: 6px;
+    display: none;
 }
 #restaurant_info .photos .mini{
     width:55px;
@@ -1039,7 +1040,14 @@ table.table_layout td {
 }
 
 /*********** /calendar *************/
-/***********CLASS*************/
+/***********TO CHTO PROEBALI*************/
+
+.description .name{
+	padding-bottom:6px;
+	padding-top:10px;
+}
+
+
 
 /***********CLASS*************/
 .caption{

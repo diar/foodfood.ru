@@ -74,104 +74,57 @@ class MD_Rating extends Model {
     }
 
     /**
-     * Уменьшить рейтинг ресторана
-     * @return string
-     */
-    public static function minusRating ($id) {
-        if (!User::isAuth()) {
-            return 'NO_LOGIN';
-        }
-        $comm = DB::getRecord(
-                Model::getPrefix ().'rest_comment',
-                'rest_id='.DB::quote($id).' AND user_id='.User::getParam('user_id')
-        );
-        $text = !empty($_POST['text']) ? $_POST['text'] : '';
-        if ($comm) return 'ALREADY';
-        if (strlen($text)>1000) return 'LENGTH';
-        if (AntimatPlugin::check($text) == '***') return 'MAT';
-        DB::insert(Model::getPrefix ().'rest_comment', Array(
-                'rest_id'=>$id,'user_id'=>User::getParam('user_id'),
-                'text'=>$text
-        ));
-        if ($text!='') {
-            DB::update(
-                    Model::getPrefix ().'rest',
-                    Array('rest_karma'=>'rest_karma-1','rest_comment_count'=>'rest_comment_count+1'),
-                    'id='.DB::quote($id),false
-            );
-        } else {
-            DB::update(
-                    Model::getPrefix ().'rest',
-                    Array('rest_karma'=>'rest_karma-1'),
-                    'id='.DB::quote($id),false
-            );
-        }
-        self::updateRating($id);
-        return 'OK';
-    }
-
-    /**
-     * Увеличить рейтинг ресторана
-     * @return string
-     */
-    public static function plusRating ($id) {
-        if (!User::isAuth()) {
-            return 'NO_LOGIN';
-        }
-        $comm = DB::getRecord(
-                Model::getPrefix ().'rest_comment',
-                'rest_id='.DB::quote($id).' AND user_id='.User::getParam('user_id')
-        );
-        $text = !empty($_POST['text']) ? $_POST['text'] : '';
-        if ($comm) return 'ALREADY';
-        if (strlen($text)>1000) return 'LENGTH';
-        if (AntimatPlugin::check($text) == '***') return 'MAT';
-        DB::insert(Model::getPrefix ().'rest_comment', Array(
-                'rest_id'=>$id,'user_id'=>User::getParam('user_id'),
-                'text'=>$text
-        ));
-        if ($text!='') {
-            DB::update(
-                    Model::getPrefix ().'rest',
-                    Array('rest_karma'=>'rest_karma+1','rest_comment_count'=>'rest_comment_count+1'),
-                    'id='.DB::quote($id),false
-            );
-        } else {
-            DB::update(
-                    Model::getPrefix ().'rest',
-                    Array('rest_karma'=>'rest_karma+1'),
-                    'id='.DB::quote($id),false
-            );
-        }
-        self::updateRating($id);
-        return 'OK';
-    }
-
-    /**
      * Добавить комментарий ресторану
      * @return string
      */
-    public static function addcomment ($id) {
+    public static function addcomment ($rest_id,$rating_target,$text) {
+        $text = (!empty($_POST['text']) && $_POST['text']!="Нет слов...") ? $_POST['text'] : '';
         if (!User::isAuth()) {
             return 'NO_LOGIN';
         }
-        $comm = DB::getRecord(
-                Model::getPrefix ().'rest_comment',
-                'rest_id='.DB::quote($id).' AND user_id='.User::getParam('user_id')
-        );
-        $text = !empty($_POST['text']) ? $_POST['text'] : '';
-        if ($comm) return 'ALREADY';
+        // Проверяем не голосовал ли пользователь в течение 5 минут
+        if ($text!='') {
+            $fmin = DB::getRecord(
+                    Model::getPrefix ().'rest_comment',
+                    'rest_id='.DB::quote($rest_id).' AND user_id='.User::getParam('user_id').
+                    ' AND comment_date > NOW() - INTERVAL 5 MINUTE'
+            );
+            if ($fmin) return 'FMIN';
+        }
+        // Если нажал плюс или минус
+        if (intval($rating_target)!=0) {
+            // Узнаем, не голосовал ли пользователь
+            $already = DB::getRecord(
+                    Model::getPrefix ().'rest_rating',
+                    'rest_id='.DB::quote($rest_id).' AND user_id='.User::getParam('user_id')
+            );
+            if ($already) return 'ALREADY';
+            DB::insert(Model::getPrefix ().'rest_rating', Array(
+                    'rest_id'=>$rest_id,'user_id'=>User::getParam('user_id'),
+                    'rating_target'=>$rating_target
+            ));
+            DB::update(
+                    Model::getPrefix ().'rest',
+                    Array('rest_karma'=>'rest_karma+'.intval($rating_target)),
+                    'id='.DB::quote($rest_id),false
+            );
+            self::updateRating ($rest_id);
+        }
         if (strlen($text)>1000) return 'LENGTH';
         if (AntimatPlugin::check($text) == '***') return 'MAT';
-        DB::insert(Model::getPrefix ().'rest_comment', Array(
-                'rest_id'=>$id,'user_id'=>User::getParam('user_id'),
-                'text'=>$text
-        ));
+        if ($text=='') return 'OK';
+        // Если добавил комментарий
         DB::update(
                 Model::getPrefix ().'rest',
                 Array('rest_comment_count'=>'rest_comment_count+1'),
-                'id='.DB::quote($id),false
+                'id='.DB::quote($rest_id),false
         );
+        DB::insert(Model::getPrefix ().'rest_comment', Array(
+                'rest_id'=>DB::quote($rest_id),
+                'user_id'=>DB::quote(User::getParam('user_id')),
+                'text'=>DB::quote($text),
+                'comment_date' => 'NOW()'
+        ),false);
         return 'OK';
     }
 }

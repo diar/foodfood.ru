@@ -12,3 +12,6 @@ Site
 Инструменты
  - оптимизация CSS - http://www.cleancss.com/
  - оптимизация JavaScript - http://habrahabr.ru/blogs/google/74438/
+
+RM discounts
+DELETE FROM `kazan_discount_list` WHERE discount_id=1 AND discount_counter>20

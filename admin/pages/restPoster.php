@@ -8,6 +8,7 @@ class restPoster extends AdminModule {
     protected static $_DB_table = 'rest_poster';
 
     public static function initModule () {
+        self::addAction('add', 'Добавить афишу',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
     }
@@ -264,7 +265,7 @@ class restPoster extends AdminModule {
         $list = Form::showJqGrid(
                 array(
                 'url'=>'/admin/admin.php?page=restPoster&action=showJSON',
-                'table'=>'gridlist','pager'=>'gridpager','width'=>'600','height'=>'240'
+                'table'=>'gridlist','pager'=>'gridpager','width'=>'600','height'=>'400'
                 ),
                 array(
                 array('title'=>'id'),

@@ -108,12 +108,12 @@
                     </div>
                 </div>
                 <div id="cursor_top" class="rounded">
-                    <div class="left_text">Повеселее</div>
+                    <div class="left_text">Посерьёзней</div>
                     <div id="cursor">
                         <div class="scroll_left"></div>
                         <div class="scroll_right"></div>
                     </div>
-                    <div class="right_text">Посерьёзней</div>
+                    <div class="right_text">Повеселее</div>
                 </div>
             </div>
         </div>
@@ -192,6 +192,7 @@
             <div class="right">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
+                <a  href="#" onclick="bookmark(this);">В избранное</a>
             </div>
         </div>
     </xsl:template>

@@ -4,20 +4,28 @@ $loader_gray = '<div class="loader"><img src="/public/images/loader_gray.gif" al
 
 // Показать диалог
 $.showDialog = function (id) {
-    if(!$.browser.msie) {
-        scrolling = $(document).scrollTop()+100;
-    } else {
-        scrolling = document.documentElement.scrollTop + 50;
+    $body_fill = $('#body_fill');
+    // Показываем затемнение
+    if ($('#body_fill').length==0) {
+        $body_fill = $('<div id="body_fill"></div>');
+        $('body').append($body_fill);
     }
-    $('#'+id).css('top',scrolling);
-    $('.dialog:not(#'+id+')').fadeOut(500,function(){
-        $('#'+id).fadeIn(500);
+    $body_fill.css('opacity',0).show().animate({
+        'opacity':0.5
+    },300);
+    // Показываем диалог
+    $('#'+id).css('top',100);
+    $('.dialog:not(#'+id+')').fadeOut(300,function(){
+        $('#'+id).fadeIn(300);
     });
 };
 
 // Показать диалог
 $.hideDialog = function (id) {
-    $('#'+id).fadeOut(500);
+    $('#body_fill').animate({
+        'opacity':0
+    },300).hide();
+    $('#'+id).fadeOut(300);
 };
 
 // Показать сообщение
@@ -200,7 +208,9 @@ function update_rating_without_text(rest_id,target){
     if(user_auth!='1') {
         $.alert('Чтобы оставить отзыв, зайди на сайт или зарегистрируйся!',true);
     } else {
-        $.post('/'+site_city+'/restaurant/'+target+'/'+rest_id+'/' ,function (data) {
+        $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/',{
+            'target':target
+        },function (data) {
             if (data=='OK') $.alert('Ваш голос учтен',false);
             else if (data=='NO_LOGIN') $.alert('Чтобы оставить отзыв, зайди на сайт или зарегистрируйся!',true);
             else if (data=='ALREADY') $.alert('Вы уже голосовали за этот ресторан',true);
@@ -327,4 +337,23 @@ function serialize( mixed_value ) {
     }
     if (type != "object" && type != "array") val += ";";
     return val;
+}
+
+// Добавить в Избранное
+function bookmark(a) {
+    title=document.title;
+    url=document.location;
+    if ($.browser.msie) {
+        window.external.AddFavorite(url, title);
+    }
+    if ($.browser.mozilla) {
+        window.sidebar.addPanel(title, url, "");
+    }
+    if ($.browser.opera) {
+        a.rel="sidebar";
+        a.title=title;
+        a.url=url;
+        return true;
+    }
+    return false;
 }
