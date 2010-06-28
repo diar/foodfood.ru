@@ -204,6 +204,7 @@
                             </xsl:when>
                         </xsl:choose>
                     </div>
+                    <xsl:if test="//person!=''">
                     <div class="person_block">
                         <div class="caption">Приятного аппетита желает:</div>
                         <div class="photo">
@@ -222,8 +223,8 @@
                             <xsl:value-of select="//person/person_text" />
                         </div>
                         <div class="clear"></div>
-
                     </div>
+                    </xsl:if>
                 </div>
                 <!-- Средняя колонка -->
                 <div class="center_col">
