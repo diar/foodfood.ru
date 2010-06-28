@@ -89,6 +89,7 @@ html {
     height:160px;
     background:#666;
     margin-right:10px;
+    z-index: 7;
 }
 
 .banner240n320 {
@@ -616,7 +617,7 @@ html {
 
 #footer_center {
     margin-top:15px;
-    width:26%;
+    width:25%;
     float:left;
     
    
@@ -701,6 +702,7 @@ html {
     padding-top: 18px;
     padding-left: 10px;
     font-family: Verdana, Arial, Tahoma;
+    width:300px;
 }
 /******************************** CLASS *****************************/
 .clear {
