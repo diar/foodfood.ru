@@ -618,14 +618,15 @@ html {
 #footer_left ul {
     padding:17px 0 0 37px;
     line-height: 18px;
+	width:250px;
 }
+#footer_left ul li {
+padding-bottom:5px;}
 
 #footer_center {
     margin-top:15px;
-    width:26%;
+    width:25%;
     float:left;
-    
-   
 }
 
 #footer_center .title {
