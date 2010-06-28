@@ -104,7 +104,7 @@ $(document).ready(function(){
             $('#moods .icon.active').removeClass('active');
             set_anchor ('mood-'+current_mood);
             $(this).addClass('active');
-            $('.restaurant_navigate .caption').html('Настроение : '+$(this).find('.caption').html());
+            $('.restaurant_navigate .caption').html('Настроение: '+$(this).find('.caption').html());
             search_offset = 0;
             search_start();
         } else {
