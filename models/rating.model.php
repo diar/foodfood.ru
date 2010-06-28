@@ -78,8 +78,18 @@ class MD_Rating extends Model {
      * @return string
      */
     public static function addcomment ($rest_id,$rating_target,$text) {
+        $text = (!empty($_POST['text']) && $_POST['text']!="Нет слов...") ? $_POST['text'] : '';
         if (!User::isAuth()) {
             return 'NO_LOGIN';
+        }
+        // Проверяем не голосовал ли пользователь в течение 5 минут
+        if ($text!='') {
+            $fmin = DB::getRecord(
+                    Model::getPrefix ().'rest_comment',
+                    'rest_id='.DB::quote($rest_id).' AND user_id='.User::getParam('user_id').
+                    ' AND comment_date > NOW() - INTERVAL 5 MINUTE'
+            );
+            if ($fmin) return 'FMIN';
         }
         // Если нажал плюс или минус
         if (intval($rating_target)!=0) {
@@ -100,7 +110,6 @@ class MD_Rating extends Model {
             );
             self::updateRating ($rest_id);
         }
-        $text = (!empty($_POST['text']) && $_POST['text']!="Нет слов...") ? $_POST['text'] : '';
         if (strlen($text)>1000) return 'LENGTH';
         if (AntimatPlugin::check($text) == '***') return 'MAT';
         if ($text=='') return 'OK';
@@ -111,10 +120,11 @@ class MD_Rating extends Model {
                 'id='.DB::quote($rest_id),false
         );
         DB::insert(Model::getPrefix ().'rest_comment', Array(
-                'rest_id'=>$rest_id,
-                'user_id'=>User::getParam('user_id'),
-                'text'=>$text
-        ));
+                'rest_id'=>DB::quote($rest_id),
+                'user_id'=>DB::quote(User::getParam('user_id')),
+                'text'=>DB::quote($text),
+                'comment_date' => 'NOW()'
+        ),false);
         return 'OK';
     }
 }
