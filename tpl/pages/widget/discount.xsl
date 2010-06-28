@@ -27,24 +27,12 @@
     <!-- Список скидок -->
     <xsl:template match="discounts/item">
         <div class="discount" partner="{rest_id}" >
-            <div class="count rounded">
-                <xsl:if test="16 &lt; discount_percent">
-                    <xsl:attribute name="class">count sale20</xsl:attribute>
-                </xsl:if>
-                <xsl:if test="16 &gt; discount_percent">
-                    <xsl:attribute name="class">count sale15</xsl:attribute>
-                </xsl:if>
-                <xsl:if test="6 &gt; discount_percent ">
-                    <xsl:attribute name="class">count sale5</xsl:attribute>
-                </xsl:if>
-                <span class="percent"><xsl:value-of select="discount_percent" /> %</span>
-            </div>
-            <div class="rest_caption">
-                <a href="/{//site/city}/discount#get-{rest_id}" target="_blank" class="get_discount">
-                    <xsl:value-of select="rest_title" />
-                </a>
-                <div class="left">Осталось: <xsl:value-of select="discount_count" /></div>
-            </div>
+            <a href="/{//site/city}/discount#get-{rest_id}" target="_blank" class="get_discount">
+                <xsl:if test="discount_percent &lt; 10">0</xsl:if>
+                <xsl:value-of select="discount_percent" /> % -
+                <xsl:value-of select="rest_title" />
+            </a>
+            <div class="left">Осталось: <xsl:value-of select="discount_count" /></div>
         </div>
     </xsl:template>
 </xsl:stylesheet>

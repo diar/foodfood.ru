@@ -10,7 +10,6 @@ class restMood extends AdminModule {
     public static function initModule () {
 
         self::addAction('addItem', 'Добавить настроение',7,true);
-        self::addAction('showList', 'Список настроений',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
     }

@@ -82,7 +82,6 @@
                         </xsl:choose>
                         <div class="back"></div>
                     </a>
-
                     <div>
                         <div class="caption">
                             <div class="title"><xsl:value-of select="mood_title" /> <xsl:if test="mood_title != ''">: </xsl:if>  <xsl:value-of select="rest_title" /></div>
@@ -147,7 +146,6 @@
             <div class="clear"></div>
             <div class="clear marginTop20px"></div>
             <!-- Вывод  информации по ресторану -->
-
             <div id="restaurant_info">
                 <!-- Левая колонка -->
                 <div class="left_col">
@@ -155,14 +153,12 @@
                         <div class="main_container">
                             <xsl:choose>
                                 <xsl:when test="photos=''">
-                                    <a href="/public/images/rest_icon_big.jpg">
-                                        <img src="/public/images/rest_icon_big.jpg" class="main" alt="{rest_title}" />
-                                    </a>
+                                    <img src="/public/images/rest_icon_big.jpg" class="main" alt="{rest_title}" />
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <a href="/upload/image/rest_photo/{id}/{photos/item/src}">
-                                        <img src="/upload/image/rest_photo/{id}/{photos/item/src}" class="main" alt="{rest_title}" />
-                                    </a>
+                                    <xsl:apply-templates select="photos/item">
+                                        <xsl:with-param name="big">1</xsl:with-param>
+                                    </xsl:apply-templates>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </div>
@@ -170,7 +166,9 @@
                             <xsl:if test="photos=''">
                                 <img src="/public/images/rest_icon_big.jpg" class="mini" alt="{rest_title}" />
                             </xsl:if>
-                            <xsl:apply-templates select="photos/item" />
+                            <xsl:apply-templates select="photos/item">
+                                <xsl:with-param name="big">0</xsl:with-param>
+                            </xsl:apply-templates>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -246,6 +244,10 @@
                                 <form action="" method="post">
                                     <textarea name="text" class="rounded"></textarea>
                                     <input type="submit" value="Отправить" />
+                                    <div style="padding-top:10px;">
+                                        <input type="checkbox" style="float:none;margin:0;height:14px;width:14px;" />
+                                        <span>отправить ресторатору</span>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -320,10 +322,10 @@
             <div class="clear"></div>
         </div>
         <div id="google_dialog" class="dialog_box dialog box_shadow">
-                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0 -20px 0 0;" />
-                <div class="clear"></div>
-                <div id="map_canvas" style="width:700px; height:535px"></div>
-                <div style="width:100%;height:35px;background:#fff;position:relative;top:-35px;"></div>
+            <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" style="margin:0 -20px 0 0;" />
+            <div class="clear"></div>
+            <div id="map_canvas" style="width:700px; height:535px"></div>
+            <div style="width:100%;height:35px;background:#fff;position:relative;top:-35px;"></div>
         </div>
         <div id="map_text" style="display:none;">
             <div style="height:200px; width:300px;font-size:14px;">
@@ -390,14 +392,29 @@
     <!-- Список отзывов -->
     <xsl:template match="reviews/item">
         <div class="review">
-            <div class="user"><xsl:value-of select="user_login" /> говорит:</div>
+            <div class="user">
+                <a href="/blog/profile/{user_login}"><xsl:value-of select="user_login" /></a>
+                говорит:
+            </div>
             <div class="text">« <xsl:value-of select="text" /> »</div>
         </div>
     </xsl:template>
 
     <!-- Список фотографий -->
     <xsl:template match="photos/item">
-        <img src="/upload/image/rest_photo/{../../id}/mini-{src}" rel="/upload/image/rest_photo/{../../id}/{src}" class="mini" />
+        <xsl:param name="big" />
+        <xsl:choose>
+            <xsl:when test="$big=1">
+                <a href="/upload/image/rest_photo/{../../id}/{src}">
+                    <img src="/upload/image/rest_photo/{../../id}/{src}"
+                         class="main" alt="{rest_title}" />
+                </a>
+            </xsl:when>
+            <xsl:when test="$big=0">
+                <img src="/upload/image/rest_photo/{../../id}/mini-{src}"
+                     rel="/upload/image/rest_photo/{../../id}/{src}" class="mini" />
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Список тэгов -->

@@ -100,7 +100,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 
     /*
@@ -138,7 +138,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 
     /*
@@ -155,70 +155,84 @@ class index_Page extends View {
         $page_width = $_POST['width'];
         $offset = $_POST['offset'];
         $item_count = ceil(($page_width-54)/234);
+        $page_count = 0;
         switch ($_POST['search_by']) {
             case  'search_by_rest' :
                 $restaurants = MD_Restaurant::searchRestaurantByTitle (
                         $tags,$_POST['text'],array('count'=>3*($item_count-1),'offset'=>$offset)
                 );
-                $page_count = ceil(count(MD_Restaurant::searchRestaurantByTitle (
-                        $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
-                        ))/(3*($item_count-1)));
+                if (!empty($restaurants))
+                    $page_count = ceil(count(MD_Restaurant::searchRestaurantByTitle (
+                            $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
+                            ))/(3*($item_count-1)));
                 break;
             case  'search_by_cook' :
                 $restaurants = MD_Restaurant::searchRestaurantByCook (
                         $tags,$_POST['text'],array('count'=>3*($item_count-1),'offset'=>$offset)
                 );
-                $page_count = ceil(count(MD_Restaurant::searchRestaurantByCook (
-                        $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
-                        ))/(3*($item_count-1)));
+                if (!empty($restaurants))
+                    $page_count = ceil(count(MD_Restaurant::searchRestaurantByCook (
+                            $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
+                            ))/(3*($item_count-1)));
                 break;
             case  'search_by_music' :
                 $restaurants = MD_Restaurant::searchRestaurantByMusic (
                         $tags,$_POST['text'],array('count'=>3*($item_count-1),'offset'=>$offset)
                 );
-                $page_count = ceil(count(MD_Restaurant::searchRestaurantByMusic (
-                        $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
-                        ))/(3*($item_count-1)));
+                if (!empty($restaurants))
+                    $page_count = ceil(count(MD_Restaurant::searchRestaurantByMusic (
+                            $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
+                            ))/(3*($item_count-1)));
                 break;
             case  'search_by_category' :
                 $restaurants = MD_Restaurant::searchRestaurantByCategory (
                         $tags,$_POST['text'],array('count'=>3*($item_count-1),'offset'=>$offset)
                 );
-                $page_count = ceil(count(MD_Restaurant::searchRestaurantByCategory (
-                        $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
-                        ))/(3*($item_count-1)));
+                if (!empty($restaurants))
+                    $page_count = ceil(count(MD_Restaurant::searchRestaurantByCategory (
+                            $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
+                            ))/(3*($item_count-1)));
                 break;
             case  'search_by_menu' :
                 $restaurants = MD_Restaurant::searchRestaurantByMenu (
                         $tags,$_POST['text'],array('count'=>3*($item_count-1),'offset'=>$offset)
                 );
-                $page_count = ceil(count(MD_Restaurant::searchRestaurantByMenu (
-                        $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
-                        ))/(3*($item_count-1)));
+                if (!empty($restaurants))
+                    $page_count = ceil(count(MD_Restaurant::searchRestaurantByMenu (
+                            $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
+                            ))/(3*($item_count-1)));
                 break;
             case  'search_by_address' :
                 $restaurants = MD_Restaurant::searchRestaurantByAddress (
                         $tags,$_POST['text'],array('count'=>3*($item_count-1),'offset'=>$offset)
                 );
-                $page_count = ceil(count(MD_Restaurant::searchRestaurantByAddress (
-                        $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
-                        ))/(3*($item_count-1)));
+                if (!empty($restaurants))
+                    $page_count = ceil(count(MD_Restaurant::searchRestaurantByAddress (
+                            $tags,$_POST['text'],array('count'=>5000,'offset'=>0,'select'=>'id')
+                            ))/(3*($item_count-1)));
                 break;
         }
-        if (!empty($restaurants))
-            foreach ($restaurants as &$rest) {
-                preg_match('/^(.*?)\,/', $rest['rest_address'],$rest_address);
-                if (!empty($rest_address[1])) {
-                    $rest['rest_address']=trim(preg_replace('/ул\.|Ул\.|пр\./', '',$rest_address[1]));
+        if (!empty($restaurants)) {
+            if (is_array($restaurants)) {
+                foreach ($restaurants as &$rest) {
+                    preg_match('/^(.*?)\,/', $rest['rest_address'],$rest_address);
+                    if (!empty($rest_address[1])) {
+                        $rest['rest_address']=trim(preg_replace('/ул\.|Ул\.|пр\./', '',$rest_address[1]));
+                    }
                 }
+            } else {
+                echo '<div class="message">Поиск не дал результатов. '.$restaurants.'</div>';
             }
+        } else {
+            echo '<div class="message">Поиск не дал результатов.';
+        }
         // Добавляем переменные xslt
         self::$page['item_count']=$item_count;
         self::$page['page_count']=$page_count;
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 
     /*
@@ -255,7 +269,7 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
     /*
      * Получаем список ресторанов по настроению через ajax
@@ -290,6 +304,6 @@ class index_Page extends View {
         self::$page['restaurants']=$restaurants;
 
         // Показываем страницу
-        self::showXSLT('pages/ajax/restaurants');
+        self::showXSLT('pages/index/search');
     }
 }

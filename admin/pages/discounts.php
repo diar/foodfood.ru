@@ -2,7 +2,7 @@
 require_once "adminModule.class.php";
 
 class discounts extends AdminModule {
-    protected static $_title = "Завоз скидок";
+    protected static $_title = "Скидки";
     protected static $_DB_table = 'rest_discount';
 
     public static function add() {

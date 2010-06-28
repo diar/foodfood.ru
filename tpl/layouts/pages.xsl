@@ -192,6 +192,7 @@
             <div class="right">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
+                <a  href="#" onclick="bookmark(this);">В избранное</a>
             </div>
         </div>
     </xsl:template>
