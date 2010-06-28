@@ -456,6 +456,7 @@ function comment_rest(rest_id,text){
             else if (data=='ALREADY') $.alert('Вы уже оставляли отзыв для данного ресторана',true);
             else if (data=='LENGTH') $.alert('Длина отзыва не должна превышать 500 символов',true);
             else if (data=='MAT') $.alert('Ваш отзыв не принят из-за мата',true);
+            else if (data=='FMIN') $.alert('Вы не можете оставлять более 1 отзыва ресторану за 5 минут',true);
             else $.alert('Ошибка. Попробуйте еще раз',true);
         });
     }
