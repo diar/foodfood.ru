@@ -91,6 +91,7 @@ html {
     height:160px;
     background:#666;
     margin-right:10px;
+    z-index: 7;
 }
 
 .banner240n320 {
@@ -708,6 +709,7 @@ padding-bottom:5px;}
     padding-top: 18px;
     padding-left: 10px;
     font-family: Verdana, Arial, Tahoma;
+    width:300px;
 }
 /******************************** CLASS *****************************/
 .clear {

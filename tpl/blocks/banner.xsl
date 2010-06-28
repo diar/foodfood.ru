@@ -23,7 +23,10 @@
                 width = $(this).find('.width').html();
                 height = $(this).find('.height').html();
                 $(this).html('');
-                swfobject.embedSWF("/upload/flash/banners/"+src, "banner"+id, width, height, "9.0.0");
+                var params = {
+                    wmode:"opaque"
+                };
+                swfobject.embedSWF("/upload/flash/banners/"+src, "banner"+id, width, height, "9.0.0",false,false,params);
             }).show();
             });
         </script>
