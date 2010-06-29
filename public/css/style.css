@@ -439,6 +439,7 @@ html {
 
 #restaurant_by_mood .message{
     font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .restaurant_navigate {

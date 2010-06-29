@@ -199,8 +199,9 @@ class MD_Restaurant extends Model {
      * @return array
      */
     public static function searchRestaurantByTitle ($tags,$text,$params=null) {
-        empty ($params['count']) ? $count=20 : $count=$params['count'];
-        empty ($params['offset']) ? $offset=0 : $offset=$params['offset'];
+        $count= empty ($params['count']) ? 20 : $params['count'];
+        $offset= empty ($params['offset']) ? 0 : $params['offset'];
+        $ext_search= empty ($params['ext_search']) ? false : $params['ext_search'];
         $text = strtolower($text);
         // -- Получаем список ресторанов по поиску (точное соответствие)
         $by_text=self::getAll(
@@ -216,6 +217,20 @@ class MD_Restaurant extends Model {
             // Получаем рестораны
             return self::getRestaurantsByIds($by_tag,$params);
         }
+        if (!$ext_search) return null;
+        $new_title = self::searchRestaurantByTitleExt($text);
+        if (!empty($new_title)) {
+            $params['ext_search'] = false;
+            return self::searchRestaurantByTitle($tags, $new_title);
+        }
+    }
+    /**
+     * Расширенный поиск ресторанов по названию
+     * @param $text Название
+     * @param $params Параметры
+     * @return array
+     */
+    public static function searchRestaurantByTitleExt ($text,$params=null) {
         // -- Пытаемся найти похожие записи
         // ----- Сначала преобразуем на русский язык
         $rus_text = str_replace(
@@ -245,9 +260,10 @@ class MD_Restaurant extends Model {
                 }
             }
             if ($percent>70) {
-                return 'Возможно вы имели ввиду '.
+                echo '<div class="message">Поиск не дал результатов. Возможно, вы имели ввиду '.
                         '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
-                        '\')" class="highlight">'.$new_text.'</a> ?';
+                        '\')" class="highlight">'.$new_text.'</a> ?</div>';
+                return $new_text;
             }
         }
         // -- Пытаемся найти по второму алфавиту
@@ -277,9 +293,10 @@ class MD_Restaurant extends Model {
                 }
             }
             if ($percent>=50) {
-                return 'Возможно вы имели ввиду '.
+                echo '<div class="message">Поиск не дал результатов. Возможно, вы имели ввиду '.
                         '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
-                        '\')" class="highlight">'.$new_text.'</a> ?';
+                        '\')" class="highlight">'.$new_text.'</a> ?</div>';
+                return $new_text;
             }
         }
         // -- Пытаемся найти по третьему алфавиту
@@ -312,9 +329,10 @@ class MD_Restaurant extends Model {
                 }
             }
             if ($percent>40) {
-                return 'Возможно вы имели ввиду '.
+                echo '<div class="message">Поиск не дал результатов. Возможно, вы имели ввиду '.
                         '<a href="#" onclick="$(\'#search_text\').val(\''.$new_text.
-                        '\')" class="highlight">'.$new_text.'</a> ?';
+                        '\')" class="highlight">'.$new_text.'</a> ?</div>';
+                return $new_text;
             } else {
                 return null;
             }
