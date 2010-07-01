@@ -18,9 +18,7 @@
     <xsl:template match="content">
     	<div style="width:100%;text-align:center;font-size:32px; font-family:Tahoma,Arial;padding-top:40px;">
         	Наполняем прилавки...<br /><br />
-
-
-            <span style="color:#999999; font-style:italic;">Открытие 1 июля</span>
+            <span style="color:#999999; font-style:italic;">Открытие 20 июля</span>
         </div>
     </xsl:template>
     
