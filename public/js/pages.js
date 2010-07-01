@@ -323,13 +323,13 @@ $(document).ready(function(){
         $('.date_list .item[offset="'+offset+'"]').click();
         // прокручиваем так, чтобы был виден текущий день
         if (current_day>poster_day_count) {
-            poster_day_scroll = poster_day_count;
+            poster_day_scroll = poster_day_count + 1;
         } else {
-            poster_day_scroll = current_day - 1;
+            poster_day_scroll = current_day;
         }
         poster_day_position = poster_day_scroll-1;
         $(".date_list .items").animate({
-            scrollLeft: (poster_day_scroll)*115
+            scrollLeft: (poster_day_scroll - 1)*115
         },250);
         // нажатие на кнопки прокрутки дней
         $(".date_list .back").click(function(){
