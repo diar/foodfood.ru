@@ -27,7 +27,7 @@ RewriteRule ^(.*)$ index.php
 
 </IfModule>
 
-php_flag display_errors On
+php_flag display_errors Off
 php_flag magic_quotes_gpc 0
 php_flag magic_quotes_runtime 0
 php_value short_open_tag On
