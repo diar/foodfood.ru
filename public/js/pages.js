@@ -318,12 +318,14 @@ $(document).ready(function(){
             return false;
         });
         // получаем афишу на текущий день
-        $('.date_list .item[offset="'+current_day+'"]').click();
+        offset= current_day;
+        if (offset<10) offset = '0'+offset;
+        $('.date_list .item[offset="'+offset+'"]').click();
         // прокручиваем так, чтобы был виден текущий день
         if (current_day>poster_day_count) {
             poster_day_scroll = poster_day_count;
         } else {
-            poster_day_scroll = current_day;
+            poster_day_scroll = current_day - 1;
         }
         poster_day_position = poster_day_scroll-1;
         $(".date_list .items").animate({
@@ -468,9 +470,11 @@ function get_poster () {
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
     if ((parseInt(month) == parseInt(current_month)) && (parseInt(year) == parseInt(current_year))) {
-        $('.date_list .item[offset="'+current_day+'"]').attr("id","today").html('сегодня');
+        offset= current_day;
+        if (offset<10) offset = '0'+offset;
+        $('.date_list .item[offset="'+offset+'"]').attr("id","today").html('сегодня');
     } else {
-        $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","y");
+        $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","");
     }
     date=''+year+'.'+month+'.'+day;
     $('.anounce_block').html($loader);

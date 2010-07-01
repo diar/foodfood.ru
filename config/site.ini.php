@@ -12,5 +12,6 @@ sms.sender = foodfood.ru
 ; Настройка меню (заголовок::page::action::url)
 menu.1 = Афиша::poster
 menu.2 = Скидки::discount
-menu.3 = Блоги::blog::::/blog/
-menu.4 = Гурманы::blog::::/blog/people/
+menu.3 = Гурманы::blog::::/blog/people/
+menu.4 = Блоги::blog::::/blog/
+menu.5 = FF люди::persons
