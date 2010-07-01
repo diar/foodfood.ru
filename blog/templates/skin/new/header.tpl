@@ -11,13 +11,6 @@
 	
 	<link href="{cfg name='path.static.skin'}/images/favicon.ico" rel="shortcut icon" />
 	<link rel="search" type="application/opensearchdescription+xml" href="{router page='search'}opensearch/" title="{cfg name='view.name'}" />
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-            google.load("jquery", "1.4.2");
-        </script>
-        <script type="text/javascript" src="/public/js/libs/jquery.keyboard.js"></script>
-        <script type="text/javascript" src="/public/js/libs/md5.js"></script>
-
 	{if $aHtmlRssAlternate}
 		<link rel="alternate" type="application/rss+xml" href="{$aHtmlRssAlternate.url}" title="{$aHtmlRssAlternate.title}">
 	{/if}
