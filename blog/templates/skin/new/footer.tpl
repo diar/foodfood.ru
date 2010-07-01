@@ -22,7 +22,7 @@
                     <div class="clear"></div>
                     <input type="button" id="auth_submit" value="Войти" />
                     <div style="margin-top:10px;">
-                        <a href="#" onclick="$.showDialog('passwd_dialog');">Вспомнить пароль</a>
+                        <a href="#" class="passwd">Вспомнить пароль</a>
                     </div>
                 </div>
             </div>

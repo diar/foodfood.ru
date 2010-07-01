@@ -365,6 +365,10 @@ $config['head']['rules']['page'] =array(
 );
 
 $config['head']['default']['js']  = array(
+        "___path.static.skin___/js/jquery.js",
+        "___path.static.skin___/js/jquery.keyboard.js",
+        "___path.static.skin___/js/md5.js",
+        "___path.static.skin___/js/login.js",
 	"___path.root.engine_lib___/external/JsHttpRequest/JsHttpRequest.js",
 	"___path.root.engine_lib___/external/MooTools_1.2/mootools-1.2.js?v=1.2.4",
 	"___path.root.engine_lib___/external/MooTools_1.2/plugs/Roal/Roar.js",
@@ -382,7 +386,6 @@ $config['head']['default']['js']  = array(
 	"___path.static.skin___/js/friend.js",
 	"___path.static.skin___/js/blog.js",	
 	"___path.static.skin___/js/other.js",
-	"___path.static.skin___/js/login.js",
 	"___path.static.skin___/js/panel.js",
 	"___path.root.engine_lib___/external/MooTools_1.2/plugs/Piechart/moocanvas.js"=>array('browser'=>'IE'),
 );

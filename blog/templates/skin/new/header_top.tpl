@@ -61,8 +61,8 @@
 		</div>
 		{else}
 		<div class="profile guest">
-			<a href="{router page='login'}" onclick="return showLoginForm();">Войти</a> /
-			<a href="{router page='registration'}" class="reg">Регистрация</a>
+			<a href="#" class="auth">Войти</a> /
+			<a href="#" class="reg">Регистрация</a>
 		</div>
 		{/if}
 		
