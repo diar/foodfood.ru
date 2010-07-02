@@ -1053,11 +1053,8 @@ padding-bottom:5px;}
 /********** DISCOUNT DIALOG ***********/
 #discount_dialog {
     width:592px;
-    position:absolute;
     left:50%;
     margin-left:-296px;
-    top:100px;
-    display:none;
     background:url(/public/images/discount_dialog_bg.jpg) center 270px  no-repeat #ffffff;
 }
 #discount_dialog .form_dialog {padding:0;}
