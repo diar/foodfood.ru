@@ -18,6 +18,7 @@ class index_Page extends View {
         $tags = MD_Mood::getTags();
 
         self::$page['site']['city'] = CityPlugin::getCity();
+        self::$page['site']['title'] = 'Все кафе и рестораны Казани на FoodFood.ru';
         self::$page['site']['description'] = "Food food сочетает в себе полноценный ресторанный портал " .
                 "с каталогом ресторанов и сообществом любителей вкусно поесть. " .
                 "На портале представлены все кафе и рестораны города Казани с меню, фотографиями и отзывами. " .
@@ -55,7 +56,6 @@ class index_Page extends View {
         $reviews = MD_Restaurant::getRestaurantsReviews(array('count' => 4));
 
         // Добавляем переменные xslt
-        self::$page['site']['page'] = 'Главная';
         self::$page['content']['reviews'] = $reviews;
         self::$page['content']['articles'] = $articles;
         self::$page['content']['discounts'] = $discounts;

@@ -15,8 +15,6 @@
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
             <head>
                 <title>
-                    <xsl:value-of select="site/page" />
-                    <xsl:text> | </xsl:text>
                     <xsl:value-of select="site/title" />
                 </title>
                 <meta name="keywords" content="{site/keywords}" />
