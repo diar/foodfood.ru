@@ -380,6 +380,7 @@ $(document).ready(function(){
         },function(data){
           alert(data);
         });
+        return false;
     });
 });
 
