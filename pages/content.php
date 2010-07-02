@@ -17,7 +17,6 @@ class content_Page extends View {
         $tags=MD_Mood::getTags();
 
         self::$page['site']['city'] = CityPlugin::getCity();
-        self::$page['site']['title'] = $content['content_title'];
         self::$page['content']['moods']=$moods;
         self::$page['content']['tags']=$tags;
         self::$page['header']['banner']['type'] = 'horizontal';
@@ -30,6 +29,7 @@ class content_Page extends View {
     public static function viewAction ($id) {
         $content = MD_Content::getContent($id);
         self::$page['content']['page'] = $content;
+        self::$page['site']['title'] = $content['content_title'];
         self::showXSLT('pages/content/view');
     }
 
