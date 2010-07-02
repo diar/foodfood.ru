@@ -14,7 +14,7 @@
     <xsl:template match="root">
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
             <head>
-                <title>Все кафе и рестораны Казани на FoodFood.ru <xsl:value-of select="/site/title" /></title>
+                <title><xsl:value-of select="//site/title" /></title>
                 <meta name="keywords" content="{site/keywords}" />
                 <meta name="description" content="{site/description}" />
                 <link rel="icon" type="image/vnd.microsoft.icon"  href="/public/images/favicon.ico" />
