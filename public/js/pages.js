@@ -153,17 +153,14 @@ $(document).ready(function(){
                     '</tr>'
                     );
                 $('.trash .items table#list_trash').append($trash_item);
-				
-                $trash_item.find('.trash_add_item').click(function(){
-					
+		trash_itogo();
+                $trash_item.find('.trash_add_item').click(function(){	
                     cn = parseInt($(this).parents('.trash_item').find('.number').html());
                     $(this).parents('.trash_item').find('.number').html(cn+1);
                     price = $(this).parents('.trash_item').find('.price').html();
                     price = parseInt((price/cn)*(cn+1));
                     $(this).parents('.trash_item').find('.price').html(price);
-                    trash_itogo();
-				
-					
+                    trash_itogo();	
                 });
                 $trash_item.find('.trash_remove_item').click(function(){
                     cn = parseInt($(this).parents('.trash_item').find('.number').html());
