@@ -37,7 +37,6 @@ class persons_Page extends View {
     }
 
     public static function viewAction ($id) {
-        self::$page['site']['page'] = 'Лица foodfood';
         self::$page['content']['persons'] = MD_Person::getPersons();
         self::$page['content']['person_id'] = $id;
         // Показываем страницу
