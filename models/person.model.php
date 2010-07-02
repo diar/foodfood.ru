@@ -20,7 +20,7 @@ class MD_Person extends Model {
      * @return int
      */
     public static function getPersons () {
-        $persons=self::getAll(null,'id');
+        $persons=self::getAll(null,'id DESC');
         return $persons;
     }
     /**
@@ -29,7 +29,7 @@ class MD_Person extends Model {
      */
     public static function getPerson ($id=null) {
         if (empty($id)) {
-            $person=self::get(null,'id');
+            $person=self::get(null,'id DESC');
         } else {
             $person=self::get('id='.DB::quote($id));
         }
