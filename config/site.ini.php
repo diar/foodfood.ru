@@ -15,3 +15,4 @@ menu.2 = Скидки::discount::::::скидки Казань
 menu.3 = Гурманы::blog::::/blog/people/
 menu.4 = Блоги::blog::::/blog/
 menu.5 = FF люди::persons
+menu.6 = Конкурс::content/konkurs

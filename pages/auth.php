@@ -11,16 +11,35 @@ class auth_Page extends View {
      * Инициализация контроллера
     */
     public static function initController ($action) {
+        // Получаем список настроений
+        $moods=MD_Mood::getMoods();
+        // Получаем список тэгов
+        $tags=MD_Mood::getTags();
+
         self::$page['site']['city'] = CityPlugin::getCity();
+        self::$page['site']['title'] = $content['content_title'];
+        self::$page['content']['moods']=$moods;
+        self::$page['content']['tags']=$tags;
+        self::$page['header']['banner']['type'] = 'horizontal';
+        self::$page['header']['banner']['class'] = 'banner770';
     }
 
     /*
      * Главная страница авторизации
     */
     public static function indexAction ($id) {
-        if(!User::isAuth()) self::loginAction();
-        else Router::setPage('/');
+        self::$page['content']['invite_code']=Router::getRouteIndex(3);
+        self::showXSLT('pages/auth/auth');
     }
+
+    public static function getPromoAjaxAction () {
+        if (User::isAuth()) {
+            echo 'http://foodfood.ru/kazan/auth/pr'.Session::get('user_id');
+        } else {
+            echo 'Вам необходимо авторизоваться';
+        }
+    }
+    
 
     /**
      * Авторизация по ajax
