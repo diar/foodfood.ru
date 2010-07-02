@@ -480,13 +480,16 @@ class Restaurants extends AdminModule {
         } else {
             $id = intval($id);
         }
-        $status = DBP::getValue('rest', 'is_hidden');
+        
+        $status = DBP::getValue('rest', 'is_hidden','id='.$id);
         if ($status) {
-            DBP::update('rest', array('is_hidden'=>0), 'id='.$id);
+            DBP::update('rest', array('is_hidden'=>'0'), 'id='.$id);
+             echo "ok => on";
         } else {
-            DBP::update('rest', array('is_hidden'=>1), 'id='.$id);
+            DBP::update('rest', array('is_hidden'=>'1'), 'id='.$id);
+             echo "ok => off";
         }
-        echo "ok";
+       
     }
 
 }

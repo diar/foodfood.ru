@@ -38,6 +38,6 @@ function toggleItem(item) {
     $.post('/admin/admin.php?page=restaurants&action=toggleItem',{
         'id':item_id
     },function(data){
-        //  alert(data);
+          //alert(data);
         });
 }

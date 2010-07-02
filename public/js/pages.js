@@ -374,6 +374,13 @@ $(document).ready(function(){
         });
         check_discount_anchor ();
     }
+
+    $("a#getPromo").click(function(){
+        $.post('/kazan/auth/getPromo',{
+        },function(data){
+          alert(data);
+        });
+    });
 });
 
 /*
