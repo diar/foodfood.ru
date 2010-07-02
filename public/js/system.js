@@ -28,6 +28,15 @@ $.hideDialog = function (id) {
     $('#'+id).fadeOut(300);
 };
 
+// Изменить диалог
+$.toggleDialog = function (id) {
+    // Показываем диалог
+    $('#'+id).css('top',100);
+    $('.dialog:not(#'+id+')').fadeOut(300,function(){
+        $('#'+id).fadeIn(300);
+    });
+};
+
 // Показать сообщение
 $.alert = function (message,error) {
     if (typeof(alert_timeout)!='undefined') clearTimeout(alert_timeout);
