@@ -29,14 +29,30 @@
                 <xsl:apply-templates select="discounts/item" />
             </div>
             <div class="clear"></div>
-            
-            <div style="padding-left:40px; width:80%;">
-                   <span style="padding-left:20px">Портал foodfood.ru дает тебе возможность получить бесплатную скидку в твоем любимом ресторане Казани. </span><br />
-<span style="padding-left:20px">Если вечером ты собрался в ресторан, но опасаешься, что чек напугает тебя нулями, то смело заходи на наш сайт и получай бесплатную скидку. Для этого тебе всего лишь надо зарегистрироваться и нажать на вкладку «скидка».
-Выбери заведение, введи свое имя и номер мобильника (он не будет доступен третьим лицам) и забирай свою личную скидку в ресторане Казани! </span><br />
-<span style="padding-left:20px">       В течение нескольких минут совершенно бесплатно придет SMS, где будет указанно название ресторана, скидка и срок действия, и не забудь про четырехзначный код, он понабиться твоему официанту. 
-</span><br />
-       <span style="padding-left:20px">Если ты не успел в течение 24 часов воспользоваться нашей бесплатной скидкой, то ты можешь взять ее снова.</span>
+            <div style="padding-left:40px; width:80%;display:none;">
+                <span style="padding-left:20px">
+                    Портал foodfood.ru дает тебе возможность получить бесплатную скидку в твоем любимом
+                    ресторане Казани.
+                </span>
+                <br />
+                <span style="padding-left:20px">
+                    Если вечером ты собрался в ресторан, но опасаешься, что чек напугает тебя нулями,
+                    то смело заходи на наш сайт и получай бесплатную скидку. Для этого тебе всего лишь
+                    надо зарегистрироваться и нажать на вкладку «скидка».
+                    Выбери заведение, введи свое имя и номер мобильника (он не будет доступен третьим лицам)
+                    и забирай свою личную скидку в ресторане Казани!
+                </span>
+                <br />
+                <span style="padding-left:20px">
+                    В течение нескольких минут совершенно бесплатно придет SMS, где будет
+                    указанно название ресторана, скидка и срок действия, и не забудь про
+                    четырехзначный код, он понабиться твоему официанту.
+                </span>
+                <br />
+                <span style="padding-left:20px">
+                    Если ты не успел в течение 24 часов воспользоваться нашей бесплатной скидкой,
+                    то ты можешь взять ее снова.
+                </span>
             </div>
         </div>
     </xsl:template>
@@ -51,7 +67,8 @@
                         <xsl:when test="discount_percent>0">percent sale5 rounded shadow_box</xsl:when>
                     </xsl:choose>
                 </xsl:attribute>
-                <xsl:value-of select="discount_percent" /><span>%</span>
+                <xsl:value-of select="discount_percent" />
+                <span>%</span>
             </div>
             <div class="name">
                 <xsl:call-template name="rest_link">
@@ -59,7 +76,9 @@
                     <xsl:with-param name="uri" select="rest_uri" />
                     <xsl:with-param name="title" select="rest_title" />
                 </xsl:call-template>
-                <div class="count">осталось: <xsl:value-of select="discount_count" /></div>
+                <div class="count">осталось:
+                    <xsl:value-of select="discount_count" />
+                </div>
             </div>
             <div class="discount_description" style="display:none;">
                 <xsl:value-of select="discount_description" disable-output-escaping="yes" />
