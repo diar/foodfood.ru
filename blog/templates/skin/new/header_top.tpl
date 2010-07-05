@@ -31,9 +31,11 @@
         <div id="topMenu">
           <a class="item" href="/kazan/poster">Афиша</a>
           <a class="item" href="/kazan/discount">Скидки</a>
-          <a class="item {if $sMenuHeadItemSelect=='blog'}current{/if}" href="/blog">Блоги</a>
           <a class="item {if $sMenuHeadItemSelect=='people'}current{/if}" href="/blog/people">Гурманы</a>
+          <a class="item {if $sMenuHeadItemSelect=='blog'}current{/if}" href="/blog">Блоги</a>
           <a class="item" href="/market/">Доставка</a>
+          <a class="item" href="/kazan/persons">FF люди</a>
+          <a class="item" href="/kazan/content/konkurs">Конкурс</a>
         </div>
 		<div style="clear:both;">
 		<div class="nav-main">
