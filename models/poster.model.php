@@ -56,7 +56,7 @@ class MD_Poster extends Model {
                 '(date<='.$date.' and date_end>='.$date.') or (repeat_week=1 AND '.
                 '(DAYOFWEEK(date)=DAYOFWEEK('.$date.') or '.
                 '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
-                '(repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
+                '(repeat_week_end!=-1 and repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
                 '(repeat_week_end=repeat_week_start))))'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
@@ -66,7 +66,7 @@ class MD_Poster extends Model {
                 '(date<='.$date.' and date_end>='.$date.') or (repeat_week=1 AND '.
                 '(DAYOFWEEK(date)=DAYOFWEEK('.$date.') or '.
                 '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
-                '(repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
+                '(repeat_week_end!=-1 and repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
                 '(repeat_week_end=repeat_week_start))))'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
@@ -76,7 +76,7 @@ class MD_Poster extends Model {
                 '(date<='.$date.' and date_end>='.$date.') or (repeat_week=1 AND '.
                 '(DAYOFWEEK(date)=DAYOFWEEK('.$date.') or '.
                 '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
-                '(repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
+                '(repeat_week_end!=-1 and repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
                 '(repeat_week_end=repeat_week_start))))'
                 ,'rest_rating DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
