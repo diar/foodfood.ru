@@ -74,7 +74,6 @@
         </div>
         <div id="topMenu">
             <xsl:apply-templates select="../menu/item" />
-            <a href="/market/" class="active">Доставка</a>
         </div>
 
         <!-- Панель поиска -->
