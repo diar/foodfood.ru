@@ -38,12 +38,13 @@ $(document).ready(function(){
         ;
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
+           
             $('#discount_submit').attr('partner',$(this).attr('partner'));
             title = $('.caption .title').html();
             percent = $(this).attr('percent');
-            description = $(this).parent().find('.discount_description').html();
+            des = $(this).parent().find('.discount_description').html();
             $('#discount_dialog .name').html(title);
-            $('#discount_dialog .description_discount').html(description);
+            $('#discount_dialog .description_discount').html(des);
             $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');
             $.showDialog('discount_dialog');
             return false;
@@ -365,9 +366,9 @@ $(document).ready(function(){
             $('#discount_submit').attr('partner',$(this).attr('partner'));
             title = $(this).find('.name a').html();
             percent = $(this).attr('percent');
-            description = $(this).find('.discount_description').html();
+            des = $(this).find('.discount_description').html();
             $('#discount_dialog .name').html(title);
-            $('#discount_dialog .description_discount').html(description);
+            $('#discount_dialog .description_discount').html(des);
             $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');
             $.showDialog('discount_dialog');
             return false;
