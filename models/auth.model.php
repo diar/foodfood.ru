@@ -113,6 +113,9 @@ class MD_Auth extends Model {
     public static function invite ($invite,$new_user_id) {
         $user_id = str_replace('pr', '', $invite);
         $new_user_id = intval($new_user_id);
-        DB::insert('user_invite', '')
+        DB::insert('user_invite', array(
+            'user_id'=>$user_id,
+            'invited_user_id' => $new_user_id
+        ));
     }
 }
