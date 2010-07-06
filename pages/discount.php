@@ -35,6 +35,17 @@ class discount_Page extends View {
     }
 
     /*
+     * Вывод rss
+    */
+    public static function rssAction ($id) {
+        self::$page['site']['city'] = CityPlugin::getCity();
+        self::$page['content']['date'] = date('Y-m-d');
+        self::$page['content']['discounts'] = MD_Discount::getDiscounts();
+        // Показываем страницу
+        self::showXSLT('pages/discount/rss');
+    }
+
+    /*
      * Ajax действие получения скидки
     */
     public static function getAjaxAction ($id) {

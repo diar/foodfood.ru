@@ -73,6 +73,17 @@ class poster_Page extends View {
     }
 
     /*
+     * Вывод rss
+    */
+    public static function rssAction ($id) {
+        $date = date('Y.m.d');
+        self::$page['site']['city'] = CityPlugin::getCity();
+        self::$page['content'] = MD_Poster::getPostersToDate($date);
+        // Показываем страницу
+        self::showXSLT('pages/poster/rss');
+    }
+
+    /*
      * "Я пойду!"
     */
     public static function followAjaxAction ($id) {
