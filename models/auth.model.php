@@ -46,7 +46,7 @@ class MD_Auth extends Model {
                 'user_ip_register'=>DB::quote(Router::getClientIp()),
                 ), false);
         $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
-        Sms::sendSms(String::toPhone($phone), $text);
+        $result = MD_Sms::sendSms(String::toPhone($phone), $text);
         self::login($mail, $password, false);
         return "OK";
     }
@@ -98,7 +98,7 @@ class MD_Auth extends Model {
         }
         if ($result) {
             $text = 'Ваш новый пароль на сайте foodfood.ru: '.$password;
-            Sms::sendSms(String::toPhone($phone), $text);
+            $result=MD_Sms::sendSms(String::toPhone($phone), $text);
             return "OK";
         } else {
             return "LOGIN";

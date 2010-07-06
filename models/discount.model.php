@@ -137,9 +137,9 @@ class MD_Discount extends Model {
 
         $sms_text = $partner_uri.', скидка '.$partner['discount_percent'].'%. До '.
                 date('d.m.Y',time()+60*60*24).'. № '.$sms_code['discount_counter'].' код '.$code;
-        $result=Sms::sendSms($phone, $sms_text);
+        $result=MD_Sms::sendSms($phone, $sms_text);
 
-        if (!empty($result) && !empty($result['status']) && $result['status']=='accepted') {
+        if ($result) {
             DB::update(
                     Model::getPrefix().'discount_list', Array('discount_activated'=>1), 
                     'id='.$sms_code['discount_list_id']
