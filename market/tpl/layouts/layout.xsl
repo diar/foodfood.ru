@@ -63,7 +63,6 @@
         </div>
         <div id="menu_top">
             <xsl:apply-templates select="../menu/item" />
-            <a href="/market/" class="active">Доставка</a>
         </div>
     </xsl:template >
 
