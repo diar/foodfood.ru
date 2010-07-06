@@ -126,10 +126,10 @@ html {
     color:#000;
     margin-right:20px;
     padding:4px 14px;
-	height:21px;
-	display:block;
-	float:left;
-	color:#fff;
+    height:21px;
+    display:block;
+    float:left;
+    color:#fff;
 }
 
 #topMenu a:hover,#topMenu a.current {
@@ -139,7 +139,7 @@ html {
     -webkit-border-radius:3px 3px 0 0 ;
     border-radius:3px 3px 0 0;
     text-decoration:none;
-	color:#000;
+    color:#000;
 }
 
 /* ПОИСК
@@ -547,12 +547,12 @@ html {
     color:#000;
 }
 
-.restaurant_tags {
+#restaurant_by_mood .restaurant_tags {
     margin:5px auto;
-	max-width:1480px;
+    max-width:1480px;
 }
 
-.restaurant_tags .item {
+#restaurant_by_mood .restaurant_tags .item {
     height: 52px;
     width:52px;
     text-align:center;
@@ -562,19 +562,40 @@ html {
     cursor:pointer;
 }
 
-.restaurant_tags .item:hover {
+#restaurant_by_mood .restaurant_tags .item:hover {
     border:1px solid #a1a1a1;
     width:50px;
     height: 50px;
 }
 
-.restaurant_tags .item.current {
+#restaurant_by_mood .restaurant_tags .item.current {
     border:1px solid #ff6600;
     width:50px;
     height: 50px;
 }
 
-.restaurant_tags .item .text {
+#restaurant_by_mood .restaurant_tags .item .text {
+    font-size:9px;
+    color:#000;
+    text-align:center;
+    padding:3px 0;
+}
+
+#restaurant .restaurant_tags {
+    margin:5px auto;
+    max-width:1480px;
+}
+
+#restaurant .restaurant_tags .item {
+    height: 52px;
+    width:52px;
+    text-align:center;
+    float:left;
+    margin:5px 1px;
+    padding:3px 0;
+}
+
+#restaurant  .restaurant_tags .item .text {
     font-size:9px;
     color:#000;
     text-align:center;
@@ -593,13 +614,13 @@ html {
 /* DISCOUNTS
 ----------------------------------------------*/
 .sale5 {
-	background:url(/public/images/sale5.jpg) no-repeat;
+    background:url(/public/images/sale5.jpg) no-repeat;
 }
 .sale15 {
-	background:url(/public/images/sale15.jpg) no-repeat;
+    background:url(/public/images/sale15.jpg) no-repeat;
 }
 .sale20 {
-	background:url(/public/images/sale20.jpg) no-repeat;
+    background:url(/public/images/sale20.jpg) no-repeat;
 }
 
 
@@ -629,10 +650,10 @@ html {
 #footer_left ul {
     padding:17px 0 0 37px;
     line-height: 18px;
-	width:250px;
+    width:250px;
 }
 #footer_left ul li {
-padding-bottom:5px;}
+    padding-bottom:5px;}
 
 #footer_center {
     margin-top:15px;
@@ -642,13 +663,13 @@ padding-bottom:5px;}
 
 #footer_center .title {
     font-size:14px;
-	color:#000000;
-	padding-bottom:10px;
+    color:#000000;
+    padding-bottom:10px;
 }
 
 #footer_center .text {
-	padding-left:10px;
-	color: #333333;
+    padding-left:10px;
+    color: #333333;
 }
 
 #footer_right {
@@ -835,8 +856,8 @@ padding-bottom:5px;}
     color:#FFF;
     font-size:14px;
     text-shadow:-1px 0 0 #777;
-	display:block;
-	margin:0 auto;
+    display:block;
+    margin:0 auto;
 }
 
 #auth_dialog #auth_submit:active,
@@ -1014,16 +1035,16 @@ padding-bottom:5px;}
 }
 
 .rest_rating.white {
-	border:0;
-	padding:4px 1px 1px 5px;
+    border:0;
+    padding:4px 1px 1px 5px;
 }
 
 .rating_complete {
-	margin: 3px 0 0 1px;
-	height:18px;
-	position:absolute;
-	background:#ffd9a6;
-	max-width:143px;
+    margin: 3px 0 0 1px;
+    height:18px;
+    position:absolute;
+    background:#ffd9a6;
+    max-width:143px;
 }
 
 .rating_line {
@@ -1166,7 +1187,7 @@ a:hover,a.no_decoration {
     text-decoration:none;
 }
 #footer_right .more a{
-	color:#ff6600;
+    color:#ff6600;
 }
 #cursor_top .right_border,#footer_right .more,.float_right {
     float:right;
@@ -1218,53 +1239,53 @@ a:hover,a.no_decoration {
 
 
 .margin020 {
-	margin:0 16px;
+    margin:0 16px;
 }
 
 
 .margin0autoMax-width1600 {
-	margin: 0 auto; 
-	max-width: 1480px;
+    margin: 0 auto;
+    max-width: 1480px;
 }
 
 /* 404
 ***********************************************/
 body.error404 {
-	background:#000000;
-	color:#FFFFFF;
+    background:#000000;
+    color:#FFFFFF;
 }
 
 div.error404 {
-	margin:0 auto;
-	margin-top:100px;
-	
-	width:750px;
+    margin:0 auto;
+    margin-top:100px;
+
+    width:750px;
 }
 
 .logo404 {
-	float:left;
-	margin-right:30px;
+    float:left;
+    margin-right:30px;
 }
 
 .text404 {
-	float:left;
-	padding:10px 0;
-	font-size:15px;
+    float:left;
+    padding:10px 0;
+    font-size:15px;
 }
 
 .title404 {
-	color:#ff6600;
-	font-size:39px;
+    color:#ff6600;
+    font-size:39px;
 }
 
 .menu404 {
-	color:#009900;
-	font-size:15px;
-	padding-top:5px;
+    color:#009900;
+    font-size:15px;
+    padding-top:5px;
 }
 
 .menu404 a {
-	margin-right:10px;
-	color:#009900;
-	font-size:15px;
+    margin-right:10px;
+    color:#009900;
+    font-size:15px;
 }
