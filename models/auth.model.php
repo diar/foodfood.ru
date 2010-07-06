@@ -104,4 +104,15 @@ class MD_Auth extends Model {
             return "LOGIN";
         }
     }
+
+
+    /**
+     * Функция учитывания приглашенных другими пользователями
+     */
+
+    public static function invite ($invite,$new_user_id) {
+        $user_id = str_replace('pr', '', $invite);
+        $new_user_id = intval($new_user_id);
+        DB::insert('user_invite', '')
+    }
 }
