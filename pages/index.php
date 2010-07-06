@@ -27,7 +27,7 @@ class index_Page extends View {
                 "интерактивной форме: Выбор ресторана; Просмотр меню; Афиши; Интерьера; Отзывы и рекомендации; " .
                 "Скидки в кафе и ресторане; Доставка блюд. ";
         // получаем лицо foodfood которое желает приятного аппетита
-        self::$page['person'] = MD_Person::getPersonRand();
+        self::$page['person'] = MD_Person::getPerson();
         self::$page['content']['moods'] = $moods;
         self::$page['content']['tags'] = $tags;
         self::$page['header']['banner']['type'] = 'horizontal';
