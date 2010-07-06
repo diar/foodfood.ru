@@ -47,6 +47,7 @@ class MD_Auth extends Model {
                 ), false);
         $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
         $result = MD_Sms::sendSms(String::toPhone($phone), $text);
+        self::invite($_POST['invite_code'],mysql_insert_id());
         self::login($mail, $password, false);
         return "OK";
     }
@@ -111,7 +112,7 @@ class MD_Auth extends Model {
      */
 
     public static function invite ($invite,$new_user_id) {
-        $user_id = str_replace('pr', '', $invite);
+        $user_id = intval(str_replace('pr', '', $invite));
         $new_user_id = intval($new_user_id);
         DB::insert('user_invite', array(
             'user_id'=>$user_id,
