@@ -123,7 +123,7 @@ class String {
      */
     public static function toPhone ($str) {
         $str = preg_replace("/[^0-9]/",'',$str);
-        $str = preg_replace("/^[7-8]/",'+7',$str);
+        $str = preg_replace("/^(79|89|9)/",'+79',$str);
         if (preg_match('/^[+]?[[:digit:]]{5,12}$/i',$str))
             return $str;
         else return false;
@@ -133,7 +133,8 @@ class String {
      * @return string;
      */
     public static function isPhone ($str) {
-        $str = preg_replace("/^[7-8]/",'+7',$str);
+        $str = preg_replace("/[^0-9]/",'',$str);
+        $str = preg_replace("/^(79|89|9)/",'+79',$str);
         if (preg_match('/^[+]?[[:digit:]]{5,12}$/i',$str))
             return true;
         else return false;

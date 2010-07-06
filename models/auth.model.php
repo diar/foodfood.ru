@@ -46,10 +46,14 @@ class MD_Auth extends Model {
                 'user_ip_register'=>DB::quote(Router::getClientIp()),
                 ), false);
         $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
+        if(!empty ($_POST['invite_code'])) {
+            self::invite($_POST['invite_code'],DB::lastInsertId());
+        }
         $result = MD_Sms::sendSms(String::toPhone($phone), $text);
-        self::invite($_POST['invite_code'],mysql_insert_id());
+        
+        
         self::login($mail, $password, false);
-        return "OK";
+       // return "OK";
     }
 
     /**
@@ -118,5 +122,6 @@ class MD_Auth extends Model {
             'user_id'=>$user_id,
             'invited_user_id' => $new_user_id
         ));
+        return true;
     }
 }

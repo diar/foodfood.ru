@@ -129,6 +129,7 @@ $(document).ready(function () {
         name = $('#reg_name').val();
         mail = $('#reg_mail').val();
         phone = $('#reg_phone').val();
+        invite_code = $('#invite_code').val();
         rules = $('#reg_rules').attr('checked');
         if (!rules) {
             $('#reg_message').html('Ошибка: ознакомьтесь с правилами');
@@ -139,7 +140,8 @@ $(document).ready(function () {
             $.post('/'+site_city+'/auth/registration',{
                 'name':name,
                 'mail':mail,
-                'phone':phone
+                'phone':phone,
+                'invite_code':invite_code
             },
             function(data){
                 $('#reg_loader').fadeOut(500);
@@ -161,7 +163,7 @@ $(document).ready(function () {
                 else $('#reg_message').html('Ошибка при регистрации, попробуйте еще раз');
             })
         } else {
-            $('#reg_message').html('Ошибочка, придёться заполнить все поля');
+            $('#reg_message').html('Ошибочка, придётся заполнить все поля');
         }
         return false;
     });
@@ -185,7 +187,7 @@ $(document).ready(function () {
                 else $('#return "LOGIN";_message').html('Ошибка при изменении пароля, попробуйте еще раз');
             })
         } else {
-            $('#passwd_message').html('Ошибочка, придёться заполнить все поля');
+            $('#passwd_message').html('Ошибочка, придётся заполнить все поля');
         }
         return false;
     });
