@@ -53,11 +53,11 @@ function toggleBlogDeleteForm(id,link) {
 						</li>
 					{/if}
 					{if $oUserCurrent and ($oUserCurrent->getId()==$oBlog->getOwnerId() or $oUserCurrent->isAdministrator() or $oBlog->getUserIsAdministrator() )}
-  						<li class="edit"><a href="{router page='blog'}edit/{$oBlog->getId()}/" title="{$aLang.blog_edit}">{$aLang.blog_edit}</a></li>
+  						<li class="edit"><a href="{router page='restaurant'}edit/{$oBlog->getId()}/" title="{$aLang.blog_edit}">{$aLang.blog_edit}</a></li>
  						{if $oUserCurrent->isAdministrator()}
 							<li class="delete">
 								<a href="#" title="{$aLang.blog_delete}" onclick="toggleBlogDeleteForm('blog_delete_form',this); return false;">{$aLang.blog_delete}</a> 
-								<form id="blog_delete_form" class="hidden" action="{router page='blog'}delete/{$oBlog->getId()}/" method="POST">
+								<form id="blog_delete_form" class="hidden" action="{router page='restaurant'}delete/{$oBlog->getId()}/" method="POST">
 									<input type="hidden" value="{$LIVESTREET_SECURITY_KEY}" name="security_ls_key" /> 
 									{$aLang.blog_admin_delete_move}:<br /> 
 									<select name="topic_move_to">
@@ -72,7 +72,7 @@ function toggleBlogDeleteForm(id,link) {
 									<input type="submit" value="{$aLang.blog_delete}" />
 								</form></li>						
 						{else} 						
-  							<li class="delete"><a href="{router page='blog'}delete/{$oBlog->getId()}/?security_ls_key={$LIVESTREET_SECURITY_KEY}" title="{$aLang.blog_delete}" onclick="return confirm('{$aLang.blog_admin_delete_confirm}');" >{$aLang.blog_delete}</a></li>
+  							<li class="delete"><a href="{router page='restaurant'}delete/{$oBlog->getId()}/?security_ls_key={$LIVESTREET_SECURITY_KEY}" title="{$aLang.blog_delete}" onclick="return confirm('{$aLang.blog_admin_delete_confirm}');" >{$aLang.blog_delete}</a></li>
   						{/if}
   					{/if}
 				</ul>
