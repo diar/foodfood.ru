@@ -190,7 +190,7 @@ class restPoster extends AdminModule {
         $date_start=mktime(0, 0, 0, $date_start[1], $date_start[2], $date_start[0]);
         $data['repeat_week_start']=date('w',$date_start);
 
-        if ($data['date_end']!='') {
+        if ($data['date_end']!='' && $data['date_end']!='0000-00-00') {
             $date_end=explode('-',$data['date_end']);
             $date_end=mktime(0, 0, 0, $date_end[1], $date_end[2], $date_end[0]);
             $data['repeat_week_end']=date('w',$date_end);
@@ -232,7 +232,7 @@ class restPoster extends AdminModule {
         $date_start=mktime(0, 0, 0, $date_start[1], $date_start[2], $date_start[0]);
         $data['repeat_week_start']=date('w',$date_start);
 
-        if ($data['date_end']!='') {
+        if ($data['date_end']!='' && $data['date_end']!='0000-00-00') {
             $date_end=explode('-',$data['date_end']);
             $date_end=mktime(0, 0, 0, $date_end[1], $date_end[2], $date_end[0]);
             $data['repeat_week_end']=date('w',$date_end);

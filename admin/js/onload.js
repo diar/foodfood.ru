@@ -20,7 +20,7 @@ $(document).ready(
         $(".datepicker").parent().find('input').each(function(){
             date = $(this).val();
             $(this).datepicker().datepicker('option', {dateFormat: 'yy-mm-dd'});
-            if (date!='') {
+            if (date!='' && date!='0000-00-00') {
                 $(this).datepicker('option', {
                     defaultDate: date
                 }).datepicker( "setDate", date);
