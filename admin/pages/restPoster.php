@@ -195,7 +195,7 @@ class restPoster extends AdminModule {
             $date_end=mktime(0, 0, 0, $date_end[1], $date_end[2], $date_end[0]);
             $data['repeat_week_end']=date('w',$date_end);
         } else {
-            $data['repeat_week_end']=null;
+            $data['repeat_week_end']=-1;
         }
 
         if (!empty($_FILES['img']['name'])) {
@@ -239,7 +239,7 @@ class restPoster extends AdminModule {
             $date_end=mktime(0, 0, 0, $date_end[1], $date_end[2], $date_end[0]);
             $data['repeat_week_end']=date('w',$date_end);
         } else {
-            $data['repeat_week_end']=null;
+            $data['repeat_week_end']=-1;
         }
 
         if (!empty($_FILES['img']['name'])) {
