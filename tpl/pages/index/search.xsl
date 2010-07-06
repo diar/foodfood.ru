@@ -16,6 +16,11 @@
     <!-- Список ресторанов -->
     <xsl:template match="restaurants/item">
         <div class="item rounded">
+            <xsl:if test="rest_color!=''">
+                <xsl:attribute name="style">background:
+                    <xsl:value-of select="rest_color" />
+                </xsl:attribute>
+            </xsl:if>
             <xsl:choose>
                 <xsl:when test="position()&lt;//item_count">
                     <div class="img">
@@ -103,7 +108,9 @@
                         </xsl:attribute>
                         <xsl:value-of select="rest_title" />
                     </a>
-                    <div class="address"><xsl:value-of select="rest_address" /></div>
+                    <div class="address">
+                        <xsl:value-of select="rest_address" />
+                    </div>
                 </div>
             </div>
         </div>
