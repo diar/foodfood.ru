@@ -38,12 +38,13 @@ $(document).ready(function(){
         ;
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
+           
             $('#discount_submit').attr('partner',$(this).attr('partner'));
             title = $('.caption .title').html();
             percent = $(this).attr('percent');
-            description = $(this).parent().find('.discount_description').html();
+            des = $(this).parent().find('.discount_description').html();
             $('#discount_dialog .name').html(title);
-            $('#discount_dialog .description_discount').html(description);
+            $('#discount_dialog .description_discount').html(des);
             $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');
             $.showDialog('discount_dialog');
             return false;
@@ -153,17 +154,14 @@ $(document).ready(function(){
                     '</tr>'
                     );
                 $('.trash .items table#list_trash').append($trash_item);
-				
-                $trash_item.find('.trash_add_item').click(function(){
-					
+		trash_itogo();
+                $trash_item.find('.trash_add_item').click(function(){	
                     cn = parseInt($(this).parents('.trash_item').find('.number').html());
                     $(this).parents('.trash_item').find('.number').html(cn+1);
                     price = $(this).parents('.trash_item').find('.price').html();
                     price = parseInt((price/cn)*(cn+1));
                     $(this).parents('.trash_item').find('.price').html(price);
-                    trash_itogo();
-				
-					
+                    trash_itogo();	
                 });
                 $trash_item.find('.trash_remove_item').click(function(){
                     cn = parseInt($(this).parents('.trash_item').find('.number').html());
@@ -318,16 +316,18 @@ $(document).ready(function(){
             return false;
         });
         // получаем афишу на текущий день
-        $('.date_list .item[offset="'+current_day+'"]').click();
+        offset= current_day;
+        if (offset<10) offset = '0'+offset;
+        $('.date_list .item[offset="'+offset+'"]').click();
         // прокручиваем так, чтобы был виден текущий день
         if (current_day>poster_day_count) {
-            poster_day_scroll = poster_day_count;
+            poster_day_scroll = poster_day_count + 1;
         } else {
             poster_day_scroll = current_day;
         }
         poster_day_position = poster_day_scroll-1;
         $(".date_list .items").animate({
-            scrollLeft: (poster_day_scroll)*115
+            scrollLeft: (poster_day_scroll - 1)*115
         },250);
         // нажатие на кнопки прокрутки дней
         $(".date_list .back").click(function(){
@@ -366,15 +366,23 @@ $(document).ready(function(){
             $('#discount_submit').attr('partner',$(this).attr('partner'));
             title = $(this).find('.name a').html();
             percent = $(this).attr('percent');
-            description = $(this).find('.discount_description').html();
+            des = $(this).find('.discount_description').html();
             $('#discount_dialog .name').html(title);
-            $('#discount_dialog .description_discount').html(description);
+            $('#discount_dialog .description_discount').html(des);
             $('#discount_dialog .discount_percent .number').html(''+percent+' <span>%</span>');
             $.showDialog('discount_dialog');
             return false;
         });
         check_discount_anchor ();
     }
+
+    $("a#getPromo").click(function(){
+        $.post('/kazan/auth/getPromo',{
+        },function(data){
+          alert(data);
+        });
+        return false;
+    });
 });
 
 /*
@@ -468,9 +476,11 @@ function get_poster () {
     if (month<10) month='0'+month;
     day = $('.date_list .item.current').attr('offset');
     if ((parseInt(month) == parseInt(current_month)) && (parseInt(year) == parseInt(current_year))) {
-        $('.date_list .item[offset="'+current_day+'"]').attr("id","today").html('сегодня');
+        offset= current_day;
+        if (offset<10) offset = '0'+offset;
+        $('.date_list .item[offset="'+offset+'"]').attr("id","today").html('сегодня');
     } else {
-        $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","y");
+        $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","");
     }
     date=''+year+'.'+month+'.'+day;
     $('.anounce_block').html($loader);

@@ -59,8 +59,11 @@ class View {
             if (empty($menu_array[1])) $menu_array[1] = '';
             if (empty($menu_array[2])) $menu_array[2] = '';
             if (empty($menu_array[3])) $menu_array[3] = '';
+            if (empty($menu_array[4])) $menu_array[4] = $menu_array[0];
             $menu_value = Array (
-                    'title'=>$menu_array[0],'page'=>$menu_array[1],'action'=>$menu_array[2],'url'=>$menu_array[3]
+                    'title'=>$menu_array[0],'page'=>$menu_array[1],
+                    'action'=>$menu_array[2],'url'=>$menu_array[3],
+                    'tag_title'=>$menu_array[4]
             );
             $menu[]=$menu_value;
         }

@@ -6,7 +6,6 @@ class restDocs extends AdminModule {
     protected static $_DB_table = 'rest_docs';
 
     public static function add() {
-        Debug::disable();
         $web_dir = '/upload/file/'.'restaurant/'.self::getRestId().'/';
         $file=self::save();
         if ($file) {
@@ -32,7 +31,6 @@ class restDocs extends AdminModule {
     }
 
     public static function delete() {
-        Debug::disable();
         $web_dir = '/upload/file/'.'restaurant/'.self::getRestId().'/';
         $file_dir = Config::getValue('path','upload').'file/restaurant/'.self::getRestId().'/';
         foreach ($_POST['doc_id'] as $doc) {

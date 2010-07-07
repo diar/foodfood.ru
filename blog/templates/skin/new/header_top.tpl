@@ -31,9 +31,11 @@
         <div id="topMenu">
           <a class="item" href="/kazan/poster">Афиша</a>
           <a class="item" href="/kazan/discount">Скидки</a>
-          <a class="item {if $sMenuHeadItemSelect=='blog'}current{/if}" href="/blog">Блоги</a>
           <a class="item {if $sMenuHeadItemSelect=='people'}current{/if}" href="/blog/people">Гурманы</a>
+          <a class="item {if $sMenuHeadItemSelect=='blog'}current{/if}" href="/blog">Блоги</a>
           <a class="item" href="/market/">Доставка</a>
+          <a class="item" href="/kazan/persons">FF люди</a>
+          <a class="item" href="/kazan/content/konkurs">Конкурс</a>
         </div>
 		<div style="clear:both;">
 		<div class="nav-main">
@@ -61,8 +63,8 @@
 		</div>
 		{else}
 		<div class="profile guest">
-			<a href="{router page='login'}" onclick="return showLoginForm();">Войти</a> /
-			<a href="{router page='registration'}" class="reg">Регистрация</a>
+			<a href="#" class="auth">Войти</a> /
+			<a href="#" class="reg">Регистрация</a>
 		</div>
 		{/if}
 		

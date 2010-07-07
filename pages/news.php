@@ -28,8 +28,8 @@ class news_Page extends View {
     */
     public static function viewAction ($id) {
         $content = MD_News::get($id);
-        self::$page['site']['page'] = $content['title'];
-        self::$page['content']['page'] = $content;
+        self::$page['site']['title'] = $content['title'];
+        self::$page['content']['title'] = $content;
         self::showXSLT('pages/news/view');
     }
 

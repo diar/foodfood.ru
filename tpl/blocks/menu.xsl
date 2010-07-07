@@ -7,7 +7,7 @@
                 doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
     <xsl:template match="menu/item">
         <xsl:param name="page" select="//route/page" />
-        <a>
+        <a title="{tag_title}">
             <xsl:attribute name="href">
                 <xsl:choose>
                     <xsl:when test="url=''">

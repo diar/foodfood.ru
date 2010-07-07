@@ -28,8 +28,8 @@ class content_Page extends View {
     */
     public static function viewAction ($id) {
         $content = MD_Content::getContent($id);
-        self::$page['site']['page'] = $content['content_title'];
         self::$page['content']['page'] = $content;
+        self::$page['site']['title'] = $content['content_title'];
         self::showXSLT('pages/content/view');
     }
 

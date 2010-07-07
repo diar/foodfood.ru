@@ -14,7 +14,9 @@
     <xsl:template match="root">
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
             <head>
-                <title>Все кафе и рестораны Казани на FoodFood.ru <xsl:value-of select="/site/title" /></title>
+                <title>
+                    <xsl:value-of select="//site/title" />
+                </title>
                 <meta name="keywords" content="{site/keywords}" />
                 <meta name="description" content="{site/description}" />
                 <link rel="icon" type="image/vnd.microsoft.icon"  href="/public/images/favicon.ico" />
@@ -22,7 +24,8 @@
                 <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
                 <xsl:comment><![CDATA[[if IE]>
                 <link href="/public/css/ie.css" rel="stylesheet" type="text/css" />
-                <![endif]]]></xsl:comment>
+                <![endif]]]>
+                </xsl:comment>
             </head>
             <body>
                 <xsl:apply-templates select="header" />
@@ -50,7 +53,8 @@
                 <script type="text/javascript" src="/public/js/system.js"></script>
                 <script type="text/javascript" src="/public/js/moods.js"></script>
                 <script type="text/javascript" src="/public/js/main.js"></script>
-                <!--LiveInternet counter--><script type="text/javascript"><!--
+                <!--LiveInternet counter-->
+                <script type="text/javascript"><!--
                     document.write("<a href='http://www.liveinternet.ru/click' "+
                     "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
                     escape(document.referrer)+((typeof(screen)=="undefined")?"":
@@ -59,7 +63,8 @@
                     ";"+Math.random()+
                     "' alt='' title='LiveInternet' "+
                     "border='0' width='31' height='31'><\/a>")
-                //--></script><!--/LiveInternet-->
+                //-->
+                </script><!--/LiveInternet-->
                 <script type="text/javascript">
                     var _gaq = _gaq || [];
                     _gaq.push(['_setAccount', 'UA-13029839-2']);
@@ -88,7 +93,6 @@
         </div>
         <div id="topMenu">
             <xsl:apply-templates select="../menu/item" />
-            <a href="/market/">Доставка</a>
         </div>
         <div class="clear"></div>
         <!-- Панель поиска -->
@@ -102,14 +106,19 @@
         <div id="login_block">
             <xsl:choose>
                 <xsl:when test="//user/is_auth=1">
-                    <a href="/blog/profile/{//user/user_login}"><xsl:value-of select="//user/user_login" /></a>
+                    <a href="/blog/profile/{//user/user_login}">
+                        <xsl:value-of select="//user/user_login" />
+                    </a>
                     <xsl:text> (</xsl:text>
                     <a href="/{//site/city}/auth/logout" style="text-decoration:none;">выход</a>
-                    <xsl:text>) </xsl:text><br /><xsl:text>Настройки </xsl:text>
+                    <xsl:text>) </xsl:text>
+                    <br />
+                    <xsl:text>Настройки </xsl:text>
                     <a href="/blog/settings/profile/">профиля</a>
                 </xsl:when>
                 <xsl:otherwise>
-                    <a href="#" id="login">Войти</a> / <a href="#" id="registration">Регистрация</a>
+                    <a href="#" id="login">Войти</a> /
+                    <a href="#" id="registration">Регистрация</a>
                 </xsl:otherwise>
             </xsl:choose>
         </div>
@@ -175,7 +184,8 @@
                     <div class="clear"></div>
                 </div>
                 <div id="search_sample">
-                    например, <a href="#" onclick="$('#search_text').val($(this).html());">суши-бар</a>
+                    например,
+                    <a href="#" onclick="$('#search_text').val($(this).html());">суши-бар</a>
                 </div>
             </div>
         </div>
@@ -195,9 +205,13 @@
     <!-- Список настроений -->
     <xsl:template match="moods/item">
         <div class="icon rounded no_text_select" uri="{uri}">
-            <div class="count"><xsl:value-of select="rest_count" /></div>
+            <div class="count">
+                <xsl:value-of select="rest_count" />
+            </div>
             <img src="/public/images/moods/{uri}.png" alt="{caption}" />
-            <a href="#mood-{uri}" title="{title}" class="caption"><xsl:value-of select="title" /></a>
+            <a href="#mood-{uri}" title="{title}" class="caption">
+                <xsl:value-of select="title" />
+            </a>
         </div>
     </xsl:template>
 
@@ -211,12 +225,17 @@
                 </ul>
             </div>
             <div id="footer_center">
-                <div class="title">Привет, <xsl:value-of select="//statistic/people" />-й посетитель!</div>
+                <div class="title">Привет,
+                    <xsl:value-of select="//statistic/people" />-й посетитель!
+                </div>
                 <div class="text">
-                    На портале представлены <xsl:value-of select="//statistic/restaurant" /> кафе и
+                    На портале представлены
+                    <xsl:value-of select="//statistic/restaurant" /> кафе и
                     ресторанов города Казани с меню, фотографиями и отзывами.
                     Есть возможность заказать банкет, забронировать стол, получить скидку и конечно же осуществить
-                    доставку еды. <br /><br />
+                    доставку еды. 
+                    <br />
+                    <br />
                     Каждому посетителю портала будет доступно в интерактивной форме:
                     Выбор ресторана; Просмотр меню; Афиши; Интерьера;Отзывы и рекомендации;
                     Скидки в кафе и ресторане; Доставка блюд, а так же удобный сервис по проведению банкетов.
@@ -239,7 +258,8 @@
                                         <xsl:value-of select="//person/person_name" />
                                     </a>
                                 </div>
-                                <xsl:value-of select="//person/person_post" /><br />
+                                <xsl:value-of select="//person/person_post" />
+                                <br />
                                 <br />
                                 <xsl:value-of select="//person/person_text" />
                             </div>
@@ -267,7 +287,11 @@
     </xsl:template>
 
     <xsl:template match="//news/item">
-        <li><a href="/{//site/city}/news/{id}"><xsl:value-of select="title" /></a></li>
+        <li>
+            <a href="/{//site/city}/news/{id}">
+                <xsl:value-of select="title" />
+            </a>
+        </li>
     </xsl:template>
     
     <!-- Ссылка на ресторан -->

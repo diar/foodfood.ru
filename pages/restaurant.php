@@ -56,7 +56,7 @@ class restaurant_Page extends View {
         $mood_title = DB::getValue('list_mood','title',"uri = '$mood'");
         // Добавляем переменные xslt
         self::$page['site']['page'] = $restaurant['rest_title'];
-        self::$page['person'] = MD_Person::getLikePerson($restaurant['rest_title']);
+        self::$page['person'] = MD_Person::getLikePerson($restaurant['id']);
         self::$page['content']['restaurant'] = $restaurant;
         self::$page['content']['discount'] = MD_Discount::getPartnerById($restaurant['id']);
         self::$page['content']['restaurant']['posters'] = $posters;

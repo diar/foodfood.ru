@@ -20,7 +20,7 @@ class MD_Person extends Model {
      * @return int
      */
     public static function getPersons () {
-        $persons=self::getAll(null,'id');
+        $persons=self::getAll(null,'id DESC');
         return $persons;
     }
     /**
@@ -29,7 +29,7 @@ class MD_Person extends Model {
      */
     public static function getPerson ($id=null) {
         if (empty($id)) {
-            $person=self::get(null,'id');
+            $person=self::get(null,'id DESC');
         } else {
             $person=self::get('id='.DB::quote($id));
         }
@@ -52,8 +52,8 @@ class MD_Person extends Model {
      * Получить лицо фудфуда, которому нравится ресторан
      * @return int
      */
-    public static function getLikePerson ($rest_title) {
-        $person=self::get('person_questions LIKE "%'.DB::escape($rest_title).'%"', 'RAND()');
+    public static function getLikePerson ($rest_id) {
+        $person=self::get('show_on LIKE "%'.DB::escape($rest_id).'%"', 'RAND()');
         if (empty($person)) return null;
         preg_match_all("|<q>(.*)</q>|Uis", $person['person_questions'],$person_q);
         preg_match_all("|<a>(.*)</a>|Uis", $person['person_questions'],$person_a);

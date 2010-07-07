@@ -152,9 +152,6 @@ class marketMenu extends AdminModule {
     }
 
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
-
         $data = $_POST;
         if (!empty($_FILES['img']['name'])) {
             $file = File::saveFile('img', null,  Config::getValue('path','upload').'image/menu/');
@@ -172,9 +169,7 @@ class marketMenu extends AdminModule {
     }
 
     public static function saveEdit() {
-        $data = array();
-        $id = $_POST['id'];
-        unset($_POST['edit']);
+        $id = $_POST['id']; 
         unset($_POST['id']);
         $data = $_POST;
         if (!empty($_FILES['img']['name'])) {

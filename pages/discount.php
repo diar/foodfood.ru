@@ -30,11 +30,19 @@ class discount_Page extends View {
      * Показ страницы скидок
     */
     public static function indexAction ($uri) {
-
-        self::$page['site']['page'] = 'Скидки';
         self::$page['content']['discounts'] = MD_Discount::getDiscounts();
-
         self::showXSLT('pages/discount/index');
+    }
+
+    /*
+     * Вывод rss
+    */
+    public static function rssAction ($id) {
+        self::$page['site']['city'] = CityPlugin::getCity();
+        self::$page['content']['date'] = date('Y-m-d');
+        self::$page['content']['discounts'] = MD_Discount::getDiscounts();
+        // Показываем страницу
+        self::showXSLT('pages/discount/rss');
     }
 
     /*

@@ -41,7 +41,7 @@ if (DEV) {
 }
 
 
-if (!isset($_SESSION['admin']['superadmin'])) {exit;}			// Do not forget to add your user authorization
+//if (!isset($_SESSION['admin']['superadmin'])) {exit;}			// Do not forget to add your user authorization
 
 
 define('DIR_SEP', '/');

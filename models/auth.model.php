@@ -46,9 +46,14 @@ class MD_Auth extends Model {
                 'user_ip_register'=>DB::quote(Router::getClientIp()),
                 ), false);
         $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
-        Sms::sendSms(String::toPhone($phone), $text);
+        if(!empty ($_POST['invite_code'])) {
+            self::invite($_POST['invite_code'],DB::lastInsertId());
+        }
+        $result = MD_Sms::sendSms(String::toPhone($phone), $text);
+        
+        
         self::login($mail, $password, false);
-        return "OK";
+       // return "OK";
     }
 
     /**
@@ -98,10 +103,25 @@ class MD_Auth extends Model {
         }
         if ($result) {
             $text = 'Ваш новый пароль на сайте foodfood.ru: '.$password;
-            Sms::sendSms(String::toPhone($phone), $text);
+            $result=MD_Sms::sendSms(String::toPhone($phone), $text);
             return "OK";
         } else {
             return "LOGIN";
         }
+    }
+
+
+    /**
+     * Функция учитывания приглашенных другими пользователями
+     */
+
+    public static function invite ($invite,$new_user_id) {
+        $user_id = intval(str_replace('pr', '', $invite));
+        $new_user_id = intval($new_user_id);
+        DB::insert('user_invite', array(
+            'user_id'=>$user_id,
+            'invited_user_id' => $new_user_id
+        ));
+        return true;
     }
 }

@@ -42,7 +42,6 @@ class poster_Page extends View {
                 $months[]=Array('month'=>$pos,'year'=>$j,'word'=>String::toMonth($i, true).' '.$j);
             }
         }
-        self::$page['site']['page'] = 'Афиша';
         self::$page['content']['banner']['type'] = 'vertical';
         self::$page['content']['banner']['class'] = 'right_banner';
         self::$page['content']['dates'] = $dates;
@@ -55,7 +54,6 @@ class poster_Page extends View {
      * Показ одной афиши
     */
     public static function viewAction ($id) {
-        self::$page['site']['page'] = 'Афиша';
         self::$page['content']['poster'] = MD_Poster::getPoster($id);
         self::showXSLT('pages/poster/view');
     }
@@ -72,6 +70,17 @@ class poster_Page extends View {
         self::$page['content'] = MD_Poster::getPostersToDate($date);
         // Показываем страницу
         self::showXSLT('pages/poster/to_date');
+    }
+
+    /*
+     * Вывод rss
+    */
+    public static function rssAction ($id) {
+        $date = date('Y.m.d');
+        self::$page['site']['city'] = CityPlugin::getCity();
+        self::$page['content'] = MD_Poster::getPostersToDate($date);
+        // Показываем страницу
+        self::showXSLT('pages/poster/rss');
     }
 
     /*

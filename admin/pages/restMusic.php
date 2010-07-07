@@ -8,7 +8,6 @@ class restMusic extends AdminModule {
     protected static $_DB_table = 'rest_music';
 
     public static function initModule () {
-
         self::addAction('addItem', 'Добавить тип музыки',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
@@ -42,8 +41,6 @@ class restMusic extends AdminModule {
     }
     
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
         $data = $_POST;
         DB::insert('list_music',$data);
     }

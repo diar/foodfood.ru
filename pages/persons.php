@@ -16,6 +16,7 @@ class persons_Page extends View {
         // Получаем список тэгов
         $tags=MD_Mood::getTags();
 
+        self::$page['site']['title'] = 'Лица foodfood';
         self::$page['site']['city'] = CityPlugin::getCity();
         self::$page['content']['moods']=$moods;
         self::$page['content']['tags']=$tags;
@@ -24,7 +25,6 @@ class persons_Page extends View {
     }
 
     public static function indexAction ($uri) {
-        self::$page['site']['page'] = 'Лица foodfood';
         self::$page['content']['persons'] = MD_Person::getPersons();
         // Показываем страницу
         self::showXSLT('pages/persons/index');
@@ -37,7 +37,6 @@ class persons_Page extends View {
     }
 
     public static function viewAction ($id) {
-        self::$page['site']['page'] = 'Лица foodfood';
         self::$page['content']['persons'] = MD_Person::getPersons();
         self::$page['content']['person_id'] = $id;
         // Показываем страницу

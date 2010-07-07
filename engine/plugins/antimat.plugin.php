@@ -8,7 +8,7 @@
 class AntimatPlugin {
 
     static $antimat=Array(
-            'хуй','xуй','хyй','xyй','сука','бля',
+            'хуй','xуй','хyй','xyй','сука','cука','сукa','бля','хуя',
     );
 
     public static function check ($str) {

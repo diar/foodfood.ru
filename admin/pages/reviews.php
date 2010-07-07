@@ -5,18 +5,6 @@ class reviews extends AdminModule {
     protected static $_title = "Отзывы о ресторане";
     protected static $_DB_table = 'rest_comment';
 
-    public static function add() {
-
-    }
-
-    public static function save() {
-
-    }
-
-    public static function delete() {
-
-    }
-
     public static function showList() {
         $list = Form::showJqGrid(
                 array(
@@ -33,7 +21,6 @@ class reviews extends AdminModule {
     }
 
     public static function showJSON() {
-        Debug::disable();
         $records = DB::fetchAll(
                 "SELECT id,user_login,text FROM ".DBP::getPrefix()."rest_comment AS cm ".
                 "LEFT JOIN user ON user.user_id=cm.user_id ".
