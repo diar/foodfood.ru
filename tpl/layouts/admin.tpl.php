@@ -61,18 +61,18 @@
                     <div id="rest_change<?php if($admin['access'] != 'superadmin') echo'_non_modify';?>" class="rest_change">
                         <?=!$admin['restaurant']['rest_title'] ? "Выберите ресторан" : $admin['restaurant']['rest_title'] ;?>
                     </div>
-                    <?php if ($admin['access'] == 'superadmin') : ?>
                     <ul id="pageMenu">
+                        <?php if ($admin['access'] == 'superadmin') : ?>
                         <li><a href="<?=AdminModule::getLink('restaurants','showList') ?>">Список ресторанов</a> </li>
                         <li><a href="<?=AdminModule::getLink('restaurants','add') ?>">Добавить ресторан</a> </li>
                         <li style="width:100%; border-bottom: 1px solid #ccc; margin:4px 0;"></li>
+                        <?endif;?>
                             <?php if ($pageMenu = self::get('pageMenu')) : ?>
                                 <? foreach ($pageMenu as $action => $title) : ?>
                         <li><a href="<?=AdminModule::getLink(PAGE,$action) ?>"><?=$title?></a> </li>
                                 <? endforeach;?>
-                            <?endif;?>
-                    </ul>
                     <?endif;?>
+                    </ul>
                 </td>
                 <td class="right">
                     <div id="divToUpdate"></div>
