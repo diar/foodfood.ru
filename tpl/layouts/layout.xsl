@@ -219,7 +219,7 @@
     <xsl:template name="footer">
         <div id="footer">
             <div id="footer_left">
-                <div class="caption rounded_right">Добавка</div>
+                <div class="caption rounded_right">Новости портала FF</div>
                 <ul>
                     <xsl:apply-templates select="//content/news/item" />
                 </ul>
