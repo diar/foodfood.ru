@@ -1,4 +1,5 @@
 <?php
+
 require_once "adminModule.class.php";
 
 class System extends AdminModule {
@@ -18,27 +19,25 @@ class System extends AdminModule {
      * @var array
      */
     protected static $_actions = array(
-            'setRestaurant' => array (
-                            'title' => 'Сменить администрируемый ресторан',
-                            'level' => 7,
-                            'onMenu' => false
-            )
+        'setRestaurant' => array(
+            'title' => 'Сменить администрируемый ресторан',
+            'level' => 7,
+            'onMenu' => false
+        )
     );
 
-    public static function initModule () {
+    public static function initModule() {
         self::start();
     }
 
     public static function setRestaurant() {
-        if (ELEMENT_ID) {
+        if (ELEMENT_ID && $_SESSION['admin']['access'] == 'superadmin') {
             $id = ELEMENT_ID;
             $_SESSION['admin']['restaurant_id'] = $id;
-            $_SESSION['admin']['restaurant'] = DBP::getRecord('rest','id='.DB::quote($id));
+            $_SESSION['admin']['restaurant'] = DBP::getRecord('rest', 'id=' . DB::quote($id));
             header('Location: admin.php?page=main', true, 303);
             die();
         }
     }
-
-
 
 }

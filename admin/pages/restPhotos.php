@@ -31,7 +31,6 @@ class restPhotos extends AdminModule {
     }
 
     public static function delete() {
-        Debug::disable();
         $web_dir = '/upload/image/'.'rest_photo/'.self::getRestId().'/';
         $file_dir = Config::getValue('path','upload').'image/rest_photo/'.self::getRestId().'/';
         foreach ($_POST['photo_id'] as $photo) {

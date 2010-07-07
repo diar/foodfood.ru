@@ -8,7 +8,6 @@ class restMood extends AdminModule {
     protected static $_DB_table = 'rest_mood';
 
     public static function initModule () {
-
         self::addAction('addItem', 'Добавить настроение',7,true);
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
@@ -28,7 +27,6 @@ class restMood extends AdminModule {
         );
 
         $form->addfield(array('name' => 'submit',
-
                 'caption' => 'Добавить',
                 'pattern' => 'submit')
         );
@@ -43,8 +41,6 @@ class restMood extends AdminModule {
     }
     
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
         $data = $_POST;
         DB::insert('list_mood',$data);
     }

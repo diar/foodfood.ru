@@ -207,7 +207,12 @@ class FormBuilder {
 
     public function field_html_build($field) {
         $value = $field['value'];
-        $this->_form.= '<tr><td>' . $field['caption'] . '</td><td style="padding:10px;0">' . $value . '</td></tr>';
+        $this->_form.= '<tr><td>' . $field['caption'] . '</td><td style="padding:10px 0;">' . $value . '</td></tr>';
+    }
+
+    public function field_description_build($field) {
+        $value = $field['value'];
+        $this->_form.= '<tr><td></td><td style="padding:4px 0 8px 0;font-size:10px;color:#555;">'.$value.'</td></tr>';
     }
 
     public function field_confirm_build($field) {

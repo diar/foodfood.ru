@@ -62,7 +62,17 @@ Class FormValidator {
      * Form validating
      */
     public function form_validate() {
-
+        // Удаляем не используемые при сохранении поля
+        foreach ($this->_fields as $field) {
+            if (!empty($field['pattern']) && (
+                    $field['pattern'] == 'html' || $field['pattern'] == 'submit' ||
+                    $field['pattern'] == 'confirm' || $field['pattern'] == 'description'
+                    )) {
+                if (!empty($field['name']) && !empty($_POST[$field['name']])) {
+                    unset($_POST[$field['name']]);
+                }
+            }
+        }
         foreach ($this->_fields as $field) {
 
             if ((!$field['pattern']) || ($field['pattern'] == 'hidden')
@@ -81,8 +91,8 @@ Class FormValidator {
             if (!in_array($field['pattern'], $this->_config->_allowed_builders)) {
                 throw new Exception('Фатальная ошибка, паттерн ' . $field['pattern'] . ' не зарегистрирован, как существующий.');
             }
-
             $field_method_validator = 'field_' . $field['pattern'] . '_validate';
+            $this->$field_method_validator($field);
         }
 
         if (in_array(false, $this->is_valid)) {
@@ -432,6 +442,10 @@ Class FormValidator {
     }
 
     private function field_delimiter_validate() {
+        return '';
+    }
+
+    private function field_description_validate() {
         return '';
     }
 

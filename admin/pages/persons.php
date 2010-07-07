@@ -141,8 +141,6 @@ class persons extends AdminModule {
     }
 
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
         $data = $_POST;
 
         if (!empty($_FILES['person_photo']['name'])) {

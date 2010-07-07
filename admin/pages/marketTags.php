@@ -10,7 +10,6 @@ class marketTags extends AdminModule {
     public static function initModule () {
 
         self::addAction('addItem', 'Добавить тэг',7,true);
-
         self::setRestId($_SESSION['admin']['restaurant_id']);
         self::start();
     }
@@ -45,8 +44,6 @@ class marketTags extends AdminModule {
     }
 
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
         $data = $_POST;
         DB::insert('list_market_menu_tag',$data);
     }

@@ -83,9 +83,6 @@ class Restaurants extends AdminModule {
     }
 
     public static function saveEdit() {
-        $data = array();
-        unset($_POST['edit']);
-        unset($_POST['confirm']);
         $data = $_POST;
         DBP::update('rest',$data,'id ='.self::getRestId());
     }

@@ -94,7 +94,7 @@ Class FormConstruct {
                 'custom','confirm','textarea',
                 'select','radio','delimiter',
                 'file','date','checkbox','submit',
-                'button','editor','phone','html'
+                'button','editor','phone','html', 'description'
         );
     }
 

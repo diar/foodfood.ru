@@ -36,10 +36,6 @@ class Mood extends AdminModule {
     }
 
     public static function save() {
-
-        $data = array();
-        unset($_POST['submit']);
-        unset($_POST['confirm']);
         $data = $_POST;
         $data['src'] = File::saveFile('src','php.jpg','../upload/file');
         DB::insert(self::getDbTable(),$data);

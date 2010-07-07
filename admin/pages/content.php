@@ -86,24 +86,16 @@ class content extends AdminModule {
     }
 
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
         $data = $_POST;
         DB::insert('content',$data);
     }
 
     public static function saveEdit() {
-        $data = array();
         $id = ELEMENT_ID;
-        unset($_POST['edit']);
         unset($_POST['id']);
         $data = $_POST;
         DB::update('content',$data,'id ='.$id);
 
-    }
-
-    public static function apply() {
-        return true;
     }
 
     public static function delete() {

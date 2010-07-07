@@ -50,7 +50,6 @@ class discountLog extends AdminModule {
     }
 
     public static function showJSON() {
-        Debug::disable();
         $page = 1;
         $limit = 10;
         // Получаем кол-во записей

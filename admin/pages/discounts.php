@@ -27,7 +27,6 @@ class discounts extends AdminModule {
     }
 
     public static function saveEdit() {
-        unset($_POST['edit']);
         $data = $_POST;
         DBP::update(self::getDbTable(),$data,'id ='.ELEMENT_ID);
     }
@@ -101,7 +100,6 @@ class discounts extends AdminModule {
     }
 
     public static function showJSON() {
-        Debug::disable();
         $records = DB::fetchAll("SELECT id,discount_percent,discount_count FROM ".DBP::getPrefix()."rest_discount WHERE rest_id=".self::getRestId());
         foreach ($records as &$record) {
             $editLink = self::getLink(PAGE, 'edit', $record['id']);
@@ -112,7 +110,6 @@ class discounts extends AdminModule {
     }
 
     public static function saveForRest() {
-        Debug::disable();
         $records = DB::fetchAll(
                 "SELECT discount_counter, discount_percent, discount_secret, discount_activated ".
                 "FROM ".DBP::getPrefix()."rest_discount AS ds ".
@@ -141,7 +138,6 @@ class discounts extends AdminModule {
     }
 
     public static function saveForOff() {
-        Debug::disable();
         $records = DB::fetchAll(
                 "SELECT discount_counter, discount_percent, discount_secret, discount_activated ".
                 "FROM ".DBP::getPrefix()."rest_discount AS ds ".
@@ -164,7 +160,6 @@ class discounts extends AdminModule {
         $path = 'discount_list'.time().'.xls';
 
         File::saveXLS($records,Config::getValue('path','tmp').$path,"Список скидок foodfood","foodfood.ru");
-
         header('Location: /tmp/'.$path, true, 303);
     }
 

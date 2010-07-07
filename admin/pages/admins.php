@@ -72,9 +72,6 @@ class Admins extends AdminModule {
     }
 
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
-        unset($_POST['confirm']);
         $data = $_POST;
         $data['password'] = AdminAuth::crypt($data['password']);
         DB::insert('admin_table',$data);

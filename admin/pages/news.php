@@ -78,16 +78,12 @@ class news extends AdminModule {
     }
 
     public static function save() {
-        $data = array();
-        unset($_POST['submit']);
         $data = $_POST;
         DBP::insert(self::getDbTable(),$data);
     }
 
     public static function saveEdit() {
-        $data = array();
         $id = ELEMENT_ID;
-        unset($_POST['edit']);
         $data = $_POST;
         DBP::update(self::getDbTable(),$data,'id ='.$id);
 
