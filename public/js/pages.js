@@ -105,7 +105,8 @@ $(document).ready(function(){
         });
         $('.reviews .form input[type="submit"]').click(function(){
             text = $(this).parents('form').find('textarea').val();
-            comment_rest(current_rest_id,text);
+            to_admin = $(this).parents('form').find('input[type="checkbox"]').attr('checked');
+            comment_rest(current_rest_id,text,to_admin);
             return false;
         });
         // Показать карту google
@@ -451,12 +452,13 @@ function persons_check_buttons () {
 /*
  * Добавить комментарий ресторану
  */
-function comment_rest(rest_id,text){
+function comment_rest(rest_id,text,to_admin){
     if(user_auth!='1') {
         $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
     } else {
         $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/' ,{
             'text':text,
+            'to_admin':to_admin,
             'target':0
         },function (data) {
             if (data=='OK') $.alert('Отзыв добавлен',false);

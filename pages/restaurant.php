@@ -87,7 +87,8 @@ class restaurant_Page extends View {
     */
     public static function commentAjaxAction ($id) {
         $text = !empty ($_POST['text']) ? $_POST['text'] : '';
+        $to_admin = $_POST['to_admin']=='true' ? true : false;
         $rating_target = !empty ($_POST['target']) ? $_POST['target'] : '';
-        echo MD_Rating::addComment($id,$rating_target,$text);
+        echo MD_Rating::addComment($id,$rating_target,$text,$to_admin);
     }
 }

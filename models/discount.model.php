@@ -145,7 +145,7 @@ class MD_Discount extends Model {
                     'id='.$sms_code['discount_list_id']
             );
             // Отправляем оповещение ресторатору
-            $admin=DB::getRecord('admin_group_table', 'restaurant_id=1',null,
+            $admin=DB::getRecord('admin_group_table', 'restaurant_id='.DB::quote($rest_id),null,
                     Array('join'=>'admin_table','left'=>'id','right'=>'group_id'));
 
             if (!empty($admin['email']) && $admin['send_log_email']==1) {
