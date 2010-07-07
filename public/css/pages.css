@@ -1043,6 +1043,11 @@ table.table_layout td {
     width: 100%;
 }
 
+.auth_page td{
+    vertical-align: middle;
+    padding:5px 0;
+}
+
 .auth_page .number{
     font-family: Georgia;
     font-size: 20px;

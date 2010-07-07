@@ -29,6 +29,7 @@ class auth_Page extends View {
     */
     public static function indexAction ($id) {
         self::$page['content']['invite_code']=Router::getRouteIndex(3);
+        self::$page['content']['invite_users']=MD_User::getUsersByInvites();
         self::showXSLT('pages/auth/auth');
     }
 

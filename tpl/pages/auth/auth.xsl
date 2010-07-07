@@ -67,13 +67,39 @@
                 <xsl:if test="//user/user_id!=''">
                     <p>
                     Ваш ссылка, отправьте эту ссылку друзьям:
-                        <div class="promo">http://foodfood.ru/auth/pr<xsl:value-of select="//user/user_id" />
-                        </div>
+                        <div class="promo">http://foodfood.ru/auth/pr<xsl:value-of select="//user/user_id" /></div>
                     </p>
                 </xsl:if>
+                <p>Самые активные на данный момент пользователи:</p>
+                <p>
+                    <table style="width:350px;">
+                        <xsl:apply-templates select="invite_users/item" />
+                    </table>
+                </p>
             </div>
             <div class="clear"></div>
         </div>
     </xsl:template >
 
+
+    <xsl:template match="invite_users/item">
+        <tr>
+            <td style="width:60px;">
+                <xsl:choose>
+                    <xsl:when test="user_profile_avatar!=''">
+                        <img src="{user_profile_avatar}" style="width:48px;" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <img src="/blog/templates/skin/new/images/avatar_48x48.jpg" style="width:48px;" />
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+            <td>
+                <a style="font-size:16px;" href="/blog/profile/{user_login}" ><xsl:value-of select="user_login" /></a>
+            </td>
+            <td style="font-family:Georgia; font-size:28px;color:#ff6600;">
+                <xsl:value-of select="count" />
+            </td>
+        </tr>
+    </xsl:template>
 </xsl:stylesheet>
