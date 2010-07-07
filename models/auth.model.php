@@ -53,7 +53,7 @@ class MD_Auth extends Model {
         
         
         self::login($mail, $password, false);
-       // return "OK";
+        return "OK";
     }
 
     /**
