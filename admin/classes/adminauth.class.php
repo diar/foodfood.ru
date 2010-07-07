@@ -90,4 +90,12 @@ class AdminAuth {
         self::$_isAuth = false;
     }
 
+    /**
+     * Шифрование строки
+     * @param string $string Строка
+     * @return string
+     */
+    public static function crypt ($string) {
+        return md5($string);
+    }
 }

@@ -15,7 +15,7 @@ class Admins extends AdminModule {
 
     public static function add() {
 
-        $form = Form::newForm('Admins', 'adminsForm');
+        $form = Form::newForm('Admins', 'adminsForm',self::getDbTable());
 
         $form->addfield(array(
             'name' => 'login',
@@ -24,17 +24,15 @@ class Admins extends AdminModule {
             'maxlength' => '32',
             'size' => '20',
             'help' => 'латинские символы',
-            'css_class' => 'caption'
+            'css_class' => 'caption',
+            'is_required' => true
         ));
 
         $form->addfield(array(
             'name' => 'password',
-            'name2' => 'confirm',
-            'caption1' => 'Пароль',
-            'caption2' => 'Еще раз',
-            'pattern' => 'confirm',
+            'caption' => 'Пароль',
+            'pattern' => 'text',
             'maxlength' => '30',
-            'type' => 'password',
             'css_class' => 'caption',
             'is_required' => true
         ));
@@ -78,7 +76,8 @@ class Admins extends AdminModule {
 
         $form->addfield(array(
             'name' => 'submit',
-            'caption' => 'Сохранить',
+            'caption' => 'Добавить',
+            'css_class' => 'ui_button',
             'pattern' => 'submit'
         ));
 
@@ -146,7 +145,7 @@ class Admins extends AdminModule {
     public static function save() {
         $data = $_POST;
         $data['password'] = AdminAuth::crypt($data['password']);
-        DB::insert('admin_table', $data);
+        DB::insert(self::getDbTable(), $data);
     }
 
     public static function saveEdit() {
