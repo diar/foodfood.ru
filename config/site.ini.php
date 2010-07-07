@@ -16,4 +16,4 @@ menu.3 = Гурманы::blog::::/blog/people/
 menu.4 = Блоги::blog::::/blog/
 menu.5 = Доставка::market::::/market/
 menu.6 = FF люди::persons
-menu.7 = Конкурс::content::konkurs
+menu.7 = Конкурс::auth

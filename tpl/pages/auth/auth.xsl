@@ -16,16 +16,16 @@
     <!-- Код страницы -->
     <xsl:template match="content">
         <div class="restaurant_header margin020 rounded">
-        	<div class="margin0autoMax-width1600">
-            <div class="caption">
-                <div class="title">Регистрация нового гурмана</div>
-            </div>
+            <div class="margin0autoMax-width1600">
+                <div class="caption">
+                    <div class="title">FoodFood объявляет конкурс! Пригласи всех своих друзей и поужинай за наш счет!
+                    </div>
+                </div>
             </div>
         </div>
         <div class="auth_page">
-            <div id="registration_dialog" class=" dialog ">
+            <div id="registration_dialog" class=" dialog " style="float:left;width:420px;">
                 <div class="caption">
-                    
                     <div class="clear"></div>
                     <img class="form_loader" id="reg_loader" src="/public/images/loader.gif" alt="загрузка.." />
                     <div class="message" id="reg_message"></div>
@@ -36,7 +36,7 @@
                         <input type="text" class="form_input rounded" name="reg_phone" id="reg_phone" />
                         <div class="label">e-mail:</div>
                         <input type="text" class="form_input rounded" name="reg_mail" id="reg_mail" />
-                         <div class="label">Код-приглашения:</div>
+                        <div class="label">Код-приглашения:</div>
                         <input type="text" class="form_input rounded" name="invite_code" id="invite_code" value='{invite_code}'/>
                         <div style="padding:15px 0">
                             <input type="checkbox" id="reg_rules" />
@@ -48,6 +48,31 @@
                     
                 </div>
             </div>
+            <div class="konkurs_description">
+                <p>
+                    Самые активные пользователи, пригласившие на foodfood.ru больше всех друзей,
+                    получат от нас:
+                    <ul style="font-size:18px;margin:20px 0 20px 20px;">
+                        <li>
+                            <span class="number">1 место</span>  : сертификат на ужин в ресторане на двоих;
+                        </li>
+                        <li>
+                            <span class="number">2 место</span> : сертификат на ужин в ресторане на одного;
+                        </li>
+                        <li>
+                            <span class="number">3 место</span> : футболка с фирменным логотипом foodfood.ru;
+                        </li>
+                    </ul>
+                </p>
+                <xsl:if test="//user/user_id!=''">
+                    <p>
+                    Ваш ссылка, отправьте эту ссылку друзьям:
+                        <div class="promo">http://foodfood.ru/auth/pr<xsl:value-of select="//user/user_id" />
+                        </div>
+                    </p>
+                </xsl:if>
+            </div>
+            <div class="clear"></div>
         </div>
     </xsl:template >
 

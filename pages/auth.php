@@ -17,7 +17,7 @@ class auth_Page extends View {
         $tags=MD_Mood::getTags();
 
         self::$page['site']['city'] = CityPlugin::getCity();
-        self::$page['site']['title'] = $content['content_title'];
+        self::$page['site']['title'] = 'Регистрация на сайте';
         self::$page['content']['moods']=$moods;
         self::$page['content']['tags']=$tags;
         self::$page['header']['banner']['type'] = 'horizontal';

@@ -1039,11 +1039,28 @@ table.table_layout td {
     padding-top:5px;
 }
 
-
-
 .auth_page {
-    width: 50%;
-    
+    width: 100%;
+}
+
+.auth_page .number{
+    font-family: Georgia;
+    font-size: 20px;
+    color:#ff6600;
+}
+
+.auth_page .promo{
+    font-size: 24px;
+    color:#ff6600;
+    padding: 10px 20px;
+}
+
+.auth_page .konkurs_description {
+    width:500px;
+    float:left;
+    padding:45px 20px;
+    font-size:14px;
+    line-height: 20px;
 }
 /*********** /calendar *************/
 /***********TO CHTO PROEBALI*************/
