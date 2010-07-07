@@ -1101,3 +1101,81 @@ table.table_layout td {
 
 .alignCenter{text-align:center;}
 .widthAuto {width:auto;max-width:none;}
+
+
+#registration_page .caption {
+    height:34px;
+    width:100%;
+}
+
+#registration_page .close_button {
+    width:18px;
+    height:18px;
+    background:#86a515;
+    float:right;
+    cursor:pointer;
+    margin: 8px 8px 0 0;
+}
+
+#registration_page .title {
+    font-size:25px;
+    width:100%;
+    color:#86a515;
+    text-align:center;
+}
+
+#registration_page .message {
+    margin-top:10px;
+    width:100%;
+    text-align:center;
+    color:#ff6600;
+    height:16px;
+}
+
+#registration_page .form_dialog {
+    width:auto;
+    padding:0 23px;
+}
+
+#registration_page .form_input {
+    width:100%;
+    font-size:24px;
+    border:1px solid #000;
+    text-align:center;
+    height:44px;
+}
+
+#registration_page .form_loader {
+    display:none;
+    float:left;
+    position:absolute;
+    padding-left:5px;
+}
+
+#registration_page .label {
+    font-size:11px;
+    color:#505050;
+    text-align:center;
+    margin:8px 0 3px;
+}
+#registration_page {
+    height:447px;
+    text-align:center;
+}
+
+#registration_page #registration_submit{
+    width:195px;
+    height:55px;
+    background:url(/public/images/auth_button);
+    border:none;
+    cursor:pointer;
+    color:#FFF;
+    font-size:14px;
+    text-shadow:-1px 0 0 #777;
+    display:block;
+    margin:0 auto;
+}
+
+#registration_page #registration_submit:active {
+    background:url(/public/images/auth_button_active);
+}

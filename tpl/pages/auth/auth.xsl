@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="auth_page">
-            <div id="registration_dialog" class=" dialog " style="float:left;width:420px;">
+            <div id="registration_page" style="float:left;width:420px;">
                 <div class="caption">
                     <div class="clear"></div>
                     <img class="form_loader" id="reg_loader" src="/public/images/loader.gif" alt="загрузка.." />
@@ -67,7 +67,7 @@
                 <xsl:if test="//user/user_id!=''">
                     <p>
                     Ваш ссылка, отправьте эту ссылку друзьям:
-                        <div class="promo">http://foodfood.ru/auth/pr<xsl:value-of select="//user/user_id" /></div>
+                        <div class="promo">http://foodfood.ru/kazan/auth/pr<xsl:value-of select="//user/user_id" /></div>
                     </p>
                 </xsl:if>
                 <p>Самые активные на данный момент пользователи:</p>
