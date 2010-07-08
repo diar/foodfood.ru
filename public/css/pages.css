@@ -1049,7 +1049,6 @@ table.table_layout td {
 }
 
 .auth_page .number{
-    font-family: Georgia;
     font-size: 20px;
     color:#ff6600;
 }
@@ -1061,7 +1060,7 @@ table.table_layout td {
 }
 
 .auth_page .konkurs_description {
-    width:500px;
+    width:530px;
     float:left;
     padding:45px 20px;
     font-size:14px;

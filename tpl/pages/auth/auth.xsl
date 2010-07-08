@@ -67,10 +67,14 @@
                 <xsl:if test="//user/user_id!=''">
                     <p>
                     Ваш ссылка, отправьте эту ссылку друзьям:
-                        <div class="promo">http://foodfood.ru/kazan/auth/pr<xsl:value-of select="//user/user_id" /></div>
+                        <div class="promo">
+													<xsl:text>http://foodfood.ru/kazan/auth/pr</xsl:text>
+													<xsl:value-of select="//user/user_id" />
+												</div>
                     </p>
                 </xsl:if>
-                <p>Самые активные на данный момент пользователи:</p>
+								<p><a href="/{//site/city}/content/konkurs">Подробнее</a></p>
+                <p>Потенциальные победители:</p>
                 <p>
                     <table style="width:350px;">
                         <xsl:apply-templates select="invite_users/item" />
