@@ -50,27 +50,30 @@
             </div>
             <div class="konkurs_description">
                 <p>
-                    Самые активные пользователи, пригласившие на foodfood.ru больше всех друзей,
-                    получат от нас:
+                    Самым активным пользователям нашего портала, пригласившим на foodfood.ru больше всех друзей, мы дарим подарки:
                     <ul style="font-size:18px;margin:20px 0 20px 20px;">
                         <li>
-                            <span class="number">1 место</span>  : сертификат на ужин в ресторане на двоих;
+                            <span class="number">1 место</span> — сертификат на ужин в ресторане на двоих
                         </li>
                         <li>
-                            <span class="number">2 место</span> : сертификат на ужин в ресторане на одного;
+                            <span class="number">2 место</span> — сертификат на ужин в ресторане на одного
                         </li>
                         <li>
-                            <span class="number">3 место</span> : футболка с фирменным логотипом foodfood.ru;
+                            <span class="number">3 место</span> — футболка с фирменным логотипом foodfood.ru
                         </li>
                     </ul>
                 </p>
                 <xsl:if test="//user/user_id!=''">
                     <p>
                     Ваш ссылка, отправьте эту ссылку друзьям:
-                        <div class="promo">http://foodfood.ru/kazan/auth/pr<xsl:value-of select="//user/user_id" /></div>
+                        <div class="promo">
+													<xsl:text>http://foodfood.ru/kazan/auth/pr</xsl:text>
+													<xsl:value-of select="//user/user_id" />
+												</div>
                     </p>
                 </xsl:if>
-                <p>Самые активные на данный момент пользователи:</p>
+								<p><a href="/{//site/city}/content/konkurs" style="font-size:16px;">Подробнее о конкурсе</a></p>
+                <p>Потенциальные победители:</p>
                 <p>
                     <table style="width:350px;">
                         <xsl:apply-templates select="invite_users/item" />
