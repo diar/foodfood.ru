@@ -1,3 +1,4 @@
 blog/templates/cache
 blog/templates/compiled
 config
+blog/config

@@ -28,7 +28,6 @@ class news_Page extends View {
     */
     public static function viewAction ($id) {
         $content = MD_News::get($id);
-        Debug::dump($content);
         self::$page['site']['title'] = $content['title'];
         self::$page['content']['page'] = $content;
         self::showXSLT('pages/news/view');
