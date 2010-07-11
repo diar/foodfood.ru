@@ -154,6 +154,10 @@ $(document).ready(function () {
                     a = '<a href="#" onclick="$.showDialog(\'passwd_dialog\');">Забыл пароль?</a>';
                     $('#reg_message').html('Пользователь с таким e-mail уже существует. '+a);
                 }
+                else if (data=='LOGIN_EXIST') {
+                    a = '<a href="#" onclick="$.showDialog(\'passwd_dialog\');">Забыл пароль?</a>';
+                    $('#reg_message').html('Пользователь с таким логином уже существует. '+a);
+                }
                 else if (data=='NOT_PHONE') $('#reg_message').html('Ошибка: введите номер телефона в правильном формате');
                 else if (data=='NOT_MAIL') $('#reg_message').html('Ошибка: введите e-mail в правильном формате');
                 else if (data=='OK')

@@ -108,6 +108,10 @@ jQuery.noConflict()(function(){
                     a = '<a href="#" class="passwd">Забыл пароль?</a>';
                     jQuery('#reg_message').html('Пользователь с таким e-mail уже существует. '+a);
                 }
+                else if (data=='LOGIN_EXIST') {
+                    a = '<a href="#" onclick="$.showDialog(\'passwd_dialog\');">Забыл пароль?</a>';
+                    jQuery('#reg_message').html('Пользователь с таким логином уже существует. '+a);
+                }
                 else if (data=='NOT_PHONE') jQuery('#reg_message').html('Ошибка: введите номер телефона в правильном формате');
                 else if (data=='NOT_MAIL') jQuery('#reg_message').html('Ошибка: введите e-mail в правильном формате');
                 else if (data=='OK')

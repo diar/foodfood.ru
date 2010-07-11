@@ -30,9 +30,11 @@ class MD_Auth extends Model {
 
         // Проверяем не зарегистрирован ли уже пользователь
         $u_phone=DB::getValue(Auth::getTable(), 'user_id', 'user_phone='.DB::quote(String::toPhone($phone)));
-        $u_mail=DB::getValue(Auth::getTable(), 'user_id', 'user_mail='.DB::quote($mail));
         if (!empty($u_phone)) return "PHONE_EXIST";
+        $u_mail=DB::getValue(Auth::getTable(), 'user_id', 'user_mail='.DB::quote($mail));
         if (!empty($u_mail)) return "MAIL_EXIST";
+        $u_name=DB::getValue(Auth::getTable(), 'user_id', 'user_login='.DB::quote($name));
+        if (!empty($u_name)) return "LOGIN_EXIST";
 
         // Регистрируем
         $password = substr(md5(time()), 0, 5);
