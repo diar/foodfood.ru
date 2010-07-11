@@ -6,7 +6,7 @@
  * @version 0.1
  * Модель для управления отображением баннеров
  */
-class MD_USer extends Model {
+class MD_User extends Model {
 
     /**
      * Инициализация модели

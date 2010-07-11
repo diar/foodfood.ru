@@ -86,6 +86,11 @@ $(document).ready(function () {
         $.showDialog('registration_dialog');
         return false;
     });
+    $('#callback').click(function(){
+        $('#callback_message').html('');
+        $.showDialog('callback_dialog');
+        return false;
+    });
     // -------- Авторизация -------------------
     $('#auth_submit').click(function(){
         login = $('#auth_login').val();
@@ -170,6 +175,30 @@ $(document).ready(function () {
             $('#reg_message').html('Ошибочка, придётся заполнить все поля');
         }
         return false;
+    });
+    // -------- Обратная связь -------------------
+    $('#callback_submit').click(function(){
+        text = $('#callback_text').val();
+        mail = $('#callback_mail').val();
+        if (text!='' && mail!='') {
+            $('#callback_loader').fadeIn(500);
+            $.post('/'+site_city+'/service/callback',{
+                'text':text,
+                'mail':mail
+            },
+            function(data){
+                $('#callback_loader').fadeOut(500);
+                if (data=='SPACE') $('#callback_message').html('Ошибочка, придёться заполнить все поля');
+                else if (data=='NOT_MAIL') $('#callback_message').html('Ошибка: введите e-mail в правильном формате');
+                else if (data=='OK')
+                    $('#callback_message').html(
+                        '<span style="color:green">Ваше сообщение отправлено администратору</span>'
+                        );
+                else $('#callback_message').html('Ошибка при отправке, попробуйте еще раз');
+            })
+        } else {
+            $('#callback_message').html('Ошибочка, придёться заполнить все поля');
+        }
     });
     // -------- Изменение пароля
     $('#passwd_submit').click(function(){

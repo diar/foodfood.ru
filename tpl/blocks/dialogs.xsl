@@ -48,6 +48,26 @@
         </div>
     </xsl:template>
 
+    <xsl:template name="callback_dialog">
+        <div id="callback_dialog" class="dialog_box dialog box_shadow">
+            <div class="caption">
+                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть"></img>
+                <div class="clear"></div>
+                <img class="form_loader" id="callback_loader" src="/public/images/loader.gif" alt="загрузка.."></img>
+                <div class="title">Обратная связь</div>
+                <div class="message" id="callback_message"></div>
+                <div id="callback_form" class="ajax_form form_dialog">
+                    <div class="label">ваш e-mail:</div>
+                    <input type="text" name="mail" id="callback_mail" class="form_input rounded" />
+                    <div class="label">сообщение:</div>
+                    <textarea name="text" id="callback_text" class="form_input rounded"></textarea>
+                    <div class="clear"></div>
+                    <input type="button" id="callback_submit" value="Отправить" />
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+
     <xsl:template name="registration_dialog">
         <div id="registration_dialog" class="dialog_box dialog box_shadow">
             <div class="caption">

@@ -845,8 +845,19 @@ html {
     height:240px;
     text-align:center;
 }
+#callback_dialog {
+    height:447px;
+    text-align:center;
+}
+#callback_dialog #callback_text {
+    height:200px;
+    max-height:200px;
+    max-width: 394px;
+    margin-bottom: 10px;
+}
 #auth_dialog #auth_submit,
 #registration_dialog #registration_submit,
+#callback_dialog #callback_submit,
 #passwd_dialog #passwd_submit{
     width:195px;
     height:55px;
@@ -859,9 +870,9 @@ html {
     display:block;
     margin:0 auto;
 }
-
 #auth_dialog #auth_submit:active,
 #registration_dialog #registration_submit:active,
+#callback_dialog #callback_submit:active,
 #passwd_dialog #passwd_submit:active{
     background:url(/public/images/auth_button_active);
 }

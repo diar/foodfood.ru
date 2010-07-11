@@ -37,6 +37,7 @@
                 <xsl:call-template name="discount_dialog" />
                 <xsl:call-template name="message_dialog" />
                 <xsl:call-template name="passwd_dialog" />
+                <xsl:call-template name="callback_dialog" />
                 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
                     google.load("jquery", "1.4.2");
@@ -276,7 +277,7 @@
             <div class="right">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
-                <a  href="#" onclick="bookmark(this);">В избранное</a>
+                <a  href="#" id="callback">Обратная связь</a>
             </div>
         </div>
     </xsl:template>
