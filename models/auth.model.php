@@ -45,10 +45,21 @@ class MD_Auth extends Model {
                 'user_date_register'=>'NOW()',
                 'user_ip_register'=>DB::quote(Router::getClientIp()),
                 ), false);
-        $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
+        $user_id = DB::lastInsertId();
+        // Создаем блог пользователя
+        DB::insert('blog_blog', Array(
+                'user_owner_id'=>DB::quote($user_id),
+                'blog_title'=>DB::quote('Блог им. '.$name),
+                'blog_description'=>DB::quote('Это ваш персональный блог.'),
+                'blog_type'=>DB::quote('personal'),
+                'blog_date_add'=>'NOW()',
+                ), false);
+        // Если зарегался по инвайту, то заносим в таблицу
         if(!empty ($_POST['invite_code'])) {
-            self::invite($_POST['invite_code'],DB::lastInsertId());
+            self::invite($_POST['invite_code'],$user_id);
         }
+        // Отправляем смс
+        $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
         $result = MD_Sms::sendSms(String::toPhone($phone), $text);
         
         
