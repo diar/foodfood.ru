@@ -65,20 +65,23 @@
                 </p>
                 <xsl:if test="//user/user_id!=''">
                     <p>
-                    Ваш ссылка, отправьте эту ссылку друзьям:
+                    Ваша ссылка, отправьте ее друзьям:
                         <div class="promo">
-													<xsl:text>http://foodfood.ru/kazan/auth/pr</xsl:text>
-													<xsl:value-of select="//user/user_id" />
-												</div>
+                            <xsl:text>http://foodfood.ru/kazan/auth/pr</xsl:text>
+                            <xsl:value-of select="//user/user_id" />
+                        </div>
                     </p>
                 </xsl:if>
-								<p><a href="/{//site/city}/content/konkurs" style="font-size:16px;">Подробнее о конкурсе</a></p>
+                <p>
+                    <a href="/{//site/city}/content/konkurs" style="font-size:16px;">Подробнее о конкурсе</a>
+                </p>
                 <p>Потенциальные победители:</p>
                 <p>
                     <table style="width:350px;">
                         <xsl:apply-templates select="invite_users/item" />
                     </table>
                 </p>
+                <p><a href="/{//site/city}/special/contest">Все пользователи</a></p>
             </div>
             <div class="clear"></div>
         </div>
@@ -98,7 +101,9 @@
                 </xsl:choose>
             </td>
             <td>
-                <a style="font-size:16px;" href="/blog/profile/{user_login}" ><xsl:value-of select="user_login" /></a>
+                <a style="font-size:16px;" href="/blog/profile/{user_login}" >
+                    <xsl:value-of select="user_login" />
+                </a>
             </td>
             <td style="font-family:Georgia; font-size:28px;color:#ff6600;">
                 <xsl:value-of select="count" />

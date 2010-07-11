@@ -1178,3 +1178,22 @@ table.table_layout td {
 #registration_page #registration_submit:active {
     background:url(/public/images/auth_button_active);
 }
+#contest_users h2{
+    margin: 10px 30px;
+    font-size: 18px;
+}
+#contest_users table{
+    width:800px;margin:20px;
+}
+#contest_users td{
+    padding:10px;
+    border-bottom: 1px solid #aaa;
+}
+#contest_users td.right{
+    font-family:Georgia;
+    font-size:28px;
+    color:#ff6600;
+    vertical-align:middle;
+    text-align:right;
+    width: 140px;
+}
