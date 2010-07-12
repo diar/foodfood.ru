@@ -721,7 +721,7 @@ html {
 #copyright .left {
     float:left;
     padding:15px 0 5px 40px;
-	width:290px;
+	width:380px;
 }
 
 #copyright .left a{
@@ -730,7 +730,7 @@ html {
 
 #copyright .right {
     float:right;
-    padding:15px 265px 10px 0;
+    padding:15px 100px 10px 0;
 	color:#FF6600;
 }
 

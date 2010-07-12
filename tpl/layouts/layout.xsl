@@ -272,22 +272,20 @@
             </div>
         </div>
         <div id="copyright">
-            <div class="left">2010 Diar group
-                <br />
-                <br />Дизайн —
-                <a href="http://bpirok.ru">Большой Пирок</a>
-            </div>
+            <div class="left">2010 Diar group<br />
+<br />Дизайн — <a href="http://bpirok.ru">Большой Пирок</a>
+</div>
             <div class="smi">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
-                <a  href="#" id="callback">Обратная связь</a>
-                <br />
-                <br />
-                При полном или частичном цитировании,
-                заимствовании, использовании ссылка обязательна.
+                <a  href="#" id="callback">Обратная связь</a><br />
+<br />
+При полном или частичном цитировании, 
+заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
-                Присоединяйся к нам!
+
+            	Присоединяйся к нам!
                 <br />
                 <br />
                 <a href="http://www.facebook.com/profile.php?id=100001264771648">
@@ -302,6 +300,7 @@
                 <a href="http://twitter.com/foodfoodru">
                     <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
                 </a>
+
             </div>
         </div>
     </xsl:template>
