@@ -284,6 +284,9 @@
 заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
+            	Присоединяйся к нам!<br />
+<br />
+
                 <a href="#"><img src="/public/images/icons/fb.png" alt="Мы в FaceBook" /></a>
                 <a href="#"><img src="/public/images/icons/lj.png" alt="Мы в ЖЖ" /></a>
                 <a href="#"><img src="/public/images/icons/vk.png" alt="Мы Вконтакте" /></a>
