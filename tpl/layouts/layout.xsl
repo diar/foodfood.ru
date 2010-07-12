@@ -272,12 +272,22 @@
             </div>
         </div>
         <div id="copyright">
-            <div class="left">Copyright, 2010 DIAR LTD</div>
-            <div class="smi">Сайт зарегистрирован как СМИ, копирование информации без согласия администрации запрещена.</div>
-            <div class="right">
+            <div class="left">2010 Diar group<br />
+<br />Дизайн — <a href="http://bpirok.ru">Большой Пирок</a>
+</div>
+            <div class="smi">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
-                <a  href="#" id="callback">Обратная связь</a>
+                <a  href="#" id="callback">Обратная связь</a><br />
+<br />
+При полном или частичном цитировании, 
+заимствовании, использовании ссылка обязательна.
+            </div>
+            <div class="right">
+                <a href="#"><img src="/public/images/icons/fb.png" alt="Мы в FaceBook" /></a>
+                <a href="#"><img src="/public/images/icons/lj.png" alt="Мы в ЖЖ" /></a>
+                <a href="#"><img src="/public/images/icons/vk.png" alt="Мы Вконтакте" /></a>
+                <a href="#"><img src="/public/images/icons/tw.png" alt="Мы в Twitter" /></a>
             </div>
         </div>
     </xsl:template>
