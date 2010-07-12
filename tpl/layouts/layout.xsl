@@ -42,10 +42,8 @@
                 <script type="text/javascript">
                     google.load("jquery", "1.4.2");
                     google.load("swfobject", "2.2");
-                    site_city = '
-                    <xsl:value-of select="site/city" />';
-                    user_auth = '
-                    <xsl:value-of select="//user/is_auth" />';
+                    site_city = '<xsl:value-of select="site/city" />';
+                    user_auth = '<xsl:value-of select="//user/is_auth" />';
                 </script>
                 <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
@@ -274,43 +272,25 @@
             </div>
         </div>
         <div id="copyright">
-            <div class="left">2010 Diar group
-                <br />
-                <br />Дизайн —
-                <a href="http://bpirok.ru">Большой Пирок</a>
-            </div>
+            <div class="left">2010 Diar group<br />
+<br />Дизайн — <a href="http://bpirok.ru">Большой Пирок</a>
+</div>
             <div class="smi">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
-                <a  href="#" id="callback">Обратная связь</a>
-                <br />
-                <br />
-                При полном или частичном цитировании,
-                заимствовании, использовании ссылка обязательна.
+                <a  href="#" id="callback">Обратная связь</a><br />
+<br />
+При полном или частичном цитировании, 
+заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
-<<<<<<< HEAD
-                <a href="http://www.facebook.com/profile.php?id=100001264771648">
-                    <img src="/public/images/icons/fb.png" alt="Мы в FaceBook" />
-                </a>
-                <a href="http://foodfoodru.livejournal.com/">
-                    <img src="/public/images/icons/lj.png" alt="Мы в ЖЖ" />
-                </a>
-                <a href="http://vkontakte.ru/club16013362 ">
-                    <img src="/public/images/icons/vk.png" alt="Мы Вконтакте" />
-                </a>
-                <a href="http://twitter.com/foodfoodru">
-                    <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
-                </a>
-=======
             	Присоединяйся к нам!<br />
-<br />
+<br /> 
 
                 <a href="#"><img src="/public/images/icons/fb.png" alt="Мы в FaceBook" /></a>
                 <a href="#"><img src="/public/images/icons/lj.png" alt="Мы в ЖЖ" /></a>
                 <a href="#"><img src="/public/images/icons/vk.png" alt="Мы Вконтакте" /></a>
                 <a href="#"><img src="/public/images/icons/tw.png" alt="Мы в Twitter" /></a>
->>>>>>> 7ff19bde78fb23dce8600ab7bcfd93a27da0e415
             </div>
         </div>
     </xsl:template>
