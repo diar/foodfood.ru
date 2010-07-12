@@ -229,9 +229,6 @@
                 <a href="http://twitter.com/foodfoodru">
                     <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
                 </a>
-            	Присоединяйся к нам!
-                <br />
-                <br />
             </div>
         </div>
     </xsl:template>
