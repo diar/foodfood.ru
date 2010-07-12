@@ -25,7 +25,8 @@
                 <link rel="stylesheet" type="text/css" href="/public/css/pages.css" />
                 <xsl:comment><![CDATA[[if IE]>
                     <link href="/public/css/ie.css" rel="stylesheet" type="text/css" />
-                <![endif]]]></xsl:comment>
+                <![endif]]]>
+                </xsl:comment>
             </head>
             <body>
                 <xsl:apply-templates select="header" />
@@ -42,8 +43,10 @@
                 <script type="text/javascript">
                     google.load("jquery", "1.4.2");
                     google.load("swfobject", "2.2");
-                    site_city = '<xsl:value-of select="site/city" />';
-                    user_auth = '<xsl:value-of select="//user/is_auth" />';
+                    site_city = '
+                    <xsl:value-of select="site/city" />';
+                    user_auth = '
+                    <xsl:value-of select="//user/is_auth" />';
                 </script>
                 <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
@@ -73,7 +76,7 @@
         <div id="topMenu">
             <xsl:apply-templates select="../menu/item" />
         </div>
-		<div class="clear"></div>
+        <div class="clear"></div>
         <!-- Панель поиска -->
         <div id="search_menu">
             <a href="#" class="no_text_select" id="show_moods">Настроение</a>
@@ -85,14 +88,19 @@
         <div id="login_block">
             <xsl:choose>
                 <xsl:when test="//user/is_auth=1">
-                    <a href="/blog/profile/{//user/user_login}"><xsl:value-of select="//user/user_login" /></a>
+                    <a href="/blog/profile/{//user/user_login}">
+                        <xsl:value-of select="//user/user_login" />
+                    </a>
                     <xsl:text> (</xsl:text>
                     <a href="/{//site/city}/auth/logout" style="text-decoration:none;">выход</a>
-                    <xsl:text>) </xsl:text><br /><xsl:text>Настройки </xsl:text>
+                    <xsl:text>) </xsl:text>
+                    <br />
+                    <xsl:text>Настройки </xsl:text>
                     <a href="/blog/settings/profile/">профиля</a>
                 </xsl:when>
                 <xsl:otherwise>
-                    <a href="#" id="login">Войти</a> / <a href="#" id="registration">Регистрация</a>
+                    <a href="#" id="login">Войти</a> /
+                    <a href="#" id="registration">Регистрация</a>
                 </xsl:otherwise>
             </xsl:choose>
         </div>
@@ -158,7 +166,8 @@
                     <div class="clear"></div>
                 </div>
                 <div id="search_sample">
-                    например, <a href="#" onclick="$('#search_text').val($(this).html());">суши-бар</a>
+                    например,
+                    <a href="#" onclick="$('#search_text').val($(this).html());">суши-бар</a>
                 </div>
             </div>
         </div>
@@ -177,20 +186,46 @@
     <!-- Список настроений -->
     <xsl:template match="moods/item">
         <div class="icon rounded no_text_select" uri="{uri}">
-            <div class="count"><xsl:value-of select="rest_count" /></div>
+            <div class="count">
+                <xsl:value-of select="rest_count" />
+            </div>
             <img src="/public/images/moods/{uri}.png" alt="{caption}" />
-            <a href="#mood-{uri}" class="caption"><xsl:value-of select="title" /></a>
+            <a href="#mood-{uri}" class="caption">
+                <xsl:value-of select="title" />
+            </a>
         </div>
     </xsl:template>
 
     <!-- Footer -->
     <xsl:template name="footer">
         <div id="copyright">
-            <div class="left">Copyright, 2010 DIAR LTD</div>
-            <div class="right">
+            <div class="left">2010 Diar group
+                <br />
+                <br />Дизайн —
+                <a href="http://bpirok.ru">Большой Пирок</a>
+            </div>
+            <div class="smi">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
                 <a  href="#" id="callback">Обратная связь</a>
+                <br />
+                <br />
+                При полном или частичном цитировании,
+                заимствовании, использовании ссылка обязательна.
+            </div>
+            <div class="right">
+                <a href="http://www.facebook.com/profile.php?id=100001264771648">
+                    <img src="/public/images/icons/fb.png" alt="Мы в FaceBook" />
+                </a>
+                <a href="http://foodfoodru.livejournal.com/">
+                    <img src="/public/images/icons/lj.png" alt="Мы в ЖЖ" />
+                </a>
+                <a href="http://vkontakte.ru/club16013362 ">
+                    <img src="/public/images/icons/vk.png" alt="Мы Вконтакте" />
+                </a>
+                <a href="http://twitter.com/foodfoodru">
+                    <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
+                </a>
             </div>
         </div>
     </xsl:template>
