@@ -289,7 +289,9 @@
                 заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
-<<<<<<< HEAD
+                Присоединяйся к нам!
+                <br />
+                <br />
                 <a href="http://www.facebook.com/profile.php?id=100001264771648">
                     <img src="/public/images/icons/fb.png" alt="Мы в FaceBook" />
                 </a>
@@ -302,15 +304,9 @@
                 <a href="http://twitter.com/foodfoodru">
                     <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
                 </a>
-=======
-            	Присоединяйся к нам!<br />
-<br />
-
-                <a href="#"><img src="/public/images/icons/fb.png" alt="Мы в FaceBook" /></a>
-                <a href="#"><img src="/public/images/icons/lj.png" alt="Мы в ЖЖ" /></a>
-                <a href="#"><img src="/public/images/icons/vk.png" alt="Мы Вконтакте" /></a>
-                <a href="#"><img src="/public/images/icons/tw.png" alt="Мы в Twitter" /></a>
->>>>>>> 7ff19bde78fb23dce8600ab7bcfd93a27da0e415
+            	Присоединяйся к нам!
+                <br />
+                <br />
             </div>
         </div>
     </xsl:template>

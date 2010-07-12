@@ -214,6 +214,9 @@
                 заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
+                Присоединяйся к нам!
+                <br />
+                <br />
                 <a href="http://www.facebook.com/profile.php?id=100001264771648">
                     <img src="/public/images/icons/fb.png" alt="Мы в FaceBook" />
                 </a>
@@ -226,6 +229,9 @@
                 <a href="http://twitter.com/foodfoodru">
                     <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
                 </a>
+            	Присоединяйся к нам!
+                <br />
+                <br />
             </div>
         </div>
     </xsl:template>
