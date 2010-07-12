@@ -711,7 +711,7 @@ html {
     color: #FF6600;
 }
 #copyright {
-    height:45px;
+    height:115px;
     background:#000;
     color:#FFF;
     margin-top:20px;
@@ -719,8 +719,12 @@ html {
 
 #copyright .left {
     float:left;
-    background:url(/public/images/icons/rss_icon.jpg) 15px 15px no-repeat;
     padding:15px 0 5px 40px;
+	width:290px;
+}
+
+#copyright .left a{
+	color:#FFFFFF;
 }
 
 #copyright .right {
@@ -735,12 +739,19 @@ html {
 }
 .smi {
     float:left;
-    font-size: 9px;
-    color:#ddd;
+    font-size: 12px;
     padding-top: 18px;
     padding-left: 10px;
     font-family: Verdana, Arial, Tahoma;
     width:300px;
+}
+.smi a{
+	margin-right:10px;
+	color:#fff;
+}
+
+.smi a:hover{
+	color:#FF6600;
 }
 /******************************** CLASS *****************************/
 .clear {
