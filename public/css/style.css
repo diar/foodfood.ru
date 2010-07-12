@@ -715,6 +715,7 @@ html {
     background:#000;
     color:#FFF;
     margin-top:20px;
+	font-size:16xpx;
 }
 
 #copyright .left {
@@ -730,7 +731,10 @@ html {
 #copyright .right {
     float:right;
     padding:15px 265px 10px 0;
+	color:#FF6600;
 }
+
+
 
 #copyright .right a {
     padding-right:15px;
@@ -739,7 +743,6 @@ html {
 }
 .smi {
     float:left;
-    font-size: 12px;
     padding-top: 18px;
     padding-left: 10px;
     font-family: Verdana, Arial, Tahoma;
