@@ -43,10 +43,8 @@
                 <script type="text/javascript">
                     google.load("jquery", "1.4.2");
                     google.load("swfobject", "2.2");
-                    site_city = '
-                    <xsl:value-of select="site/city" />';
-                    user_auth = '
-                    <xsl:value-of select="//user/is_auth" />';
+                    site_city = '<xsl:value-of select="site/city" />';
+                    user_auth = '<xsl:value-of select="//user/is_auth" />';
                 </script>
                 <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
@@ -214,6 +212,9 @@
                 заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
+                Присоединяйся к нам!
+                <br />
+                <br />
                 <a href="http://www.facebook.com/profile.php?id=100001264771648">
                     <img src="/public/images/icons/fb.png" alt="Мы в FaceBook" />
                 </a>
