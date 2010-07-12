@@ -41,7 +41,8 @@ class MD_Article extends Model {
                 $article['topic_id'] = $topic['topic_id'];
                 $article['topic_date_day'] = $topic['topic_date_add_day'];
                 $article['topic_date_month'] = String::toMonth($topic['topic_date_add_month']);
-                preg_match('/^(.*?)[\.|\?|!]/is', $topic['topic_text_short'],$topic_text);
+                $topic_text = preg_replace('/<img [^>]*>/i','',$topic['topic_text_short']);
+                preg_match('/^(.*?)[\.|\?|!]/is', $topic_text,$topic_text);
                 $article['text'] = !empty($topic_text[1]) ? $topic_text[1].'...' : '...';
                 $article['comment_count'] = String::toDeclension(
                         $topic['topic_count_comment'],'комментарий','комментария','комментариев'
