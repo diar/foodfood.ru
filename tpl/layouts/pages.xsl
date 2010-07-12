@@ -43,10 +43,8 @@
                 <script type="text/javascript">
                     google.load("jquery", "1.4.2");
                     google.load("swfobject", "2.2");
-                    site_city = '
-                    <xsl:value-of select="site/city" />';
-                    user_auth = '
-                    <xsl:value-of select="//user/is_auth" />';
+                    site_city = '<xsl:value-of select="site/city" />';
+                    user_auth = '<xsl:value-of select="//user/is_auth" />';
                 </script>
                 <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
