@@ -82,9 +82,9 @@ $(document).ready(function(){
                 $(this).css('backgroundPosition','0 -24px');
             }
             if (recomended_position==0) {
-                $('#recomended .back').css('backgroundPosition','0 0');
+                $('#recomended .back').css('backgroundPosition','0 -48px');
             } else {
-                $('#recomended .back').css('backgroundPosition','0 -24px');
+                $('#recomended .back').css('backgroundPosition','0 -72px');
             }
         }
     });
@@ -105,9 +105,9 @@ $(document).ready(function(){
             });
             recomended_position=recomended_position-counter;
             if (recomended_position==0) {
-                $(this).css('backgroundPosition','0 0');
+                $(this).css('backgroundPosition','0 -48px');
             } else {
-                $(this).css('backgroundPosition','0 -24px');
+                $(this).css('backgroundPosition','0 -72px');
             }
             if (recomended_position==recomended_count-recomended_visible) {
                 $('#recomended .next').css('backgroundPosition','0 0');

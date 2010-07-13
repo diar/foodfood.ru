@@ -28,7 +28,8 @@
     cursor:pointer;
 }
 
-#arrows div.back,#arrows div.next {
+#arrows div.back,
+#arrows div.next {
     float:left;
     width:24px;
     height:24px;
@@ -36,12 +37,12 @@
 }
 
 #arrows div.back {
-    background:url(/public/images/icons/recomended_arrow_back.jpg) 0 0 no-repeat;
+    background:url(/public/images/icons/recomended_arrow.png) 0 -48px no-repeat;
+}
+#arrows div.next {
+    background:url(/public/images/icons/recomended_arrow.png) 0 -24px no-repeat;
 }
 #arrows div.back:active {margin:6px 1px 0 2px;}
-#arrows div.next {
-    background:url(/public/images/icons/recomended_arrow_next.jpg) 0 -24px no-repeat;
-}
 #arrows div.next:active {margin:6px 0 0 4px;}
 
 #recomended_container {

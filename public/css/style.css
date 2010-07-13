@@ -1069,10 +1069,10 @@ body {
     float:left;
     cursor:pointer;
 }
-.minus {background:url(/public/images/icons/minus.png) 0 0 no-repeat;}
-.minus:active {background:url(/public/images/icons/minus.png) 0 -24px no-repeat;}
-.plus {background:url(/public/images/icons/plus.png) 0 0 no-repeat;}
-.plus:active {background:url(/public/images/icons/plus.png) 0 -24px no-repeat;}
+.minus {background:url(/public/images/icons/plus_minus.png) 0 -48px no-repeat;}
+.minus:active {background:url(/public/images/icons/plus_minus.png) 0 -72px no-repeat;}
+.plus {background:url(/public/images/icons/plus_minus.png) 0 0 no-repeat;}
+.plus:active {background:url(/public/images/icons/plus_minus.png) 0 -24px no-repeat;}
 #recomended_gallery .rest_rating {position:absolute;margin-top: -44px;}
 /* Icons
 - ---------------------------------------------------------------------*/
