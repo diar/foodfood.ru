@@ -50,13 +50,7 @@
                     <xsl:value-of select="//user/is_auth" />
                     <xsl:text>';</xsl:text>
                 </script>
-                <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.dropshadow.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.keyboard.js"></script>
-                <script type="text/javascript" src="/public/js/libs/lightbox/js/jquery.lightbox.pack.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.noselect.js"></script>
-                <script type="text/javascript" src="/public/js/libs/md5.js"></script>
+                <script type="text/javascript" src="/public/js/libs/jquery.libs.js"></script>
                 <script type="text/javascript" src="/public/js/system.js"></script>
                 <script type="text/javascript" src="/public/js/moods.js"></script>
                 <script type="text/javascript" src="/public/js/pages.js"></script>
@@ -191,7 +185,7 @@
             <div class="count">
                 <xsl:value-of select="rest_count" />
             </div>
-            <img src="/public/images/moods/{uri}.png" alt="{caption}" />
+            <img src="http://images.foodfood.ru/moods/{uri}.png" alt="{caption}" />
             <a href="#mood-{uri}" class="caption">
                 <xsl:value-of select="title" />
             </a>

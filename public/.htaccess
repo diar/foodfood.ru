@@ -1,2 +1,5 @@
-#Убрать комментарий для включения кеширования статики
-#expires 31d
+ExpiresActive On
+ExpiresDefault "access plus 10 years"
+<FilesMatch \.(html|xhtml|xml|shtml|phtml|php)$>
+ExpiresActive Off
+</FilesMatch>

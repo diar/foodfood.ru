@@ -209,7 +209,10 @@ body {
     border:1px solid #ff6600;
     width:132px;
 }
-
+#moods .icon img{
+    width:130px;
+    height: 130px;
+}
 #moods .icon .caption {
     display:block;
     width:100%;
