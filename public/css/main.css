@@ -236,24 +236,12 @@
     float:left;
     text-align:center;
     width:48px;
-    height:34px;
-    color:#FFF;
+    height:33px;
+    color:#fff;
     font-size:9px;
     line-height:10px;
-    background:#d84705;
-    padding:1px 1px 1px 2px;
+    padding:5px 1px 1px 2px;
     text-align: center;
-    padding-top:5px;
-}
-
-#restaurant_discount .discounts .sale5 {
-    background:url(/public/images/sale5.jpg) no-repeat;
-}
-#restaurant_discount .discounts .sale15 {
-    background:url(/public/images/sale15.jpg) no-repeat;
-}
-#restaurant_discount .discounts .sale20 {
-    background:url(/public/images/sale20.jpg) no-repeat;
 }
 
 #restaurant_discount .discounts .percent {
