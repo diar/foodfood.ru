@@ -2,3 +2,7 @@ blog/templates/cache
 blog/templates/compiled
 config
 blog/config
+tmp
+blog/tmp
+blog/uploads
+blog/logs
