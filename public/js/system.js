@@ -150,7 +150,6 @@ $(document).ready(function () {
             },
             function(data){
                 $('#reg_loader').fadeOut(500);
-                alert(data);
                 if (data=='SPACE') $('#reg_message').html('Ошибочка, придёться заполнить все поля');
                 else if (data=='PHONE_EXIST') {
                     a = '<a href="#" onclick="$.showDialog(\'passwd_dialog\');">Забыл пароль?</a>';
