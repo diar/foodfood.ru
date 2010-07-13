@@ -40,10 +40,14 @@
                 <xsl:call-template name="callback_dialog" />
                 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
-                    google.load("jquery", "1.4.2");
-                    google.load("swfobject", "2.2");
-                    site_city = '<xsl:value-of select="site/city" />';
-                    user_auth = '<xsl:value-of select="//user/is_auth" />';
+                    <xsl:text>google.load("jquery", "1.4.2");</xsl:text>
+                    <xsl:text>google.load("swfobject", "2.2");</xsl:text>
+                    <xsl:text>site_city = '</xsl:text>
+                    <xsl:value-of select="site/city" />
+                    <xsl:text>';</xsl:text>
+                    <xsl:text>user_auth = '</xsl:text>
+                    <xsl:value-of select="//user/is_auth" />
+                    <xsl:text>';</xsl:text>
                 </script>
                 <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
@@ -272,19 +276,21 @@
             </div>
         </div>
         <div id="copyright">
-            <div class="left">2010 Diar group<br />
-<br />Дизайн — <a href="http://bpirok.ru">Большой Пирок</a>
-</div>
+            <div class="left">&#169; 2010 Diar group
+                <br />
+                <br />Дизайн —
+                <a href="http://bpirok.ru">Большой Пирок</a>
+            </div>
             <div class="smi">
                 <a href="/{//site/city}/content/about">О проекте</a>
                 <a href="/{//site/city}/content/ads">Реклама</a>
-                <a  href="#" id="callback">Обратная связь</a><br />
-<br />
-При полном или частичном цитировании, 
-заимствовании, использовании ссылка обязательна.
+                <a  href="#" id="callback">Обратная связь</a>
+                <br />
+                <br />
+                При полном или частичном цитировании,
+                заимствовании, использовании ссылка обязательна.
             </div>
             <div class="right">
-
             	Присоединяйся к нам!
                 <br />
                 <br />
@@ -300,7 +306,6 @@
                 <a href="http://twitter.com/foodfoodru">
                     <img src="/public/images/icons/tw.png" alt="Мы в Twitter" />
                 </a>
-
             </div>
         </div>
     </xsl:template>

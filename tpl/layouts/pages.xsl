@@ -41,10 +41,14 @@
                 <xsl:call-template name="callback_dialog" />
                 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
-                    google.load("jquery", "1.4.2");
-                    google.load("swfobject", "2.2");
-                    site_city = '<xsl:value-of select="site/city" />';
-                    user_auth = '<xsl:value-of select="//user/is_auth" />';
+                    <xsl:text>google.load("jquery", "1.4.2");</xsl:text>
+                    <xsl:text>google.load("swfobject", "2.2");</xsl:text>
+                    <xsl:text>site_city = '</xsl:text>
+                    <xsl:value-of select="site/city" />
+                    <xsl:text>';</xsl:text>
+                    <xsl:text>user_auth = '</xsl:text>
+                    <xsl:value-of select="//user/is_auth" />
+                    <xsl:text>';</xsl:text>
                 </script>
                 <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
@@ -197,7 +201,7 @@
     <!-- Footer -->
     <xsl:template name="footer">
         <div id="copyright">
-            <div class="left">2010 Diar group
+            <div class="left">&#169; 2010 Diar group
                 <br />
                 <br />Дизайн —
                 <a href="http://bpirok.ru">Большой Пирок</a>

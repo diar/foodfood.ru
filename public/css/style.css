@@ -173,22 +173,21 @@ body {
     padding-top:2px;
 }
 #cursor_top .left_text {left:50px;}
-
 #cursor_top .right_text {right:50px;}
 #cursor .scroll_left {
     float:left;
-    background:url(/public/images/scroll_left.jpg) top center no-repeat;
+    background:url(/public/images/scroll.jpg) 0 -18px no-repeat;
     width:19px;
     height:18px;
 }
 #cursor .scroll_right {
     float:right;
-    background:url(/public/images/scroll_right.jpg) top center no-repeat;
+    background:url(/public/images/scroll.jpg) 0 -36px no-repeat;
     width:19px;
     height:18px;
 }
 #moods #cursor {
-    background:url(/public/images/scroll.jpg) top center;
+    background:url(/public/images/scroll.jpg) 0 0 repeat-x;
     width:165px;
     height:18px;
     cursor:pointer;
