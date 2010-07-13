@@ -473,7 +473,6 @@ body {
     margin:5px auto;
     max-width:1480px;
 }
-
 #restaurant_by_mood .restaurant_tags .item {
     height: 52px;
     width:52px;
@@ -483,6 +482,7 @@ body {
     padding:3px 0;
     cursor:pointer;
 }
+#restaurant_by_mood .restaurant_tags img {height:32px;width:32px;}
 
 #restaurant_by_mood .restaurant_tags .item:hover {
     border:1px solid #a1a1a1;

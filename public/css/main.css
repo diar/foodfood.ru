@@ -38,16 +38,11 @@
 #arrows div.back {
     background:url(/public/images/icons/recomended_arrow_back.jpg) 0 0 no-repeat;
 }
-#arrows div.back:active {
-    margin:6px 1px 0 2px;
-}
+#arrows div.back:active {margin:6px 1px 0 2px;}
 #arrows div.next {
     background:url(/public/images/icons/recomended_arrow_next.jpg) 0 -24px no-repeat;
 }
-
-#arrows div.next:active {
-    margin:6px 0 0 4px;
-}
+#arrows div.next:active {margin:6px 0 0 4px;}
 
 #recomended_container {
     height:310px;
@@ -316,22 +311,18 @@
 }
 
 #restaurant_review .reviews {
-
     width:250px;
 }
-
 #restaurant_review .review {
     width:280px;
     font-size:12px;
     padding-left:30px;
     padding-top:10px;
 }
-
 #restaurant_review .from {
     padding-left:20px;
     background:url(/public/images/icons/user_icon.gif) no-repeat;
 }
-
 #restaurant_review .text {
     margin-top:3px;
     font-size:12px;
@@ -340,27 +331,18 @@
     padding-left:30px;
     overflow:hidden;
 }
-
-#restaurant_review .lq {
-    margin-left: -7px;
-}
-
+#restaurant_review .lq {margin-left: -7px;}
 #restaurant_article .caption {
     color:#fff;
     background:url(/public/images/caption_green_bg.jpg) repeat-x;
     width:80%;
 }
-
-#restaurant_article .caption a {
-    color:#fff;
-}
-
+#restaurant_article .caption a {color:#fff;}
 #restaurant_article .article_block {
     float:left;
     display:none;
     width:270px;
 }
-
 #restaurant_article .date {
     background: #fff;
     border:1px solid #fff;
@@ -370,10 +352,7 @@
     text-align:center;
     font-size:11px;
 }
-#restaurant_article .date .number{
-    font-size:24px;
-    color:#333;
-}
+#restaurant_article .date .number{font-size:24px;color:#333;}
 #restaurant_article .date .month{
     font-size:9px;
     background:#090;
@@ -381,18 +360,13 @@
     color:#fff;
     padding:2px 0;
 }
-
-#restaurant_article .article_description {
-    font-size:9px;
-}
-
+#restaurant_article .article_description {font-size:9px;}
 #restaurant_article .article_title {
     display:block;
     font-size:14px;
     color:#000;
     width: 190px;
 }
-
 #restaurant_article .text {
     width:170px;
     margin-top:5px;
@@ -400,29 +374,19 @@
     font-size:12px;
     line-height: 13px;
 }
-
-#restaurant_dostavka {
-
-}
-
 #restaurant_dostavka .caption {
     background:url(/public/images/caption_white_bg.jpg) repeat-x;
     float:right;
     width:135px;
     padding-right:80px;
 }
-
-#restaurant_dostavka .caption a {
-    color:#489615;
-}
-
+#restaurant_dostavka .caption a {color:#489615;}
 #restaurant_dostavka .dostavka_li {
     background:url(/public/images/icons/small_dostavka.png) 0 5px no-repeat;
     font-size:12px;
     padding:5px 0 5px 30px;
     line-height:30px;
 }
-
 #restaurant_dostavka .dostavka_li span {
     font-size:11px;
     color:#555;
@@ -434,47 +398,19 @@
     float:right;
     padding-right:100px;
 }
-
-#restaurant_banner_mini {
-    text-align:right;
-}
-
-#additional2_content {
-    height:454px;
-    background:#c8c8c8;
-}
-
+#restaurant_banner_mini {text-align:right;}
+#additional2_content {height:454px;background:#c8c8c8;}
 #recomended_gallery div.img img.rest_image,#restaurant_new .border img {
-    width:220px;
+    width:220px;height:220px;
 }
-
-.name a,#restaurant_discount .discount a {
-    font-size:16px;
+.name a,#restaurant_discount .discount a {font-size:16px;}
+.commentCount,.commentCount a {font-size:12px;}
+.additional_left,#restaurant_review {width:300px;}
+#restaurant_poster .poster,#restaurant_article .article {margin-top:15px;}
+#restaurant_poster .poster {height:90px;}
+#restaurant_poster .poster_icon,#restaurant_article .article_icon {
+    float:left;width:76px;height:76px;
 }
-
-.commentCount,.commentCount a {
-    font-size:12px;
-}
-
-.additional_left,#restaurant_review {
-    width:300px;
-}
-
-#restaurant_poster .poster,#restaurant_article .article {
-    margin-top:15px;
-}
-#restaurant_poster .poster {
-    height:90px;
-}
-
-#restaurant_poster .poster_icon,
-#restaurant_article .article_icon {
-    float:left;
-    width:76px;
-}
-
 #restaurant_poster .poster_text,#restaurant_article .article_text {
-    float:left;
-    padding-left:15px;
-    padding-right:10px;
+    float:left;padding-left:15px;padding-right:10px;
 }

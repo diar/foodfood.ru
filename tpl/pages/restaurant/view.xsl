@@ -19,10 +19,13 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             rest_page_activate = true;
-            current_rest_id = <xsl:value-of select="restaurant/id" />;
+            current_rest_id =
+            <xsl:value-of select="restaurant/id" />;
             function map_init() {
-            x_coord = '<xsl:value-of select="restaurant/rest_google_x" />';
-            y_coord = '<xsl:value-of select="restaurant/rest_google_y" />';
+            x_coord = '
+            <xsl:value-of select="restaurant/rest_google_x" />';
+            y_coord = '
+            <xsl:value-of select="restaurant/rest_google_y" />';
             if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseFloat(x_coord);} else {x_coord = 0;}
             if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseFloat(y_coord);} else {y_coord = 0;}
             var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
@@ -84,7 +87,11 @@
                     </a>
                     <div>
                         <div class="caption">
-                            <div class="title"><xsl:value-of select="mood_title" /> <xsl:if test="mood_title != ''">: </xsl:if>  <xsl:value-of select="rest_title" /></div>
+                            <h1 class="title">
+                                <xsl:value-of select="mood_title" />
+                                <xsl:if test="mood_title != ''">: </xsl:if>
+                                <xsl:value-of select="rest_title" />
+                            </h1>
                         </div>
                         <!-- Ссылка на следующий ресторан -->
                         <a>
@@ -113,9 +120,12 @@
                         </a>
                         <div class="rest_rating">
                             <div class="minus"></div>
-                            <div class="rating_line"><xsl:value-of select="rest_rating" /></div>
+                            <div class="rating_line">
+                                <xsl:value-of select="rest_rating" />
+                            </div>
                             <div class="plus"></div>
-                    </div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="restaurant_tags">
@@ -131,7 +141,8 @@
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:value-of select="worktime/time_start"/> до
-                        <xsl:value-of select="worktime/time_end"/> <br />
+                        <xsl:value-of select="worktime/time_end"/>
+                        <br />
                         <xsl:choose>
                             <xsl:when test="worktime/opened=1">
                                 <span>Открыто</span>
@@ -174,56 +185,85 @@
                     </div>
 
                     <div class="rest_params">
-                        <xsl:if test="categories != ''"><span class="param_type">Тип: </span> <xsl:value-of select="categories" /><br /></xsl:if>
-                        <xsl:if test="cooks != ''"><span class="param_type">Кухня: </span> <xsl:value-of select="cooks" /><br /></xsl:if>
-                        <xsl:if test="diets != ''"><span class="param_type">Меню: </span> <xsl:value-of select="diets" /><br /></xsl:if>
-                        <xsl:if test="musics != ''"><span class="param_type">Музыка: </span> <xsl:value-of select="musics" /><br /></xsl:if>
-                        <xsl:if test="payments != ''"><span class="param_type">Способы оплаты: </span> <xsl:value-of select="payments" /><br /></xsl:if>
+                        <xsl:if test="categories != ''">
+                            <span class="param_type">Тип: </span>
+                            <xsl:value-of select="categories" />
+                            <br />
+                        </xsl:if>
+                        <xsl:if test="cooks != ''">
+                            <span class="param_type">Кухня: </span>
+                            <xsl:value-of select="cooks" />
+                            <br />
+                        </xsl:if>
+                        <xsl:if test="diets != ''">
+                            <span class="param_type">Меню: </span>
+                            <xsl:value-of select="diets" />
+                            <br />
+                        </xsl:if>
+                        <xsl:if test="musics != ''">
+                            <span class="param_type">Музыка: </span>
+                            <xsl:value-of select="musics" />
+                            <br />
+                        </xsl:if>
+                        <xsl:if test="payments != ''">
+                            <span class="param_type">Способы оплаты: </span>
+                            <xsl:value-of select="payments" />
+                            <br />
+                        </xsl:if>
                     </div>
                     <div class="rest_description">
                         <xsl:value-of select="rest_description" disable-output-escaping="yes" />
                     </div>
                     <div class="rest_contacts">
                         <xsl:if test="rest_phone != ''">
-                            <div class="phone"><xsl:value-of select="rest_phone" /></div>
+                            <div class="phone">
+                                <xsl:value-of select="rest_phone" />
+                            </div>
                         </xsl:if>
                         <xsl:if test="rest_address != ''">
                             <div class="address">
                                 <xsl:value-of select="rest_address" />
-                                <span class="map_link"><a href="#">Карта проезда</a></span>
+                                <span class="map_link">
+                                    <a href="#">Карта проезда</a>
+                                </span>
                             </div>
                         </xsl:if>
                         <xsl:choose>
                             <xsl:when test="rest_metro!=''">
-                                <div class="metro"><xsl:value-of select="rest_metro" /></div>
+                                <div class="metro">
+                                    <xsl:value-of select="rest_metro" />
+                                </div>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
                             <xsl:when test="rest_ostanovka!=''">
-                                <div class="ostanovka"><xsl:value-of select="rest_ostanovka" /></div>
+                                <div class="ostanovka">
+                                    <xsl:value-of select="rest_ostanovka" />
+                                </div>
                             </xsl:when>
                         </xsl:choose>
                     </div>
                     <xsl:if test="//person!=''">
-                    <div class="person_block">
-                        <div class="caption">Приятного аппетита желает:</div>
-                        <div class="photo">
-                            <a href="/{//site/city}/persons/view/{//person/id}">
-                                <img src="/upload/image/persons/medium-{//person/uri}.jpg" alt="{//person/person_name}" />
-                            </a>
-                        </div>
-                        <div class="text">
-                            <div class="fio">
+                        <div class="person_block">
+                            <div class="caption">Приятного аппетита желает:</div>
+                            <div class="photo">
                                 <a href="/{//site/city}/persons/view/{//person/id}">
-                                    <xsl:value-of select="//person/person_name" />
+                                    <img src="/upload/image/persons/medium-{//person/uri}.jpg" alt="{//person/person_name}" />
                                 </a>
                             </div>
-                            <xsl:value-of select="//person/person_post" /><br />
-                            <br />
-                            <xsl:value-of select="//person/person_text" />
+                            <div class="text">
+                                <div class="fio">
+                                    <a href="/{//site/city}/persons/view/{//person/id}">
+                                        <xsl:value-of select="//person/person_name" />
+                                    </a>
+                                </div>
+                                <xsl:value-of select="//person/person_post" />
+                                <br />
+                                <br />
+                                <xsl:value-of select="//person/person_text" />
+                            </div>
+                            <div class="clear"></div>
                         </div>
-                        <div class="clear"></div>
-                    </div>
                     </xsl:if>
                 </div>
                 <!-- Средняя колонка -->
@@ -269,9 +309,15 @@
                                         </li>
                                     </xsl:when>
                                 </xsl:choose>
-                                <li class="link dostavka_icon"><a href="#">Доставить еду</a></li>
-                                <li class="link"><a href="#">Забронировать столик</a></li>
-                                <li class="link"><a href="#">Заказать банкет</a></li>
+                                <li class="link dostavka_icon">
+                                    <a href="#">Доставить еду</a>
+                                </li>
+                                <li class="link">
+                                    <a href="#">Забронировать столик</a>
+                                </li>
+                                <li class="link">
+                                    <a href="#">Заказать банкет</a>
+                                </li>
                             </ul>
                             <div class="menu_link menu_icon">
                                 <xsl:if test="have_menu=1">
@@ -332,10 +378,14 @@
             <div style="height:200px; width:300px;font-size:14px;">
                 <img src="/public/images/logo_small.png" />
                 <div>
-                    <div><xsl:value-of select="rest_title" /></div>
+                    <div>
+                        <xsl:value-of select="rest_title" />
+                    </div>
                     <div class="rest_contacts">
                         <xsl:if test="rest_phone != ''">
-                            <div class="phone"><xsl:value-of select="rest_phone" /></div>
+                            <div class="phone">
+                                <xsl:value-of select="rest_phone" />
+                            </div>
                         </xsl:if>
                         <xsl:if test="rest_address != ''">
                             <div class="address">
@@ -344,12 +394,16 @@
                         </xsl:if>
                         <xsl:choose>
                             <xsl:when test="rest_metro!=''">
-                                <div class="metro"><xsl:value-of select="rest_metro" /></div>
+                                <div class="metro">
+                                    <xsl:value-of select="rest_metro" />
+                                </div>
                             </xsl:when>
                         </xsl:choose>
                         <xsl:choose>
                             <xsl:when test="rest_ostanovka!=''">
-                                <div class="ostanovka"><xsl:value-of select="rest_ostanovka" /></div>
+                                <div class="ostanovka">
+                                    <xsl:value-of select="rest_ostanovka" />
+                                </div>
                             </xsl:when>
                         </xsl:choose>
                     </div>
@@ -383,9 +437,14 @@
             </div>
             <div class="text_block">
                 <div class="title">
-                    <a href="/{//site/city}/poster/view/{rest_poster_id}"><xsl:value-of select="title" /></a>
+                    <a href="/{//site/city}/poster/view/{rest_poster_id}">
+                        <xsl:value-of select="title" />
+                    </a>
                 </div>
-            <div class="text"><xsl:value-of select="anounce" /></div></div>
+                <div class="text">
+                    <xsl:value-of select="anounce" />
+                </div>
+            </div>
         </div>
         <div class="clear"></div>
     </xsl:template>
@@ -394,10 +453,14 @@
     <xsl:template match="reviews/item">
         <div class="review">
             <div class="user">
-                <a href="/blog/profile/{user_login}"><xsl:value-of select="user_login" /></a>
+                <a href="/blog/profile/{user_login}">
+                    <xsl:value-of select="user_login" />
+                </a>
                 говорит:
             </div>
-            <div class="text">« <xsl:value-of select="text" /> »</div>
+            <div class="text">«
+                <xsl:value-of select="text" /> »
+            </div>
         </div>
     </xsl:template>
 
@@ -424,7 +487,9 @@
             <div class="img">
                 <img src="/public/images/tags/{uri}.png" alt="{title}" />
             </div>
-            <div class="text"><xsl:value-of select="title" /></div>
+            <div class="text">
+                <xsl:value-of select="title" />
+            </div>
         </div>
     </xsl:template>
 

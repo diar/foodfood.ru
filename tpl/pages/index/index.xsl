@@ -71,7 +71,7 @@
                                             <img src="/public/images/rest_icon.jpg" alt="{rest_title}" />
                                         </xsl:when>
                                         <xsl:when test="new_rest/rest_photo=1">
-                                            <img src="/upload/image/restaurant/{new_rest/rest_uri}.jpg" alt="{rest_title}" />
+                                            <img src="http://uploads.foodfood.ru/image/restaurant/{new_rest/rest_uri}.jpg" alt="{rest_title}" />
                                         </xsl:when>
                                     </xsl:choose>
                                 </a>
@@ -183,7 +183,7 @@
                             <img src="/public/images/rest_icon.jpg"  alt="{rest_title}" class="rest_image" />
                         </xsl:when>
                         <xsl:when test="rest_photo=1">
-                            <img src="/upload/image/restaurant/{rest_uri}.jpg"  alt="{rest_title}" class="rest_image" />
+                            <img src="http://uploads.foodfood.ru/image/restaurant/{rest_uri}.jpg"  alt="{rest_title}" class="rest_image" />
                         </xsl:when>
                     </xsl:choose>
                 </a>

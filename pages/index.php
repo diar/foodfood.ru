@@ -49,7 +49,7 @@ class index_Page extends View {
         $news = MD_News::getAll(null, 'id DESC LIMIT 0,5');
         // Получаем список статей и афиш
         $articles = MD_Article::getArticleBlocks(array('count' => 20));
-        $posters = MD_Poster::getPosterBlocksWeek(array('count' => 20));
+        $posters = MD_Poster::getPosterBlocksWeek(array('count' => 15));
         // Получаем список скидок
         $discounts = MD_Discount::getDiscountBlock(array('count' => 7));
         // Получаем список отзывов

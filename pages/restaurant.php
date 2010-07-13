@@ -54,8 +54,11 @@ class restaurant_Page extends View {
         $have_menu = MD_Restaurant::haveMenu($restaurant['id']);
         $have_menu_map = MD_Restaurant::haveMenuMap($restaurant['id']);
         $mood_title = DB::getValue('list_mood','title',"uri = '$mood'");
+        $title = 'Ресторан '.$restaurant['rest_title'].'. Меню, скидки, акции и заказ столиков на FoodFood.ru';
+        $description = str_replace('"', '\'', $restaurant['rest_description']);
         // Добавляем переменные xslt
-        self::$page['site']['page'] = $restaurant['rest_title'];
+        self::$page['site']['title'] = $title;
+        self::$page['site']['description'] = preg_replace('/<[^>]*>|\\r|\\n/i', '', $description);
         self::$page['person'] = MD_Person::getLikePerson($restaurant['id']);
         self::$page['content']['restaurant'] = $restaurant;
         self::$page['content']['discount'] = MD_Discount::getPartnerById($restaurant['id']);

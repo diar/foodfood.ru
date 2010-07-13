@@ -59,7 +59,7 @@
                                     <img src="/public/images/rest_icon.jpg" alt="{rest_title}" />
                                 </xsl:when>
                                 <xsl:when test="rest_photo=1">
-                                    <img src="/upload/image/restaurant/{rest_uri}.jpg" alt="{rest_title}" />
+                                    <img src="http://uploads.foodfood.ru/image/restaurant/{rest_uri}.jpg" alt="{rest_title}" />
                                 </xsl:when>
                             </xsl:choose>
                         </a>
@@ -73,7 +73,7 @@
                             <img src="/public/images/icons/rest_logo_icon.gif" />
                         </xsl:when>
                         <xsl:otherwise>
-                            <img src="/upload/image/rest_logo/{rest_uri}.jpg" />
+                            <img src="http://uploads.foodfood.ru/image/rest_logo/{rest_uri}.jpg" />
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
