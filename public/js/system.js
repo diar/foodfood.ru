@@ -150,6 +150,7 @@ $(document).ready(function () {
             },
             function(data){
                 $('#reg_loader').fadeOut(500);
+                alert(data);
                 if (data=='SPACE') $('#reg_message').html('Ошибочка, придёться заполнить все поля');
                 else if (data=='PHONE_EXIST') {
                     a = '<a href="#" onclick="$.showDialog(\'passwd_dialog\');">Забыл пароль?</a>';
@@ -170,7 +171,7 @@ $(document).ready(function () {
                     $('#reg_message').html('Ошибка: введите e-mail в правильном формате');
                 }
                 else if (data=='NOT_LOGIN') {
-                    $('#reg_message').html('Ошибка: логин должен состоять из букв и символов "-", "_"');
+                    $('#reg_message').html('Логин должен состоять из букв и символов -_');
                 }
                 else if (data=='OK')
                     $('#reg_message').html(

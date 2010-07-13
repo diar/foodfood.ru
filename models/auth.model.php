@@ -27,7 +27,7 @@ class MD_Auth extends Model {
         }
         if (!String::isEmail($mail)) return "NOT_MAIL";
         if (!String::isPhone($phone)) return "NOT_PHONE";
-        if (!String::isLogin($login)) return 'NOT_LOGIN';
+        if (!String::isLogin($name)) return 'NOT_LOGIN';
         // Проверяем не зарегистрирован ли уже пользователь
         $u_phone=DB::getValue(Auth::getTable(), 'user_id', 'user_phone='.DB::quote(String::toPhone($phone)));
         if (!empty($u_phone)) return "PHONE_EXIST";

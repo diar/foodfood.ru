@@ -10,7 +10,7 @@
         <xsl:apply-templates select="root" />
     </xsl:template>
 
-    <!-- Список ресторанов -->
+    <!-- Вывод афиши -->
     <xsl:template match="root">
         <script type="text/javascript">
             poster_page_activate = true;
@@ -35,6 +35,7 @@
         </div>
     </xsl:template>
 
+    <!-- Одна афиша -->
     <xsl:template match="items/item">
         <div class="item">
             <div class="img">

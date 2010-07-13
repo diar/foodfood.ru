@@ -23,7 +23,7 @@
         <xsl:apply-templates select="poster" />
     </xsl:template >
 
-    <!-- Информация о лице -->
+    <!-- Афиша -->
     <xsl:template match="poster">
         <div id="additional">
             <div class="restaurant_header rounded">
@@ -39,7 +39,9 @@
             <div class="somepage">
                 <div class="title">
                     <div class="date">
-                        <xsl:value-of select="date_day" /><xsl:text> </xsl:text><xsl:value-of select="date_month" />
+                        <xsl:value-of select="date_day" />
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="date_month" />
                     </div>
                     <div class="caption"><xsl:value-of select="title" /></div>
                 </div>

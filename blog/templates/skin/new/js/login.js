@@ -119,7 +119,7 @@ jQuery.noConflict()(function(){
                     jQuery('#reg_message').html('Ошибка: введите e-mail в правильном формате');
                 }
                 else if (data=='NOT_LOGIN') {
-                    $('#reg_message').html('Ошибка: логин должен состоять из букв и символов "-", "_"');
+                    jQuery('#reg_message').html('Логин должен состоять из букв и символов -_');
                 }
                 else if (data=='OK')
                     jQuery('#reg_message').html(
