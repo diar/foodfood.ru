@@ -19,13 +19,15 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             rest_page_activate = true;
-            current_rest_id =
+            <xsl:text>current_rest_id =</xsl:text>
             <xsl:value-of select="restaurant/id" />;
             function map_init() {
-            x_coord = '
-            <xsl:value-of select="restaurant/rest_google_x" />';
-            y_coord = '
-            <xsl:value-of select="restaurant/rest_google_y" />';
+            <xsl:text>x_coord = '</xsl:text>
+            <xsl:value-of select="restaurant/rest_google_x" />
+            <xsl:text>';</xsl:text>
+            <xsl:text>y_coord = '</xsl:text>
+            <xsl:value-of select="restaurant/rest_google_y" />
+            <xsl:text>';</xsl:text>
             if (x_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {x_coord = parseFloat(x_coord);} else {x_coord = 0;}
             if (y_coord.replace(/(^\s+)|(\s+$)/g, "")!='') {y_coord = parseFloat(y_coord);} else {y_coord = 0;}
             var latlng = new google.maps.LatLng(x_coord+0.002000,y_coord);
