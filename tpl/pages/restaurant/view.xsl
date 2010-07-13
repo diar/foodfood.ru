@@ -471,14 +471,14 @@
         <xsl:param name="big" />
         <xsl:choose>
             <xsl:when test="$big=1">
-                <a href="/upload/image/rest_photo/{../../id}/{src}">
-                    <img src="/upload/image/rest_photo/{../../id}/{src}"
+                <a href="http://uploads.foodfood.ru/image/rest_photo/{../../id}/{src}">
+                    <img src="http://uploads.foodfood.ru/image/rest_photo/{../../id}/{src}"
                          class="main" alt="{rest_title}" />
                 </a>
             </xsl:when>
             <xsl:when test="$big=0">
-                <img src="/upload/image/rest_photo/{../../id}/mini-{src}"
-                     rel="/upload/image/rest_photo/{../../id}/{src}" class="mini" />
+                <img src="http://uploads.foodfood.ru/image/rest_photo/{../../id}/mini-{src}"
+                     rel="http://uploads.foodfood.ru/image/rest_photo/{../../id}/{src}" class="mini" />
             </xsl:when>
         </xsl:choose>
     </xsl:template>
