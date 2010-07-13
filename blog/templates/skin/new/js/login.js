@@ -71,7 +71,7 @@ jQuery.noConflict()(function(){
                 else jQuery('#auth_message').html('Ошибка при авторизации, попробуйте еще раз');
             })
         } else {
-            jQuery('#auth_message').html('Ошибочка, придёться заполнить все поля');
+            jQuery('#auth_message').html('Ошибочка, придётся заполнить все поля');
         }
         if (login=='') jQuery('#auth_login').css('backgroundColor','#c1c1c1');
         else jQuery('#auth_login').css('backgroundColor','#fff');
@@ -112,8 +112,15 @@ jQuery.noConflict()(function(){
                     a = '<a href="#" onclick="$.showDialog(\'passwd_dialog\');">Забыл пароль?</a>';
                     jQuery('#reg_message').html('Пользователь с таким логином уже существует. '+a);
                 }
-                else if (data=='NOT_PHONE') jQuery('#reg_message').html('Ошибка: введите номер телефона в правильном формате');
-                else if (data=='NOT_MAIL') jQuery('#reg_message').html('Ошибка: введите e-mail в правильном формате');
+                else if (data=='NOT_PHONE') {
+                    jQuery('#reg_message').html('Ошибка: введите номер телефона в правильном формате');
+                }
+                else if (data=='NOT_MAIL') {
+                    jQuery('#reg_message').html('Ошибка: введите e-mail в правильном формате');
+                }
+                else if (data=='NOT_LOGIN') {
+                    $('#reg_message').html('Ошибка: логин должен состоять из букв и символов "-", "_"');
+                }
                 else if (data=='OK')
                     jQuery('#reg_message').html(
                         '<span style="color:green">Регистрация прошла успешно. Пароль выслан на ваш номер</span>'
@@ -121,7 +128,7 @@ jQuery.noConflict()(function(){
                 else jQuery('#reg_message').html('Ошибка при регистрации, попробуйте еще раз');
             })
         } else {
-            jQuery('#reg_message').html('Ошибочка, придёться заполнить все поля');
+            jQuery('#reg_message').html('Ошибочка, придётся заполнить все поля');
         }
         return false;
     });

@@ -109,6 +109,15 @@ class String {
     }
 
     /**
+     * Проверка - является ли строка логином
+     * @param $str строка
+     * @return bool;
+     */
+    public static function isLogin ($str) {
+        return preg_match('/^[\da-zа-я\_\-\.]{2,10}$/iu', $str);
+    }
+
+    /**
      * Получить текущую дату
      * @return string;
      */
