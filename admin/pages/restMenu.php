@@ -228,4 +228,16 @@ class restMenu extends AdminModule {
         echo Form::arrayToJqGrid($records, $total_pages, $page, $count);
     }
 
+    public static function uploadExcel () {
+        
+    }
+
+    private static function parseExcelRecursive () {
+        
+    }
+
+    private static function parseExcelPerRow () {
+        
+    }
+
 }
