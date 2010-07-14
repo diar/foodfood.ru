@@ -541,6 +541,13 @@ body {
     padding:3px 0;
 }
 
+#restaurant .restaurant_tags .img {
+	height:32px;
+	width:32px;
+	background:url(/public/images/tags/all.jpg) no-repeat;
+	margin:0 auto;
+}
+
 #restaurant  .restaurant_tags .item .text {
     font-size:9px;
     color:#000;
