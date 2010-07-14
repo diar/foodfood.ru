@@ -73,6 +73,14 @@ $(document).ready(function(){
                 scrollLeft:scroll_left
             },300,function(){
                 recomended_block = false;
+                ij = 0;
+                $('#recomended_gallery .img img').each(function(){
+                    ij++;
+                    if (recomended_position + recomended_visible +1 > ij
+                        && typeof($(this).attr('src'))=='undefined') {
+                        $(this).attr('src',$(this).attr('rel')).attr('rel','');
+                    }
+                });
             });
             recomended_position=recomended_position+counter;
             if (recomended_position==recomended_count-recomended_visible) {
@@ -185,7 +193,10 @@ function update_rating_form(parent,target){
         rest_id = $(this).parents('.item').attr('rel');
         text = $(this).parent().find('textarea').val();
         $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/',
-        {'text':text,'target':target},
+        {
+            'text':text,
+            'target':target
+        },
         function (data) {
             if (data=='OK') $.alert('Ваш голос учтен',false);
             else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
@@ -206,7 +217,6 @@ function update_rating_form(parent,target){
  * Обработка ширины блоков рекомендуемых ресторанов
  */
 function recomended_check_width () {
-    $('#recomended_gallery .item').hide();
     recomended_count=0;
     recomended_item_width=$("#recomended_container .item").width()+20;
     if (!$.browser.msie) recomended_visible = Math.ceil(($(document).width()-270)/recomended_item_width)-1;
@@ -215,11 +225,17 @@ function recomended_check_width () {
     $('#recomended_container').css({
         'width':recomended_container_width
     });
-    $('#recomended_gallery .item').each(function(){
+    $('#recomended_gallery .img img')
+    .each(function(){
         recomended_count++;
-        $(this).animate({
-            'opacity':'show'
-        },1000);
+        $(this).load(function(){
+            $(this).animate({
+                'opacity':'show'
+            },400);
+        });
+        if (recomended_count<recomended_visible+1 && typeof($(this).attr('src'))=='undefined') {
+            $(this).attr('src',$(this).attr('rel')).attr('rel','');
+        }
     });
     $('#recomended_container').css('background','none');
     recomended_max_width=recomended_count*recomended_item_width;
