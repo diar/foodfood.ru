@@ -18,7 +18,8 @@
         <div id="additional">
             <script type="text/javascript">
                 person_page_activate = true;
-                person_id = '<xsl:value-of select="person_id" />';
+                <xsl:text>person_id = '</xsl:text>
+                <xsl:value-of select="person_id" />';
             </script>
             <div class="restaurant_header rounded">
                 <div class="margin0autoMax-width1600">
@@ -32,12 +33,13 @@
                     </div>
                 </div>
             </div>
-            <div class="margin0autoMax-width1600">
-                <div id="persons_list">
-                    <div style="width:5000px;">
-                        <xsl:apply-templates select="persons/item" />
-                    </div>
+            
+            <div id="persons_list">
+                <div style="width:5000px;">
+                    <xsl:apply-templates select="persons/item" />
                 </div>
+            </div>
+            <div class="margin0autoMax-width1600">
                 <div id="person"></div>
             </div>
         </div>
@@ -45,7 +47,9 @@
 
     <xsl:template match="persons/item">
         <div class="item" rel="{id}" pos="{position()}">
-            <div class="img"><img src="/upload/image/persons/mini-{uri}.jpg" /></div>
+            <div class="img">
+                <img src="/upload/image/persons/mini-{uri}.jpg" />
+            </div>
         </div>
     </xsl:template>
 

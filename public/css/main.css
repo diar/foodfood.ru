@@ -64,7 +64,6 @@
     float:left;
     margin-right:20px;
     z-index:-1;
-    display:none;
 }
 
 #recomended_gallery div.img {
@@ -72,6 +71,10 @@
     width:220px;
     height:220px;
     padding:4px;
+}
+
+#recomended_gallery div.img img {
+    background:url(/public/images/loader.gif) no-repeat center;
 }
 
 #recomended_gallery a.container {

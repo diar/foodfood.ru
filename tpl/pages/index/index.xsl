@@ -180,10 +180,10 @@
                     <!-- End Создаем ссылку в зависимости от того, есть ли uri -->
                     <xsl:choose>
                         <xsl:when test="rest_photo=0">
-                            <img src="/public/images/rest_icon.jpg"  alt="{rest_title}" class="rest_image" />
+                            <img rel="/public/images/rest_icon.jpg"  alt="{rest_title}" class="rest_image" />
                         </xsl:when>
                         <xsl:when test="rest_photo=1">
-                            <img src="http://uploads.foodfood.ru/image/restaurant/{rest_uri}.jpg"  alt="{rest_title}" class="rest_image" />
+                            <img rel="http://uploads.foodfood.ru/image/restaurant/{rest_uri}.jpg"  alt="{rest_title}" class="rest_image" />
                         </xsl:when>
                     </xsl:choose>
                 </a>

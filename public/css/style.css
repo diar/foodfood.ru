@@ -134,6 +134,19 @@ body {
     padding-left:20px;
     padding-top:13px;
 }
+#login_block a.message {
+    background: url(/public/images/icons/icons.gif) no-repeat scroll right -17px;
+    color:#000000;
+    margin-right: 5px;
+    padding-right: 18px;
+    text-decoration: none;
+}
+#login_block a.message-empty {
+    background: url(/public/images/icons/icons.gif) no-repeat scroll right 3px;
+    color:#ffea00;
+    margin-right: 5px;
+    padding-right: 18px;
+}
 
 /* Панель выбора настроений
 -------------------------------------------------------------------*/
