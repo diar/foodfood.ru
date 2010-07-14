@@ -683,7 +683,6 @@ body {
 
 
 #copyright .right a {
-    padding-right:15px;
     color:#fff;
     vertical-align:top;
 }
@@ -1098,6 +1097,27 @@ body {
 .plus {background:url(/public/images/icons/plus_minus.png) 0 0 no-repeat;}
 .plus:active {background:url(/public/images/icons/plus_minus.png) 0 -24px no-repeat;}
 #recomended_gallery .rest_rating {position:absolute;margin-top: -44px;}
+
+a.social {
+	display:block;
+	float:left;
+	margin-right:10px;
+	width:21px;
+	height:21px;
+	background:url(/public/images/icons/social.jpg) no-repeat;
+}
+a.social.fb {
+	background-position:0 0;
+}
+a.social.lj {
+	background-position:-21px 0;
+}
+a.social.vk {
+	background-position:-42px 0;
+}
+a.social.tw {
+	background-position:-63px 0;
+}
 /* Icons
 - ---------------------------------------------------------------------*/
 .dostavka_icon {
