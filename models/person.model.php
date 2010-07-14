@@ -13,6 +13,7 @@ class MD_Person extends Model {
      */
     public static function initModel () {
         self::setModelTable('persons');
+        self::enableCache();
     }
 
     /**

@@ -14,6 +14,7 @@ class MD_Restaurant extends Model {
      */
     public static function initModel() {
         self::setModelTable('rest');
+        self::enableCache();
     }
 
     /**

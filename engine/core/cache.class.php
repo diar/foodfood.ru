@@ -104,7 +104,7 @@ class Cache {
      * Записать значение в кеш
      */
     public static function setValue($name,$data,$tags=array(),$lifetime=false) {
-        if ($lifetime==false) $lifetime=60*60*2;
+        if ($lifetime==false) $lifetime=60*60;
         if (!self::$_useCache) return false;
         $name=md5(Config::getValue('cache','prefix').$name);
         if (self::$_cacheType==CACHE_TYPE_FILE) {

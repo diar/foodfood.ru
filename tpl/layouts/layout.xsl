@@ -113,6 +113,16 @@
                     <a href="/{//site/city}/auth/logout" style="text-decoration:none;">выход</a>
                     <xsl:text>) </xsl:text>
                     <br />
+                    <xsl:choose>
+                        <xsl:when test="//user/message_count!=0">
+                            <a href="/blog/talk/" class="message" id="new_messages">
+                                <xsl:value-of select="//user/message_count" />
+                            </a>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="/blog/talk/" class="message-empty" id="new_messages"> </a>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:text>Настройки </xsl:text>
                     <a href="/blog/settings/profile/">профиля</a>
                 </xsl:when>
