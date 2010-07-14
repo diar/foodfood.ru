@@ -255,7 +255,7 @@
                     <img class="poster_icon box_shadow box_shadow_not_ie" src="/public/images/poster_icon.jpg" alt="{title}" />
                 </xsl:when>
                 <xsl:otherwise>
-                    <img class="poster_icon box_shadow box_shadow_not_ie" src="/upload/image/poster/{img}" alt="{title}" />
+                    <img class="poster_icon box_shadow box_shadow_not_ie" rel="http://uploads.foodfood.ru/image/poster/{img}" alt="{title}" />
                 </xsl:otherwise>
             </xsl:choose>
             <div class="poster_text">
