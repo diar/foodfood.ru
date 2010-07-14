@@ -165,7 +165,12 @@ class ActionPeople extends Action {
 		/**
 		 * Получаем хороших юзеров
 		 */
-		$this->GetUserRating('good');	
+		$this->GetUserRating('good');
+                /**
+		 * Последние по регистрации
+		 */
+		$aUsersRegister=$this->User_GetUsersByDateRegister(15);
+		$this->Viewer_Assign('aUsersRegister',$aUsersRegister);
 		/**
 		 * Устанавливаем шаблон вывода
 		 */		
@@ -184,6 +189,11 @@ class ActionPeople extends Action {
 		 * Получаем хороших юзеров
 		 */
 		$this->GetUserRating('bad');
+                /**
+		 * Последние по регистрации
+		 */
+		$aUsersRegister=$this->User_GetUsersByDateRegister(15);
+		$this->Viewer_Assign('aUsersRegister',$aUsersRegister);
 		/**
 		 * Устанавливаем шаблон вывода
 		 */		
