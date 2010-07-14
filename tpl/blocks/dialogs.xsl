@@ -68,6 +68,34 @@
         </div>
     </xsl:template>
 
+    <xsl:template name="reserving_dialog">
+        <div id="reserving_dialog" class="dialog_box dialog box_shadow">
+            <div class="caption">
+                <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть"></img>
+                <div class="clear"></div>
+                <img class="form_loader" id="callback_loader" src="/public/images/loader.gif" alt="загрузка.."></img>
+                <div class="title">Обратная связь</div>
+                <div class="message" id="callback_message"></div>
+                <div id="reserving_form" class="ajax_form form_dialog">
+                    <div class="label">Дата:</div>
+                    <input type="text" name="date" id="reserving_mail" class="form_input rounded" />
+                    <div class="label">Время:</div>
+                    <input type="text" name="time" id="reserving_mail" class="form_input rounded" />
+                    <div class="label">Имя и фамилия:</div>
+                    <input type="text" name="name" id="reserving_mail" class="form_input rounded" />
+                    <div class="label">Контактный телефон:</div>
+                    <input type="text" name="phone" id="reserving_mail" class="form_input rounded" />
+                    <div class="label">Количество человек:</div>
+                    <input type="text" name="count" id="reserving_mail" class="form_input rounded" />
+                    <div class="label">Коментарий:</div>
+                    <textarea name="text" id="reserving_text" class="form_input rounded"></textarea>
+                    <div class="clear"></div>
+                    <input type="button" id="reserving_submit" value="Отправить" />
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+
     <xsl:template name="registration_dialog">
         <div id="registration_dialog" class="dialog_box dialog box_shadow">
             <div class="caption">

@@ -223,6 +223,12 @@ body {
     width:130px;
     height: 130px;
 }
+
+#moods .icon .img_icon_in_bg{
+    width:130px;
+    height: 130px;
+	background:url(/public/images/moods/all.jpg) no-repeat;
+}
 #moods .icon .caption {
     display:block;
     width:100%;
@@ -495,7 +501,12 @@ body {
     padding:3px 0;
     cursor:pointer;
 }
-#restaurant_by_mood .restaurant_tags img {height:32px;width:32px;}
+#restaurant_by_mood .restaurant_tags .img {
+	height:32px;
+	width:32px;
+	background:url(/public/images/tags/all.jpg) no-repeat;
+	margin:0 auto;
+}
 
 #restaurant_by_mood .restaurant_tags .item:hover {
     border:1px solid #a1a1a1;

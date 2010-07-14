@@ -1,5 +1,5 @@
-ExpiresActive On
-ExpiresDefault "access plus 10 years"
-<FilesMatch \.(html|php)$>
-ExpiresActive Off
-</FilesMatch>
+#ExpiresActive On
+#ExpiresDefault "access plus 10 years"
+#<FilesMatch \.(html|php)$>
+#ExpiresActive Off
+#</FilesMatch>

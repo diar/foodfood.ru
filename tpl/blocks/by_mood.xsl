@@ -35,8 +35,8 @@
 
     <xsl:template match="//content/tags/item">
         <div class="item rounded" tag="{id}">
-            <div class="img">
-                <img src="http://images.foodfood.ru/tags/{uri}.png" alt="{title}" />
+            <div class="img" style="background-position:-{(position()-1)*32}px 0;" alt="{title}">
+
             </div>
             <div class="text"><xsl:value-of select="title" /></div>
         </div>

@@ -218,7 +218,8 @@
             <div class="count">
                 <xsl:value-of select="rest_count" />
             </div>
-            <img src="http://images.foodfood.ru/moods/{uri}.png" alt="{caption}" />
+            <div class="img_icon_in_bg" style="background-position:-{(position()-1)*130}px 0;" title="{caption}"><br />
+			</div>
             <a href="#mood-{uri}" title="{title}" class="caption">
                 <xsl:value-of select="title" />
             </a>
