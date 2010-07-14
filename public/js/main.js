@@ -253,6 +253,11 @@ function poster_check_width () {
             $(this).animate({
                 'width':'show'
             },100);
+            $(this).find('img').each(function(){
+                if (typeof($(this).attr('src'))=='undefined') {
+                    $(this).attr('src',$(this).attr('rel')).attr('rel','');
+                }
+            });
             poster_add_count--;
         }
     });

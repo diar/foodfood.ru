@@ -76,6 +76,19 @@
                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
                     })();
                 </script>
+                <!-- Yandex.Metrika -->
+                <script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script>
+                <div style="display:none;">
+                    <script type="text/javascript">
+                    try { var yaCounter1192696 = new Ya.Metrika(1192696); } catch(e){}
+                    </script>
+                </div>
+                <noscript>
+                    <div style="position:absolute">
+                        <img src="//mc.yandex.ru/watch/1192696" alt="" />
+                    </div>
+                </noscript>
+                <!-- /Yandex.Metrika -->
             </body>
         </html>
     </xsl:template>
@@ -218,8 +231,9 @@
             <div class="count">
                 <xsl:value-of select="rest_count" />
             </div>
-            <div class="img_icon_in_bg" style="background-position:-{(position()-1)*130}px 0;" title="{caption}"><br />
-			</div>
+            <div class="img_icon_in_bg" style="background-position:-{(position()-1)*130}px 0;" title="{caption}">
+                <br />
+            </div>
             <a href="#mood-{uri}" title="{title}" class="caption">
                 <xsl:value-of select="title" />
             </a>
@@ -260,7 +274,7 @@
                             <div class="caption">Приятного аппетита желает:</div>
                             <div class="photo">
                                 <a href="/{//site/city}/persons/view/{//person/id}">
-                                    <img src="/upload/image/persons/medium-{//person/uri}.jpg" alt="{//person/person_name}" />
+                                    <img src="http://uploads.foodfood.ru/image/persons/medium-{//person/uri}.jpg" alt="{//person/person_name}" />
                                 </a>
                             </div>
                             <div class="text">
