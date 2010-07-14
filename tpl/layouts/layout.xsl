@@ -32,11 +32,13 @@
                 <div class="clear"></div>
                 <xsl:apply-templates select="content" />
                 <xsl:call-template name="footer" />
-                <xsl:call-template name="auth_dialog" />
-                <xsl:call-template name="registration_dialog" />
+                <xsl:if test="//user/is_auth!=1">
+                    <xsl:call-template name="auth_dialog" />
+                    <xsl:call-template name="registration_dialog" />
+                    <xsl:call-template name="passwd_dialog" />
+                </xsl:if>
                 <xsl:call-template name="discount_dialog" />
                 <xsl:call-template name="message_dialog" />
-                <xsl:call-template name="passwd_dialog" />
                 <xsl:call-template name="callback_dialog" />
                 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
