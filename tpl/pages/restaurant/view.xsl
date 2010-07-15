@@ -485,8 +485,9 @@
 
     <!-- Список тэгов -->
     <xsl:template match="restaurant/tags/item">
+        <xsl:param name="counter" select="order" />
         <div class="item rounded">
-            <div class="img" style="background-position:-{(position()-1)*32}px 0;" alt="{title}"></div>
+            <div class="img" style="background-position:-{(($counter)-1)*32}px 0;" alt="{title}"></div>
             <div class="text">
                 <xsl:value-of select="title" />
             </div>

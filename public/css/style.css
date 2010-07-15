@@ -227,7 +227,7 @@ body {
 #moods .icon .img_icon_in_bg{
     width:130px;
     height: 130px;
-	background:url(/public/images/moods/all.jpg) no-repeat;
+    background:url(/public/images/moods/all.jpg) no-repeat;
 }
 #moods .icon .caption {
     display:block;
@@ -502,10 +502,10 @@ body {
     cursor:pointer;
 }
 #restaurant_by_mood .restaurant_tags .img {
-	height:32px;
-	width:32px;
-	background:url(/public/images/tags/all.jpg) no-repeat;
-	margin:0 auto;
+    height:32px;
+    width:32px;
+    background:url(/public/images/tags/all.jpg) no-repeat;
+    margin:0 auto;
 }
 
 #restaurant_by_mood .restaurant_tags .item:hover {
@@ -539,6 +539,13 @@ body {
     float:left;
     margin:5px 1px;
     padding:3px 0;
+}
+
+#restaurant .restaurant_tags .img {
+    height:32px;
+    width:32px;
+    background:url(/public/images/tags/all.jpg) no-repeat;
+    margin:0 auto;
 }
 
 #restaurant  .restaurant_tags .item .text {
@@ -1099,24 +1106,24 @@ body {
 #recomended_gallery .rest_rating {position:absolute;margin-top: -44px;}
 
 a.social {
-	display:block;
-	float:left;
-	margin-right:10px;
-	width:21px;
-	height:21px;
-	background:url(/public/images/icons/social.jpg) no-repeat;
+    display:block;
+    float:left;
+    margin-right:10px;
+    width:21px;
+    height:21px;
+    background:url(/public/images/icons/social.jpg) no-repeat;
 }
 a.social.fb {
-	background-position:0 0;
+    background-position:0 0;
 }
 a.social.lj {
-	background-position:-21px 0;
+    background-position:-21px 0;
 }
 a.social.vk {
-	background-position:-42px 0;
+    background-position:-42px 0;
 }
 a.social.tw {
-	background-position:-63px 0;
+    background-position:-63px 0;
 }
 /* Icons
 - ---------------------------------------------------------------------*/
