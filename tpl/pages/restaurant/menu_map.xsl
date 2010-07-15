@@ -109,7 +109,11 @@
                             <ul>
                                 <li class="link discount_icon"><a href="#">Получить скидку</a></li>
                                 <li class="link dostavka_icon"><a href="#">Доставить еду</a></li>
-                                <li class="link"><a href="#">Забронировать столик</a></li>
+                                <xsl:if test="rest_reserv_phone != ''">
+                                <li class="link">
+                                    <a href="#" id="reserv">Забронировать столик</a>
+                                </li>
+                                </xsl:if>
                                 <li class="link"><a href="#">Заказать банкет</a></li>
                             </ul>
                             <div class="menu_link menu_icon">

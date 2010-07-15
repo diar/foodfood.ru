@@ -777,6 +777,20 @@ body {
     text-align:center;
     margin:8px 0 3px;
 }
+
+#reserving_dialog {
+	height:360px;
+}
+#reserving_dialog .form_input {
+	font-size:14px;
+	height:20px;
+}
+#reserving_dialog #reserving_text {
+	height:100px;
+	margin-bottom:10px;
+	max-height:100px;
+	max-width:394px;
+}
 #auth_dialog {
     height:360px;
     text-align:center;
@@ -806,6 +820,7 @@ body {
     max-width: 394px;
     margin-bottom: 10px;
 }
+#reserving_submit,
 #auth_submit,
 #registration_submit,
 #callback_submit,

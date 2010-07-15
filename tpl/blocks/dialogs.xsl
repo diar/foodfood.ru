@@ -73,23 +73,36 @@
             <div class="caption">
                 <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть"></img>
                 <div class="clear"></div>
-                <img class="form_loader" id="callback_loader" src="/public/images/loader.gif" alt="загрузка.."></img>
-                <div class="title">Обратная связь</div>
-                <div class="message" id="callback_message"></div>
+                <img class="form_loader" id="reserving_loader" src="/public/images/loader.gif" alt="загрузка.."></img>
+                <div class="title">Забронировать столик</div>
+                <div class="message" id="reserving_message"></div>
                 <div id="reserving_form" class="ajax_form form_dialog">
-                    <div class="label">Дата:</div>
-                    <input type="text" name="date" id="reserving_mail" class="form_input rounded" />
-                    <div class="label">Время:</div>
-                    <input type="text" name="time" id="reserving_mail" class="form_input rounded" />
-                    <div class="label">Имя и фамилия:</div>
-                    <input type="text" name="name" id="reserving_mail" class="form_input rounded" />
-                    <div class="label">Контактный телефон:</div>
-                    <input type="text" name="phone" id="reserving_mail" class="form_input rounded" />
-                    <div class="label">Количество человек:</div>
-                    <input type="text" name="count" id="reserving_mail" class="form_input rounded" />
+                	<div style="width:30%;float:left; margin-right:19px;">
+                    	<div class="label">Дата:</div>
+                    	<input type="text" name="date" id="reserving_date" class="form_input rounded" />
+                    </div>
+                    <div style="width:30%;float:left; margin-right:19px;">
+                        <div class="label">Время:</div>
+                        <input type="text" name="time" id="reserving_time" class="form_input rounded" />
+                    </div>
+                    <div style="width:30%;float:left;">
+                        <div class="label">Количество человек:</div>
+                        <input type="text" name="count" id="reserving_count" class="form_input rounded" />
+                    </div>
+                    <div class="clear"></div>
+                    <div style="width:48%;float:left; margin-right:15px;">
+                        <div class="label">Имя и фамилия:</div>
+                        <input type="text" name="name" id="reserving_name" class="form_input rounded" />
+                    </div>
+					<div style="width:48%;float:left;">
+                        <div class="label">Контактный телефон:</div>
+                        <input type="text" name="phone" id="reserving_phone" class="form_input rounded" />
+                    </div>
+                    <div class="clear"></div>
                     <div class="label">Коментарий:</div>
                     <textarea name="text" id="reserving_text" class="form_input rounded"></textarea>
                     <div class="clear"></div>
+                    <input type="hidden" value="{//content/restaurant/id}" name="rest_id" id="reserving_rest_id"/>
                     <input type="button" id="reserving_submit" value="Отправить" />
                 </div>
             </div>

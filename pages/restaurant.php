@@ -94,4 +94,25 @@ class restaurant_Page extends View {
         $rating_target = !empty ($_POST['target']) ? $_POST['target'] : '';
         echo MD_Rating::addComment($id,$rating_target,$text,$to_admin);
     }
+
+
+    /*
+     * Бронь столика
+    */
+    public static function reservAjaxAction ($id) {
+        $date = $_POST['date'];
+        $time = $_POST['time'];
+        $name = $_POST['name'];
+        $phone = String::toPhone($_POST['phone']);
+        $count = $_POST['count'];
+        $text = $_POST['text'];
+        $rest_id = intval($_POST['rest_id']);
+        $rest_phone = MD_Restaurant::value('rest_reserv_phone','id ='.$rest_id);
+        $rest_text = "Бронь.Дата:$date.Время:$time.Имя:$name.тел:$phone.человек:$count.Текст:$text";
+        Sms::sendSmsByGet($rest_phone, $rest_text);
+        $text = 'Вам перезвонят через 5 минут';
+        Sms::sendSmsByGet($phone, $text);
+        echo 'OK';
+
+    }
 }

@@ -41,6 +41,7 @@
                 <xsl:call-template name="discount_dialog" />
                 <xsl:call-template name="message_dialog" />
                 <xsl:call-template name="callback_dialog" />
+                <xsl:call-template name="reserving_dialog" />
                 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
                     <xsl:text>google.load("jquery", "1.4.2");</xsl:text>
@@ -231,11 +232,13 @@
     <!-- Список настроений -->
     <xsl:template match="moods/item">
         <div class="icon rounded no_text_select" uri="{uri}">
-            <div class="count">
+             <div class="count">
                 <xsl:value-of select="rest_count" />
             </div>
-            <img src="http://images.foodfood.ru/moods/{uri}.png" alt="{caption}" />
-            <a href="#mood-{uri}" class="caption">
+            <div class="img_icon_in_bg" style="background-position:-{(position()-1)*130}px 0;" title="{caption}">
+                <br />
+            </div>
+            <a href="#mood-{uri}" title="{title}" class="caption">
                 <xsl:value-of select="title" />
             </a>
         </div>

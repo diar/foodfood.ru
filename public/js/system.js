@@ -91,6 +91,10 @@ $(document).ready(function () {
         $.showDialog('callback_dialog');
         return false;
     });
+	$('#reserv').click(function(){
+        $.showDialog('reserving_dialog');
+        return false;
+    });
     // -------- Авторизация -------------------
     $('#auth_submit').click(function(){
         login = $('#auth_login').val();
@@ -254,6 +258,43 @@ $(document).ready(function () {
     });
     check_anchor ();
 });
+
+
+// -------- Бронирование столика -------------------
+    $('#reserving_submit').click(function(){
+		
+        date = $('#reserving_date').val();
+        time = $('#reserving_time').val();
+		name = $('#reserving_name').val();
+		phone = $('#reserving_phone').val();
+		count = $('#reserving_count').val();
+		text = $('#reserving_text').val();
+		rest_id = $('#reserving_rest_id').val();
+        if (phone!='') {
+            $('#reserving_loader').fadeIn(500);
+            $.post('/'+site_city+'/restaurant/reserv',{
+                'date':date,
+                'time':time,
+                'name':name,
+				'phone':phone,
+				'count':count,
+				'text':text,
+				'rest_id':rest_id
+            },
+            function(data){
+                $('#reserving_message').html('');
+                $('#reserving_loader').fadeOut(300);
+                if (data=="OK") $.hideDialog('reserving_dialog');
+                else if (data=="DATE") $('#reserving_message').html('Неверно введена дата');
+                else if (data=="TIME") $('#reserving_message').html('Неверно введено време');
+                else $('#reserving_message').html('Ошибка, попробуйте перезагрузить страницу.');
+            })
+        } else {
+            $('#reserving_message').html('Ошибочка, придёться заполнить все поля');
+        }
+       
+    });
+
 
 function update_rating_without_text(rest_id,target){
     if(user_auth!='1') {

@@ -40,6 +40,7 @@
                 <xsl:call-template name="discount_dialog" />
                 <xsl:call-template name="message_dialog" />
                 <xsl:call-template name="callback_dialog" />
+                
                 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
                     <xsl:text>google.load("jquery", "1.4.2");</xsl:text>

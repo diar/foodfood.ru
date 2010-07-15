@@ -75,6 +75,14 @@ class Restaurants extends AdminModule {
         ));
 
         $form->addfield(array(
+            'name' => 'rest_reserv_phone',
+            'caption' => 'Телефон для брони',
+            'pattern' => 'phone',
+            'maxlength' => '255',
+            'css_class' => 'caption'
+        ));
+
+        $form->addfield(array(
             'name' => 'rest_photo',
             'caption' => 'Основная фотография',
             'pattern' => 'file',
@@ -263,6 +271,15 @@ class Restaurants extends AdminModule {
         ));
 
         $form->addfield(array(
+            'name' => 'rest_reserv_phone',
+            'caption' => 'Телефон для брони',
+            'pattern' => 'phone',
+            'maxlength' => '255',
+            'value' => $record['rest_reserv_phone'],
+            'css_class' => 'caption'
+        ));
+
+        $form->addfield(array(
             'name' => 'rest_photo',
             'caption' => 'Основная фотография',
             'pattern' => 'file',
@@ -374,6 +391,7 @@ class Restaurants extends AdminModule {
         $data['rest_uri'] = str_replace('-', '_', $data['rest_uri']);
         $data['rest_uri'] = str_replace(' ', '_', $data['rest_uri']);
         $data['in_market'] = !empty($data['in_market']) ? 1 : 0;
+        $data['rest_reserv_phone'] = String::toPhone($data['rest_reserv_phone']);
         // Работа с координатами google Maps
         $google_location = str_replace(')', '', $data['google_location']);
         unset($data['google_location']);
@@ -418,6 +436,7 @@ class Restaurants extends AdminModule {
     public static function saveEdit() {
         $data = $_POST;
         $data['in_market'] = !empty($data['in_market']) ? 1 : 0;
+        $data['rest_reserv_phone'] = String::toPhone($data['rest_reserv_phone']);
         // Работа с координатами google Maps
         $google_location = str_replace(')', '', $data['google_location']);
         unset($data['google_location']);

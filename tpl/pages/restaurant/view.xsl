@@ -314,9 +314,12 @@
                                 <li class="link dostavka_icon">
                                     <a href="#">Доставить еду</a>
                                 </li>
+                                <xsl:if test="rest_reserv_phone != ''">
                                 <li class="link">
-                                    <a href="#">Забронировать столик</a>
+                                    <a href="#" id="reserv">Забронировать столик</a>
                                 </li>
+                                </xsl:if>
+                                
                                 <li class="link">
                                     <a href="#">Заказать банкет</a>
                                 </li>
