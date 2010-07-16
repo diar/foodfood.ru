@@ -285,8 +285,9 @@
                             <xsl:apply-templates select="reviews/item" />
                             <div class="form">
                                 <form action="" method="post">
-                                    <textarea name="text" class="rounded"></textarea>
+                                    <textarea name="text" class="rounded" id="review_textarea"></textarea>
                                     <input type="submit" value="Отправить" />
+                                    <div style="color:#999999;font-size:12px;">Символов: <span id="reviews_comment_lenght"></span> из 3000</div>
                                     <div style="padding-top:10px;">
                                         <input type="checkbox" style="float:none;margin:0;height:14px;width:14px;" />
                                         <span>отправить ресторатору</span>

@@ -113,7 +113,7 @@ class MD_Rating extends Model {
             );
             self::updateRating($rest_id);
         }
-        if (strlen($text) > 1000)
+        if (strlen($text) > 3000)
             return 'LENGTH';
         if (AntimatPlugin::check($text) == '***')
             return 'MAT';

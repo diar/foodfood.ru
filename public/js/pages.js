@@ -22,6 +22,14 @@ $(document).ready(function(){
         });
     }
 
+    $("#review_textarea").keydown(function(){
+        
+        var length = $(this).val().length;
+        
+        $("#reviews_comment_lenght").html(length);
+        if (length > 3000) return false;
+    });
+
     /* ---------------------------------------------------------------------
     * Если находимся на странице вывода ресторана
     */
@@ -384,6 +392,7 @@ $(document).ready(function(){
         });
         return false;
     });
+
 });
 
 /*
