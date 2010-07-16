@@ -93,6 +93,14 @@ $(document).ready(function () {
     });
 	$('#reserv').click(function(){
         $.showDialog('reserving_dialog');
+        var today = new Date();
+        day = today.getDate();
+        month = today.getMonth()+1;
+        $("#reserving_date").val(day+'.0'+month);
+        hours = today.getHours();
+        minut = today.getMinutes();
+        if (minut < 10) minut= '0'+minut;
+        $("#reserving_time").val(hours+':'+minut);
         return false;
     });
     // -------- Авторизация -------------------

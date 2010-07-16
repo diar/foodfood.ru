@@ -91,12 +91,12 @@
                     </div>
                     <div class="clear"></div>
                     <div style="width:48%;float:left; margin-right:15px;">
-                        <div class="label">Имя и фамилия:</div>
+                        <div class="label">Как Вас зовут?</div>
                         <input type="text" name="name" id="reserving_name" class="form_input rounded" />
                     </div>
 					<div style="width:48%;float:left;">
                         <div class="label">Контактный телефон:</div>
-                        <input type="text" name="phone" id="reserving_phone" class="form_input rounded" />
+                        <input type="text" name="phone" id="reserving_phone" class="form_input rounded" value="+7"/>
                     </div>
                     <div class="clear"></div>
                     <div class="label">Коментарий:</div>

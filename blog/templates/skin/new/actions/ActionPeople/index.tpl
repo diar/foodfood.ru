@@ -35,7 +35,7 @@
 				{/if}
 			</div>
 
-<!--
+
 {if $aUsersRegister}
 <table>
     <tbody>
@@ -54,7 +54,7 @@
     {/foreach}
     </tbody>
 </table>
--->
+
 {/if}
 
 			{include file='paging.tpl' aPaging=`$aPaging`}
