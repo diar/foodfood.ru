@@ -27,7 +27,7 @@ $(document).ready(function(){
         var length = $(this).val().length;
         
         $("#reviews_comment_lenght").html(length);
-        if (length > 3000) return false;
+        if (length > 2000) return false;
     });
 
     /* ---------------------------------------------------------------------

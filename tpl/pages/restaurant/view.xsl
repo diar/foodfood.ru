@@ -287,7 +287,7 @@
                                 <form action="" method="post">
                                     <textarea name="text" class="rounded" id="review_textarea"></textarea>
                                     <input type="submit" value="Отправить" />
-                                    <div style="color:#999999;font-size:12px;padding-top:3px;">Символов: <span id="reviews_comment_lenght">0</span> из 3000</div>
+                                    <div style="color:#999999;font-size:12px;padding-top:3px;">Символов: <span id="reviews_comment_lenght">0</span> из 2000</div>
                                     <div style="padding-top:10px;">
                                         <input type="checkbox" style="float:none;margin:0;height:14px;width:14px;" />
                                         <span>отправить ресторатору</span>
