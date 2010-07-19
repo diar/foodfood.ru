@@ -35,7 +35,7 @@
 				{/if}
 			</div>
 
-
+<!--
 {if $aUsersRegister}
 <table>
     <tbody>
@@ -56,7 +56,7 @@
 </table>
 
 {/if}
-
+-->
 			{include file='paging.tpl' aPaging=`$aPaging`}
 
 {include file='footer.tpl'}
