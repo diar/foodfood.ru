@@ -1,10 +1,10 @@
 {include file='header.tpl' showWhiteBack=true menu='people'}
 
 			<div class="page people">
-		<!--
+		
 				<h1>{$aLang.user_list} <span>({$aStat.count_all})</span></h1>
 
-				
+		<!--
 				<ul class="block-nav">
 					<li {if $sEvent=='good'}class="active"{/if}><strong></strong><a href="{router page='people'}good/">{$aLang.user_good}</a></li>
 					<li {if $sEvent=='bad'}class="active"{/if}><a href="{router page='people'}bad/">{$aLang.user_bad}</a><em></em></li>
@@ -13,7 +13,7 @@
 				{if $aUsersRating}
 				<table>
 					<tr>
-                                        <td>
+                                            <td valign="top">
                                             {if $aUsersRegister}
                                                 <table>
                                                     <thead>
@@ -38,7 +38,7 @@
                                                 {/if}
                                         </td>
                                         <td width="100"></td>
-                                        <td>
+                                        <td valign="top">
 
                                             <table>
                                                 <thead>
