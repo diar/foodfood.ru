@@ -22,7 +22,7 @@ $(document).ready(function(){
         });
     }
 
-    $("#review_textarea").keydown(function(){
+    $("#review_textarea").keyup(function(){
         
         var length = $(this).val().length;
         
