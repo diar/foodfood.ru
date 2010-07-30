@@ -169,6 +169,12 @@
                             </table>
                         </div>
                     </div>
+                    <xsl:if test="restaurant/tmp_banner = 1">
+                        <div class="rest_banner" style="padding-top:20px;">
+                            <img src="/upload/image/banners/5second.jpg" alt="5 секунд - ГЛАВНЫЙ ПО ДИСКОНТУ" />
+                            <br />ГЛАВНЫЙ ПО ДИСКОНТУ
+                        </div>
+                    </xsl:if>
                 </div>
             </div>
             <div class="clear"></div>

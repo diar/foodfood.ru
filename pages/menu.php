@@ -34,7 +34,12 @@ class menu_Page extends View {
         $check = DB::getValue('list_check','title',"id = '$check_id'");
         $have_menu_map = MD_Restaurant::haveMenuMap($restaurant['id']);
         if (empty($menu)) View::showError();
+
+        
         self::$page['content']['restaurant'] = $restaurant;
+        // Временное решение для баннера на страницах пяти ресторанов
+        if ($restaurant['id'] == 96 || $restaurant['id'] == 196 || $restaurant['id'] == 207 || $restaurant['id'] == 191 || $restaurant['id'] == 200)
+            self::$page['content']['restaurant']['tmp_banner'] = true;
         self::$page['content']['restaurant']['tags'] = $tags;
         self::$page['content']['restaurant']['cooks'] = $cooks;
         self::$page['content']['restaurant']['check'] = $check;
@@ -58,9 +63,13 @@ class menu_Page extends View {
         $check = DB::getValue('list_check','title',"id = '$check_id'");
         $have_menu = MD_Restaurant::haveMenu($restaurant['id']);
         self::$page['content']['restaurant'] = $restaurant;
+        
         self::$page['content']['restaurant']['tags'] = $tags;
         self::$page['content']['restaurant']['cooks'] = $cooks;
         self::$page['content']['restaurant']['check'] = $check;
+        // Временное решение для баннера на страницах пяти ресторанов
+        if ($restaurant['id'] == 96 || $restaurant['id'] == 196 || $restaurant['id'] == 207 || $restaurant['id'] == 191 || $restaurant['id'] == 200)
+            self::$page['content']['restaurant']['tmp_banner'] = true;
         self::$page['content']['restaurant']['have_menu'] = $have_menu;
         self::$page['site']['title'] = $restaurant['rest_title'].' | Карта бара';
         self::$page['content']['menu_list'] = $menu;

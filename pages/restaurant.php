@@ -56,7 +56,12 @@ class restaurant_Page extends View {
         $mood_title = DB::getValue('list_mood','title',"uri = '$mood'");
         $title = 'Ресторан '.$restaurant['rest_title'].'. Меню, скидки, акции и заказ столиков на FoodFood.ru';
         $description = str_replace('"', '\'', $restaurant['rest_description']);
+        
+        
+        
+           
         // Добавляем переменные xslt
+             
         self::$page['site']['title'] = $title;
         self::$page['site']['description'] = preg_replace('/<[^>]*>|\\r|\\n/i', '', $description);
         self::$page['person'] = MD_Person::getLikePerson($restaurant['id']);
@@ -76,6 +81,9 @@ class restaurant_Page extends View {
         self::$page['content']['restaurant']['worktime'] = $worktime;
         self::$page['content']['restaurant']['have_menu'] = $have_menu;
         self::$page['content']['restaurant']['have_menu_map'] = $have_menu_map;
+        // Временное решение для баннера на страницах пяти ресторанов
+        if ($restaurant['id'] == 96 || $restaurant['id'] == 196 || $restaurant['id'] == 207 || $restaurant['id'] == 191 || $restaurant['id'] == 200)
+            self::$page['content']['restaurant']['tmp_banner'] = true;
         self::$page['content']['navigate']['next'] = $next;
         self::$page['content']['navigate']['prev'] = $prev;
         self::$page['content']['navigate']['mood'] = $mood;
