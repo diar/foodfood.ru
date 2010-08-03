@@ -15,14 +15,14 @@
 
     <!-- Код страницы -->
     
-    <xsl:template match="content_old">
+    <xsl:template match="content">
     	<div style="width:100%;text-align:center;font-size:32px; font-family:Tahoma,Arial;padding-top:40px;">
         	Наполняем прилавки...<br /><br />
             <span style="color:#999999; font-style:italic;">Открытие 20 августа</span>
         </div>
     </xsl:template>
     
-    <xsl:template match="content">
+    <xsl:template match="content_old">
         <div id="info_block">
             <table>
                 <tr>
