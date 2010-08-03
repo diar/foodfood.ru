@@ -15,3 +15,9 @@ Site
 
 RM discounts
 DELETE FROM `kazan_discount_list` WHERE discount_id=1 AND discount_counter>20
+
+**
+		 * Последние по регистрации
+		 */
+		$aUsersRegister=$this->User_GetUsersByDateRegister(15);
+		$this->Viewer_Assign('aUsersRegister',$aUsersRegister);

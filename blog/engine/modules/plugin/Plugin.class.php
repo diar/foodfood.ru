@@ -19,7 +19,7 @@
  * Модуль управления плагинами сообщений
  *
  */
-class LsPlugin extends Module {
+class ModulePlugin extends Module {
 	/**
 	 * Файл содержащий информацию об активированных плагинах
 	 *
@@ -53,10 +53,18 @@ class LsPlugin extends Module {
 	 */
 	protected $aDelegates=array(
 		'module' => array(),
+		'mapper' => array(),
 		'action' => array(),
 		'entity' => array(),
 		'template' => array()
 	);
+	
+	/**
+	 * Стек наследований
+	 *
+	 * @var array
+	 */
+	protected $aInherits=array();	
 	
 	/**
 	 * Инициализация модуля
@@ -147,7 +155,7 @@ class LsPlugin extends Module {
 						 * Проверяем совместимость с версией LS 						 
 						 */
 						if(defined('LS_VERSION') 
-							and version_compare(LS_VERSION,$aPlugins[$sPlugin]['property']->requires->livestreet,'=<')) {
+							and version_compare(LS_VERSION,(string)$aPlugins[$sPlugin]['property']->requires->livestreet,'<')) {
 								$this->Message_AddError(
 									$this->Lang_Get(
 										'plugins_activation_version_error',
@@ -187,6 +195,7 @@ class LsPlugin extends Module {
 						 * (по поводу объявленных делегатов) 
 						 */
 						$aPluginDelegates=$oPlugin->GetDelegates();
+						$aPluginInherits=$oPlugin->GetInherits();
 						$iConflict=0;
 						foreach ($this->aDelegates as $sGroup=>$aReplaceList) {
 							$iCount=0;
@@ -205,8 +214,44 @@ class LsPlugin extends Module {
 											);									
 										}
 							}
+							if(isset($aPluginInherits[$sGroup]) 
+								and is_array($aPluginInherits[$sGroup])
+									and $iCount=count($aOverlap=array_intersect_key($aReplaceList,$aPluginInherits[$sGroup]))) {
+										$iConflict+=$iCount;
+										foreach ($aOverlap as $sResource=>$aConflict) {
+											$this->Message_AddError(
+												$this->Lang_Get('plugins_activation_overlap', array(
+														'resource'=>$sResource,
+														'delegate'=>$aConflict['delegate'],
+														'plugin'  =>$aConflict['sign']
+												)), 
+												$this->Lang_Get('error'), true
+											);									
+										}
+							}							
 							if($iCount){ return; }
 						}
+						/**
+						 * Проверяем на конфликт с наследуемыми классами
+						 */
+						$iConflict=0;
+						foreach ($aPluginDelegates as $sGroup=>$aReplaceList) {
+							foreach ($aReplaceList as $sResource=>$aConflict) {
+								if (isset($this->aInherits[$sResource])) {
+									$iConflict+=count($this->aInherits[$sResource]['items']);
+									foreach ($this->aInherits[$sResource]['items'] as $aItem) {
+										$this->Message_AddError(
+											$this->Lang_Get('plugins_activation_overlap_inherit', array(
+													'resource'=>$sResource,													
+													'plugin'  =>$aItem['sign']
+											)), 
+											$this->Lang_Get('error'), true
+										);
+									}
+								}
+							}
+						}
+						if($iConflict){ return; }						
 					}
 					
 					$bResult=$oPlugin->$sAction();
@@ -320,15 +365,59 @@ class LsPlugin extends Module {
 	}
 
 	/**
+	 * Добавляет в стек наследника класса
+	 *
+	 * @param string $sFrom
+	 * @param string $sTo
+	 * @param string $sSign	
+	 */
+	public function Inherit($sFrom,$sTo,$sSign=__CLASS__) {
+		if(!is_string($sSign) or !strlen($sSign)) return null;
+		if(!$sFrom or !$sTo) return null;
+				
+		$this->aInherits[trim($sFrom)]['items'][]=array(
+			'inherit'=>trim($sTo),
+			'sign'=>$sSign
+		);
+		$this->aInherits[trim($sFrom)]['position']=count($this->aInherits[trim($sFrom)]['items'])-1;
+	}
+	
+	/**
+	 * Получает следующего родителя у наследника.
+	 * ВНИМАНИЕ! Данный метод нужно вызвать только из __autoload()
+	 *
+	 * @param unknown_type $sFrom
+	 * @return unknown
+	 */
+	public function GetParentInherit($sFrom) {		
+		if (!isset($this->aInherits[$sFrom]['items']) or count($this->aInherits[$sFrom]['items'])<=1 or $this->aInherits[$sFrom]['position']<1) {
+			return $sFrom;
+		}
+		$this->aInherits[$sFrom]['position']--;		
+		return $this->aInherits[$sFrom]['items'][$this->aInherits[$sFrom]['position']]['inherit'];
+	}
+	
+	public function GetLastInherit($sFrom) {
+		if (isset($this->aInherits[trim($sFrom)])) {
+			return $this->aInherits[trim($sFrom)]['items'][count($this->aInherits[trim($sFrom)]['items'])-1];
+		}
+		return null;
+	}
+	/**
 	 * Возвращает делегат модуля, экшена, сущности. 
-	 * Если делегат не определен, отдает переданный в качестве sender`a параметр
+	 * Если делегат не определен, пытается найти наследника, иначе отдает переданный в качестве sender`a параметр
 	 *
 	 * @param  string $sType
 	 * @param  string $sFrom
 	 * @return string
 	 */
-	public function GetDelegate($sType,$sFrom) {
-		return $this->isDelegater($sType,$sFrom)?$this->aDelegates[$sType][$sFrom]['delegate']:$sFrom;
+	public function GetDelegate($sType,$sFrom) {		
+		if (isset($this->aDelegates[$sType][$sFrom]['delegate'])) {			
+			return $this->aDelegates[$sType][$sFrom]['delegate'];
+		} elseif ($aInherit=$this->GetLastInherit($sFrom)) {			
+			return $aInherit['inherit'];
+		}
+		return $sFrom;
 	}
 
 	/**
@@ -339,20 +428,23 @@ class LsPlugin extends Module {
 	 * @return string
 	 */
 	public function GetDelegater($sType,$sTo) {
- 		/**
-		 * Фильтруем меппер делегатов
-		 * @var array
-		 */
 		$aDelegateMapper=array_filter(
 			$this->aDelegates[$sType], 
 			create_function('$item','return $item["delegate"]=="'.$sTo.'";')
 		);
-		if(!is_array($aDelegateMapper) and !count($aDelegateMapper)) return $sTo;
-		
-		/**
-		 * Получаем ключ первого элемента массива (это название делегирующего экшена)
-		 */
-		return array_shift(array_keys($aDelegateMapper));
+		if (is_array($aDelegateMapper) and count($aDelegateMapper))	{
+			return array_shift(array_keys($aDelegateMapper));
+		}		
+		foreach ($this->aInherits as $k=>$v) {
+			$aInheritMapper=array_filter(
+				$v['items'],
+				create_function('$item','return $item["inherit"]=="'.$sTo.'";')
+			);
+			if (is_array($aInheritMapper) and count($aInheritMapper))	{
+				return $k;
+			}
+		}
+		return $sTo;		
 	}
 	
 	/**
@@ -363,7 +455,13 @@ class LsPlugin extends Module {
 	 * @return string|null
 	 */
 	public function GetDelegateSign($sType,$sFrom) {
-		return $this->isDelegater($sType,$sFrom)?$this->aDelegates[$sType][$sFrom]['sign']:null;
+		if (isset($this->aDelegates[$sType][$sFrom]['sign'])) {
+			return $this->aDelegates[$sType][$sFrom]['sign'];
+		}
+		if ($aInherit=$this->GetLastInherit($sFrom)) {
+			return $aInherit['sign'];
+		}
+		return null;
 	}
 	
 	/**
@@ -375,8 +473,12 @@ class LsPlugin extends Module {
 	 * @return bool
 	 */
 	public function isDelegater($sType,$sFrom) {
-		if(!in_array($sType,array_keys($this->aDelegates)) or !$sFrom) return false;
-		return isset($this->aDelegates[$sType][$sFrom]['delegate']);
+		if (isset($this->aDelegates[$sType][$sFrom]['delegate'])) {			
+			return true;
+		} elseif ($aInherit=$this->GetLastInherit($sFrom)) {			
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -388,14 +490,26 @@ class LsPlugin extends Module {
 	 */
 	public function isDelegated($sType,$sTo) {
 		/**
-		 * Фильтруем меппер делегатов
+		 * Фильтруем меппер делегатов/наследников
 		 * @var array
 		 */
 		$aDelegateMapper=array_filter(
 			$this->aDelegates[$sType], 
 			create_function('$item','return $item["delegate"]=="'.$sTo.'";')
 		);
-		return (is_array($aDelegateMapper) and count($aDelegateMapper));		
+		if (is_array($aDelegateMapper) and count($aDelegateMapper))	{
+			return true;
+		}		
+		foreach ($this->aInherits as $k=>$v) {
+			$aInheritMapper=array_filter(
+				$v['items'],
+				create_function('$item','return $item["inherit"]=="'.$sTo.'";')
+			);
+			if (is_array($aInheritMapper) and count($aInheritMapper))	{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

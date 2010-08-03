@@ -87,13 +87,6 @@ class ActionRegistration extends Action {
 				$this->Message_AddError($this->Lang_Get('registration_mail_error'),$this->Lang_Get('error'));
 				$bError=true;
 			}
-                        /**
-			 * Проверка номера
-			 */
-			if (!func_check(getRequest('phone'),'phone')) {
-				$this->Message_AddError($this->Lang_Get('registration_phone_error'),$this->Lang_Get('error'));
-				$bError=true;
-			}
 			/**
 			 * Проверка пароля
 			 */
@@ -132,10 +125,8 @@ class ActionRegistration extends Action {
 				/**
 				 * Создаем юзера
 				 */
-                                $phone = preg_replace("/^[7-8]/",'+7',getRequest('phone'));
 				$oUser=Engine::GetEntity('User');
 				$oUser->setLogin(getRequest('login'));
-                                $oUser->setPhone($phone);
 				$oUser->setMail(getRequest('mail'));
 				$oUser->setPassword(func_encrypt(getRequest('password')));
 				$oUser->setDateRegister(date("Y-m-d H:i:s"));

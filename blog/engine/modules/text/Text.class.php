@@ -21,7 +21,7 @@ require_once(Config::Get('path.root.engine').'/lib/external/Jevix/jevix.class.ph
  * Модуль обработки текста на основе типографа Jevix
  *
  */
-class LsText extends Module {
+class ModuleText extends Module {
 	/**
 	 * Объект типографа
 	 *
@@ -46,6 +46,8 @@ class LsText extends Module {
 	 *
 	 */
 	protected function JevixConfig() {
+		// разрешаем в параметрах символ &
+		unset($this->oJevix->entities1['&']);
 		// Разрешённые теги
 		$this->oJevix->cfgAllowTags(array('cut','a', 'img', 'i', 'b', 'u', 's', 'video', 'em',  'strong', 'nobr', 'li', 'ol', 'ul', 'sup', 'abbr', 'sub', 'acronym', 'h4', 'h5', 'h6', 'br', 'hr', 'pre', 'code', 'object', 'param', 'embed', 'blockquote'));
 		// Коротие теги типа
@@ -54,14 +56,14 @@ class LsText extends Module {
 		$this->oJevix->cfgSetTagPreformatted(array('pre','code','video'));
 		// Разрешённые параметры тегов		
 		$this->oJevix->cfgAllowTagParams('img', array('src', 'alt' => '#text', 'title', 'align' => array('right', 'left', 'center'), 'width' => '#int', 'height' => '#int', 'hspace' => '#int', 'vspace' => '#int'));
-		$this->oJevix->cfgAllowTagParams('a', array('title', 'href', 'rel'));		
+		$this->oJevix->cfgAllowTagParams('a', array('title', 'href', 'rel' => '#text', 'name' => '#text'));
 		$this->oJevix->cfgAllowTagParams('cut', array('name'));
-		$this->oJevix->cfgAllowTagParams('object', array('width' => '#int', 'height' => '#int', 'data' => '#link'));
+		$this->oJevix->cfgAllowTagParams('object', array('width' => '#int', 'height' => '#int', 'data' => '#link', 'type' => '#text'));
 		$this->oJevix->cfgAllowTagParams('param', array('name' => '#text', 'value' => '#text'));
 		$this->oJevix->cfgAllowTagParams('embed', array('src' => '#image', 'type' => '#text','allowscriptaccess' => '#text', 'allowfullscreen' => '#text','width' => '#int', 'height' => '#int', 'flashvars'=> '#text', 'wmode'=> '#text'));
 		// Параметры тегов являющиеся обязательными
 		$this->oJevix->cfgSetTagParamsRequired('img', 'src');
-		$this->oJevix->cfgSetTagParamsRequired('a', 'href');
+		//$this->oJevix->cfgSetTagParamsRequired('a', 'href');
 		// Теги которые необходимо вырезать из текста вместе с контентом
 		$this->oJevix->cfgSetTagCutWithContent(array('script', 'iframe', 'style'));
 		// Вложенные теги
@@ -70,7 +72,7 @@ class LsText extends Module {
 		$this->oJevix->cfgSetTagChilds('object', 'param', false, true);
 		$this->oJevix->cfgSetTagChilds('object', 'embed', false, false);
 		// Если нужно оставлять пустые не короткие теги
-		$this->oJevix->cfgSetTagIsEmpty(array('param','embed'));
+		$this->oJevix->cfgSetTagIsEmpty(array('param','embed','a'));
 		// Не нужна авто-расстановка <br>
 		$this->oJevix->cfgSetTagNoAutoBr(array('ul','ol','object'));
 		// Теги с обязательными параметрами		
@@ -130,10 +132,6 @@ class LsText extends Module {
 		$sResult=$this->JevixParser($sResult);	
 		$sResult=$this->VideoParser($sResult);	
 		$sResult=$this->CodeSourceParser($sResult);
-		if (Config::Get('view.noindex')) {
-			// требует доработки, т.к. обрабатывает ВСЕ ссылки, включая в <code></code>
-			$sResult=$this->MakeUrlNoIndex($sResult);
-		}
 		return $sResult;
 	}
 	/**
@@ -142,7 +140,7 @@ class LsText extends Module {
 	 * 
 	 */
 	protected function FlashParamParser($sText) {	
-		if (preg_match_all("@(<\s*param\s*name\s*=\s*\".*\"\s*value\s*=\s*\".*\")\s*/?\s*>(?!</param>)@Ui",$sText,$aMatch)) {				
+		if (preg_match_all("@(<\s*param\s*name\s*=\s*(?:\"|').*(?:\"|')\s*value\s*=\s*(?:\"|').*(?:\"|'))\s*/?\s*>(?!</param>)@Ui",$sText,$aMatch)) {				
 			foreach ($aMatch[1] as $key => $str) {
 				$str_new=$str.'></param>';				
 				$sText=str_replace($aMatch[0][$key],$str_new,$sText);				
@@ -157,7 +155,7 @@ class LsText extends Module {
 		/**
 		 * Удаляем все <param name="wmode" value="*"></param>		 
 		 */
-		if (preg_match_all("@(<param\s.*name=\"wmode\".*>\s*</param>)@Ui",$sText,$aMatch)) {
+		if (preg_match_all("@(<param\s.*name=(?:\"|')wmode(?:\"|').*>\s*</param>)@Ui",$sText,$aMatch)) {
 			foreach ($aMatch[1] as $key => $str) {
 				$sText=str_replace($aMatch[0][$key],'',$sText);
 			}
@@ -181,16 +179,6 @@ class LsText extends Module {
 		return $sText;
 	}
 	/**
-	 * Делает ссылки не видимыми для поисковиков
-	 *
-	 * @param unknown_type $sText
-	 * @return unknown
-	 */
-	public function MakeUrlNoIndex($sText) {
-		return preg_replace("/(<a .*>.*<\/a>)/Ui","<noindex>$1</noindex>",$sText);
-	}
-	
-	/**
 	 * Производить резрезание текста по тегу <cut>.
 	 * Возвращаем массив вида:
 	 * array(
@@ -207,7 +195,7 @@ class LsText extends Module {
 		$sTextNew   = $sText;
 		$sTextCut   = null;
 		
-		$sTextTemp=str_replace("\r\n",'[<rn>]',getRequest('topic_text'));
+		$sTextTemp=str_replace("\r\n",'[<rn>]',$sText);
 		$sTextTemp=str_replace("\n",'[<n>]',$sTextTemp);
 		
 		if (preg_match("/^(.*)<cut(.*)>(.*)$/Ui",$sTextTemp,$aMatch)) {			
@@ -215,8 +203,8 @@ class LsText extends Module {
 			$aMatch[1]=str_replace('[<n>]',"\r\n",$aMatch[1]);
 			$aMatch[3]=str_replace('[<rn>]',"\r\n",$aMatch[3]);
 			$aMatch[3]=str_replace('[<n>]',"\r\n",$aMatch[3]);				
-			$sTextShort=$this->Parser($aMatch[1]);
-			$sTextNew=$this->Parser($aMatch[1].' '.$aMatch[3]);							
+			$sTextShort=$aMatch[1];
+			$sTextNew=$aMatch[1].' <a name="cut"></a> '.$aMatch[3];
 			if (preg_match('/^\s*name\s*=\s*"(.+)"\s*\/?$/Ui',$aMatch[2],$aMatchCut)) {				
 				$sTextCut=trim($aMatchCut[1]);
 			}				

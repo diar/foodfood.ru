@@ -15,17 +15,16 @@
 ---------------------------------------------------------
 */
 
-class Mapper_User extends Mapper {
+class ModuleUser_MapperUser extends Mapper {
 	protected $oUserCurrent=null;
 	
 	public function SetUserCurrent($oUserCurrent)  {
 		$this->oUserCurrent=$oUserCurrent;
 	}
 	
-	public function Add(UserEntity_User $oUser) {
+	public function Add(ModuleUser_EntityUser $oUser) {
 		$sql = "INSERT INTO ".Config::Get('db.table.user')." 
 			(user_login,
-                        user_phone,
 			user_password,
 			user_mail,
 			user_date_register,
@@ -33,19 +32,18 @@ class Mapper_User extends Mapper {
 			user_activate,
 			user_activate_key
 			)
-			VALUES(?, ?, ?,	?,	?,	?,	?,	?)
+			VALUES(?,  ?,	?,	?,	?,	?,	?)
 		";			
-		if ($iId=$this->oDb->query($sql,$oUser->getLogin(),$oUser->getPhone(),$oUser->getPassword(),$oUser->getMail(),$oUser->getDateRegister(),$oUser->getIpRegister(),$oUser->getActivate(),$oUser->getActivateKey())) {
+		if ($iId=$this->oDb->query($sql,$oUser->getLogin(),$oUser->getPassword(),$oUser->getMail(),$oUser->getDateRegister(),$oUser->getIpRegister(),$oUser->getActivate(),$oUser->getActivateKey())) {
 			return $iId;
 		}		
 		return false;
 	}
 	
-	public function Update(UserEntity_User $oUser) {
+	public function Update(ModuleUser_EntityUser $oUser) {
 		$sql = "UPDATE ".Config::Get('db.table.user')." 
 			SET 
 				user_password = ? ,
-                                user_phone = ? ,
 				user_mail = ? ,					
 				user_skill = ? ,				
 				user_date_activate = ? ,
@@ -73,7 +71,7 @@ class Mapper_User extends Mapper {
 				user_settings_notice_new_friend = ? 		
 			WHERE user_id = ?
 		";			
-		if ($this->oDb->query($sql,$oUser->getPassword(),$oUser->getPhone(),
+		if ($this->oDb->query($sql,$oUser->getPassword(),
 								   $oUser->getMail(),								   
 								   $oUser->getSkill(),								   
 								   $oUser->getDateActivate(),
@@ -120,7 +118,7 @@ class Mapper_User extends Mapper {
 		return null;
 	}
 	
-	public function CreateSession(UserEntity_Session $oSession) {
+	public function CreateSession(ModuleUser_EntitySession $oSession) {
 		$sql = "REPLACE INTO ".Config::Get('db.table.session')." 
 			SET 
 				session_key = ? ,
@@ -133,7 +131,7 @@ class Mapper_User extends Mapper {
 		return $this->oDb->query($sql,$oSession->getKey(), $oSession->getUserId(), $oSession->getIpCreate(), $oSession->getIpLast(), $oSession->getDateCreate(), $oSession->getDateLast());
 	}
 	
-	public function UpdateSession(UserEntity_Session $oSession) {
+	public function UpdateSession(ModuleUser_EntitySession $oSession) {
 		$sql = "UPDATE ".Config::Get('db.table.session')." 
 			SET 
 				session_ip_last = ? ,	
@@ -206,18 +204,6 @@ class Mapper_User extends Mapper {
 				".Config::Get('db.table.user')." as u 				
 			WHERE u.user_mail = ? ";
 		if ($aRow=$this->oDb->selectRow($sql,$sMail)) {
-			return $aRow['user_id'];
-		}
-		return null;
-	}
-
-        public function GetUserByPhone($sPhone) {
-		$sql = "SELECT
-				u.user_id
-			FROM
-				".Config::Get('db.table.user')." as u
-			WHERE u.user_phone = ? ";
-		if ($aRow=$this->oDb->selectRow($sql,$sPhone)) {
 			return $aRow['user_id'];
 		}
 		return null;
@@ -379,7 +365,7 @@ class Mapper_User extends Mapper {
 	
 	
 	
-	public function AddFriend(UserEntity_Friend $oFriend) {
+	public function AddFriend(ModuleUser_EntityFriend $oFriend) {
 		$sql = "INSERT INTO ".Config::Get('db.table.friend')." 
 			(user_from,
 			user_to,
@@ -402,7 +388,7 @@ class Mapper_User extends Mapper {
 		return false;
 	}
 	
-	public function EraseFriend(UserEntity_Friend $oFriend) {
+	public function EraseFriend(ModuleUser_EntityFriend $oFriend) {
 		$sql = "DELETE FROM ".Config::Get('db.table.friend')." 
 			WHERE
 				user_from = ?d
@@ -416,7 +402,7 @@ class Mapper_User extends Mapper {
 		return false;
 	}
 	
-	public function UpdateFriend(UserEntity_Friend $oFriend) {
+	public function UpdateFriend(ModuleUser_EntityFriend $oFriend) {
 		$sql = "
 			UPDATE ".Config::Get('db.table.friend')."
 			SET 
@@ -506,9 +492,9 @@ class Mapper_User extends Mapper {
 				$sql,
 				$sUserId,
 				$sUserId,
-				LsUser::USER_FRIEND_ACCEPT+LsUser::USER_FRIEND_OFFER,
-				LsUser::USER_FRIEND_ACCEPT,
-				LsUser::USER_FRIEND_ACCEPT 
+				ModuleUser::USER_FRIEND_ACCEPT+ModuleUser::USER_FRIEND_OFFER,
+				ModuleUser::USER_FRIEND_ACCEPT,
+				ModuleUser::USER_FRIEND_ACCEPT 
 			)
 		) {
 			foreach ($aRows as $aUser) {
@@ -527,7 +513,7 @@ class Mapper_User extends Mapper {
 	 * @param  int    $iStatus Статус запроса со стороны добавляемого
 	 * @return array
 	 */
-	public function GetUsersFriendOffer($sUserId,$iStatus=LsUser::USER_FRIEND_NULL) {
+	public function GetUsersFriendOffer($sUserId,$iStatus=ModuleUser::USER_FRIEND_NULL) {
 		$sql = "SELECT 
 					uf.user_to							
 				FROM 
@@ -543,7 +529,7 @@ class Mapper_User extends Mapper {
 		if ($aRows=$this->oDb->select(
 				$sql,
 				$sUserId,
-				LsUser::USER_FRIEND_OFFER,
+				ModuleUser::USER_FRIEND_OFFER,
 				$iStatus 
 			)
 		) {
@@ -561,7 +547,7 @@ class Mapper_User extends Mapper {
 	 * @param  int    $iStatus Статус запроса со стороны самого пользователя
 	 * @return array
 	 */
-	public function GetUserSelfFriendOffer($sUserId,$iStatus=LsUser::USER_FRIEND_NULL) {
+	public function GetUserSelfFriendOffer($sUserId,$iStatus=ModuleUser::USER_FRIEND_NULL) {
 		$sql = "SELECT 
 					uf.user_from
 				FROM 
@@ -577,7 +563,7 @@ class Mapper_User extends Mapper {
 		if ($aRows=$this->oDb->select(
 				$sql,
 				$sUserId,
-				LsUser::USER_FRIEND_OFFER,
+				ModuleUser::USER_FRIEND_OFFER,
 				$iStatus 
 			)
 		) {
@@ -601,7 +587,7 @@ class Mapper_User extends Mapper {
 		return null;
 	}
 	
-	public function AddInvite(UserEntity_Invite $oInvite) {
+	public function AddInvite(ModuleUser_EntityInvite $oInvite) {
 		$sql = "INSERT INTO ".Config::Get('db.table.invite')." 
 			(invite_code,
 			user_from_id,
@@ -615,7 +601,7 @@ class Mapper_User extends Mapper {
 		return false;
 	}
 	
-	public function UpdateInvite(UserEntity_Invite $oInvite) {
+	public function UpdateInvite(ModuleUser_EntityInvite $oInvite) {
 		$sql = "UPDATE ".Config::Get('db.table.invite')." 
 			SET 
 				user_to_id = ? ,
@@ -735,7 +721,7 @@ class Mapper_User extends Mapper {
 		return $aReturn;
 	}
 	
-	public function AddCountry(UserEntity_Country $oCountry) {
+	public function AddCountry(ModuleUser_EntityCountry $oCountry) {
 		$sql = "INSERT INTO ".Config::Get('db.table.country')." 
 			(country_name)
 			VALUES(?)
@@ -764,7 +750,7 @@ class Mapper_User extends Mapper {
 		return null;
 	}
 	
-	public function AddCity(UserEntity_City $oCity) {
+	public function AddCity(ModuleUser_EntityCity $oCity) {
 		$sql = "INSERT INTO ".Config::Get('db.table.city')." 
 			(city_name)
 			VALUES(?)
@@ -811,7 +797,7 @@ class Mapper_User extends Mapper {
 		return $aReturn;
 	}
 	
-	public function AddReminder(UserEntity_Reminder $oReminder) {		
+	public function AddReminder(ModuleUser_EntityReminder $oReminder) {		
 		$sql = "REPLACE ".Config::Get('db.table.reminder')." 
 			SET 
 				reminder_code = ? ,
@@ -824,7 +810,7 @@ class Mapper_User extends Mapper {
 		return $this->oDb->query($sql,$oReminder->getCode(),$oReminder->getUserId(),$oReminder->getDateAdd(),$oReminder->getDateUsed(),$oReminder->getDateExpire(),$oReminder->getIsUsed());
 	}
 	
-	public function UpdateReminder(UserEntity_Reminder $oReminder) {
+	public function UpdateReminder(ModuleUser_EntityReminder $oReminder) {
 		return $this->AddReminder($oReminder);
 	}
 	

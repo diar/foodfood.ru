@@ -287,17 +287,13 @@ class ActionTopic extends Action {
 		$oTopic->setTitle(getRequest('topic_title'));
 		$oTopic->setTextHash(md5(getRequest('topic_text')));
 		/**
-		 * Парсим на предмет ХТМЛ тегов
-		 */
-		$sText=$this->Text_Parser(getRequest('topic_text'));
-		/**
 		 * Получаемый и устанавливаем разрезанный текст по тегу <cut>
 		 */
-		list($sTextShort,$sTextNew,$sTextCut) = $this->Text_Cut($sText);
+		list($sTextShort,$sTextNew,$sTextCut) = $this->Text_Cut(getRequest('topic_text'));
 		
 		$oTopic->setCutText($sTextCut);
-		$oTopic->setText($sTextNew);
-		$oTopic->setTextShort($sTextShort);
+		$oTopic->setText($this->Text_Parser($sTextNew));
+		$oTopic->setTextShort($this->Text_Parser($sTextShort));
 		
 		$oTopic->setTextSource(getRequest('topic_text'));
 		$oTopic->setTags(getRequest('topic_tags'));
@@ -418,17 +414,13 @@ class ActionTopic extends Action {
 		$oTopic->setTitle(getRequest('topic_title'));
 		$oTopic->setTextHash(md5(getRequest('topic_text')));
 		/**
-		 * Парсим на предмет ХТМЛ тегов
-		 */
-		$sText=$this->Text_Parser(getRequest('topic_text'));
-		/**
 		 * Получаемый и устанавливаем разрезанный текст по тегу <cut>
 		 */
-		list($sTextShort,$sTextNew,$sTextCut) = $this->Text_Cut($sText);
+		list($sTextShort,$sTextNew,$sTextCut) = $this->Text_Cut(getRequest('topic_text'));
 
 		$oTopic->setCutText($sTextCut);
-		$oTopic->setText($sTextNew);
-		$oTopic->setTextShort($sTextShort);
+		$oTopic->setText($this->Text_Parser($sTextNew));
+		$oTopic->setTextShort($this->Text_Parser($sTextShort));
 		
 		$oTopic->setTextSource(getRequest('topic_text'));
 		$oTopic->setTags(getRequest('topic_tags'));
@@ -481,7 +473,7 @@ class ActionTopic extends Action {
 			 * Рассылаем о новом топике подписчикам блога
 			 */
 			if ($bSendNotify)	 {
-				$this->Topic_SendNotifyTopicNew($oBlog,$oTopic,$this->oUserCurrent);
+				$this->Topic_SendNotifyTopicNew($oBlog,$oTopic,$oTopic->getUser());
 			}
 			if (!$oTopic->getPublish() and !$this->oUserCurrent->isAdministrator() and $this->oUserCurrent->getId()!=$oTopic->getUserId()) {
 				Router::Location($oBlog->getUrlFull());

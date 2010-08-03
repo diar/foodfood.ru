@@ -95,7 +95,7 @@ class Router extends Object {
 	protected function GetRequestUri() {
 		$sReq=preg_replace("/\/+/",'/',$_SERVER['REQUEST_URI']);		
 		$sReq=preg_replace("/^\/(.*)\/?$/U",'\\1',$sReq);		
-		$sReq=preg_replace("/^(.*)\/\?.*$/U",'\\1',$sReq);
+		$sReq=preg_replace("/^(.*)\?.*$/U",'\\1',$sReq);
 
 		/**
 		 * Формируем $sPathWebCurrent ДО применения реврайтов
@@ -125,6 +125,7 @@ class Router extends Object {
 		if (isset($aRequestUrl[0]) and @substr($aRequestUrl[0],0,1)=='?') {
 			$aRequestUrl=array();
 		}
+		$aRequestUrl = array_map('urldecode',$aRequestUrl);
 		return $aRequestUrl;
 	}
 	/**
@@ -180,17 +181,11 @@ class Router extends Object {
 		 */
 		if(!preg_match('/^Plugin([\w]+)_Action([\w]+)$/i',$sActionClass,$aMatches)) {
 			require_once(Config::Get('path.root.server').'/classes/actions/'.$sActionClass.'.class.php');
-			$sPrefixCustom='';
-			if (file_exists(Config::Get('path.root.server')."/classes/actions/".$sActionClass.'.class.custom.php')) {
-				require_once(Config::Get('path.root.server')."/classes/actions/".$sActionClass.'.class.custom.php');
-				$sPrefixCustom='_custom';
-			}
 		} else {
 			require_once(Config::Get('path.root.server').'/plugins/'.strtolower($aMatches[1]).'/classes/actions/Action'.ucfirst($aMatches[2]).'.class.php');
-			$sPrefixCustom='';
 		}
 		
-		$sClassName=$sActionClass.$sPrefixCustom;		
+		$sClassName=$sActionClass;
 		$this->oAction=new $sClassName($this->oEngine,self::$sAction);
 		
 		/**
@@ -276,7 +271,7 @@ class Router extends Object {
 	 * @return string
 	 */
 	static public function GetAction() {
-		return self::$sAction;		
+		return self::getInstance()->Standart(self::$sAction);		
 	}
 	
 	/**

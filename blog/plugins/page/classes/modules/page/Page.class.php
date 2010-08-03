@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/Page.mapper.class.php');
-
 /**
  * Модуль статических страниц
  *
  */
-class PluginPage_Page extends Module {		
+class PluginPage_ModulePage extends Module {		
 	protected $oMapper;
 	protected $aRebuildIds=array();
 		
@@ -31,7 +28,7 @@ class PluginPage_Page extends Module {
 	 *
 	 */
 	public function Init() {		
-		$this->oMapper=new PluginPage_Mapper_Page($this->Database_GetConnect());
+		$this->oMapper=Engine::GetMapper(__CLASS__);
 	}
 	/**
 	 * Добавляет страницу
@@ -39,7 +36,7 @@ class PluginPage_Page extends Module {
 	 * @param PageEntity_Page $oPage
 	 * @return unknown
 	 */
-	public function AddPage(PluginPage_PageEntity_Page $oPage) {
+	public function AddPage(PluginPage_ModulePage_EntityPage $oPage) {
 		if ($sId=$this->oMapper->AddPage($oPage)) {			
 			$oPage->setId($sId);
 			//чистим зависимые кеши
@@ -54,7 +51,7 @@ class PluginPage_Page extends Module {
 	 * @param PageEntity_Page $oPage
 	 * @return unknown
 	 */
-	public function UpdatePage(PluginPage_PageEntity_Page $oPage) {
+	public function UpdatePage(PluginPage_ModulePage_EntityPage $oPage) {
 		if ($this->oMapper->UpdatePage($oPage)) {
 			//чистим зависимые кеши
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array('page_change',"page_change_{$oPage->getId()}","page_change_urlfull_{$oPage->getUrlFull()}"));
@@ -92,9 +89,9 @@ class PluginPage_Page extends Module {
 	 *
 	 * @return unknown
 	 */
-	public function GetPages() {
+	public function GetPages($aFilter=array()) {
 		$aPages=array();
-		$aPagesRow=$this->oMapper->GetPages();	
+		$aPagesRow=$this->oMapper->GetPages($aFilter);	
 		if (count($aPagesRow)) {
 			$aPages=$this->BuildPagesRecursive($aPagesRow);
 		}
@@ -188,6 +185,24 @@ class PluginPage_Page extends Module {
 	 */
 	public function SetPagesPidToNull() {
 		return $this->oMapper->SetPagesPidToNull();
+	}
+	/**
+	 * Получает слудующую по сортировке страницу
+	 *
+	 * @param unknown_type $iSort
+	 * @param unknown_type $sWay
+	 * @return unknown
+	 */
+	public function GetNextPageBySort($iSort,$sPid,$sWay='up') {
+		return $this->oMapper->GetNextPageBySort($iSort,$sPid,$sWay);
+	}
+	/**
+	 * Получает значение максимальной сртировки
+	 *
+	 * @return unknown
+	 */
+	public function GetMaxSortByPid($sPid) {
+		return $this->oMapper->GetMaxSortByPid($sPid);
 	}
 }
 ?>

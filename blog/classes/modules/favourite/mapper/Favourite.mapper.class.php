@@ -15,9 +15,9 @@
 ---------------------------------------------------------
 */
 
-class Mapper_Favourite extends Mapper {	
+class ModuleFavourite_MapperFavourite extends Mapper {	
 		
-	public function AddFavourite(FavouriteEntity_Favourite $oFavourite) {
+	public function AddFavourite(ModuleFavourite_EntityFavourite $oFavourite) {
 		$sql = "
 			INSERT INTO ".Config::Get('db.table.favourite')." 
 				( target_id, target_type, user_id )
@@ -56,7 +56,7 @@ class Mapper_Favourite extends Mapper {
 		return $aFavourites;
 	}	
 	
-	public function DeleteFavourite(FavouriteEntity_Favourite $oFavourite) {
+	public function DeleteFavourite(ModuleFavourite_EntityFavourite $oFavourite) {
 		$sql = "
 			DELETE FROM ".Config::Get('db.table.favourite')." 
 			WHERE

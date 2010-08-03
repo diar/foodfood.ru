@@ -38,6 +38,12 @@ abstract class Plugin extends Object {
 	 * @var array
 	 */
 	protected $aDelegates=array();
+	/**
+	 * Массив наследуемых классов плагина
+	 *
+	 * @var array
+	 */
+	protected $aInherits=array();
 	
 	public function __construct() {
 
@@ -60,46 +66,70 @@ abstract class Plugin extends Object {
 		 */
 		preg_match('/^Plugin([\w]+)$/i',get_class($this),$aMatches);
 		$sPluginName=strtolower($aMatches[1]);
-		/**
-		 * Получаем список объектов, подлежащих делегации
-		 */
-		$aObjects=$this->Plugin_GetDelegateObjectList();
 		
-		/**
-		 * Считываем данные из XML файла описания
-		 */
-		$sPluginXML = Config::Get('path.root.server').'/plugins/'.$sPluginName.'/'.LsPlugin::PLUGIN_XML_FILE;
-		if($oXml = @simplexml_load_file($sPluginXML)) {
-			foreach($aObjects as $sObjectName) {
-				if(is_array($data=$oXml->xpath("delegate/{$sObjectName}/item"))) {
-					foreach($data as $aDelegate) {
-						/**
-						 * Если не указан параметр FROM, копируем значение всего ITEM
-						 */
-						if(!$aDelegate->from) $aDelegate->from=$aDelegate;						
-						$this->DelegateWrapper($sObjectName,$aDelegate->from,$aDelegate->to);						
-					}
-				}
+		$aDelegates=$this->GetDelegates();
+		foreach ($aDelegates as $sObjectName=>$aParams) {
+			foreach ($aParams as $sFrom=>$sTo) {
+				$this->Plugin_Delegate($sObjectName,$sFrom,$sTo,get_class($this));
 			}
 		}
 		
-		if(is_array($this->aDelegates) and count($this->aDelegates)) {
-			foreach ($this->aDelegates as $sObjectName=>$aParams) {
+		$aInherits=$this->GetInherits();
+		foreach ($aInherits as $sObjectName=>$aParams) {
+			foreach ($aParams as $sFrom=>$sTo) {				
+				$this->Plugin_Inherit($sFrom,$sTo,get_class($this));
+			}
+		}
+	}
+	
+	/**
+	 * Возвращает массив делегатов
+	 *
+	 * @return array
+	 */
+	final function GetInherits() {
+		$aReturn=array();
+		if(is_array($this->aInherits) and count($this->aInherits)) {
+			foreach ($this->aInherits as $sObjectName=>$aParams) {				
 				if(is_array($aParams) and count($aParams)) {
 					foreach ($aParams as $sFrom=>$sTo) {
 						if (is_int($sFrom)) {
 							$sFrom=$sTo;
 							$sTo=null;
 						}
-						$this->DelegateWrapper($sObjectName,$sFrom,$sTo);						
+						list($sFrom,$sTo)=$this->MakeDelegateParams($sObjectName,$sFrom,$sTo);						
+						$aReturn[$sObjectName][$sFrom]=$sTo;
 					}
 				}
 			}
 		}
+		return $aReturn;
+	}
+	/**
+	 * Возвращает массив наследников
+	 *
+	 * @return array
+	 */
+	final function GetDelegates() {
+		$aReturn=array();
+		if(is_array($this->aDelegates) and count($this->aDelegates)) {
+			foreach ($this->aDelegates as $sObjectName=>$aParams) {				
+				if(is_array($aParams) and count($aParams)) {
+					foreach ($aParams as $sFrom=>$sTo) {
+						if (is_int($sFrom)) {
+							$sFrom=$sTo;
+							$sTo=null;
+						}
+						list($sFrom,$sTo)=$this->MakeDelegateParams($sObjectName,$sFrom,$sTo);						
+						$aReturn[$sObjectName][$sFrom]=$sTo;
+					}
+				}
+			}
+		}
+		return $aReturn;
 	}
 	
-	
-	public function DelegateWrapper($sObjectName,$sFrom,$sTo=null) {
+	public function MakeDelegateParams($sObjectName,$sFrom,$sTo) {
 		/**
 		 * Если не указан делегат TO, считаем, что делегатом является 
 		 * одноименный объект текущего плагина
@@ -111,18 +141,13 @@ abstract class Plugin extends Object {
 				$sTo=preg_replace("/^_/",$this->GetTemplatePath(get_class($this)),$sTo);
 			}
 		} else {
-			if(!$sTo) $sTo = get_class($this).'_'.$sFrom;
+			if(!$sTo) {
+				$sTo = get_class($this).'_'.$sFrom;
+			} else {
+				$sTo=preg_replace("/^_/",get_class($this).'_',$sTo);
+			}
 		}
-		$this->Plugin_Delegate($sObjectName,$sFrom,$sTo,get_class($this));
-	}
-	
-	/**
-	 * Возвращает массив делегатов
-	 *
-	 * @return array
-	 */
-	final function GetDelegates() {
-		return $this->aDelegates;
+		return array($sFrom,$sTo);
 	}
 	
 	/**
@@ -195,6 +220,20 @@ abstract class Plugin extends Object {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Получает версию плагина
+	 *
+	 * @return unknown
+	 */
+	public function GetVersion() {
+		preg_match('/^Plugin([\w]+)$/i',get_class($this),$aMatches);		
+		$sPluginXML = Config::Get('path.root.server').'/plugins/'.strtolower($aMatches[1]).'/'.ModulePlugin::PLUGIN_XML_FILE;
+		if($oXml = @simplexml_load_file($sPluginXML)) {
+			return (string)$oXml->version;
+		}
+		return null;
 	}
 	
 	public function __call($sName,$aArgs) {

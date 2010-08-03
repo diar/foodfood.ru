@@ -24,7 +24,7 @@ require_once(Config::Get('path.root.engine').'/lib/external/JSMin-1.1.1/jsmin.ph
  * Модуль обработки шаблонов используя шаблонизатор Smarty
  *
  */
-class LsViewer extends Module {
+class ModuleViewer extends Module {
 	/**
 	 * Объект Smarty
 	 *
@@ -212,10 +212,10 @@ class LsViewer extends Module {
 	/**
 	 * Получает локальную копию модуля
 	 *
-	 * return LsViewer
+	 * return ModuleViewer
 	 */
 	public function GetLocalViewer() {
-		$oViewerLocal=new LsViewer(Engine::getInstance());
+		$oViewerLocal=new ModuleViewer(Engine::getInstance());
 		$oViewerLocal->Init();
 		$oViewerLocal->VarAssign();
 		$oViewerLocal->Assign('aLang',$this->Lang_GetLangMsg());
@@ -451,7 +451,16 @@ class LsViewer extends Module {
 			$this->ClearBlocks($sGroup);
 		}
 		foreach ($aBlocks as $sBlock) {
-			$this->AddBlock($sGroup,$sBlock);
+			if (is_array($sBlock)) {
+				$this->AddBlock(
+					$sGroup,
+					$sBlock['block'],
+					isset($sBlock['params']) ? $sBlock['params'] : array(),
+					isset($sBlock['priority']) ? $sBlock['priority'] : 5
+				);
+			} else {
+				$this->AddBlock($sGroup,$sBlock);
+			}
 		}
 	}
 	
@@ -587,6 +596,14 @@ class LsViewer extends Module {
 				foreach ($aRule['blocks'] as $sGroup => $aBlocks) {
 					foreach ((array)$aBlocks as $sName=>$aParams) {
 						/**
+						 * Если название блока указывается в параметрах
+						 */
+						if (is_int($sName)) {
+							if (is_array($aParams)) {
+								$sName=$aParams['block'];
+							}
+						}
+						/**
 						 * Если $aParams не являются массивом, значит передано только имя блока
 						 */
 						if(!is_array($aParams)) {
@@ -654,8 +671,6 @@ class LsViewer extends Module {
 				}				
 			}
 		}
-
-		$this->aFileRules = Config::Get('head.rules');
 	}
 	/**
 	 * Создает css-компрессор и инициализирует его конфигурацию
@@ -718,6 +733,7 @@ class LsViewer extends Module {
 		 */
 		$aResult = $this->aFilesDefault;
 		
+		$this->aFileRules = Config::Get('head.rules');
 		foreach((array)$this->aFileRules as $sName => $aRule) {
 			if(!$aRule['path']) continue;
 

@@ -15,9 +15,9 @@
 ---------------------------------------------------------
 */
 
-class PluginPage_Mapper_Page extends Mapper {
+class PluginPage_ModulePage_MapperPage extends Mapper {
 	
-	public function AddPage(PluginPage_PageEntity_Page $oPage) {
+	public function AddPage(PluginPage_ModulePage_EntityPage $oPage) {
 		$sql = "INSERT INTO ".Config::Get('plugin.page.table.page')." 
 			(page_pid,
 			page_url,
@@ -27,18 +27,20 @@ class PluginPage_Mapper_Page extends Mapper {
 			page_date_add,
 			page_seo_keywords,
 			page_seo_description,
-			page_active			
+			page_active,			
+			page_main,			
+			page_sort			
 			)
-			VALUES(?, ?,	?,	?,  ?,  ?,  ?,  ?,  ?d)
+			VALUES(?, ?,	?,	?,  ?,  ?,  ?,  ?,  ?d,  ?d,  ?d)
 		";			
-		if ($iId=$this->oDb->query($sql,$oPage->getPid(),$oPage->getUrl(),$oPage->getUrlFull(),$oPage->getTitle(),$oPage->getText(),$oPage->getDateAdd(),$oPage->getSeoKeywords(),$oPage->getSeoDescription(),$oPage->getActive())) 
+		if ($iId=$this->oDb->query($sql,$oPage->getPid(),$oPage->getUrl(),$oPage->getUrlFull(),$oPage->getTitle(),$oPage->getText(),$oPage->getDateAdd(),$oPage->getSeoKeywords(),$oPage->getSeoDescription(),$oPage->getActive(),$oPage->getMain(),$oPage->getSort())) 
 		{
 			return $iId;
 		}		
 		return false;
 	}
 	
-	public function UpdatePage(PluginPage_PageEntity_Page $oPage) {
+	public function UpdatePage(PluginPage_ModulePage_EntityPage $oPage) {
 		$sql = "UPDATE ".Config::Get('plugin.page.table.page')." 
 			SET page_pid = ? ,
 			page_url = ? ,
@@ -48,10 +50,12 @@ class PluginPage_Mapper_Page extends Mapper {
 			page_date_edit = ? ,
 			page_seo_keywords = ? ,
 			page_seo_description = ? ,
-			page_active	 = ? 		
+			page_active	 = ?, 		
+			page_main	 = ?,		
+			page_sort	 = ? 		
 			WHERE page_id = ?d
 		";			
-		if ($this->oDb->query($sql,$oPage->getPid(),$oPage->getUrl(),$oPage->getUrlFull(),$oPage->getTitle(),$oPage->getText(),$oPage->getDateEdit(),$oPage->getSeoKeywords(),$oPage->getSeoDescription(),$oPage->getActive(),$oPage->getId())) 
+		if ($this->oDb->query($sql,$oPage->getPid(),$oPage->getUrl(),$oPage->getUrlFull(),$oPage->getTitle(),$oPage->getText(),$oPage->getDateEdit(),$oPage->getSeoKeywords(),$oPage->getSeoDescription(),$oPage->getActive(),$oPage->getMain(),$oPage->getSort(),$oPage->getId())) 
 		{
 			return true;
 		}		
@@ -95,16 +99,29 @@ class PluginPage_Mapper_Page extends Mapper {
 		return false;
 	}
 	
-	public function GetPages() {
+	public function GetPages($aFilter) {
+		$sPidNULL='';
+		if (array_key_exists('pid',$aFilter) and is_null($aFilter['pid'])) {
+			$sPidNULL='and page_pid IS NULL';
+		}
 		$sql = "SELECT 
 					*,					
 					page_id as ARRAY_KEY,
 					page_pid as PARENT_KEY
 				FROM 
-					".Config::Get('plugin.page.table.page')." 				
-				ORDER by page_title asc;	
+					".Config::Get('plugin.page.table.page')." 
+				WHERE 
+					1=1
+					{ and page_active = ?d }					
+					{ and page_main = ?d }	
+					{ and page_pid = ? } {$sPidNULL}				
+				ORDER by page_sort desc;	
 					";
-		if ($aRows=$this->oDb->select($sql)) {
+		if ($aRows=$this->oDb->select($sql,
+				isset($aFilter['main']) ? $aFilter['main']:DBSIMPLE_SKIP,
+				isset($aFilter['active']) ? $aFilter['active']:DBSIMPLE_SKIP,
+				(array_key_exists('pid',$aFilter) and !is_null($aFilter['pid'])) ? $sPid : DBSIMPLE_SKIP
+				)) {
 			return $aRows;
 		}
 		return null;
@@ -132,6 +149,37 @@ class PluginPage_Mapper_Page extends Mapper {
 			}
 		}
 		return $aResult;
+	}
+	
+	public function GetNextPageBySort($iSort,$sPid,$sWay) {
+		if ($sWay=='up') {
+			$sWay='>';
+			$sOrder='asc';
+		} else {
+			$sWay='<';
+			$sOrder='desc';
+		}
+		$sPidNULL='';
+		if (is_null($sPid)) {
+			$sPidNULL='page_pid IS NULL and';
+		}
+		$sql = "SELECT * FROM ".Config::Get('plugin.page.table.page')." WHERE { page_pid = ? and } {$sPidNULL} page_sort {$sWay} ? order by page_sort {$sOrder} limit 0,1";
+		if ($aRow=$this->oDb->selectRow($sql,is_null($sPid) ? DBSIMPLE_SKIP : $sPid, $iSort)) {
+			return Engine::GetEntity('PluginPage_Page',$aRow);
+		}
+		return null;
+	}
+	
+	public function GetMaxSortByPid($sPid) {
+		$sPidNULL='';
+		if (is_null($sPid)) {
+			$sPidNULL='and page_pid IS NULL';
+		}
+		$sql = "SELECT max(page_sort) as max_sort FROM ".Config::Get('plugin.page.table.page')." WHERE 1=1 { and page_pid = ? } {$sPidNULL} ";
+		if ($aRow=$this->oDb->selectRow($sql,is_null($sPid) ? DBSIMPLE_SKIP : $sPid)) {
+			return $aRow['max_sort'];
+		}
+		return 0;
 	}
 }
 ?>

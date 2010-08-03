@@ -7,9 +7,9 @@
 		<lang name="default">LiveStreet Developers Team</lang>
 	</author>
 	<homepage>http://livestreet.ru/</homepage>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<requires>
-		<livestreet>0.4.0</livestreet>
+		<livestreet>0.4.1</livestreet>
 		<plugins>
 
 		</plugins>
@@ -18,10 +18,4 @@
 		<lang name="default">Profiling the engine`s working.</lang>
 		<lang name="russian">Профилирование работы движка LiveStreet-движка.</lang>
 	</description>
-	<delegate>
-		<module></module>
-		<action></action>
-		<template></template>
-		<entity></entity>
-	</delegate>
 </plugin>

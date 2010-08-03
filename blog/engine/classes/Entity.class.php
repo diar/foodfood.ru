@@ -44,7 +44,7 @@ abstract class Entity extends Object {
 		
 		$aReturn=array();
 		foreach ($aKeys as $key) {
-			if(isset($this->_aData[$key])) {
+			if(key_exists($key,$this->_aData)) {
 				$aReturn[$key] = $this->_aData[$key];
 			}
 		}
@@ -67,7 +67,7 @@ abstract class Entity extends Object {
 					return $this->_aData[$sKey];
 				}
 				return null;
-			} elseif ($sType=='set' and isset($aArgs[0])) {
+			} elseif ($sType=='set' and key_exists(0,$aArgs)) {
 				$this->_aData[$sKey]=$aArgs[0];
 			}
 		} else {

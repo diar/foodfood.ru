@@ -15,16 +15,13 @@
 ---------------------------------------------------------
 */
 
-class UserEntity_User extends Entity {
+class ModuleUser_EntityUser extends Entity {
 	
 	public function getId() {
         return $this->_aData['user_id'];
     }        
     public function getLogin() {
         return $this->_aData['user_login'];
-    }
-    public function getPhone() {
-        return $this->_aData['user_phone'];
     }
     public function getPassword() {
         return $this->_aData['user_password'];
@@ -160,9 +157,6 @@ class UserEntity_User extends Entity {
     }
     public function setLogin($data) {
     	$this->_aData['user_login']=$data;
-    }
-    public function setPhone($data) {
-    	$this->_aData['user_phone']=$data;
     }
     public function setPassword($data) {
     	$this->_aData['user_password']=$data;

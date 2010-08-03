@@ -56,19 +56,19 @@ document.addEvent('domready', function() {
 					<input type="text" id="topic_tags" name="topic_tags" value="{$_aRequest.topic_tags}" class="w100p" /><br />
        				<span class="form_note">{$aLang.topic_create_tags_notice}</span></p>
 												
-					<p><label for=""><input type="checkbox" id="topic_forbid_comment" name="topic_forbid_comment" class="checkbox" value="1" {if $_aRequest.topic_forbid_comment==1}checked{/if}/> 
+					<p><label for="topic_forbid_comment"><input type="checkbox" id="topic_forbid_comment" name="topic_forbid_comment" class="checkbox" value="1" {if $_aRequest.topic_forbid_comment==1}checked{/if}/>
 					&mdash; {$aLang.topic_create_forbid_comment}</label><br />
 					<span class="form_note">{$aLang.topic_create_forbid_comment_notice}</span></p>
 
 					{if $oUserCurrent->isAdministrator()}
-						<p><label for=""><input type="checkbox" id="topic_publish_index" name="topic_publish_index" class="checkbox" value="1" {if $_aRequest.topic_publish_index==1}checked{/if}/> 
+						<p><label for="topic_publish_index"><input type="checkbox" id="topic_publish_index" name="topic_publish_index" class="checkbox" value="1" {if $_aRequest.topic_publish_index==1}checked{/if}/>
 						&mdash; {$aLang.topic_create_publish_index}</label><br />
 						<span class="form_note">{$aLang.topic_create_publish_index_notice}</span></p>
 					{/if}
 					{hook run='form_add_topic_link_end'}
 					<p class="buttons">
 					<input type="submit" name="submit_topic_publish" value="{$aLang.topic_create_submit_publish}" class="right" />
-					<input type="submit" name="submit_preview" value="{$aLang.topic_create_submit_preview}" onclick="$('text_preview').getParent('div').setStyle('display','block'); ajaxTextPreview('topic_text',false); return false;" />&nbsp;
+					<input type="submit" name="submit_preview" value="{$aLang.topic_create_submit_preview}" onclick="$('text_preview').getParent('div').setStyle('display','block'); ajaxTextPreview('topic_text',true); return false;" />&nbsp;
 					<input type="submit" name="submit_topic_save" value="{$aLang.topic_create_submit_save}" />
 					</p>
 				</form>

@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/User.mapper.class.php');
-
 /**
  * Модуль для работы с пользователями
  *
  */
-class LsUser extends Module {
+class ModuleUser extends Module {
 	/**
 	 * Статусы дружбы между пользователями
 	 */
@@ -41,7 +38,7 @@ class LsUser extends Module {
 	 *
 	 */
 	public function Init() {
-		$this->oMapper=new Mapper_User($this->Database_GetConnect());
+		$this->oMapper=Engine::GetMapper(__CLASS__);
 		/**
 		 * Проверяем есть ли у юзера сессия, т.е. залогинен или нет
 		 */
@@ -104,7 +101,7 @@ class LsUser extends Module {
 			if (isset($aSessions[$oUser->getId()])) {
 				$oUser->setSession($aSessions[$oUser->getId()]);
 			} else {
-				$oUser->setSession(null); // или $oUser->setSession(new UserEntity_Session());
+				$oUser->setSession(null); // или $oUser->setSession(new ModuleUser_EntitySession());
 			}
 			if ($aFriends&&isset($aFriends[$oUser->getId()])) {
 				$oUser->setUserFriend($aFriends[$oUser->getId()]);
@@ -316,10 +313,10 @@ class LsUser extends Module {
 	/**
 	 * Добавляет юзера
 	 *
-	 * @param UserEntity_User $oUser
+	 * @param ModuleUser_EntityUser $oUser
 	 * @return unknown
 	 */
-	public function Add(UserEntity_User $oUser) {
+	public function Add(ModuleUser_EntityUser $oUser) {
 		if ($sId=$this->oMapper->Add($oUser)) {
 			$oUser->setId($sId);
 			//чистим зависимые кеши
@@ -358,16 +355,6 @@ class LsUser extends Module {
 		$id=$this->oMapper->GetUserByMail($sMail);
 		return $this->GetUserById($id);
 	}
-        /**
-	 * Получить юзера по номеру
-	 *
-	 * @param unknown_type $sMail
-	 * @return unknown
-	 */
-	public function GetUserByPhone($sPhone) {
-		$id=$this->oMapper->GetUserByPhone($sPhone);
-		return $this->GetUserById($id);
-	}
 	/**
 	 * Получить юзера по логину
 	 *
@@ -399,10 +386,10 @@ class LsUser extends Module {
 	/**
 	 * Обновляет юзера
 	 *
-	 * @param UserEntity_User $oUser
+	 * @param ModuleUser_EntityUser $oUser
 	 * @return unknown
 	 */
-	public function Update(UserEntity_User $oUser) {
+	public function Update(ModuleUser_EntityUser $oUser) {
 		//чистим зависимые кеши
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array('user_update'));
 		$this->Cache_Delete("user_{$oUser->getId()}");
@@ -411,10 +398,10 @@ class LsUser extends Module {
 	/**
 	 * Авторизовывает юзера
 	 *
-	 * @param UserEntity_User $oUser
+	 * @param ModuleUser_EntityUser $oUser
 	 * @return unknown
 	 */
-	public function Authorization(UserEntity_User $oUser,$bRemember=true) {	
+	public function Authorization(ModuleUser_EntityUser $oUser,$bRemember=true) {	
 		if (!$oUser->getId() or !$oUser->getActivate()) {
 			return false;
 		}
@@ -515,7 +502,7 @@ class LsUser extends Module {
 		$this->Cache_Set($data, "user_session_{$this->oSession->getUserId()}", array(), 60*60*24*4);
 	}
 
-	protected function CreateSession(UserEntity_User $oUser,$sKey) {
+	protected function CreateSession(ModuleUser_EntityUser $oUser,$sKey) {
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array('user_session_update'));
 		$this->Cache_Delete("user_session_{$oUser->getId()}");
 		$oSession=Engine::GetEntity('User_Session');
@@ -750,7 +737,7 @@ class LsUser extends Module {
 	 *
 	 * @param  string $sFriendId
 	 * @param  string $sUserId
-	 * @return UserEntity_Friend
+	 * @return ModuleUser_EntityFriend
 	 */
 	public function GetFriend($sFriendId,$sUserId) {
 		$data=$this->GetFriendsByArray($sFriendId,$sUserId);
@@ -762,10 +749,10 @@ class LsUser extends Module {
 	/**
 	 * Добавляет друга
 	 *
-	 * @param  UserEntity_Friend $oFriend
+	 * @param  ModuleUser_EntityFriend $oFriend
 	 * @return bool
 	 */
-	public function AddFriend(UserEntity_Friend $oFriend) {
+	public function AddFriend(ModuleUser_EntityFriend $oFriend) {
 		//чистим зависимые кеши
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("friend_change_user_{$oFriend->getUserFrom()}","friend_change_user_{$oFriend->getUserTo()}"));
 		$this->Cache_Delete("user_friend_{$oFriend->getUserFrom()}_{$oFriend->getUserTo()}");
@@ -776,26 +763,26 @@ class LsUser extends Module {
 	/**
 	 * Удаляет друга
 	 *
-	 * @param  UserEntity_Friend $oFriend
+	 * @param  ModuleUser_EntityFriend $oFriend
 	 * @return bool
 	 */
-	public function DeleteFriend(UserEntity_Friend $oFriend) {
+	public function DeleteFriend(ModuleUser_EntityFriend $oFriend) {
 		//чистим зависимые кеши
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("friend_change_user_{$oFriend->getUserFrom()}","friend_change_user_{$oFriend->getUserTo()}"));
 		$this->Cache_Delete("user_friend_{$oFriend->getUserFrom()}_{$oFriend->getUserTo()}");
 		$this->Cache_Delete("user_friend_{$oFriend->getUserTo()}_{$oFriend->getUserFrom()}");
 		
 		// устанавливаем статус дружбы "удалено"
-		$oFriend->setStatusByUserId(LsUser::USER_FRIEND_DELETE,$oFriend->getUserId());
+		$oFriend->setStatusByUserId(ModuleUser::USER_FRIEND_DELETE,$oFriend->getUserId());
 		return $this->oMapper->UpdateFriend($oFriend);
 	}
 	/**
 	 * Удаляет информацию о дружбе из базы данных
 	 *
-	 * @param  UserEntity_Friend $oFriend
+	 * @param  ModuleUser_EntityFriend $oFriend
 	 * @return bool
 	 */
-	public function EraseFriend(UserEntity_Friend $oFriend) {
+	public function EraseFriend(ModuleUser_EntityFriend $oFriend) {
 		//чистим зависимые кеши
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("friend_change_user_{$oFriend->getUserFrom()}","friend_change_user_{$oFriend->getUserTo()}"));
 		$this->Cache_Delete("user_friend_{$oFriend->getUserFrom()}_{$oFriend->getUserTo()}");
@@ -806,10 +793,10 @@ class LsUser extends Module {
 	/**
 	 * Обновляет информацию о друге
 	 *
-	 * @param  UserEntity_Friend $oFriend
+	 * @param  ModuleUser_EntityFriend $oFriend
 	 * @return bool
 	 */
-	public function UpdateFriend(UserEntity_Friend $oFriend) {
+	public function UpdateFriend(ModuleUser_EntityFriend $oFriend) {
 		//чистим зависимые кеши
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("friend_change_user_{$oFriend->getUserFrom()}","friend_change_user_{$oFriend->getUserTo()}"));
 		$this->Cache_Delete("user_friend_{$oFriend->getUserFrom()}_{$oFriend->getUserTo()}");
@@ -845,10 +832,10 @@ class LsUser extends Module {
 	/**
 	 * Добавляет новый инвайт
 	 *
-	 * @param UserEntity_Invite $oInvite
+	 * @param ModuleUser_EntityInvite $oInvite
 	 * @return unknown
 	 */
-	public function AddInvite(UserEntity_Invite $oInvite) {
+	public function AddInvite(ModuleUser_EntityInvite $oInvite) {
 		if ($sId=$this->oMapper->AddInvite($oInvite)) {
 			$oInvite->setId($sId);
 			return $oInvite;
@@ -858,10 +845,10 @@ class LsUser extends Module {
 	/**
 	 * Обновляет инвайт
 	 *
-	 * @param UserEntity_Invite $oInvite
+	 * @param ModuleUser_EntityInvite $oInvite
 	 * @return unknown
 	 */
-	public function UpdateInvite(UserEntity_Invite $oInvite) {
+	public function UpdateInvite(ModuleUser_EntityInvite $oInvite) {
 		//чистим зависимые кеши
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("invate_new_to_{$oInvite->getUserToId()}","invate_new_from_{$oInvite->getUserFromId()}"));
 		return $this->oMapper->UpdateInvite($oInvite);
@@ -904,7 +891,7 @@ class LsUser extends Module {
 	 * @param unknown_type $oUserFrom
 	 * @return unknown
 	 */
-	public function GetCountInviteAvailable(UserEntity_User $oUserFrom) {
+	public function GetCountInviteAvailable(ModuleUser_EntityUser $oUserFrom) {
 		$sDay=7;
 		$iCountUsed=$this->GetCountInviteUsedByDate($oUserFrom->getId(),date("Y-m-d 00:00:00",mktime(0,0,0,date("m"),date("d")-$sDay,date("Y"))));
 		$iCountAllAvailable=round($oUserFrom->getRating()+$oUserFrom->getSkill());
@@ -962,10 +949,10 @@ class LsUser extends Module {
 	/**
 	 * Добавляет страну
 	 *
-	 * @param UserEntity_Country $oCountry
+	 * @param ModuleUser_EntityCountry $oCountry
 	 * @return unknown
 	 */
-	public function AddCountry(UserEntity_Country $oCountry) {
+	public function AddCountry(ModuleUser_EntityCountry $oCountry) {
 		if ($sId=$this->oMapper->AddCountry($oCountry)) {
 			$oCountry->setId($sId);
 			//чистим зависимые кеши
@@ -996,10 +983,10 @@ class LsUser extends Module {
 	/**
 	 * Добавляет город
 	 *
-	 * @param UserEntity_City $oCity
+	 * @param ModuleUser_EntityCity $oCity
 	 * @return unknown
 	 */
-	public function AddCity(UserEntity_City $oCity) {
+	public function AddCity(ModuleUser_EntityCity $oCity) {
 		if ($sId=$this->oMapper->AddCity($oCity)) {
 			$oCity->setId($sId);
 			//чистим зависимые кеши
@@ -1042,7 +1029,7 @@ class LsUser extends Module {
 	 * @param unknown_type $oReminder
 	 * @return unknown
 	 */
-	public function AddReminder(UserEntity_Reminder $oReminder) {
+	public function AddReminder(ModuleUser_EntityReminder $oReminder) {
 		return $this->oMapper->AddReminder($oReminder);
 	}
 	/**
@@ -1051,7 +1038,7 @@ class LsUser extends Module {
 	 * @param unknown_type $oReminder
 	 * @return unknown
 	 */
-	public function UpdateReminder(UserEntity_Reminder $oReminder) {
+	public function UpdateReminder(ModuleUser_EntityReminder $oReminder) {
 		return $this->oMapper->UpdateReminder($oReminder);
 	}
 	/**
@@ -1069,7 +1056,7 @@ class LsUser extends Module {
 	 * Make resized images
 	 *
 	 * @param  array           $aFile
-	 * @param  UserEntity_User $oUser
+	 * @param  ModuleUser_EntityUser $oUser
 	 * @return (string|bool)
 	 */
 	public function UploadAvatar($aFile,$oUser) {
@@ -1103,11 +1090,15 @@ class LsUser extends Module {
 		$oImage->set_jpg_quality($aParams['jpg_quality']);
 		$oImage->output(null,$sFileTmp);
 		
-		if ($sFileAvatar=$this->Image_Resize($sFileTmp,$sPath,'avatar_100x100',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),100,100,false,$aParams)) {
-			$this->Image_Resize($sFileTmp,$sPath,'avatar_64x64',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),64,64,false,$aParams);
-			$this->Image_Resize($sFileTmp,$sPath,'avatar_48x48',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),48,48,false,$aParams);
-			$this->Image_Resize($sFileTmp,$sPath,'avatar_24x24',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),24,24,false,$aParams);
-			$this->Image_Resize($sFileTmp,$sPath,'avatar',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),null,null,false,$aParams);
+		if ($sFileAvatar=$this->Image_Resize($sFileTmp,$sPath,'avatar_100x100',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),100,100,false,$aParams)) {			
+			$aSize=Config::Get('module.user.avatar_size');
+			foreach ($aSize as $iSize) {
+				if ($iSize==0) {
+					$this->Image_Resize($sFileTmp,$sPath,'avatar',Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),null,null,false,$aParams);
+				} else {
+					$this->Image_Resize($sFileTmp,$sPath,"avatar_{$iSize}x{$iSize}",Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),$iSize,$iSize,false,$aParams);
+				}
+			}
 			@unlink($sFileTmp);
 			/**
 			 * Если все нормально, возвращаем расширение загруженного аватара
@@ -1123,18 +1114,17 @@ class LsUser extends Module {
 	/**
 	 * Delete avatar from server
 	 *
-	 * @param UserEntity_User $oUser
+	 * @param ModuleUser_EntityUser $oUser
 	 */
 	public function DeleteAvatar($oUser) {
 		/**
 		 * Если аватар есть, удаляем его и его рейсайзы
 		 */
 		if($oUser->getProfileAvatar()) {
-			@unlink($this->Image_GetServerPath($oUser->getProfileAvatarPath(100)));
-			@unlink($this->Image_GetServerPath($oUser->getProfileAvatarPath(64)));
-			@unlink($this->Image_GetServerPath($oUser->getProfileAvatarPath(48)));
-			@unlink($this->Image_GetServerPath($oUser->getProfileAvatarPath(24)));
-			@unlink($this->Image_GetServerPath($oUser->getProfileAvatarPath(0)));
+			$aSize=array_merge(Config::Get('module.user.avatar_size'),array(100));
+			foreach ($aSize as $iSize) {
+				@unlink($this->Image_GetServerPath($oUser->getProfileAvatarPath($iSize)));
+			}
 		}
 	}
 		
@@ -1142,7 +1132,7 @@ class LsUser extends Module {
 	 * Upload user foto
 	 *
 	 * @param  array           $aFile
-	 * @param  UserEntity_User $oUser
+	 * @param  ModuleUser_EntityUser $oUser
 	 * @return string
 	 */
 	public function UploadFoto($aFile,$oUser) {
@@ -1171,7 +1161,7 @@ class LsUser extends Module {
 	/**
 	 * Delete user foto from server
 	 *
-	 * @param UserEntity_User $oUser
+	 * @param ModuleUser_EntityUser $oUser
 	 */
 	public function DeleteFoto($oUser) {
 		@unlink($this->Image_GetServerPath($oUser->getProfileFoto()));

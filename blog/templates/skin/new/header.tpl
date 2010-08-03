@@ -70,6 +70,7 @@ var msgNoticeBox=new Roar({
 </script>
 {/literal}
 {/if}
+{hook run='html_head_end'}
 </head>
 
 <body onload="prettyPrint()">
@@ -97,3 +98,4 @@ var msgNoticeBox=new Roar({
 		{if !$noShowSystemMessage}
 			{include file='system_message.tpl'}
 		{/if}
+                {hook run='content_begin'}

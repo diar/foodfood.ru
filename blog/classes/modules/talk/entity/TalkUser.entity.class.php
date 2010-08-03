@@ -15,7 +15,7 @@
 ---------------------------------------------------------
 */
 
-class TalkEntity_TalkUser extends Entity 
+class ModuleTalk_EntityTalkUser extends Entity 
 {    
     public function getTalkId() {
         return $this->_aData['talk_id'];
@@ -41,7 +41,7 @@ class TalkEntity_TalkUser extends Entity
     public function getUserActive(){
     	return (array_key_exists('talk_user_active',$this->_aData)) 
     		? $this->_aData['talk_user_active']
-    		: LsTalk::TALK_USER_ACTIVE;
+    		: ModuleTalk::TALK_USER_ACTIVE;
     }
     /**
      * Возвращает соответствующий пользователю объект UserEntity

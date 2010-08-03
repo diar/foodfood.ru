@@ -91,10 +91,15 @@
         </td>
         </tr>
         {/if}
+
+        {hook run='profile_whois_privat_item' oUserProfile=$oUserProfile}
     </table>
     <br />
 				{/if}
     <br />
+
+    {hook run='profile_whois_item' oUserProfile=$oUserProfile}
+
     <h1 class="title">{$aLang.profile_activity}</h1>
     <table>
 					{if $aUsersFriend}
@@ -174,6 +179,8 @@
             </td>
         </tr>
 					{/if}
+
+        {hook run='profile_whois_activity_item' oUserProfile=$oUserProfile} 
 
         <tr>
             <td class="var">{$aLang.profile_date_registration}:</td>
