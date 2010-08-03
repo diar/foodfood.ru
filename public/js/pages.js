@@ -29,7 +29,16 @@ $(document).ready(function(){
         $("#reviews_comment_lenght").html(length);
         if (length > 2000) return false;
     });
+    function aa (ll,aa,bb) {
+        
+    }
+    if () {
 
+    } else if {
+        
+    } else {
+        
+    }
     /* ---------------------------------------------------------------------
     * Если находимся на странице вывода ресторана
     */
