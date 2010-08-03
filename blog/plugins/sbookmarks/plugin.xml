@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<name>
+		<lang name="default">Livestreet Sbookmarks Plugin</lang>
+	</name>
+	<author>
+		<lang name="default">Grebenkin Anton</lang>
+	</author>
+	<homepage>http://ls.vaktive.ru/</homepage>
+	<version>01.0</version>
+	<requires>
+		<livestreet>0.4.2</livestreet>
+		<plugins>
+
+		</plugins>
+	</requires>
+	<description>
+		<lang name="default">Allow add social bookmarks on topic</lang>
+		<lang name="russian">Позволяет добавлять топик в социальные закладки</lang>
+	</description>
+	<delegate>
+		<module></module>
+		<action></action>
+		<template></template>
+		<entity></entity>
+	</delegate>
+</plugin>
