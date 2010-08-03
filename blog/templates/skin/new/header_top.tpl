@@ -1,5 +1,5 @@
 	<!-- Header -->
-	{if !$oUserCurrent}	
+	{if !$oUserCurrent}
 	<div style="display: none;">
 	<div class="login-popup" id="login-form">
 		<div class="login-popup-top"><a href="#" class="close-block" onclick="return false;"></a></div>
@@ -58,6 +58,7 @@
 					{/if}
 					{$aLang.user_settings} <a href="{router page='settings'}profile/" class="author">{$aLang.user_settings_profile}</a> 
 				</li>
+                                {hook run='userbar_item'}
 				<!--<li>{$aLang.user_rating} <strong>{$oUserCurrent->getRating()}</strong></li>-->
 			</ul>
 		</div>

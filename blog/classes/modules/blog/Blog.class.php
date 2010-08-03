@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/Blog.mapper.class.php');
-
 /**
  * Модуль для работы с блогами
  *
  */
-class LsBlog extends Module {	
+class ModuleBlog extends Module {
 	/**
 	 * Возможные роли пользователя в блоге
 	 */
@@ -50,8 +47,8 @@ class LsBlog extends Module {
 	 * Инициализация
 	 *
 	 */
-	public function Init() {				
-		$this->oMapperBlog=new Mapper_Blog($this->Database_GetConnect());
+	public function Init() {
+		$this->oMapperBlog=Engine::GetMapper(__CLASS__);
 		$this->oMapperBlog->SetUserCurrent($this->User_GetUserCurrent());
 		$this->oUserCurrent=$this->User_GetUserCurrent();		
 	}
@@ -96,7 +93,7 @@ class LsBlog extends Module {
 			if (isset($aUsers[$oBlog->getOwnerId()])) {
 				$oBlog->setOwner($aUsers[$oBlog->getOwnerId()]);
 			} else {
-				$oBlog->setOwner(null); // или $oBlog->setOwner(new UserEntity_User());
+				$oBlog->setOwner(null); // или $oBlog->setOwner(new ModuleUser_EntityUser());
 			}
 			if (isset($aBlogUsers[$oBlog->getId()])) {
 				$oBlog->setUserIsJoin(true);
@@ -264,7 +261,7 @@ class LsBlog extends Module {
 	 * @param Entity_User $oUser
 	 * @return unknown
 	 */
-	public function CreatePersonalBlog(UserEntity_User $oUser) {
+	public function CreatePersonalBlog(ModuleUser_EntityUser $oUser) {
 		$oBlog=Engine::GetEntity('Blog');
 		$oBlog->setOwnerId($oUser->getId());
 		$oBlog->setTitle($this->Lang_Get('blogs_personal_title').' '.$oUser->getLogin());
@@ -279,10 +276,10 @@ class LsBlog extends Module {
 	/**
 	 * Добавляет блог
 	 *
-	 * @param BlogEntity_Blog $oBlog
+	 * @param ModuleBlog_EntityBlog $oBlog
 	 * @return unknown
 	 */
-	public function AddBlog(BlogEntity_Blog $oBlog) {		
+	public function AddBlog(ModuleBlog_EntityBlog $oBlog) {		
 		if ($sId=$this->oMapperBlog->AddBlog($oBlog)) {
 			$oBlog->setId($sId);
 			//чистим зависимые кеши
@@ -294,10 +291,10 @@ class LsBlog extends Module {
 	/**
 	 * Обновляет блог
 	 *
-	 * @param BlogEntity_Blog $oBlog
+	 * @param ModuleBlog_EntityBlog $oBlog
 	 * @return unknown
 	 */
-	public function UpdateBlog(BlogEntity_Blog $oBlog) {
+	public function UpdateBlog(ModuleBlog_EntityBlog $oBlog) {
 		$oBlog->setDateEdit(date("Y-m-d H:i:s"));
 		$res=$this->oMapperBlog->UpdateBlog($oBlog);		
 		if ($res) {			
@@ -311,10 +308,10 @@ class LsBlog extends Module {
 	/**
 	 * Добавляет отношение юзера к блогу, по сути присоединяет к блогу
 	 *
-	 * @param BlogEntity_BlogUser $oBlogUser
+	 * @param ModuleBlog_EntityBlogUser $oBlogUser
 	 * @return unknown
 	 */
-	public function AddRelationBlogUser(BlogEntity_BlogUser $oBlogUser) {
+	public function AddRelationBlogUser(ModuleBlog_EntityBlogUser $oBlogUser) {
 		if ($this->oMapperBlog->AddRelationBlogUser($oBlogUser)) {		
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("blog_relation_change_{$oBlogUser->getUserId()}","blog_relation_change_blog_{$oBlogUser->getBlogId()}"));	
 			$this->Cache_Delete("blog_relation_user_{$oBlogUser->getBlogId()}_{$oBlogUser->getUserId()}");	
@@ -325,10 +322,10 @@ class LsBlog extends Module {
 	/**
 	 * Удалет отношение юзера к блогу, по сути отключает от блога
 	 *
-	 * @param BlogEntity_BlogUser $oBlogUser
+	 * @param ModuleBlog_EntityBlogUser $oBlogUser
 	 * @return unknown
 	 */
-	public function DeleteRelationBlogUser(BlogEntity_BlogUser $oBlogUser) {
+	public function DeleteRelationBlogUser(ModuleBlog_EntityBlogUser $oBlogUser) {
 		if ($this->oMapperBlog->DeleteRelationBlogUser($oBlogUser)) {
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("blog_relation_change_{$oBlogUser->getUserId()}","blog_relation_change_blog_{$oBlogUser->getBlogId()}"));		
 			$this->Cache_Delete("blog_relation_user_{$oBlogUser->getBlogId()}_{$oBlogUser->getUserId()}");
@@ -564,7 +561,7 @@ class LsBlog extends Module {
 		}		
 		return $data;
 	}
-	public function UpdateRelationBlogUser(BlogEntity_BlogUser $oBlogUser) {
+	public function UpdateRelationBlogUser(ModuleBlog_EntityBlogUser $oBlogUser) {
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("blog_relation_change_{$oBlogUser->getUserId()}","blog_relation_change_blog_{$oBlogUser->getBlogId()}"));		
 		$this->Cache_Delete("blog_relation_user_{$oBlogUser->getBlogId()}_{$oBlogUser->getUserId()}");
 		return $this->oMapperBlog->UpdateRelationBlogUser($oBlogUser);
@@ -637,7 +634,7 @@ class LsBlog extends Module {
 	 * Получаем массив блогов, 
 	 * которые являются открытыми для пользователя
 	 *
-	 * @param  UserEntity_User $oUser
+	 * @param  ModuleUser_EntityUser $oUser
 	 * @return array
 	 */
 	public function GetAccessibleBlogsByUser($oUser) {
@@ -665,7 +662,7 @@ class LsBlog extends Module {
 	 * Получаем массив идентификаторов блогов, 
 	 * которые являются закрытыми для пользователя
 	 *
-	 * @param  UserEntity_User $oUser
+	 * @param  ModuleUser_EntityUser $oUser
 	 * @return array
 	 */	
 	public function GetInaccessibleBlogsByUser($oUser=null) {
@@ -706,7 +703,7 @@ class LsBlog extends Module {
 	 * @return bool
 	 */
 	public function DeleteBlog($iBlogId) {
-		if($iBlogId instanceof BlogEntity_Blog){
+		if($iBlogId instanceof ModuleBlog_EntityBlog){
 			$iBlogId = $iBlogId->getId();
 		}
 		/**
@@ -766,7 +763,7 @@ class LsBlog extends Module {
 	 * Make resized images
 	 *
 	 * @param  array           $aFile
-	 * @param  BlogEntity_Blog $oUser
+	 * @param  ModuleBlog_EntityBlog $oUser
 	 * @return (string|bool)
 	 */
 	public function UploadBlogAvatar($aFile,$oBlog) {
@@ -799,8 +796,14 @@ class LsBlog extends Module {
 		$oImage = $this->Image_CropSquare($oImage);
 		
 		if ($oImage && $sFileAvatar=$this->Image_Resize($sFileTmp,$sPath,"avatar_blog_{$oBlog->getUrl()}_48x48",Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),48,48,false,$aParams,$oImage)) {
-			$this->Image_Resize($sFileTmp,$sPath,"avatar_blog_{$oBlog->getUrl()}_24x24",Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),24,24,false,$aParams,$oImage);
-			$this->Image_Resize($sFileTmp,$sPath,"avatar_blog_{$oBlog->getUrl()}",Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),null,null,false,$aParams,$oImage);
+			$aSize=Config::Get('module.blog.avatar_size');
+			foreach ($aSize as $iSize) {
+				if ($iSize==0) {
+					$this->Image_Resize($sFileTmp,$sPath,"avatar_blog_{$oBlog->getUrl()}",Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),null,null,false,$aParams,$oImage);
+				} else {
+					$this->Image_Resize($sFileTmp,$sPath,"avatar_blog_{$oBlog->getUrl()}_{$iSize}x{$iSize}",Config::Get('view.img_max_width'),Config::Get('view.img_max_height'),$iSize,$iSize,false,$aParams,$oImage);
+				}
+			}
 			@unlink($sFileTmp);
 			/**
 			 * Если все нормально, возвращаем расширение загруженного аватара
@@ -816,16 +819,17 @@ class LsBlog extends Module {
 	/**
 	 * Delete blog avatar from server
 	 *
-	 * @param BlogEntity_Blog $oUser
+	 * @param ModuleBlog_EntityBlog $oUser
 	 */
 	public function DeleteBlogAvatar($oBlog) {
 		/**
 		 * Если аватар есть, удаляем его и его рейсайзы
 		 */
 		if($oBlog->getAvatar()) {		
-			@unlink($this->Image_GetServerPath($oBlog->getAvatarPath(48)));
-			@unlink($this->Image_GetServerPath($oBlog->getAvatarPath(24)));
-			@unlink($this->Image_GetServerPath($oBlog->getAvatarPath(0)));		
+			$aSize=array_merge(Config::Get('module.blog.avatar_size'),array(48));
+			foreach ($aSize as $iSize) {
+				@unlink($this->Image_GetServerPath($oBlog->getAvatarPath($iSize)));
+			}		
 		}
 	}	
 }

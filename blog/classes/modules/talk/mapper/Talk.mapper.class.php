@@ -15,8 +15,8 @@
 ---------------------------------------------------------
 */
 
-class Mapper_Talk extends Mapper {	
-	public function AddTalk(TalkEntity_Talk $oTalk) {
+class ModuleTalk_MapperTalk extends Mapper {	
+	public function AddTalk(ModuleTalk_EntityTalk $oTalk) {
 		$sql = "INSERT INTO ".Config::Get('db.table.talk')." 
 			(user_id,
 			talk_title,
@@ -34,7 +34,7 @@ class Mapper_Talk extends Mapper {
 		return false;
 	}
 
-	public function UpdateTalk(TalkEntity_Talk $oTalk) {
+	public function UpdateTalk(ModuleTalk_EntityTalk $oTalk) {
 		$sql = "UPDATE ".Config::Get('db.table.talk')." SET			
 				talk_date_last = ? ,
 				talk_count_comment = ? 
@@ -109,7 +109,7 @@ class Mapper_Talk extends Mapper {
 	}
 		
 		
-	public function AddTalkUser(TalkEntity_TalkUser $oTalkUser) {
+	public function AddTalkUser(ModuleTalk_EntityTalkUser $oTalkUser) {
 		$sql = "INSERT INTO ".Config::Get('db.table.talk_user')." 
 			(talk_id,
 			user_id,
@@ -132,7 +132,7 @@ class Mapper_Talk extends Mapper {
 		return false;
 	}
 	
-	public function UpdateTalkUser(TalkEntity_TalkUser $oTalkUser) {	
+	public function UpdateTalkUser(ModuleTalk_EntityTalkUser $oTalkUser) {	
 		$sql = "UPDATE ".Config::Get('db.table.talk_user')." 
 			SET 
 				date_last = ?, 				
@@ -195,7 +195,7 @@ class Mapper_Talk extends Mapper {
   						AND
   						tu.talk_user_active=?d							
 		";
-		if ($aRow=$this->oDb->selectRow($sql,$sUserId, LsTalk::TALK_USER_ACTIVE)) {
+		if ($aRow=$this->oDb->selectRow($sql,$sUserId, ModuleTalk::TALK_USER_ACTIVE)) {
 			return $aRow['count_new'];
 		}
 		return false;
@@ -214,7 +214,7 @@ class Mapper_Talk extends Mapper {
   						AND
   						tu.talk_user_active=?d						
 		";
-		if ($aRow=$this->oDb->selectRow($sql,$sUserId,LsTalk::TALK_USER_ACTIVE)) {
+		if ($aRow=$this->oDb->selectRow($sql,$sUserId,ModuleTalk::TALK_USER_ACTIVE)) {
 			return $aRow['count_new'];
 		}
 		return false;
@@ -237,7 +237,7 @@ class Mapper_Talk extends Mapper {
 					";
 		
 		$aTalks=array();
-		if ($aRows=$this->oDb->selectPage($iCount,$sql,$sUserId,LsTalk::TALK_USER_ACTIVE,($iCurrPage-1)*$iPerPage, $iPerPage)) {
+		if ($aRows=$this->oDb->selectPage($iCount,$sql,$sUserId,ModuleTalk::TALK_USER_ACTIVE,($iCurrPage-1)*$iPerPage, $iPerPage)) {
 			foreach ($aRows as $aRow) {
 				$aTalks[]=$aRow['talk_id'];
 			}
@@ -342,7 +342,7 @@ class Mapper_Talk extends Mapper {
 			$aRows=$this->oDb->selectPage(
 				$iCount,
 				$sql,
-				LsTalk::TALK_USER_ACTIVE,
+				ModuleTalk::TALK_USER_ACTIVE,
 				(!empty($aFilter['user_id']) ? $aFilter['user_id'] : DBSIMPLE_SKIP),
 				(!empty($aFilter['date_max']) ? $aFilter['date_max'] : DBSIMPLE_SKIP),
 				(!empty($aFilter['date_min']) ? $aFilter['date_min'] : DBSIMPLE_SKIP),

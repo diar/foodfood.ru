@@ -1,0 +1,1 @@
+{literal}<script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?5" charset="windows-1251"></script>{/literal}

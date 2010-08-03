@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/Comment.mapper.class.php');
-
 /**
  * Модуль для работы с комментариями
  *
  */
-class LsComment extends Module {
+class ModuleComment extends Module {
 	protected $oMapper;	
 	protected $oUserCurrent=null;
 		
@@ -31,7 +28,7 @@ class LsComment extends Module {
 	 *
 	 */
 	public function Init() {			
-		$this->oMapper=new Mapper_Comment($this->Database_GetConnect());
+		$this->oMapper=Engine::GetMapper(__CLASS__);
 		$this->oUserCurrent=$this->User_GetUserCurrent();		
 	}
 	/**
@@ -128,7 +125,7 @@ class LsComment extends Module {
 			if (isset($aUsers[$oComment->getUserId()])) {
 				$oComment->setUser($aUsers[$oComment->getUserId()]);
 			} else {
-				$oComment->setUser(null); // или $oComment->setUser(new UserEntity_User());
+				$oComment->setUser(null); // или $oComment->setUser(new ModuleUser_EntityUser());
 			}
 			if (isset($aTargets[$oComment->getTargetType()][$oComment->getTargetId()])) {
 				$oComment->setTarget($aTargets[$oComment->getTargetType()][$oComment->getTargetId()]);
@@ -354,10 +351,10 @@ class LsComment extends Module {
 	/**
 	 * Добавляет коммент
 	 *
-	 * @param  CommentEntity_Comment $oComment
+	 * @param  ModuleComment_EntityComment $oComment
 	 * @return bool
 	 */
-	public function AddComment(CommentEntity_Comment $oComment) {
+	public function AddComment(ModuleComment_EntityComment $oComment) {
 		if ($sId=$this->oMapper->AddComment($oComment)) {
 			if ($oComment->getTargetType()=='topic') {
 				$this->Topic_increaseTopicCountComment($oComment->getTargetId());
@@ -372,10 +369,10 @@ class LsComment extends Module {
 	/**
 	 * Обновляет коммент
 	 *
-	 * @param  CommentEntity_Comment $oComment
+	 * @param  ModuleComment_EntityComment $oComment
 	 * @return bool
 	 */
-	public function UpdateComment(CommentEntity_Comment $oComment) {		
+	public function UpdateComment(ModuleComment_EntityComment $oComment) {		
 		if ($this->oMapper->UpdateComment($oComment)) {		
 			//чистим зависимые кеши
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("comment_update","comment_update_{$oComment->getTargetType()}_{$oComment->getTargetId()}"));				
@@ -387,10 +384,10 @@ class LsComment extends Module {
 	/**
 	 * Обновляет рейтинг у коммента
 	 *
-	 * @param  CommentEntity_Comment $oComment
+	 * @param  ModuleComment_EntityComment $oComment
 	 * @return bool
 	 */
-	public function UpdateCommentRating(CommentEntity_Comment $oComment) {		
+	public function UpdateCommentRating(ModuleComment_EntityComment $oComment) {		
 		if ($this->oMapper->UpdateComment($oComment)) {		
 			//чистим зависимые кеши
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("comment_update_rating_{$oComment->getTargetType()}"));
@@ -402,15 +399,19 @@ class LsComment extends Module {
 	/**
 	 * Обновляет статус у коммента - delete или publish
 	 *
-	 * @param  CommentEntity_Comment $oComment
+	 * @param  ModuleComment_EntityComment $oComment
 	 * @return bool
 	 */
-	public function UpdateCommentStatus(CommentEntity_Comment $oComment) {		
+	public function UpdateCommentStatus(ModuleComment_EntityComment $oComment) {		
 		if ($this->oMapper->UpdateComment($oComment)) {	
 			/**
 			 * Если комментарий удаляется, удаляем его из прямого эфира
 			 */
 			if($oComment->getDelete()) $this->DeleteCommentOnlineByArrayId($oComment->getId(),$oComment->getTargetType());	
+			/**
+			 * Обновляем избранное
+			 */
+			$this->Favourite_SetFavouriteTargetPublish($oComment->getId(),'comment',!$oComment->getDelete());
 			/**
 			 * Чистим зависимые кеши
 			 */
@@ -465,9 +466,9 @@ class LsComment extends Module {
 	/**
 	 * Добавляет новый коммент в прямой эфир
 	 *
-	 * @param CommentEntity_CommentOnline $oCommentOnline
+	 * @param ModuleComment_EntityCommentOnline $oCommentOnline
 	 */
-	public function AddCommentOnline(CommentEntity_CommentOnline $oCommentOnline) {
+	public function AddCommentOnline(ModuleComment_EntityCommentOnline $oCommentOnline) {
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("comment_online_update_{$oCommentOnline->getTargetType()}"));
 		return $this->oMapper->AddCommentOnline($oCommentOnline);
 	}
@@ -491,7 +492,7 @@ class LsComment extends Module {
 		
 		$iMaxIdComment=max($aComments);		
 		$aCmts=$this->GetCommentsAdditionalData($aComments);				
-		if (!class_exists('LsViewer')) {
+		if (!class_exists('ModuleViewer')) {
 			require_once(Config::Get('path.root.engine')."/modules/viewer/Viewer.class.php");
 		}
 		$oViewerLocal=$this->Viewer_GetLocalViewer();
@@ -553,7 +554,7 @@ class LsComment extends Module {
 	 *
 	 * @param  string $sCommentId
 	 * @param  string $sUserId
-	 * @return FavouriteEntity_Favourite|null
+	 * @return ModuleFavourite_EntityFavourite|null
 	 */
 	public function GetFavouriteComment($sCommentId,$sUserId) {
 		return $this->Favourite_GetFavourite($sCommentId,'comment',$sUserId);
@@ -616,10 +617,10 @@ class LsComment extends Module {
 	/**
 	 * Добавляет комментарий в избранное
 	 *
-	 * @param  FavouriteEntity_Favourite $oFavourite
+	 * @param  ModuleFavourite_EntityFavourite $oFavourite
 	 * @return bool
 	 */
-	public function AddFavouriteComment(FavouriteEntity_Favourite $oFavourite) {	
+	public function AddFavouriteComment(ModuleFavourite_EntityFavourite $oFavourite) {	
 		if( ($oFavourite->getTargetType()=='comment') 
 				&& ($oComment=$this->Comment_GetCommentById($oFavourite->getTargetId())) 
 					&& $oComment->getTargetType()=='topic') {
@@ -630,10 +631,10 @@ class LsComment extends Module {
 	/**
 	 * Удаляет комментарий из избранного
 	 *
-	 * @param  FavouriteEntity_Favourite $oFavourite
+	 * @param  ModuleFavourite_EntityFavourite $oFavourite
 	 * @return bool
 	 */
-	public function DeleteFavouriteComment(FavouriteEntity_Favourite $oFavourite) {
+	public function DeleteFavouriteComment(ModuleFavourite_EntityFavourite $oFavourite) {
 		if( ($oFavourite->getTargetType()=='comment') 
 				&& ($oComment=$this->Comment_GetCommentById($oFavourite->getTargetId())) 
 					&& $oComment->getTargetType()=='topic') {

@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/Vote.mapper.class.php');
-
 /**
  * Модуль для работы с голосованиями
  *
  */
-class LsVote extends Module {		
+class ModuleVote extends Module {		
 	protected $oMapper;	
 		
 	/**
@@ -30,16 +27,16 @@ class LsVote extends Module {
 	 *
 	 */
 	public function Init() {		
-		$this->oMapper=new Mapper_Vote($this->Database_GetConnect());
+		$this->oMapper=Engine::GetMapper(__CLASS__);
 	}
 	
 	/**
 	 * Добавляет голосование
 	 *
-	 * @param VoteEntity_Vote $oVote
+	 * @param ModuleVote_EntityVote $oVote
 	 * @return unknown
 	 */
-	public function AddVote(VoteEntity_Vote $oVote) {
+	public function AddVote(ModuleVote_EntityVote $oVote) {
 		if ($this->oMapper->AddVote($oVote)) {
 			$this->Cache_Delete("vote_{$oVote->getTargetType()}_{$oVote->getTargetId()}_{$oVote->getVoterId()}");
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("vote_update_{$oVote->getTargetType()}_{$oVote->getVoterId()}"));

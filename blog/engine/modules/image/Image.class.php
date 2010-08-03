@@ -22,7 +22,7 @@ require_once Config::Get('path.root.engine').'/lib/external/LiveImage/Image.php'
  * Использует библиотеку LiveImage
  *
  */
-class LsImage extends Module {
+class ModuleImage extends Module {
 	/**
 	 * Неопределенный тип ошибки при загрузке изображения
 	 */
@@ -160,29 +160,31 @@ class LsImage extends Module {
 			 * Добавляем watermark согласно в конфигурации заданым параметрам
 			 */
 			if($aParams['watermark_use']) {
-				switch($aParams['watermark_type']) {
-					default:
-					case 'text':
-						$oImage->set_font(
-							$aParams['watermark_font_size'],  0, 
-							$aParams['path']['fonts'].$aParams['watermark_font'].'.ttf'
-						);
-						
-						$oImage->watermark(
-							$aParams['watermark_text'], 
-				 		    explode(',',$aParams['watermark_position'],2), 
-						    explode(',',$aParams['watermark_font_color']), 
-						    explode(',',$aParams['watermark_back_color']), 
-						    $aParams['watermark_font_alfa'], 
-							$aParams['watermark_back_alfa']
-						);	
-						break;
-					case 'image':
-						$oImage->paste_image(
-							$aParams['path']['watermarks'].$aParams['watermark_image'],
-							true, explode(',',$aParams['watermark_position'],2)
-						);	
-						break;
+				if ($oImage->get_image_params('width')>$aParams['watermark_min_width'] and $oImage->get_image_params('height')>$aParams['watermark_min_height']) {
+					switch($aParams['watermark_type']) {
+						default:
+						case 'text':
+							$oImage->set_font(
+								$aParams['watermark_font_size'],  0,
+								$aParams['path']['fonts'].$aParams['watermark_font'].'.ttf'
+							);
+
+							$oImage->watermark(
+								$aParams['watermark_text'],
+								explode(',',$aParams['watermark_position'],2),
+								explode(',',$aParams['watermark_font_color']),
+								explode(',',$aParams['watermark_back_color']),
+								$aParams['watermark_font_alfa'],
+								$aParams['watermark_back_alfa']
+							);
+							break;
+						case 'image':
+							$oImage->paste_image(
+								$aParams['path']['watermarks'].$aParams['watermark_image'],
+								true, explode(',',$aParams['watermark_position'],2)
+							);
+							break;
+					}
 				}
 			}
 			/**
@@ -215,7 +217,7 @@ class LsImage extends Module {
 	 * @param  LiveImage $oImage
 	 * @return LiveImage
 	 */
-	public function CropSquare(LiveImage $oImage) {
+	public function CropSquare(LiveImage $oImage,$bCenter=true) {
 		if(!$oImage || $oImage->get_last_error()) {
 			return false;
 		}
@@ -230,13 +232,61 @@ class LsImage extends Module {
 		 * Вырезаем квадрат из центра
 		 */
 		$iNewSize = min($iWidth,$iHeight);
-		$oImage->crop($iNewSize,$iNewSize,($iWidth-$iNewSize)/2,($iHeight-$iNewSize)/2);
+		
+		if ($bCenter) {		
+			$oImage->crop($iNewSize,$iNewSize,($iWidth-$iNewSize)/2,($iHeight-$iNewSize)/2);
+		} else {			
+			$oImage->crop($iNewSize,$iNewSize,0,0);
+		}
 		/**
 		 * Возвращаем объект изображения
 		 */
 		return $oImage;
 	}
 	
+	/**
+	 * Вырезает максимально возможный прямоугольный в нужной пропорции
+	 *
+	 * @param LiveImage $oImage
+	 * @param int $iW
+	 * @param int $iH
+	 * @param bool $bCenter
+	 * @return unknown
+	 */
+	public function CropProportion(LiveImage $oImage,$iW,$iH,$bCenter=true) {
+		
+		if(!$oImage || $oImage->get_last_error()) {
+			return false;
+		}
+		$iWidth  = $oImage->get_image_params('width');
+		$iHeight = $oImage->get_image_params('height');
+		/**
+		 * Если высота и ширина уже в нужных пропорциях, то возвращаем изначальный вариант
+		 */
+		$iProp=round($iW/$iH, 2);
+		if(round($iWidth/$iHeight, 2)==$iProp){ return $oImage; }
+		
+		/**
+		 * Вырезаем прямоугольник из центра
+		 */		
+		if (round($iWidth/$iHeight, 2)<=$iProp) {
+			$iNewWidth=$iWidth;
+			$iNewHeight=round($iNewWidth/$iProp);
+		} else {			
+			$iNewHeight=$iHeight;
+			$iNewWidth=$iNewHeight*$iProp;
+		}
+		
+		if ($bCenter) {		
+			$oImage->crop($iNewWidth,$iNewHeight,($iWidth-$iNewWidth)/2,($iHeight-$iNewHeight)/2);
+		} else {			
+			$oImage->crop($iNewWidth,$iNewHeight,0,0);
+		}
+		/**
+		 * Возвращаем объект изображения
+		 */
+		return $oImage;
+	}
 	/**
 	 * Создает каталог по указанному адресу (с учетом иерархии)
 	 *

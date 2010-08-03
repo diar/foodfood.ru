@@ -20,7 +20,7 @@
  * Заменяет стандартный механизм сессий(session)
  *
  */
-class LsSession extends Module {
+class ModuleSession extends Module {
 	protected $sId=null;
 	protected $aData=array();	
 	
@@ -95,7 +95,11 @@ class LsSession extends Module {
 	 *
 	 */	
 	public function GetId() {
-		return $this->sId;
+		if ($this->bUseStandartSession) {
+			return session_id();
+		} else {
+			return $this->sId;
+		}
 	}
 	
 	/**

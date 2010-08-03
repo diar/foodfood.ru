@@ -42,7 +42,7 @@ $config['block']['blogs']['row']  = 10;  // сколько записей выв
  * и возможно придёться увеличить значение SYS_OFFSET_REQUEST_URL на число вложенных директорий, 
  * например, для директории первой вложенности www.site.ru/livestreet/ поставить значение равное 1 
  */
-$config['path']['root']['web']        = 'http://'.$_SERVER['HTTP_HOST'].'/blog/';     // полный WEB адрес сайта
+$config['path']['root']['web']        = 'http://'.$_SERVER['HTTP_HOST'].'/blog';     // полный WEB адрес сайта
 $config['path']['root']['server']     = dirname(dirname(__FILE__));           // полный путь до сайта в файловой системе
 /**
  * Для CLI режима использовать
@@ -54,7 +54,7 @@ $config['path']['static']['root']     = '___path.root.web___';            // ч�
 $config['path']['static']['skin']     = '___path.static.root___/templates/skin/___view.skin___';
 $config['path']['uploads']['root']    = '/uploads';                          // директория для загрузки файлов
 $config['path']['uploads']['images']  ='___path.uploads.root___/images';
-$config['path']['offset_request_url'] = 0;                                   // иногда помогает если сервер использует внутренние реврайты
+$config['path']['offset_request_url'] = 1;                                   // иногда помогает если сервер использует внутренние реврайты
 /**
  * Настройки шаблонизатора Smarty
  */
@@ -152,6 +152,7 @@ $config['module']['blog']['personal_good']   = -5;   // Рейтинг топи�
 $config['module']['blog']['collective_good'] = -3;   // рейтинг топика в коллективных блогах ниже которого он считается плохим
 $config['module']['blog']['index_good']      =  8;   // Рейтинг топика выше которого(включительно) он попадает на главную
 $config['module']['blog']['encrypt']         = 'livestreet'; // Ключ XXTEA шифрования идентификаторов в ссылках приглашения в блоги
+$config['module']['blog']['avatar_size'] = array(24,0); // Список размеров аватаров у блога. 0 - исходный размер
 // Модуль Topic
 $config['module']['topic']['new_time']   = 60*60*24*1;  // Время в секундах в течении которого топик считается новым
 $config['module']['topic']['per_page']   = 10;          // Число топиков на одну страницу
@@ -161,6 +162,7 @@ $config['module']['user']['per_page']    = 15;          // Число юзеро
 $config['module']['user']['friend_notice']['delete'] = false; // Отправить talk-сообщение в случае удаления пользователя из друзей
 $config['module']['user']['friend_notice']['accept'] = false; // Отправить talk-сообщение в случае одобрения заявки на добавление в друзья
 $config['module']['user']['friend_notice']['reject'] = false; // Отправить talk-сообщение в случае отклонения заявки на добавление в друзья
+$config['module']['user']['avatar_size'] = array(64,48,24,0); // Список размеров аватаров у пользователя. 0 - исходный размер 
 // Модуль Comment
 $config['module']['comment']['per_page'] = 20;          // Число комментариев на одну страницу(это касается только полного списка комментариев прямого эфира)
 $config['module']['comment']['bad']      = -5;          // Рейтинг комментария, начиная с которого он будет скрыт
@@ -190,6 +192,8 @@ $config['module']['image']['default']['watermark_font_alfa']  = '0';
 $config['module']['image']['default']['watermark_back_color'] = '0,0,0';
 $config['module']['image']['default']['watermark_back_alfa']  = '40';
 $config['module']['image']['default']['watermark_image']      = false;
+$config['module']['image']['default']['watermark_min_width']  = 200;
+$config['module']['image']['default']['watermark_min_height'] = 130;
 $config['module']['image']['default']['round_corner']         = false;
 $config['module']['image']['default']['round_corner_radius']  = '18';
 $config['module']['image']['default']['round_corner_rate']    = '40';
@@ -207,7 +211,7 @@ $config['module']['security']['key']   = "livestreet_security_key"; // ключ 
 $config['module']['security']['hash']  = "livestreet_security_key"; // "примесь" к строке, хешируемой в качестве security-кода
 
 // Какие модули должны быть загружены на старте
-$config['module']['autoLoad'] = array('Hook','Cache','Security','Session','Lang','User','Message');
+$config['module']['autoLoad'] = array('Hook','Cache','Security','Session','Lang','Message','User');
 /**
  * Настройка базы данных
  */
@@ -264,14 +268,14 @@ $config['router']['rewrite'] = array();
 // Правила реврайта для REQUEST_URI
 $config['router']['uri'] = array(
 	// короткий вызов топиков из личных блогов
-	'~^(\d+)\.html~i' => "restaurant/\\1.html",
+	'~^(\d+)\.html~i' => "blog/\\1.html",
 );
 // Распределение action
 $config['router']['page']['error']         = 'ActionError';
 $config['router']['page']['registration']  = 'ActionRegistration';
 $config['router']['page']['profile']       = 'ActionProfile';
 $config['router']['page']['my']            = 'ActionMy';
-$config['router']['page']['restaurant']    = 'ActionBlog';
+$config['router']['page']['restaurant']          = 'ActionBlog';
 $config['router']['page']['personal_blog'] = 'ActionPersonalBlog';
 $config['router']['page']['top']           = 'ActionTop';
 $config['router']['page']['index']         = 'ActionIndex';
@@ -297,14 +301,15 @@ $config['router']['config']['action_not_found'] = 'error';
  * Настройки вывода блоков
  */
 $config['block']['rule_index_blog'] = array(
-	'path' => array( 
+        'path' => array(
 		'___path.root.web___/restaurant$',
 		'___path.root.web___/restaurant/*$',
+                '___path.root.web___/restaurant/*/page\d+$',
 		'___path.root.web___/restaurant/*/*\.html$',
 		'___path.root.web___/restaurant/*\.html$',
 	),
 	'action'  => array(
-			'index' => array('index',''), 'new'
+			'index', 'new'
 		),
 	'blocks'  => array(
 			'right' => array('stream'=>array('priority'=>100),'tags'=>array('priority'=>50),'blogs'=>array('params'=>array(),'priority'=>1))
@@ -384,7 +389,7 @@ $config['head']['default']['js']  = array(
 	"___path.static.skin___/js/questions.js",
 	"___path.static.skin___/js/block_loader.js",
 	"___path.static.skin___/js/friend.js",
-	"___path.static.skin___/js/blog.js",	
+	"___path.static.skin___/js/blog.js",
 	"___path.static.skin___/js/other.js",
 	"___path.static.skin___/js/panel.js",
 	"___path.root.engine_lib___/external/MooTools_1.2/plugs/Piechart/moocanvas.js"=>array('browser'=>'IE'),
@@ -404,7 +409,7 @@ $config['head']['default']['css'] = array(
 /**
  * Параметры компрессии css-файлов
  */
-$config['compress']['css']['merge'] = false;       // указывает на необходимость слияния файлов по указанным блокам.
+$config['compress']['css']['merge'] = true;       // указывает на необходимость слияния файлов по указанным блокам.
 $config['compress']['css']['use']   = false;       // указывает на необходимость компрессии файлов. Компрессия используется только в активированном режиме слияния файлов.
 $config['compress']['css']['case_properties']     = 1;
 $config['compress']['css']['merge_selectors']     = 0;

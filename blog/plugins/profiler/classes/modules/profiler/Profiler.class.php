@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/Profiler.mapper.class.php');
-
 /**
  * Модуль статических страниц
  *
  */
-class PluginProfiler_Profiler extends Module {		
+class PluginProfiler_ModuleProfiler extends Module {		
 	/**
 	 * Меппер для сохранения логов в базу данных и формирования выборок по данным из базы
 	 *
@@ -46,17 +43,17 @@ class PluginProfiler_Profiler extends Module {
 	 * Инициализация модуля
 	 */
 	public function Init() {
-		$this->oMapper=new PluginProfiler_Mapper_Profiler($this->Database_GetConnect());
+		$this->oMapper=Engine::GetMapper(__CLASS__);
 		$this->hLog = @fopen(Config::Get('path.root.server').'/logs/'.Config::Get('sys.logs.profiler_file'),'r+');
 	}
 	
 	/**
 	 * Добавить новую запись в базу данных
 	 *
-	 * @param  PluginProfiler_ProfilerEntity_Entry $oEntry
+	 * @param  PluginProfiler_ModuleProfiler_EntityEntry $oEntry
 	 * @return bool
 	 */
-	public function AddEntry(PluginProfiler_ProfilerEntity_Entry $oEntry) {
+	public function AddEntry(PluginProfiler_ModuleProfiler_EntityEntry $oEntry) {
 		return $this->oMapper->AddEntry($oEntry);
 	}
 	
@@ -64,7 +61,7 @@ class PluginProfiler_Profiler extends Module {
 	 * Читает из лог-файла записи
 	 *
 	 * @param  string $sPath
-	 * @return PluginProfiler_ProfilerEntity_Entry
+	 * @return PluginProfiler_ModuleProfiler_EntityEntry
 	 */
 	public function ReadEntry() {
 		/**

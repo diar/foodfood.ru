@@ -65,6 +65,8 @@
 						<li class="link"><a href="{router page='link'}go/{$oTopic->getId()}/" title="{$aLang.topic_link_count_jump}: {$oTopic->getLinkCountJump()}">{$oTopic->getLinkUrl(true)}</a></li>						
 					{/if}
 					<li class="author"><a href="{$oUser->getUserWebPath()}">{$oUser->getLogin()}</a></li>					
-				</ul>
+                                        {hook run='topic_show_info' topic=$oTopic}
+                                </ul>
+                        {hook run='topic_show_end' topic=$oTopic}
 			</div>
 			<!-- /Topic -->

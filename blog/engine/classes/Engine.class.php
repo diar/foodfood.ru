@@ -40,19 +40,15 @@ class Engine extends Object {
 	protected $aPlugins=array();
 	protected $aConfigModule;
 	public $iTimeLoadModule=0;
+	protected $iTimeInit=null;
 	
-	/**
-	 * Массив содержит меппер кастомизации сущностей
-	 *
-	 * @var arrat
-	 */
-	static protected $aEntityCustoms=array();
-	
+		
 	/**
 	 * При создании объекта делаем инициализацию
 	 *
 	 */
 	protected function __construct() {
+		$this->iTimeInit=microtime(true);
 		if (get_magic_quotes_gpc()) {
 			func_stripslashes($_REQUEST);
 			func_stripslashes($_GET);
@@ -160,47 +156,10 @@ class Engine extends Object {
 	public function LoadModule($sModuleName,$bInit=false) {
 		$tm1=microtime(true);
 		
-		if(!preg_match('/^Plugin([\w]+)_([\w]+)$/i',$sModuleName,$aMatches)){
-			if ($this->isFileExists(Config::Get('path.root.engine')."/modules/".strtolower($sModuleName)."/".$sModuleName.".class.php")) {
-				require_once(Config::Get('path.root.engine')."/modules/".strtolower($sModuleName)."/".$sModuleName.".class.php");			
-			} elseif ($this->isFileExists(Config::Get('path.root.server')."/classes/modules/".strtolower($sModuleName)."/".$sModuleName.".class.php")) {
-				require_once(Config::Get('path.root.server')."/classes/modules/".strtolower($sModuleName)."/".$sModuleName.".class.php");
-			} else {
-				throw new Exception("Can not find module class - ".$sModuleName);
-			}		
-
-			/**
-			 * Проверяем наличие кастомного класса. Также можно переопределить системный модуль
-			 */
-			$sPrefixCustom='';
-			if ($this->isFileExists(Config::Get('path.root.server')."/classes/modules/".strtolower($sModuleName)."/".$sModuleName.".class.custom.php")) {
-				require_once(Config::Get('path.root.server')."/classes/modules/".strtolower($sModuleName)."/".$sModuleName.".class.custom.php");
-				$sPrefixCustom='_custom';
-			}
-			/**
-			 * Определяем имя класса
-			 */
-			$sModuleNameClass='Ls'.$sModuleName.$sPrefixCustom;					
-		} else {
-			/**
-			 * Это модуль плагина
-			 */
-			$sModuleFile = Config::Get('path.root.server').'/plugins/'.strtolower($aMatches[1]).'/classes/modules/'.strtolower($aMatches[2]).'/'.$aMatches[2].'.class.php';	
-			if($this->isFileExists($sModuleFile)) {
-				require_once($sModuleFile);
-			} else {
-				throw new Exception("Can not find module class - ".$sModuleName);
-			}
-			/**
-			 * Определяем имя класса
-			 */
-			$sModuleNameClass='Plugin'.$aMatches[1].'_'.$aMatches[2];	
-		}
-		
 		/**		 
 		 * Создаем объект модуля
 		 */		
-		$oModule=new $sModuleNameClass($this);
+		$oModule=new $sModuleName($this);
 		if ($bInit or $sModuleName=='Cache') {
 			$oModule->Init();
 			$oModule->SetInit();
@@ -219,8 +178,11 @@ class Engine extends Object {
 	protected function LoadModules() {
 		$this->LoadConfig();
 		foreach ($this->aConfigModule['autoLoad'] as $sModuleName) {
-			if (!isset($this->aModules[$sModuleName])) {
-				$this->LoadModule($sModuleName);
+			$sModuleClass='Module'.$sModuleName;
+			if(!in_array($sModuleName,array('Plugin','Hook'))) $sModuleClass=$this->Plugin_GetDelegate('module',$sModuleClass);
+			
+			if (!isset($this->aModules[$sModuleClass])) {
+				$this->LoadModule($sModuleClass);
 			}
 		}
 	}
@@ -387,7 +349,7 @@ class Engine extends Object {
 		}
 				
 		if (!in_array($sModuleName,array('plugin','hook'))) {
-			$this->Hook_Run('module_'.$sModuleName.'_'.strtolower($sMethod).'_after',array('result'=>$result));
+			$this->Hook_Run('module_'.$sModuleName.'_'.strtolower($sMethod).'_after',array('result'=>&$result,'params'=>$aArgs));
 		}
 				
 		$oProfiler->Stop($iTimeId);
@@ -401,24 +363,35 @@ class Engine extends Object {
 	 * @return array
 	 */
 	public function GetModule($sName) {
+		/**
+		 * Поддержка полного синтаксиса при вызове метода модуля
+		 */
+		if (preg_match("/^Plugin(\w+)\_Module(\w+)\_(\w+)$/i",$sName,$aMatch)) {
+			$sName="Plugin{$aMatch[1]}_{$aMatch[2]}_{$aMatch[3]}";
+		}
+		if (preg_match("/^Module(\w+)\_(\w+)$/i",$sName,$aMatch)) {
+			$sName="{$aMatch[1]}_{$aMatch[2]}";
+		}
 		$aName=explode("_",$sName);
 		
 		if(count($aName)==2) {
 			$sModuleName=$aName[0];
+			$sModuleClass='Module'.$aName[0];
 			$sMethod=$aName[1];
 		} else {
 			$sModuleName=$aName[0].'_'.$aName[1];
+			$sModuleClass=$aName[0].'_Module'.$aName[1];
 			$sMethod=$aName[2];
 		}
 		/**
 		 * Подхватыем делегат модуля (в случае наличия такового)
 		 */
-		if(!in_array($sModuleName,array('Plugin','Hook'))) $sModuleName=$this->Plugin_GetDelegate('module',$sModuleName);
+		if(!in_array($sModuleName,array('Plugin','Hook'))) $sModuleClass=$this->Plugin_GetDelegate('module',$sModuleClass);
 
-		if (isset($this->aModules[$sModuleName])) {
-			$oModule=$this->aModules[$sModuleName];
+		if (isset($this->aModules[$sModuleClass])) {
+			$oModule=$this->aModules[$sModuleClass];
 		} else {
-			$oModule=$this->LoadModule($sModuleName,true);
+			$oModule=$this->LoadModule($sModuleClass,true);
 		}
 		
 		return array($oModule,$sModuleName,$sMethod);
@@ -426,6 +399,10 @@ class Engine extends Object {
 	
 	public function getStats() {
 		return array('sql'=>$this->Database_GetStats(),'cache'=>$this->Cache_GetStats(),'engine'=>array('time_load_module'=>round($this->iTimeLoadModule,3)));
+	}
+	
+	public function GetTimeInit() {
+		return $this->iTimeInit;
 	}
 
 	/**
@@ -448,6 +425,28 @@ class Engine extends Object {
 	}
 	
 	/**
+	 * Получает объект маппера
+	 *
+	 * @param string $sClassName
+	 * @param string $sName
+	 * @return mixed
+	 */
+	public static function GetMapper($sClassName,$sName=null,$oConnect=null) {		
+		if (preg_match("/^(?:Plugin\w+_)?Module(\w+)$/i",$sClassName,$aMatch)) {
+			if (!$sName) {
+				$sName=$aMatch[1];
+			}
+			$sClass=$sClassName.'_Mapper'.$sName;
+			if (!$oConnect) {			
+				$oConnect=Engine::getInstance()->Database_GetConnect();
+			}
+			$sClass=self::getInstance()->Plugin_GetDelegate('mapper',$sClass);
+			return new $sClass($oConnect);
+		}		
+		return null;
+	}
+	
+	/**
 	 * Создает объект сущности, контролируя варианты кастомизации
 	 *
 	 * @param  string $sName
@@ -465,10 +464,17 @@ class Engine extends Object {
 				break;
 			
 			case 1:		
+				/**
+				 * Поддержка полного синтаксиса при вызове сущности
+				 */
+				if (preg_match("/^Module(\w+)\_Entity(\w+)$/i",$sName,$aMatch)) {
+					$sName="{$aMatch[1]}_{$aMatch[2]}";
+				}
+				
 				list($sModule,$sEntity) = explode('_',$sName,2);
 				/**
 				 * Обслуживание короткой записи сущностей плагинов 
-				 * PluginTest_Test -> PluginTest_TestEntity_Test
+				 * PluginTest_Test -> PluginTest_ModuleTest_EntityTest
 				 */
 				if(substr($sModule,0,6)=='Plugin' and strlen($sModule)>6) {
 					$sPlugin = substr($sModule,6);
@@ -477,6 +483,12 @@ class Engine extends Object {
 				break;
 				
 			case 2:
+				/**
+				 * Поддержка полного синтаксиса при вызове сущности плагина
+				 */
+				if (preg_match("/^Plugin(\w+)\_Module(\w+)\_Entity(\w+)$/i",$sName,$aMatch)) {
+					$sName="Plugin{$aMatch[1]}_{$aMatch[2]}_{$aMatch[3]}";
+				}
 				/**
 				 * Entity плагина
 				 */
@@ -491,46 +503,10 @@ class Engine extends Object {
 			default:
 				throw new Exception("Unknown entity '{$sName}' given.");
 		}
-		
-		/**
-		 * Проверяем наличие сущности в меппере кастомизации
-		 */
-		if(array_key_exists($sName,self::$aEntityCustoms)) {
-			$sEntity = (self::$aEntityCustoms[$sName]=='custom')
-				? $sEntity.'_custom'
-				: $sEntity;
-		} else {
-			$sFileDefaultClass=isset($sPlugin)
-				? Config::get('path.root.server').'/plugins/'.strtolower($sPlugin).'/classes/modules/'.strtolower($sModule).'/entity/'.$sEntity.'.entity.class.php'
-				: Config::get('path.root.server').'/classes/modules/'.strtolower($sModule).'/entity/'.$sEntity.'.entity.class.php';		
-			
-			$sFileCustomClass=isset($sPlugin) 
-				? Config::get('path.root.server').'/plugins/'.strtolower($sPlugin).'/classes/modules/'.strtolower($sModule).'/entity/'.$sEntity.'.entity.class.custom.php'
-				: Config::get('path.root.server').'/classes/modules/'.strtolower($sModule).'/entity/'.$sEntity.'.entity.class.custom.php';
-			
-			/**
-			 * Пытаемся найти кастомизированную сущность
-			 */
-			if(file_exists($sFileCustomClass)) {
-				$sFileClass=$sFileCustomClass;
-				$sEntity.='_custom';
-				self::$aEntityCustoms[$sName]='custom';	
-			} elseif(file_exists($sFileDefaultClass)) {
-				$sFileClass=$sFileDefaultClass;
-				self::$aEntityCustoms[$sName]='default';
-			} else {
-				throw new Exception('Entity class not found');
-				return null;
-			}
-			/**
-			 * Подгружаем нужный файл
-			 */
-			require_once($sFileClass);
-		}
-		
+						
 		$sClass=isset($sPlugin)
-			? 'Plugin'.$sPlugin.'_'.$sModule.'Entity_'.$sEntity
-			: $sModule.'Entity_'.$sEntity;
+			? 'Plugin'.$sPlugin.'_Module'.$sModule.'_Entity'.$sEntity
+			: 'Module'.$sModule.'_Entity'.$sEntity;
 		/**
 		 * Определяем наличие делегата сущности
 		 * Делегирование указывается только в полной форме!
@@ -551,12 +527,10 @@ function __autoload($sClassName) {
 	/**
 	 * Если класс подходит под шаблон класса сущности то загружаем его
 	 */
-	if (preg_match("/^(\w+)Entity\_(\w+)$/i",$sClassName,$aMatch)) {			
+	if (preg_match("/^Module(\w+)\_Entity(\w+)$/i",$sClassName,$aMatch)) {			
 		$tm1=microtime(true);	
 		
-		$sFileClass= (substr($aMatch[2],-7)=='_custom') 
-			? Config::get('path.root.server').'/classes/modules/'.strtolower($aMatch[1]).'/entity/'.substr($aMatch[2],0,strlen($aMatch[2])-7).'.entity.class.custom.php'
-			: Config::get('path.root.server').'/classes/modules/'.strtolower($aMatch[1]).'/entity/'.$aMatch[2].'.entity.class.php';
+		$sFileClass=Config::get('path.root.server').'/classes/modules/'.strtolower($aMatch[1]).'/entity/'.$aMatch[2].'.entity.class.php';
 			
 		if (file_exists($sFileClass)) {
 			require_once($sFileClass);
@@ -564,10 +538,11 @@ function __autoload($sClassName) {
 			dump($sClassName." - \t\t".($tm2-$tm1));
 		}
 	}
+	
 	/**
 	 * Если класс подходит под шаблон класса сущности плагина
 	 */
-	if (preg_match("/^Plugin(\w+)\_(\w+)Entity\_(\w+)$/i",$sClassName,$aMatch)) {			
+	if (preg_match("/^Plugin(\w+)\_Module(\w+)\_Entity(\w+)$/i",$sClassName,$aMatch)) {			
 		$tm1=microtime(true);
 		
 		$sFileClass= Config::get('path.root.server').'/plugins/'.strtolower($aMatch[1]).'/classes/modules/'.strtolower($aMatch[2]).'/entity/'.$aMatch[3].'.entity.class.php';
@@ -582,17 +557,76 @@ function __autoload($sClassName) {
 	/**
 	 * Если класс подходит под шаблон модуля, то загружаем его
 	 */
-	if(preg_match("/^Ls(\w+)$/i",$sClassName,$aMatch)) {
-		$sName = ucfirst(strtolower($aMatch[1]));
-		$sFileClass= (substr($sName,-7)=='_custom') 
-			? Config::get('path.root.server').'/classes/modules/'.strtolower($sName).'/'.substr($sName,0,strlen($sName)-7).'.class.custom.php'
-			: Config::get('path.root.server').'/classes/modules/'.strtolower($sName).'/'.$sName.'.class.php';	
+	if(preg_match("/^Module(\w+)$/i",$sClassName,$aMatch)) {
+		$sName = ucfirst($aMatch[1]);
+		$sFileClass= Config::get('path.root.server').'/classes/modules/'.strtolower($sName).'/'.$sName.'.class.php';	
 			
 		if (file_exists($sFileClass)) {
 			require_once($sFileClass);
 		} else {
 			$sFileClass = str_replace('/classes/modules/','/engine/modules/',$sFileClass);
 			if(file_exists($sFileClass)) require_once($sFileClass);
+		}
+	}
+	
+	/**
+	 * Если класс подходит под шаблон класса маппера, то загружаем его
+	 */
+	if (preg_match("/^Module(\w+)\_Mapper(\w+)$/i",$sClassName,$aMatch)) {
+		$sFileClass=Config::get('path.root.server').'/classes/modules/'.strtolower($aMatch[1]).'/mapper/'.$aMatch[2].'.mapper.class.php';		
+		if (file_exists($sFileClass)) {
+			require_once($sFileClass);			
+		}
+	}
+	
+	/**
+	 * Если класс подходит под шаблон класса маппера плагина, то загружаем его
+	 */
+	if (preg_match("/^Plugin(\w+)\_Module(\w+)\_Mapper(\w+)$/i",$sClassName,$aMatch)) {
+		$sFileClass=Config::get('path.root.server').'/plugins/'.strtolower($aMatch[1]).'/classes/modules/'.strtolower($aMatch[2]).'/mapper/'.$aMatch[3].'.mapper.class.php';		
+		if (file_exists($sFileClass)) {
+			require_once($sFileClass);			
+		}
+	}
+	
+	/**
+	 * Если класс подходит под шаблон модуля плагина
+	 */
+	if (preg_match("/^Plugin(\w+)\_Module(\w+)$/i",$sClassName,$aMatch)) {
+		$sFileClass=Config::get('path.root.server').'/plugins/'.strtolower($aMatch[1]).'/classes/modules/'.strtolower($aMatch[2]).'/'.$aMatch[2].'.class.php';		
+		if (file_exists($sFileClass)) {
+			require_once($sFileClass);			
+		}
+	}
+	
+	
+	/**
+	 * Загрузка цепочки наследуемых классов
+	 */
+	if (preg_match("/^Plugin(\w+)\_Inherit\_([\w\_]+)$/i",$sClassName,$aMatch)) {
+		$sPlugin=$aMatch[1];
+		$sInheritClass=$aMatch[2];
+		$sParentClass=Engine::getInstance()->Plugin_GetParentInherit($sInheritClass);
+		class_alias($sParentClass,$sClassName);
+	}
+	
+	/**
+	 * Загрузка класса экшена
+	 */
+	if (preg_match("/^Action(\w+)$/i",$sClassName,$aMatch)) {
+		$sFileClass=Config::get('path.root.server').'/classes/actions/'.$sClassName.'.class.php';		
+		if (file_exists($sFileClass)) {
+			require_once($sFileClass);			
+		}
+	}
+	
+	/**
+	 * Загрузка класса экшена плагина
+	 */
+	if (preg_match("/^Plugin(\w+)\_Action(\w+)$/i",$sClassName,$aMatch)) {
+		$sFileClass=Config::get('path.root.server').'/plugins/'.strtolower($aMatch[1]).'/classes/actions/Action'.$aMatch[2].'.class.php';		
+		if (file_exists($sFileClass)) {
+			require_once($sFileClass);			
 		}
 	}
 }

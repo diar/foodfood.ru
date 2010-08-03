@@ -15,14 +15,11 @@
 ---------------------------------------------------------
 */
 
-set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__));
-require_once('mapper/Topic.mapper.class.php');
-
 /**
  * Модуль для работы с топиками
  *
  */
-class LsTopic extends Module {		
+class ModuleTopic extends Module {		
 	protected $oMapperTopic;
 	protected $oUserCurrent=null;
 		
@@ -31,14 +28,14 @@ class LsTopic extends Module {
 	 *
 	 */
 	public function Init() {		
-		$this->oMapperTopic=new Mapper_Topic($this->Database_GetConnect());		
+		$this->oMapperTopic=Engine::GetMapper(__CLASS__);
 		$this->oUserCurrent=$this->User_GetUserCurrent();
 	}
 	/**
 	 * Получает дополнительные данные(объекты) для топиков по их ID
 	 *
 	 */
-	public function GetTopicsAdditionalData($aTopicId,$aAllowData=array('user'=>array(),'blog'=>array('owner'=>array()),'vote','favourite','comment_new')) {
+	public function GetTopicsAdditionalData($aTopicId,$aAllowData=array('user'=>array(),'blog'=>array('owner'=>array(),'relation_user'),'vote','favourite','comment_new')) {
 		func_array_simpleflip($aAllowData);
 		if (!is_array($aTopicId)) {
 			$aTopicId=array($aTopicId);
@@ -90,12 +87,12 @@ class LsTopic extends Module {
 			if (isset($aUsers[$oTopic->getUserId()])) {
 				$oTopic->setUser($aUsers[$oTopic->getUserId()]);
 			} else {
-				$oTopic->setUser(null); // или $oTopic->setUser(new UserEntity_User());
+				$oTopic->setUser(null); // или $oTopic->setUser(new ModuleUser_EntityUser());
 			}
 			if (isset($aBlogs[$oTopic->getBlogId()])) {
 				$oTopic->setBlog($aBlogs[$oTopic->getBlogId()]);
 			} else {
-				$oTopic->setBlog(null); // или $oTopic->setBlog(new BlogEntity_Blog());
+				$oTopic->setBlog(null); // или $oTopic->setBlog(new ModuleBlog_EntityBlog());
 			}
 			if (isset($aTopicsVote[$oTopic->getId()])) {
 				$oTopic->setVote($aTopicsVote[$oTopic->getId()]);				
@@ -125,10 +122,10 @@ class LsTopic extends Module {
 	/**
 	 * Добавляет топик
 	 *
-	 * @param TopicEntity_Topic $oTopic
+	 * @param ModuleTopic_EntityTopic $oTopic
 	 * @return unknown
 	 */
-	public function AddTopic(TopicEntity_Topic $oTopic) {
+	public function AddTopic(ModuleTopic_EntityTopic $oTopic) {
 		if ($sId=$this->oMapperTopic->AddTopic($oTopic)) {
 			$oTopic->setId($sId);
 			if ($oTopic->getPublish()) {
@@ -166,7 +163,7 @@ class LsTopic extends Module {
 	 * @return unknown
 	 */
 	public function DeleteTopic($oTopicId) {
-		if ($oTopicId instanceof TopicEntity_Topic) {
+		if ($oTopicId instanceof ModuleTopic_EntityTopic) {
 			$sTopicId=$oTopicId->getId();
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("topic_update_user_{$oTopicId->getUserId()}"));
 		} else {
@@ -214,17 +211,21 @@ class LsTopic extends Module {
 		/**
 		 * Удаляем голосование к топику
 		 */
-		$this->Vote_DeleteVoteByTarget($iTopicId,'topic');		
+		$this->Vote_DeleteVoteByTarget($iTopicId,'topic');
+		/**
+		 * Удаляем теги
+		 */
+		$this->DeleteTopicTagsByTopicId($iTopicId);
 		
 		return true;
 	}
 	/**
 	 * Обновляет топик
 	 *
-	 * @param TopicEntity_Topic $oTopic
+	 * @param ModuleTopic_EntityTopic $oTopic
 	 * @return unknown
 	 */
-	public function UpdateTopic(TopicEntity_Topic $oTopic) {
+	public function UpdateTopic(ModuleTopic_EntityTopic $oTopic) {
 		/**
 		 * Получаем топик ДО изменения
 		 */
@@ -420,7 +421,7 @@ class LsTopic extends Module {
 	 * @param  int   $iPerPage
 	 * @return array
 	 */
-	public function GetTopicsByFilter($aFilter,$iPage=0,$iPerPage=0,$aAllowData=array('user'=>array(),'blog'=>array('owner'=>array()),'vote','favourite','comment_new')) {
+	public function GetTopicsByFilter($aFilter,$iPage=0,$iPerPage=0,$aAllowData=array('user'=>array(),'blog'=>array('owner'=>array(),'relation_user'),'vote','favourite','comment_new')) {
 		$s=serialize($aFilter);
 		if (false === ($data = $this->Cache_Get("topic_filter_{$s}_{$iPage}_{$iPerPage}"))) {			
 			$data = ($iPage*$iPerPage!=0) 
@@ -933,19 +934,19 @@ class LsTopic extends Module {
 	/**
 	 * Добавляет топик в избранное
 	 *
-	 * @param FavouriteEntity_Favourite $oFavouriteTopic
+	 * @param ModuleFavourite_EntityFavourite $oFavouriteTopic
 	 * @return unknown
 	 */
-	public function AddFavouriteTopic(FavouriteEntity_Favourite $oFavouriteTopic) {		
+	public function AddFavouriteTopic(ModuleFavourite_EntityFavourite $oFavouriteTopic) {		
 		return $this->Favourite_AddFavourite($oFavouriteTopic);
 	}
 	/**
 	 * Удаляет топик из избранного
 	 *
-	 * @param FavouriteEntity_Favourite $oFavouriteTopic
+	 * @param ModuleFavourite_EntityFavourite $oFavouriteTopic
 	 * @return unknown
 	 */
-	public function DeleteFavouriteTopic(FavouriteEntity_Favourite $oFavouriteTopic) {	
+	public function DeleteFavouriteTopic(ModuleFavourite_EntityFavourite $oFavouriteTopic) {	
 		return $this->Favourite_DeleteFavourite($oFavouriteTopic);
 	}
 	/**
@@ -983,9 +984,9 @@ class LsTopic extends Module {
 	/**
 	 * Обновляем/устанавливаем дату прочтения топика, если читаем его первый раз то добавляем
 	 *
-	 * @param TopicEntity_TopicRead $oTopicRead	 
+	 * @param ModuleTopic_EntityTopicRead $oTopicRead	 
 	 */
-	public function SetTopicRead(TopicEntity_TopicRead $oTopicRead) {		
+	public function SetTopicRead(ModuleTopic_EntityTopicRead $oTopicRead) {		
 		if ($this->GetTopicRead($oTopicRead->getTopicId(),$oTopicRead->getUserId())) {
 			$this->Cache_Delete("topic_read_{$oTopicRead->getTopicId()}_{$oTopicRead->getUserId()}");
 			$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("topic_read_user_{$oTopicRead->getUserId()}"));
@@ -1214,9 +1215,9 @@ class LsTopic extends Module {
 	/**
 	 * Добавляет факт голосования за топик-вопрос
 	 *
-	 * @param TopicEntity_TopicQuestionVote $oTopicQuestionVote
+	 * @param ModuleTopic_EntityTopicQuestionVote $oTopicQuestionVote
 	 */
-	public function AddTopicQuestionVote(TopicEntity_TopicQuestionVote $oTopicQuestionVote) {
+	public function AddTopicQuestionVote(ModuleTopic_EntityTopicQuestionVote $oTopicQuestionVote) {
 		$this->Cache_Delete("topic_question_vote_{$oTopicQuestionVote->getTopicId()}_{$oTopicQuestionVote->getVoterId()}");
 		$this->Cache_Clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,array("topic_question_vote_user_{$oTopicQuestionVote->getVoterId()}"));
 		return $this->oMapperTopic->AddTopicQuestionVote($oTopicQuestionVote);
@@ -1318,7 +1319,7 @@ class LsTopic extends Module {
 	 * Заргузка изображений при написании топика
 	 *
 	 * @param  array           $aFile
-	 * @param  UserEntity_User $oUser
+	 * @param  ModuleUser_EntityUser $oUser
 	 * @return string|bool
 	 */
 	public function UploadTopicImageFile($aFile,$oUser) {
@@ -1344,7 +1345,7 @@ class LsTopic extends Module {
 	 * Загрузка изображений по переданному URL
 	 *
 	 * @param  string          $sUrl
-	 * @param  UserEntity_User $oUser
+	 * @param  ModuleUser_EntityUser $oUser
 	 * @return (string|bool)
 	 */
 	public function UploadTopicImageUrl($sUrl, $oUser) {
@@ -1352,7 +1353,7 @@ class LsTopic extends Module {
 		 * Проверяем, является ли файл изображением
 		 */
 		if(!@getimagesize($sUrl)) {
-			return LsImage::UPLOAD_IMAGE_ERROR_TYPE;
+			return ModuleImage::UPLOAD_IMAGE_ERROR_TYPE;
 		}
 		/**
 		 * Открываем файловый поток и считываем файл поблочно,
@@ -1360,7 +1361,7 @@ class LsTopic extends Module {
 		 */
 		$oFile=fopen($sUrl,'r');
 		if(!$oFile) {
-			return LsImage::UPLOAD_IMAGE_ERROR_READ;
+			return ModuleImage::UPLOAD_IMAGE_ERROR_READ;
 		}
 		
 		$iMaxSizeKb=500;
@@ -1376,7 +1377,7 @@ class LsTopic extends Module {
 		 * значит файл имеет недопустимый размер
 		 */
 		if(!feof($oFile)) {
-			return LsImage::UPLOAD_IMAGE_ERROR_SIZE;
+			return ModuleImage::UPLOAD_IMAGE_ERROR_SIZE;
 		}
 		fclose($oFile);
 
@@ -1401,7 +1402,7 @@ class LsTopic extends Module {
 		} 		
 		
 		@unlink($sFileTmp);
-		return LsImage::UPLOAD_IMAGE_ERROR;
+		return ModuleImage::UPLOAD_IMAGE_ERROR;
 	}
 }
 ?>

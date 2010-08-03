@@ -18,5 +18,6 @@ $config['db']['table']['prefix'] = 'blog_';
 
 $config['path']['offset_request_url'] = '1';
 $config['db']['tables']['engine'] = 'MyISAM';
+
 return $config;
 ?>

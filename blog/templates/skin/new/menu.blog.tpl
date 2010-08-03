@@ -46,5 +46,5 @@
 		</ul>
 		
 		
-		
+		{hook run='menu_blog'} 
 

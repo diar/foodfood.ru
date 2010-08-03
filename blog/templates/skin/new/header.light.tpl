@@ -3,15 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru">
 
 <head>
+        {hook run='html_head_begin'}
 	<title>{$sHtmlTitle}</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />	
-	<!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="{cfg name='path.static.skin'}/css/style.css?v=1" />	
-	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="{cfg name='path.static.skin'}/css/ie6.css?v=1" /><![endif]-->
-	<!--[if gte IE 7]><link rel="stylesheet" type="text/css" href="{cfg name='path.static.skin'}/css/ie7.css?v=1" /><![endif]-->
+	{$aHtmlHeadFiles.css}
 	{if $bRefreshToHome}
 		<meta  HTTP-EQUIV="Refresh" CONTENT="3; URL={cfg name='path.root.web'}/">
 	{/if}
+        {hook run='html_head_end'} 
 </head>
 
 <body>
