@@ -26,7 +26,7 @@
                                                         <tr>
                                                             <td class="user">
                                                                 <a href="{router page='profile'}{$oUser->getLogin()}/">
-                                                                    <img src="{$oUser->getProfileAvatarPath(24)}" alt="" />
+                                                                    <img src="{$oUser->getProfileAvatarPath(48)}" alt="" />
                                                                 </a>
                                                                 <a href="{router page='profile'}{$oUser->getLogin()}/" class="link">{$oUser->getLogin()}</a>
                                                             </td>
@@ -52,7 +52,7 @@
                                                 <tbody>
                                                 {foreach from=$aUsersRating item=oUser}
                                                         <tr>
-                                                                <td class="user"><a href="{router page='profile'}{$oUser->getLogin()}/"><img src="{$oUser->getProfileAvatarPath(24)}" alt="" /></a><a href="{router page='profile'}{$oUser->getLogin()}/" class="link">{$oUser->getLogin()}</a></td>
+                                                                <td class="user"><a href="{router page='profile'}{$oUser->getLogin()}/"><img src="{$oUser->getProfileAvatarPath(48)}" alt="" /></a><a href="{router page='profile'}{$oUser->getLogin()}/" class="link">{$oUser->getLogin()}</a></td>
                                                                 <td class="strength">{$oUser->getSkill()}</td>
                                                                 <td class="rating"><strong>{$oUser->getRating()}</strong></td>
                                                         </tr>
