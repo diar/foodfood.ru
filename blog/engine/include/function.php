@@ -176,6 +176,7 @@ function func_check($sValue,$sParam,$iMin=1,$iMax=100) {
 		case 'mail': if (preg_match("/^[\da-z\_\-\.\+]+@[\da-z_\-\.]+\.[a-z]{2,5}$/i",$sValue)){ return true; } break;
 		case 'login': if (preg_match("/^[\da-zа-я\_\-\.]{".$iMin.','.$iMax."}$/iu",$sValue)){ return true; } break;
 		case 'md5': if (preg_match("/^[\da-z]{32}$/i",$sValue)){ return true; } break;
+                case 'phone': if (preg_match("/^\+79[[:digit:]]{5,12}$/i",$sValue)){ return true; } break;
 		case 'password': if (mb_strlen($sValue,'UTF-8')>=$iMin){ return true; } break;
 		case 'text': if (mb_strlen($sValue,'UTF-8')>=$iMin and mb_strlen($sValue,'UTF-8')<=$iMax){ return true; } break;
 		default: 

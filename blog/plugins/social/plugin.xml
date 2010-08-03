@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<name>
+		<lang name="default">Контакты и социальные сервисы</lang>
+	</name>
+	<author>
+		<lang name="default">sfilimonov</lang>
+	</author>
+	<homepage>http://sfilimonov.ru</homepage>
+	<version>1.0</version>
+	<requires>
+		<livestreet>0.4.2</livestreet>
+		<plugins>
+
+		</plugins>
+	</requires>
+	<description>
+		<lang name="default">Добавляет на страницу настроек пять дополнительных поля (Skype,Jabber,Номер телефона, Я во вконтакте, Живой Журнал) и выводит настройки контактов на отдельную страницу (/settings/social)</lang>
+	</description>
+
+</plugin>
