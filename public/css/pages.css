@@ -1208,6 +1208,15 @@ table.table_layout td {
     position: absolute;
     top:0;
 }
+.stars_caption {
+    font-size: 18px;
+    color:#009900;
+    padding-bottom: 5px;
+}
+.star_caption {
+    font-size: 14px;
+    padding-bottom: 3px;
+}
 .stars_default {
     background:url(/public/images/stars.png);
     height:35px;

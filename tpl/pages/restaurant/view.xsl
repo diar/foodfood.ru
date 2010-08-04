@@ -300,9 +300,23 @@
                 </div>
                 <!-- Правая колонка -->
                 <div class="right_col">
-                    <div class="rating-star" style="display:none;">
+                    <div class="stars_caption">Голосуй гурман!</div>
+                    <div class="star_caption">Кухня</div>
+                    <div class="rating-star" id="rating_cook">
                         <div class="stars_default stars"></div>
-                        <div class="stars_active stars"></div>
+                        <div class="stars_active stars" style="width:{rest_rating_cook*22}px;"></div>
+                        <div class="stars_hover stars"></div>
+                    </div>
+                    <div class="star_caption">Сервис</div>
+                    <div class="rating-star" id="rating_service">
+                        <div class="stars_default stars"></div>
+                        <div class="stars_active stars" style="width:{rest_rating_service*22}px;"></div>
+                        <div class="stars_hover stars"></div>
+                    </div>
+                    <div class="star_caption">Дизайн</div>
+                    <div class="rating-star" id="rating_design">
+                        <div class="stars_default stars"></div>
+                        <div class="stars_active stars" style="width:{rest_rating_design*22}px;"></div>
                         <div class="stars_hover stars"></div>
                     </div>
                     <div class="links">

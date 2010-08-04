@@ -103,6 +103,12 @@ class restaurant_Page extends View {
         echo MD_Rating::addComment($id,$rating_target,$text,$to_admin);
     }
 
+    /*
+     * Изменить рэйтинг ресторана по звездочкам
+    */
+    public static function ratingAjaxAction ($id) {
+        echo MD_Rating::changeRatingStar($id,$_POST['rating_param'],$_POST['rating_value']);
+    }
 
     /*
      * Бронь столика

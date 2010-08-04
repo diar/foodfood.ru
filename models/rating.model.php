@@ -17,24 +17,12 @@ class MD_Rating extends Model {
     }
 
     /**
-     * Вычислить рейтинг ресторана
-     * @return int
-     */
-    public static function calculate($id) {
-        $karma = self::value('rest_karma', 'id=' . DB::quote($id));
-        $filling = self::value('rest_filling', 'id=' . DB::quote($id));
-        // Формула получения рейтинга
-        $rating = $karma + $filling;
-        return $rating;
-    }
-
-    /**
      * Обновить рейтинг ресторана
      * @return null
      */
     public static function updateRating($id) {
-        $rating = self::calculate($id);
-        self::upd(Array('rest_rating' => $rating), 'id=' . DB::quote($id));
+        self::calculateFillings();
+        self::upd(Array('rest_rating' => 'rest_karma+rest_filling'), null, false);
     }
 
     /**
@@ -63,6 +51,46 @@ class MD_Rating extends Model {
                   WHERE TRIM(rest_address)!="" AND TRIM(rest_phone)!="" AND
                   TRIM(rest_phone)!="rest_google_code" AND rest_logo=1'
         );
+    }
+
+    /**
+     * Вычислить среднее значение звездочек у ресторана
+     * @return null
+     */
+    public static function calculateRatingStars($rest_id) {
+        $rest_ratings = self::getRecords(Model::getPrefix() . 'rest_rating',
+                        'rest_id=' . DB::quote($rest_id) . ' AND (rating_cook!=0 OR rating_service!=0 OR rating_design!=0)'
+        );
+        if ($rest_ratings) {
+            $rating_cook_value = 0;
+            $rating_cook_count = 0;
+            $rating_service_value = 0;
+            $rating_service_count = 0;
+            $rating_design_value = 0;
+            $rating_design_count = 0;
+            foreach ($rest_ratings as $vote) {
+                if ($vote['rating_cook']!=0){
+                    $rating_cook_value += $vote['rating_cook'];
+                    $rating_cook_count++;
+                }
+                if ($vote['rating_service']!=0){
+                    $rating_service_value += $vote['rating_service'];
+                    $rating_service_count++;
+                }
+                if ($vote['rating_design']!=0){
+                    $rating_design_value += $vote['rating_design'];
+                    $rating_design_count++;
+                }
+            }
+            $rating_cook = round ($rating_cook_value / $rating_cook_count,1);
+            $rating_service = round ($rating_service_value / $rating_service_count,1);
+            $rating_design = round ($rating_design_value / $rating_design_count,1);
+            self::upd(array(
+                'rest_rating_cook'=>$rating_cook,
+                'rest_rating_service'=>$rating_service,
+                'rest_rating_design'=>$rating_design
+            ), 'id='.$rest_id);
+        }
     }
 
     /**
@@ -100,7 +128,7 @@ class MD_Rating extends Model {
                             Model::getPrefix () . 'rest_rating',
                             'rest_id=' . DB::quote($rest_id) . ' AND user_id=' . User::getParam('user_id')
             );
-            if ($already)
+            if ($already && $already['rating_target'] != 0)
                 return 'ALREADY';
             DB::insert(Model::getPrefix () . 'rest_rating', Array(
                         'rest_id' => $rest_id, 'user_id' => User::getParam('user_id'),
@@ -133,12 +161,12 @@ class MD_Rating extends Model {
                         ), false);
         if ($to_admin) {
             // Отправляем оповещение ресторатору
-            $admin = DB::getRecord('admin_group_table', 'restaurant_id='.DB::quote($rest_id), null,
+            $admin = DB::getRecord('admin_group_table', 'restaurant_id=' . DB::quote($rest_id), null,
                             Array('join' => 'admin_table', 'left' => 'id', 'right' => 'group_id'));
 
             if (!empty($admin['email'])) {
-                $text = 'На странице вашего ресторана оставлен отзыв следующего содержания: '.
-                        '"'.$text.'"';
+                $text = 'На странице вашего ресторана оставлен отзыв следующего содержания: ' .
+                        '"' . $text . '"';
                 $mail = Mail::newMail($text, $admin['email'], 'foodfood.ru');
                 $mail->Send();
             }
@@ -146,4 +174,33 @@ class MD_Rating extends Model {
         return 'OK';
     }
 
+    /**
+     * Изменить рэйтинг ресторана по звездочкам
+     * @return string
+     */
+    public static function changeRatingStar($rest_id, $rating_param, $rating_value) {
+        if (!User::isAuth()) {
+            return 'NO_LOGIN';
+        }
+        if (!in_array($rating_param, array('rating_cook', 'rating_service', 'rating_design'))) {
+            return "error";
+        }
+        $vote = DB::getCount(
+                Model::getPrefix ().'rest_rating',
+                'rest_id='.DB::quote($rest_id).' AND user_id='.User::getParam('user_id')
+        );
+        if ($vote==0) {
+            DB::insert(Model::getPrefix ().'rest_rating', array(
+                $rating_param => $rating_value,
+                'rest_id'=>$rest_id,
+                'user_id'=>User::getParam('user_id')
+            ));
+        } else {
+            DB::update(Model::getPrefix ().'rest_rating', array(
+                $rating_param => $rating_value
+            ),'rest_id='.DB::quote($rest_id).' AND user_id='.User::getParam('user_id'));
+        }
+        self::calculateRatingStars($rest_id);
+        return "OK";
+    }
 }

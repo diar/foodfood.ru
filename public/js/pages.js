@@ -50,16 +50,43 @@ $(document).ready(function(){
         // При наведении на звездочку
         $('.star').mouseenter(function(){
             if ($(this).hasClass('star1')){
-                $('.stars_hover').css('width',22);
+                $(this).parents('.rating-star').find('.stars_hover').css('width',22);
             } else if ($(this).hasClass('star2')){
-                $('.stars_hover').css('width',44);
+                $(this).parents('.rating-star').find('.stars_hover').css('width',44);
             } else if ($(this).hasClass('star3')){
-                $('.stars_hover').css('width',66);
+                $(this).parents('.rating-star').find('.stars_hover').css('width',66);
             } else if ($(this).hasClass('star4')){
-                $('.stars_hover').css('width',88);
+                $(this).parents('.rating-star').find('.stars_hover').css('width',88);
             } else if ($(this).hasClass('star5')){
-                $('.stars_hover').css('width',110);
+                $(this).parents('.rating-star').find('.stars_hover').css('width',110);
             }
+        });
+        // При нажатии на звездочку
+        $('.star').click(function(){
+            rating_param = $(this).parents('.rating-star').attr('id');
+            if ($(this).hasClass('star1')){
+                $(this).parents('.rating-star').find('.stars_active').css('width',22);
+                rating_value = 1;
+            } else if ($(this).hasClass('star2')){
+                $(this).parents('.rating-star').find('.stars_active').css('width',44);
+                rating_value = 2;
+            } else if ($(this).hasClass('star3')){
+                $(this).parents('.rating-star').find('.stars_active').css('width',66);
+                rating_value = 3;
+            } else if ($(this).hasClass('star4')){
+                $(this).parents('.rating-star').find('.stars_active').css('width',88);
+                rating_value = 4;
+            } else if ($(this).hasClass('star5')){
+                $(this).parents('.rating-star').find('.stars_active').css('width',110);
+                rating_value = 5;
+            }
+            $.post('/'+site_city+'/restaurant/rating/'+current_rest_id,
+            {'rating_param':rating_param,'rating_value':rating_value},
+            function(data){
+                if (data=='OK') $.alert('Ваш голос учтен',false);
+                else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы голосовать',true);
+                else $.alert('Ошибка. Попробуйте еще раз',true);
+            });
         });
         $('.rating-star').mouseleave(function(){
             $('.stars_hover').css('width',0);
@@ -102,7 +129,6 @@ $(document).ready(function(){
                 $('#restaurant_info .photos .main[src="'+$(min).attr('rel')+'"]').fadeIn(300).addClass('current');
                 $('#restaurant_info .photos .main[src="'+$(min).attr('rel')+'"] a').attr('href',$(min).attr('rel'));
             });
-
             restaurant_photo_position = parseInt($(min).attr('pos'))-restaurant_photo_offset;
             if (restaurant_photo_position==restaurant_photo_visible &&
                 restaurant_photo_position+restaurant_photo_offset<restaurant_photo_count) {
