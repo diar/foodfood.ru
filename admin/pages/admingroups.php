@@ -25,8 +25,8 @@ class AdminGroups extends AdminModule {
             'css_class' => 'caption',
             'multiple' => false,
             'size' => '1',
-            'options' => array_merge(array(0 => "Все рестораны"),
-                    Form::array_combine(DB::fetchAll('SELECT id,title FROM `kazan_rest`')))
+            'options' => array_merge(array(0 => "Выбери ресторан"),
+                    Form::array_combine(DB::fetchAll('SELECT id,rest_title FROM `kazan_rest`')))
                 )
         );
 
