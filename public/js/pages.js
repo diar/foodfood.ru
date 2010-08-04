@@ -42,8 +42,32 @@ $(document).ready(function(){
             imageBlank:   '/public/js/libs/lightbox/images/lightbox-blank.gif',
             fixedNavigation:true
         });
+        /* Звездочки
+        ---------------------------------------------------------------------- */
+        for (i=1;i<6;i++) {
+            $('.stars').append('<div class="star'+i+' star"></div>');
+        }
+        // При наведении на звездочку
+        $('.star').mouseenter(function(){
+            if ($(this).hasClass('star1')){
+                $('.stars_hover').css('width',22);
+            } else if ($(this).hasClass('star2')){
+                $('.stars_hover').css('width',44);
+            } else if ($(this).hasClass('star3')){
+                $('.stars_hover').css('width',66);
+            } else if ($(this).hasClass('star4')){
+                $('.stars_hover').css('width',88);
+            } else if ($(this).hasClass('star5')){
+                $('.stars_hover').css('width',110);
+            }
+        });
+        $('.rating-star').mouseleave(function(){
+            $('.stars_hover').css('width',0);
+        });
+        $('.rating-star').mouseleave(function(){
+            $('.stars_hover').css('width',0);
+        });
         $('#restaurant_info .photos .main').first().show().addClass('current');
-        ;
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
            

@@ -50,7 +50,7 @@ class MD_Restaurant extends Model {
      */
     public static function getNew($params=null) {
         $new = self::get(
-                        'is_hidden=0','id DESC',
+                        'is_hidden=0','rest_order DESC, id DESC',
                         array('select' => 'id,rest_title,rest_uri,rest_logo,rest_photo')
         );
         return $new;

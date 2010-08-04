@@ -15,7 +15,7 @@
 
     <!-- Код страницы -->
     <xsl:template match="content">
-        <!-- Информация о ресторане -->
+        <!-- Подключаем гугл-карту -->
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             rest_page_activate = true;
@@ -54,6 +54,7 @@
             });
             }
         </script>
+        <!-- Информация о ресторане -->
         <xsl:apply-templates select="restaurant" />
     </xsl:template >
 
@@ -299,6 +300,11 @@
                 </div>
                 <!-- Правая колонка -->
                 <div class="right_col">
+                    <div class="rating-star">
+                        <div class="stars_default stars"></div>
+                        <div class="stars_active stars"></div>
+                        <div class="stars_hover stars"></div>
+                    </div>
                     <div class="links">
                         <div class="rounded border_1px_6e6e6e padding10">
                             <ul>

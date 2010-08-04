@@ -1074,8 +1074,6 @@ table.table_layout td {
 	padding-top:10px;
 }
 
-
-
 /***********CLASS*************/
 .caption{
     font-size:18px;
@@ -1165,7 +1163,7 @@ table.table_layout td {
 #registration_page #registration_submit{
     width:195px;
     height:55px;
-    background:url(/public/images/auth_button);
+    background:url(/public/images/auth_button.jpg);
     border:none;
     cursor:pointer;
     color:#FFF;
@@ -1176,7 +1174,7 @@ table.table_layout td {
 }
 
 #registration_page #registration_submit:active {
-    background:url(/public/images/auth_button_active);
+    background:url(/public/images/auth_button_active.jpg);
 }
 #contest_users h2{
     margin: 10px 30px;
@@ -1196,4 +1194,42 @@ table.table_layout td {
     vertical-align:middle;
     text-align:right;
     width: 140px;
+}
+
+/* Голосование звездочки
+--------------------------------------------------------------*/
+.rating-star {
+    position: relative;
+    height: 35px;
+}
+.stars {
+    width:111px;
+    height:22px;
+    position: absolute;
+    top:0;
+}
+.stars_default {
+    background:url(/public/images/stars.png);
+    height:35px;
+    position: absolute;
+    top:0;
+}
+.stars_hover {
+    background:url(/public/images/stars.png) 0 100px;
+    width:0;
+    overflow: hidden;
+    position: absolute;
+    top:0;
+}
+.stars_active {
+    background:url(/public/images/stars.png) 0 198px;
+    width:50px;
+    overflow: hidden;
+    position: absolute;
+    top:0;
+}
+.star {
+    width:22px;
+    height:22px;
+    float: left;
 }
