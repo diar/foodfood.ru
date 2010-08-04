@@ -8,8 +8,8 @@ RewriteBase /
 
 RewriteCond %{HTTP_HOST} ^www.foodfood.ru$ [NC]
 RewriteRule ^(.*)$ http://foodfood.ru/$1 [R=301,L]
-
 RewriteCond %{HTTP_HOST} ^[w\.]*fudfud.ru$ [NC]
+
 RewriteRule ^(.*)$ http://foodfood.ru/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^[w\.]*fydfyd.ru$ [NC]
