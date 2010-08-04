@@ -300,7 +300,7 @@
                 </div>
                 <!-- Правая колонка -->
                 <div class="right_col">
-                    <div class="rating-star">
+                    <div class="rating-star" style="display:none;">
                         <div class="stars_default stars"></div>
                         <div class="stars_active stars"></div>
                         <div class="stars_hover stars"></div>
