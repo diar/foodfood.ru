@@ -306,7 +306,7 @@
                     <div class="stars_caption">Голосуй гурман!</div>
                     <div class="star_caption">
                         Кухня
-                        <xsl:if test="user_vote/rating_cook!=''">
+                        <xsl:if test="user_vote/rating_cook!='' and user_vote/rating_cook!=0">
                             <span class="user_vote">
                             Ваш голос -
                                 <xsl:value-of select="user_vote/rating_cook" />
@@ -321,7 +321,7 @@
                     </div>
                     <div class="star_caption">
                         Сервис
-                        <xsl:if test="user_vote/rating_service!=''">
+                        <xsl:if test="user_vote/rating_service!='' and user_vote/rating_service!=0">
                             <span class="user_vote">
                             Ваш голос -
                                 <xsl:value-of select="user_vote/rating_service" />
@@ -336,7 +336,7 @@
                     </div>
                     <div class="star_caption">
                         Дизайн
-                        <xsl:if test="user_vote/rating_design!=''">
+                        <xsl:if test="user_vote/rating_design!='' and user_vote/rating_design!=0">
                             <span class="user_vote">
                             Ваш голос -
                                 <xsl:value-of select="user_vote/rating_design" />
