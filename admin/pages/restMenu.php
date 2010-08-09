@@ -52,7 +52,7 @@ class restMenu extends AdminModule {
                 'multiple' => false,
                 'size' => '1',
                 'options' => array_merge(array( 0 => "Укажите тип меню"),
-                Form::array_combine(DB::fetchAll('SELECT id,title FROM `list_menu_type`')))
+                Form::array_combine(DB::fetchAll('SELECT id,title FROM `list_menu_type` ORDER BY title')))
                 )
         );
 
@@ -123,7 +123,7 @@ class restMenu extends AdminModule {
                 'multiple' => false,
                 'size' => '1',
                 'options' => array_merge(array( 0 => "Укажите тип меню"),
-                Form::array_combine(DB::fetchAll('SELECT id,title FROM `list_menu_type`')))
+                Form::array_combine(DB::fetchAll('SELECT id,title FROM `list_menu_type` ORDER BY title')))
                 )
         );
 
