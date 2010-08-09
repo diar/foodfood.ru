@@ -288,7 +288,9 @@
                                 <form action="" method="post">
                                     <textarea name="text" class="rounded" id="review_textarea"></textarea>
                                     <input type="submit" value="Отправить" />
-                                    <div style="color:#999999;font-size:12px;padding-top:3px;">Символов: <span id="reviews_comment_lenght">0</span> из 2000</div>
+                                    <div style="color:#999999;font-size:12px;padding-top:3px;">Символов:
+                                        <span id="reviews_comment_lenght">0</span> из 2000
+                                    </div>
                                     <div style="padding-top:10px;">
                                         <input type="checkbox" style="float:none;margin:0;height:14px;width:14px;" />
                                         <span>отправить ресторатору</span>
@@ -300,20 +302,48 @@
                 </div>
                 <!-- Правая колонка -->
                 <div class="right_col">
+                    <!-- Голосование звездочками -->
                     <div class="stars_caption">Голосуй гурман!</div>
-                    <div class="star_caption">Кухня</div>
+                    <div class="star_caption">
+                        Кухня
+                        <xsl:if test="user_vote/rating_cook!=''">
+                            <span class="user_vote">
+                            Ваш голос -
+                                <xsl:value-of select="user_vote/rating_cook" />
+                            /5
+                            </span>
+                        </xsl:if>
+                    </div>
                     <div class="rating-star" id="rating_cook">
                         <div class="stars_default stars"></div>
                         <div class="stars_active stars" style="width:{rest_rating_cook*22}px;"></div>
                         <div class="stars_hover stars"></div>
                     </div>
-                    <div class="star_caption">Сервис</div>
+                    <div class="star_caption">
+                        Сервис
+                        <xsl:if test="user_vote/rating_service!=''">
+                            <span class="user_vote">
+                            Ваш голос -
+                                <xsl:value-of select="user_vote/rating_service" />
+                            /5
+                            </span>
+                        </xsl:if>
+                    </div>
                     <div class="rating-star" id="rating_service">
                         <div class="stars_default stars"></div>
                         <div class="stars_active stars" style="width:{rest_rating_service*22}px;"></div>
                         <div class="stars_hover stars"></div>
                     </div>
-                    <div class="star_caption">Дизайн</div>
+                    <div class="star_caption">
+                        Дизайн
+                        <xsl:if test="user_vote/rating_design!=''">
+                            <span class="user_vote">
+                            Ваш голос -
+                                <xsl:value-of select="user_vote/rating_design" />
+                            /5
+                            </span>
+                        </xsl:if>
+                    </div>
                     <div class="rating-star" id="rating_design">
                         <div class="stars_default stars"></div>
                         <div class="stars_active stars" style="width:{rest_rating_design*22}px;"></div>
@@ -322,6 +352,7 @@
                     <div class="links">
                         <div class="rounded border_1px_6e6e6e padding10">
                             <ul>
+                                <!-- Получить скидку -->
                                 <xsl:choose>
                                     <xsl:when test="partner!=''">
                                         <li class="link discount_icon">
@@ -332,15 +363,17 @@
                                         </li>
                                     </xsl:when>
                                 </xsl:choose>
+                                <!-- Доставить еду -->
                                 <li class="link dostavka_icon">
                                     <a href="#">Доставить еду</a>
                                 </li>
+                                <!-- Забронировать столик -->
                                 <xsl:if test="rest_reserv_phone != ''">
-                                <li class="link">
-                                    <a href="#" id="reserv">Забронировать столик</a>
-                                </li>
+                                    <li class="link">
+                                        <a href="#" id="reserv">Забронировать столик</a>
+                                    </li>
                                 </xsl:if>
-                                
+                                <!-- Заказать банкет -->
                                 <li class="link">
                                     <a href="#">Заказать банкет</a>
                                 </li>
@@ -392,7 +425,8 @@
                     <xsl:if test="tmp_banner = 1">
                         <div class="rest_banner" style="padding-top:20px;">
                             <img src="/upload/image/banners/5second.jpg" alt="5 секунд - ГЛАВНЫЙ ПО ДИСКОНТУ" />
-                            <br /><div style="font-weight: bold; font-size: 15px; text-align: center;">ГЛАВНЫЙ ПО ДИСКОНТУ</div>
+                            <br />
+                            <div style="font-weight: bold; font-size: 15px; text-align: center;">ГЛАВНЫЙ ПО ДИСКОНТУ</div>
                         </div>
                     </xsl:if>
                 </div>

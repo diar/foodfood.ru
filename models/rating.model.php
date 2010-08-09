@@ -203,4 +203,16 @@ class MD_Rating extends Model {
         self::calculateRatingStars($rest_id);
         return "OK";
     }
+
+    /**
+     * Получить значение голосования пользователем
+     * @return array
+     */
+    public static function getUserVote($rest_id) {
+        $vote = DB::getRecord(
+                Model::getPrefix ().'rest_rating',
+                'rest_id='.DB::quote($rest_id).' AND user_id='.User::getParam('user_id')
+        );
+        return $vote;
+    }
 }

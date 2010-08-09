@@ -42,10 +42,7 @@
                 <xsl:call-template name="message_dialog" />
                 <xsl:call-template name="callback_dialog" />
                 <xsl:call-template name="reserving_dialog" />
-                <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
-                    <xsl:text>google.load("jquery", "1.4.2");</xsl:text>
-                    <xsl:text>google.load("swfobject", "2.2");</xsl:text>
                     <xsl:text>site_city = '</xsl:text>
                     <xsl:value-of select="site/city" />
                     <xsl:text>';</xsl:text>
@@ -53,6 +50,8 @@
                     <xsl:value-of select="//user/is_auth" />
                     <xsl:text>';</xsl:text>
                 </script>
+                <script type="text/javascript" src="/public/js/libs/jquery.min.js"></script>
+                <script type="text/javascript" src="/public/js/libs/swfobject.js"></script>
                 <script type="text/javascript" src="/public/js/libs/jquery.libs.js"></script>
                 <script type="text/javascript" src="/public/js/libs/lightbox/js/jquery.lightbox.pack.js"></script>
                 <script type="text/javascript" src="/public/js/system.js"></script>

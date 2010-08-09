@@ -1217,6 +1217,11 @@ table.table_layout td {
     font-size: 14px;
     padding-bottom: 3px;
 }
+.star_caption .user_vote {
+    float:right;
+    color:gray;
+    font-size:12px;
+}
 .stars_default {
     background:url(/public/images/stars.png);
     height:22px;
