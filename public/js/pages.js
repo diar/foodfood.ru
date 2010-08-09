@@ -541,10 +541,10 @@ function get_poster () {
     } else {
         $('#today').html('<div>'+current_day+'<sup>'+current_week+'</sup></div>').attr("id","");
     }
-    date=''+year+'.'+month+'.'+day;
+    article_date = year + '.' + month + '.' + day;
     $('.anounce_block').html($loader);
     $.post('/'+site_city+'/poster/date/',{
-        'date':date,
+        'date':article_date,
         'day':day,
         'month':month
     },function(data){

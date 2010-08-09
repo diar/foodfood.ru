@@ -91,7 +91,7 @@ $(document).ready(function () {
         $.showDialog('callback_dialog');
         return false;
     });
-	$('#reserv').click(function(){
+    $('#reserv').click(function(){
         $.showDialog('reserving_dialog');
         var today = new Date();
         day = today.getDate();
@@ -105,16 +105,16 @@ $(document).ready(function () {
     });
     // -------- Авторизация -------------------
     $('#auth_submit').click(function(){
-        login = $('#auth_login').val();
-        password = $('#auth_password').val();
-        remember = $('#remain_me_check').attr('checked');
-        if (login!='' && password!='') {
+        user_login = $("#auth_login").val();
+        user_password = $("#auth_password").val();
+        user_remember = $("#remain_me_check").attr('checked');
+        if (user_login!='' && user_password!='') {
             $('#auth_loader').fadeIn(500);
-            password=hex_md5(password);
+            user_password=hex_md5(user_password);
             $.post('/'+site_city+'/auth/login',{
-                'login':login,
-                'password':password,
-                'remember':remember
+                'login':user_login,
+                'password':user_password,
+                'remember':user_remember
             },
             function(data){
                 $('#auth_message').html('');
@@ -134,10 +134,10 @@ $(document).ready(function () {
         } else {
             $('#auth_message').html('Ошибочка, придёться заполнить все поля');
         }
-        if (login=='') $('#auth_login').css('backgroundColor','#c1c1c1');
+        if (user_login=='') $('#auth_login').css('backgroundColor','#c1c1c1');
         else $('#auth_login').css('backgroundColor','#fff');
 
-        if (password=='') $('#auth_password').css('backgroundColor','#c1c1c1');
+        if (user_password=='') $('#auth_password').css('backgroundColor','#c1c1c1');
         else $('#auth_password').css('backgroundColor','#fff');
     });
 
