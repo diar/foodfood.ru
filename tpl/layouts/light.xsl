@@ -31,15 +31,7 @@
                 <div class="clear"></div>
                 <xsl:apply-templates select="content" />
                 <xsl:call-template name="footer" />
-                <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-                <script type="text/javascript">
-                    google.load("jquery", "1.4.2");
-                    site_city = '<xsl:value-of select="site/city" />';
-                </script>
-                <script type="text/javascript" src="/public/js/libs/jquery.corner.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.mousewheel.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.dropshadow.js"></script>
-                <script type="text/javascript" src="/public/js/libs/md5.js"></script>
+                <script type="text/javascript" src="/public/js/libs/libs.js"></script>
                 <script type="text/javascript" src="/public/js/system.js"></script>
                 <script type="text/javascript" src="/public/js/moods.js"></script>
                 <script type="text/javascript" src="/public/js/main.js"></script>

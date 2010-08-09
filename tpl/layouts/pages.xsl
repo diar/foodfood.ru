@@ -50,9 +50,7 @@
                     <xsl:value-of select="//user/is_auth" />
                     <xsl:text>';</xsl:text>
                 </script>
-                <script type="text/javascript" src="/public/js/libs/jquery.min.js"></script>
-                <script type="text/javascript" src="/public/js/libs/swfobject.js"></script>
-                <script type="text/javascript" src="/public/js/libs/jquery.libs.js"></script>
+                <script type="text/javascript" src="/public/js/libs/libs.js"></script>
                 <script type="text/javascript" src="/public/js/libs/lightbox/js/jquery.lightbox.pack.js"></script>
                 <script type="text/javascript" src="/public/js/system.js"></script>
                 <script type="text/javascript" src="/public/js/moods.js"></script>

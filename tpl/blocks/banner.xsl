@@ -8,13 +8,9 @@
 
     <xsl:template match="/">
         <html>
-            <body style="margin:0">
+        <body style="margin:0">
         <xsl:apply-templates select="root/banner" />
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-                google.load("jquery", "1.4.2");
-                google.load("swfobject", "2.2");
-        </script>
+        <script type="text/javascript" src="/public/js/libs/libs.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
             $('.swfobject').each(function(){
