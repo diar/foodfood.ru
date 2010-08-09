@@ -1200,7 +1200,7 @@ table.table_layout td {
 --------------------------------------------------------------*/
 .rating-star {
     position: relative;
-    height: 35px;
+    height: 30px;
 }
 .stars {
     width:111px;
@@ -1219,7 +1219,7 @@ table.table_layout td {
 }
 .stars_default {
     background:url(/public/images/stars.png);
-    height:35px;
+    height:22px;
     position: absolute;
     top:0;
 }

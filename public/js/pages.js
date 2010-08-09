@@ -64,26 +64,25 @@ $(document).ready(function(){
         // При нажатии на звездочку
         $('.star').click(function(){
             rating_param = $(this).parents('.rating-star').attr('id');
+            $star = $(this).parents('.rating-star').find('.stars_active')
             if ($(this).hasClass('star1')){
-                $(this).parents('.rating-star').find('.stars_active').css('width',22);
                 rating_value = 1;
             } else if ($(this).hasClass('star2')){
-                $(this).parents('.rating-star').find('.stars_active').css('width',44);
                 rating_value = 2;
             } else if ($(this).hasClass('star3')){
-                $(this).parents('.rating-star').find('.stars_active').css('width',66);
                 rating_value = 3;
             } else if ($(this).hasClass('star4')){
-                $(this).parents('.rating-star').find('.stars_active').css('width',88);
                 rating_value = 4;
             } else if ($(this).hasClass('star5')){
-                $(this).parents('.rating-star').find('.stars_active').css('width',110);
                 rating_value = 5;
             }
             $.post('/'+site_city+'/restaurant/rating/'+current_rest_id,
             {'rating_param':rating_param,'rating_value':rating_value},
             function(data){
-                if (data=='OK') $.alert('Ваш голос учтен',false);
+                if (data=='OK') {
+                    $.alert('Ваш голос учтен',false);
+                    $star.css('width',22*rating_value);
+                }
                 else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы голосовать',true);
                 else $.alert('Ошибка. Попробуйте еще раз',true);
             });

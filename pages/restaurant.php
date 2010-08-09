@@ -128,6 +128,5 @@ class restaurant_Page extends View {
         $text = 'Вам перезвонят через 5 минут';
         Sms::sendSmsByGet($phone, $text);
         echo 'OK';
-
     }
 }
