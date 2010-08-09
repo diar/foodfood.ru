@@ -96,7 +96,6 @@ $(document).ready(function(){
         $('#restaurant_info .photos .main').first().show().addClass('current');
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
-           
             $('#discount_submit').attr('partner',$(this).attr('partner'));
             title = $('.caption .title').html();
             percent = $(this).attr('percent');

@@ -850,4 +850,26 @@ class MD_Restaurant extends Model {
             return false;
     }
 
+    /*
+     * Бронь столика
+    */
+    public static function reserv ($rest_id,$date,$time,$name,$phone,$count,$text) {
+        if (!$phone = String::toPhone($phone)) {
+            return 'NOT_PHONE';
+        }
+        $rest_data = MD_Restaurant::get(
+                'id ='.DB::quote($rest_id),null,
+                array('select'=>'rest_reserv_phone,rest_title')
+        );
+        $rest_text = "Бронь в $rest_data[rest_title].Дата:$date.Время:$time.Имя:$name.тел:$phone.человек:$count.Текст:$text";
+        foreach (explode(',',$rest_data['rest_reserv_phone']) as $rest_phone_item) {
+            if ($rest_phone=String::toPhone($rest_phone_item)){
+                MD_Sms::sendSms($rest_phone, $rest_text);
+            }
+        }
+        $text = 'Вам перезвонят через 5 минут';
+        MD_Sms::sendSms($phone, $text);
+        return 'OK';
+    }
+
 }

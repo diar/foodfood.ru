@@ -310,7 +310,7 @@
                             <span class="user_vote">
                             Ваш голос -
                                 <xsl:value-of select="user_vote/rating_cook" />
-                            /5
+                            / 5
                             </span>
                         </xsl:if>
                     </div>
@@ -325,7 +325,7 @@
                             <span class="user_vote">
                             Ваш голос -
                                 <xsl:value-of select="user_vote/rating_service" />
-                            /5
+                            / 5
                             </span>
                         </xsl:if>
                     </div>
@@ -340,7 +340,7 @@
                             <span class="user_vote">
                             Ваш голос -
                                 <xsl:value-of select="user_vote/rating_design" />
-                            /5
+                            / 5
                             </span>
                         </xsl:if>
                     </div>

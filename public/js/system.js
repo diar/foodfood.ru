@@ -295,6 +295,7 @@ $(document).ready(function () {
                 if (data=="OK") $.hideDialog('reserving_dialog');
                 else if (data=="DATE") $('#reserving_message').html('Неверно введена дата');
                 else if (data=="TIME") $('#reserving_message').html('Неверно введено време');
+                else if (data=="NOT_PHONE") $('#reserving_message').html('Неверно введен номер телефона');
                 else $('#reserving_message').html('Ошибка, попробуйте перезагрузить страницу.');
             })
         } else {
