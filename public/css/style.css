@@ -108,15 +108,18 @@ body {
     float:left;
 }
 
-#search_menu a,#search_menu a.current {
+#search_menu a,
+#search_menu a.current {
     padding:3px 13px;
 }
 
-#search_menu a.current,#search_menu a:hover {
+#search_menu a.current,
+#search_menu a:hover {
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
     border: 1px solid #f60;
+    background: none;
     text-decoration:none;
     padding:3px 12px;
     color:#f60;
@@ -1151,6 +1154,10 @@ a.social.tw {
 .bar_icon {
     background:url(/public/images/icons/bar_small_icon.png) no-repeat;
     padding-top:7px;
+}
+.bar_map {
+    padding-left:20px;
+    margin-left:20px;
 }
 .menu_icon {
     background:url(/public/images/icons/menu_icon.png) no-repeat;

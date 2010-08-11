@@ -81,8 +81,12 @@ class restaurant_Page extends View {
         self::$page['content']['restaurant']['have_menu_map'] = $have_menu_map;
         self::$page['content']['restaurant']['user_vote'] = $user_vote;
         // Временное решение для баннера на страницах пяти ресторанов
-        if ($restaurant['id'] == 96 || $restaurant['id'] == 196 || $restaurant['id'] == 207 || $restaurant['id'] == 191 || $restaurant['id'] == 200)
+        if ($restaurant['id'] == 96 || $restaurant['id'] == 196 || $restaurant['id'] == 207 ||
+                $restaurant['id'] == 191 || $restaurant['id'] == 200)
             self::$page['content']['restaurant']['tmp_banner'] = true;
+        if ($restaurant['id'] == 133 || $restaurant['id'] == 156 || $restaurant['id'] == 66 ||
+                $restaurant['id'] == 152 || $restaurant['id'] == 110 || $restaurant['id'] == 111)
+            self::$page['content']['restaurant']['tmp_banner2'] = true;
         self::$page['content']['navigate']['next'] = $next;
         self::$page['content']['navigate']['prev'] = $prev;
         self::$page['content']['navigate']['mood'] = $mood;

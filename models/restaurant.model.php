@@ -872,4 +872,11 @@ class MD_Restaurant extends Model {
         return 'OK';
     }
 
+    /*
+     * Пошли со мной в ресторан
+    */
+    public static function follow ($rest_id) {
+        
+    }
+
 }

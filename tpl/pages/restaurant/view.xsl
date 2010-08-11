@@ -186,7 +186,44 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-
+                    <div class="menu_link menu_icon">
+                        <xsl:if test="have_menu=1">
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:value-of select="//site/city" />
+                                    <xsl:text>/menu/</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when test="rest_uri!=''">
+                                            <xsl:value-of select="rest_uri" />
+                                        </xsl:when>
+                                        <xsl:when test="rest_uri=''">
+                                            <xsl:value-of select="id" />
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                                <xsl:text>Меню пожалуйста!</xsl:text>
+                            </a>
+                        </xsl:if>
+                        <xsl:if test="have_menu_map=1">
+                            <a class="bar_icon bar_map">
+                                <xsl:attribute name="href">
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:value-of select="//site/city" />
+                                    <xsl:text>/menu/map/</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when test="rest_uri!=''">
+                                            <xsl:value-of select="rest_uri" />
+                                        </xsl:when>
+                                        <xsl:when test="rest_uri=''">
+                                            <xsl:value-of select="id" />
+                                        </xsl:when>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                                <xsl:text>Карта бара</xsl:text>
+                            </a>
+                        </xsl:if>
+                    </div>
                     <div class="rest_params">
                         <xsl:if test="categories != ''">
                             <span class="param_type">Тип: </span>
@@ -378,48 +415,6 @@
                                     <a href="#">Заказать банкет</a>
                                 </li>
                             </ul>
-                            <div class="menu_link menu_icon">
-                                <xsl:if test="have_menu=1">
-                                    <a>
-                                        <xsl:attribute name="href">
-                                            <xsl:text>/</xsl:text>
-                                            <xsl:value-of select="//site/city" />
-                                            <xsl:text>/menu/</xsl:text>
-                                            <xsl:choose>
-                                                <xsl:when test="rest_uri!=''">
-                                                    <xsl:value-of select="rest_uri" />
-                                                </xsl:when>
-                                                <xsl:when test="rest_uri=''">
-                                                    <xsl:value-of select="id" />
-                                                </xsl:when>
-                                            </xsl:choose>
-                                        </xsl:attribute>
-                                        <xsl:text>Меню пожалуйста!</xsl:text>
-                                    </a>
-                                </xsl:if>
-                                <xsl:if test="have_menu_map=1">
-                                    <ul class="sub_menu_link">
-                                        <li class="bar_icon">
-                                            <a>
-                                                <xsl:attribute name="href">
-                                                    <xsl:text>/</xsl:text>
-                                                    <xsl:value-of select="//site/city" />
-                                                    <xsl:text>/menu/map/</xsl:text>
-                                                    <xsl:choose>
-                                                        <xsl:when test="rest_uri!=''">
-                                                            <xsl:value-of select="rest_uri" />
-                                                        </xsl:when>
-                                                        <xsl:when test="rest_uri=''">
-                                                            <xsl:value-of select="id" />
-                                                        </xsl:when>
-                                                    </xsl:choose>
-                                                </xsl:attribute>
-                                                <xsl:text>Карта бара</xsl:text>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </xsl:if>
-                            </div>
                         </div>
                     </div>
                     <xsl:if test="tmp_banner = 1">
@@ -427,6 +422,11 @@
                             <img src="/upload/image/banners/5second.jpg" alt="5 секунд - ГЛАВНЫЙ ПО ДИСКОНТУ" />
                             <br />
                             <div style="font-weight: bold; font-size: 15px; text-align: center;">ГЛАВНЫЙ ПО ДИСКОНТУ</div>
+                        </div>
+                    </xsl:if>
+                    <xsl:if test="tmp_banner2 = 1">
+                        <div class="rest_banner" style="padding-top:20px;margin-left:-30px;">
+                            <img src="/upload/image/banners/dlq.gif" alt="Dlq" />
                         </div>
                     </xsl:if>
                 </div>

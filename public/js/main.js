@@ -225,8 +225,7 @@ function recomended_check_width () {
     $('#recomended_container').css({
         'width':recomended_container_width
     });
-    $('#recomended_gallery .img img')
-    .each(function(){
+    $('#recomended_gallery .img img').each(function(){
         recomended_count++;
         $(this).load(function(){
             $(this).animate({
