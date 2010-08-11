@@ -345,7 +345,7 @@
                         Кухня
                         <xsl:if test="user_vote/rating_cook!='' and user_vote/rating_cook!=0">
                             <span class="user_vote">
-                            Ваш голос -
+                            ваш голос -
                                 <xsl:value-of select="user_vote/rating_cook" />
                             / 5
                             </span>
@@ -360,7 +360,7 @@
                         Сервис
                         <xsl:if test="user_vote/rating_service!='' and user_vote/rating_service!=0">
                             <span class="user_vote">
-                            Ваш голос -
+                            ваш голос -
                                 <xsl:value-of select="user_vote/rating_service" />
                             / 5
                             </span>
@@ -375,7 +375,7 @@
                         Дизайн
                         <xsl:if test="user_vote/rating_design!='' and user_vote/rating_design!=0">
                             <span class="user_vote">
-                            Ваш голос -
+                            ваш голос -
                                 <xsl:value-of select="user_vote/rating_design" />
                             / 5
                             </span>
@@ -387,35 +387,35 @@
                         <div class="stars_hover stars"></div>
                     </div>
                     <div class="links">
-                        <div class="rounded border_1px_6e6e6e padding10">
-                            <ul>
-                                <!-- Получить скидку -->
-                                <xsl:choose>
-                                    <xsl:when test="partner!=''">
-                                        <li class="link discount_icon">
-                                            <a href="#" partner="{id}" percent="{partner/discount_percent}">Получить скидку</a>
-                                            <div class="discount_description">
-                                                <xsl:value-of select="partner/discount_description" disable-output-escaping="yes" />
-                                            </div>
-                                        </li>
-                                    </xsl:when>
-                                </xsl:choose>
-                                <!-- Доставить еду -->
-                                <li class="link dostavka_icon">
-                                    <a href="#">Доставить еду</a>
+                        <ul>
+                            <!-- Получить скидку -->
+                            <xsl:if test="partner!=''">
+                                <li class="link discount_icon">
+                                    <a href="#" partner="{id}" percent="{partner/discount_percent}">
+                                        <img src="/public/images/get_discount.jpg" alt="get discount" />
+                                    </a>
+                                    <div class="discount_description">
+                                        <xsl:value-of select="partner/discount_description" disable-output-escaping="yes" />
+                                    </div>
                                 </li>
-                                <!-- Забронировать столик -->
-                                <xsl:if test="rest_reserv_phone != ''">
-                                    <li class="link">
-                                        <a href="#" id="reserv">Забронировать столик</a>
-                                    </li>
-                                </xsl:if>
-                                <!-- Заказать банкет -->
+                            </xsl:if>
+                            <!-- Доставить еду
+                            <li class="link dostavka_icon">
+                                <a href="#">Доставить еду</a>
+                            </li> -->
+                            <!-- Забронировать столик -->
+                            <xsl:if test="rest_reserv_phone != ''">
                                 <li class="link">
-                                    <a href="#">Заказать банкет</a>
+                                    <a href="#" id="reserv">
+                                        <img src="/public/images/reserv_table.jpg" alt="get discount" />
+                                    </a>
                                 </li>
-                            </ul>
-                        </div>
+                            </xsl:if>
+                            <!-- Заказать банкет
+                            <li class="link">
+                                <a href="#">Заказать банкет</a>
+                            </li>-->
+                        </ul>
                     </div>
                     <xsl:if test="tmp_banner = 1">
                         <div class="rest_banner" style="padding-top:20px;">

@@ -140,7 +140,6 @@
     font-size:14px;
 }
 #restaurant_info .links .link,#restaurant_menu .links .link{
-    padding-left: 35px;
     padding-bottom:10px;
     background-position: 10px 0;
 }
@@ -1220,7 +1219,9 @@ table.table_layout td {
 .star_caption .user_vote {
     float:right;
     color:gray;
-    font-size:12px;
+    font-size:11px;
+    margin-right: 15px;
+    margin-top: 1px;
 }
 .stars_default {
     background:url(/public/images/stars.png);
