@@ -262,14 +262,16 @@
                 Присоединяйся к нам!
                 <br />
                 <br />
-                <a href="http://www.facebook.com/profile.php?id=100001264771648" class="social fb" title="Мы в FaceBook">
+                <noindex>
+                <a href="http://www.facebook.com/profile.php?id=100001264771648" rel="nofollow" class="social fb" title="Мы в FaceBook">
                 </a>
-                <a href="http://foodfoodru.livejournal.com/" class="social lj" title="Мы в ЖЖ">
+                <a href="http://foodfoodru.livejournal.com/" class="social lj" title="Мы в ЖЖ" rel="nofollow">
                 </a>
-                <a href="http://vkontakte.ru/club16013362 " class="social vk" title="Мы Вконтакте">
+                <a href="http://vkontakte.ru/club16013362 " class="social vk" rel="nofollow" title="Мы Вконтакте">
                 </a>
-                <a href="http://twitter.com/foodfoodru" class="social tw"  title="Мы в Twitter">
+                <a href="http://twitter.com/foodfoodru" class="social tw"  rel="nofollow" title="Мы в Twitter">
                 </a>
+                </noindex>
             </div>
         </div>
     </xsl:template>

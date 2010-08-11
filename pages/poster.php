@@ -17,7 +17,7 @@ class poster_Page extends View {
         $tags=MD_Mood::getTags();
 
         self::$page['site']['city'] = CityPlugin::getCity();
-        self::$page['site']['title'] = "Бесплатная доставка пиццы, суши и роллы Казань";
+        self::$page['site']['title'] = "Доставка еды и пиво Казань";
         self::$page['site']['keywords'] = " пицца Казань, суши Казань, роллы Казань, доставка суши Казань, доставка ролл Казань, автосуши Казань, японская кухня Казань";
         self::$page['site']['description'] = '';
         self::$page['content']['moods']=$moods;
