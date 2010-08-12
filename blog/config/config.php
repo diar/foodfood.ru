@@ -218,7 +218,7 @@ $config['module']['autoLoad'] = array('Hook','Cache','Security','Session','Lang'
 $config['db']['params']['host']   = 'localhost';
 $config['db']['params']['port']   = '3306';
 $config['db']['params']['user']   = 'root';
-$config['db']['params']['pass']   = '';
+$config['db']['params']['pass']   = '150878';
 $config['db']['params']['type']   = 'mysql';
 $config['db']['params']['dbname'] = 'social';
 /**

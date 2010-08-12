@@ -570,13 +570,13 @@ body {
 /* DISCOUNTS
 ----------------------------------------------*/
 .sale5 {
-    background:#d84705 url(/public/images/sale.jpg) 0 0 no-repeat;
+    background:url(/public/images/sale.jpg) 0 0 no-repeat;
 }
 .sale15 {
-    background:#d84705 url(/public/images/sale.jpg) 0 -39px no-repeat;
+    background:url(/public/images/sale.jpg) 0 -39px no-repeat;
 }
 .sale20 {
-    background:#d84705 url(/public/images/sale.jpg) 0 -78px no-repeat;
+    background:url(/public/images/sale.jpg) 0 -78px no-repeat;
 }
 
 
