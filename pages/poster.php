@@ -27,7 +27,7 @@ class poster_Page extends View {
     }
 
     /*
-     * Вывод полного списка
+     * Вывод главной страницы афиши
     */
     public static function indexAction ($id) {
         for ($i=1;$i<32;$i++) {

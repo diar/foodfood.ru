@@ -58,7 +58,7 @@ class MD_Poster extends Model {
                 '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
                 '(repeat_week_end!=-1 and repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
                 '(repeat_week_end=repeat_week_start))))'
-                ,'rest_rating DESC',array(
+                ,'rest_rating DESC, rest_poster_id DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
         $news = self::getAll(
@@ -68,7 +68,7 @@ class MD_Poster extends Model {
                 '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
                 '(repeat_week_end!=-1 and repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
                 '(repeat_week_end=repeat_week_start))))'
-                ,'rest_rating DESC',array(
+                ,'rest_rating DESC, rest_poster_id DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
         $actions = self::getAll(
@@ -78,7 +78,7 @@ class MD_Poster extends Model {
                 '(DAYOFWEEK('.$date.')-1>=repeat_week_start and DAYOFWEEK('.$date.')-1<=repeat_week_end) or '.
                 '(repeat_week_end!=-1 and repeat_week_end+1<=repeat_week_start and NOT(DAYOFWEEK('.$date.')<=repeat_week_start and DAYOFWEEK('.$date.')-1>repeat_week_end)) OR '.
                 '(repeat_week_end=repeat_week_start))))'
-                ,'rest_rating DESC',array(
+                ,'rest_rating DESC, rest_poster_id DESC',array(
                 'select'=>'*, DAY(date) AS date_day,MONTH(date) AS date_month'
         ));
         $poster_array['posters']['items'] = $posters;
