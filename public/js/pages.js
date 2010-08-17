@@ -109,8 +109,9 @@ $(document).ready(function(){
             });
             return false;
         });
-
-        $('#restaurant_info .photos .main').first().show().addClass('current');
+        $('#restaurant_info .photos .main').first().load(function(){
+            $(this).animate({'opacity':1},300).addClass('current');
+        }).css('opacity',0).show();
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
             $('#discount_submit').attr('partner',$(this).attr('partner'));
