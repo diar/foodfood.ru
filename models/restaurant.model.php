@@ -26,8 +26,8 @@ class MD_Restaurant extends Model {
         empty($params['count']) ? $count = 20 : $count = $params['count'];
         empty($params['offset']) ? $offset = 0 : $offset = $params['offset'];
         $recomended = self::getAll(
-                'is_hidden=0', 'rest_rating DESC, rest_order DESC LIMIT ' . $offset . ',' . $count,
-                array('select'=>'id,rest_title,rest_uri,rest_photo,rest_rating,rest_comment_count')
+                        'is_hidden=0', 'rest_rating DESC, rest_order DESC LIMIT ' . $offset . ',' . $count,
+                        array('select' => 'id,rest_title,rest_uri,rest_photo,rest_rating,rest_comment_count')
         );
         if (!empty($recomended)) {
             foreach ($recomended as &$item) {
@@ -50,7 +50,7 @@ class MD_Restaurant extends Model {
      */
     public static function getNew($params=null) {
         $new = self::get(
-                        'is_hidden=0','rest_order DESC, id DESC',
+                        'is_hidden=0', 'rest_order DESC, id DESC',
                         array('select' => 'id,rest_title,rest_uri,rest_logo,rest_photo')
         );
         return $new;
@@ -814,6 +814,24 @@ class MD_Restaurant extends Model {
     }
 
     /**
+     * Получить пользователей, которые оставили приглашения
+     * @return array
+     */
+    public static function getFollowers($rest_id,$params=null) {
+        $users = self::getAll('rest_id='.DB::quote($rest_id), null, array(
+                    'table' => Model::getPrefix().'rest_follow','no_prefix'=>true,
+                    'join' => 'user', 'left' => 'user_id', 'right' => 'user_id',
+                    'select' => 'user_profile_avatar,user_login'
+                ));
+        $followers = Array();
+        foreach($users as $user) {
+            $user['avatar'] = MD_User::getUserAvatar($user,48);
+            array_push($followers, $user);
+        }
+        return $followers;
+    }
+
+    /**
      * Получить отзывы ресторанов
      * @param $params Параметры
      * @return array
@@ -852,18 +870,19 @@ class MD_Restaurant extends Model {
 
     /*
      * Бронь столика
-    */
-    public static function reserv ($rest_id,$date,$time,$name,$phone,$count,$text) {
+     */
+
+    public static function reserv($rest_id, $date, $time, $name, $phone, $count, $text) {
         if (!$phone = String::toPhone($phone)) {
             return 'NOT_PHONE';
         }
         $rest_data = MD_Restaurant::get(
-                'id ='.DB::quote($rest_id),null,
-                array('select'=>'rest_reserv_phone,rest_title')
+                        'id =' . DB::quote($rest_id), null,
+                        array('select' => 'rest_reserv_phone,rest_title')
         );
         $rest_text = "Бронь в $rest_data[rest_title].Дата:$date.Время:$time.Имя:$name.тел:$phone.человек:$count.Текст:$text";
-        foreach (explode(',',$rest_data['rest_reserv_phone']) as $rest_phone_item) {
-            if ($rest_phone=String::toPhone($rest_phone_item)){
+        foreach (explode(',', $rest_data['rest_reserv_phone']) as $rest_phone_item) {
+            if ($rest_phone = String::toPhone($rest_phone_item)) {
                 MD_Sms::sendSms($rest_phone, $rest_text);
             }
         }
@@ -874,9 +893,23 @@ class MD_Restaurant extends Model {
 
     /*
      * Пошли со мной в ресторан
-    */
-    public static function follow ($rest_id) {
-        
+     */
+    public static function follow($rest_id) {
+        $user = User::getParams();
+        if (!$user['is_auth'])
+            return 'NO_LOGIN';
+        $user_follow = DB::getRecord(
+                        Model::getPrefix() . 'rest_follow',
+                        'user_id=' . $user['user_id'] . ' AND rest_id=' . DB::quote($rest_id)
+        );
+        if (!empty($user_follow)) {
+            return 'ALREADY';
+        }
+        DB::insert(
+                        Model::getPrefix() . 'rest_follow',
+                        array('user_id' => $user['user_id'], 'rest_id' => $rest_id)
+        );
+        return 'OK';
     }
 
 }

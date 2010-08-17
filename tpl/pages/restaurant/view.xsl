@@ -417,6 +417,15 @@
                             </li>-->
                         </ul>
                     </div>
+                    <div id="rest_follow">
+                        <div class="rest_follow_caption">Пошли сюда со мной:</div>
+                        <div class="rest_followers">
+                            <xsl:apply-templates select="followers" />
+                        </div>
+                        <a href="#" class="follow">
+                            <img src="/public/images/rest_follow.jpg" alt="Оставить приглашение" />
+                        </a>
+                    </div>
                     <xsl:if test="tmp_banner = 1">
                         <div class="rest_banner" style="padding-top:20px;">
                             <img src="/upload/image/banners/5second.jpg" alt="5 секунд - ГЛАВНЫЙ ПО ДИСКОНТУ" />
@@ -555,6 +564,13 @@
                 <xsl:value-of select="title" />
             </div>
         </div>
+    </xsl:template>
+
+    <!-- Список приглашений -->
+    <xsl:template match="restaurant/followers/item">
+        <a href="/blog/profile/{user_login}" class="follower">
+            <img src="{avatar}" />
+        </a>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -22,7 +22,7 @@ class MD_User extends Model {
      */
     public static function getUsersByInvites($params=null) {
         empty($params['count']) ? $count = 20 : $count = $params['count'];
-        $users = self::getAll('1=1 GROUP BY user.user_id ORDER BY count DESC', $order, array(
+        $users = self::getAll('1=1 GROUP BY user.user_id ORDER BY count DESC', null, array(
                     'table' => 'user_invite', 'no_prefix' => true, 'limit' => '0,' . $count,
                     'join' => 'user', 'left' => 'user_id', 'right' => 'user_id',
                     'select' => 'user_login,user.user_id,COUNT(*) as count,user_profile_avatar'
@@ -48,6 +48,21 @@ class MD_User extends Model {
                 'AND date_last IS NULL'
                 );
         return $comments['count_new'] + $talks['count_new'];
+    }
+
+    /**
+     * Получить аватар пользователя
+     * @param @user Id пользователя или массив с его параметрами
+     * @return int
+     */
+    public static function getUserAvatar($user, $size=100) {
+        if (is_int($user)) {
+            $user = self::fetch('SELECT user_profile_avatar FROM user WHERE user_id='.DB::quote($user));
+        }
+        if ($size!=100 && is_int($size)) {
+            $user['user_profile_avatar']=str_replace('100x100', $size.'x'.$size, $user['user_profile_avatar']);
+        }
+        return $user['user_profile_avatar'];
     }
 
 }
