@@ -847,7 +847,8 @@ table.table_layout td {
     width: 300px;
     float:left;
     height:48px;
-    background:url(../images/icons/mounth_list_bg.png) #999999 repeat-x;
+    background:url(../images/icons/mounth_list_bg.png) #999 repeat-x;
+    *margin-top:20px;
 }
 
 #mounth_list .back{

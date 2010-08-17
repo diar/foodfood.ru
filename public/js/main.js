@@ -232,7 +232,8 @@ function recomended_check_width () {
                 'opacity':'show'
             },400);
         });
-        if (recomended_count<recomended_visible+1 && typeof($(this).attr('src'))=='undefined') {
+        if (recomended_count<recomended_visible+1 && (
+            typeof($(this).attr('src'))=='undefined' || $(this).attr('src')=='')) {
             $(this).attr('src',$(this).attr('rel')).attr('rel','');
         }
     });
@@ -253,7 +254,7 @@ function poster_check_width () {
                 'width':'show'
             },100);
             $(this).find('img').each(function(){
-                if (typeof($(this).attr('src'))=='undefined') {
+                if (typeof($(this).attr('src'))=='undefined' || $(this).attr('src')=='') {
                     $(this).attr('src',$(this).attr('rel')).attr('rel','');
                 }
             });
