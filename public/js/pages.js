@@ -32,8 +32,8 @@ $(document).ready(function(){
     });
 
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода ресторана
-    */
+     * Если находимся на странице вывода ресторана
+     */
     if (typeof(rest_page_activate)!='undefined') {
         $('.main_container a').lightBox({
             imageLoading: '/public/js/libs/lightbox/images/lightbox-ico-loading.gif',
@@ -44,8 +44,8 @@ $(document).ready(function(){
             fixedNavigation:true
         });
         /*
-        * Звездочки
-        */
+         * Звездочки
+         */
         for (i=1;i<6;i++) {
             $('.stars').append('<div class="star'+i+' star"></div>');
         }
@@ -99,49 +99,53 @@ $(document).ready(function(){
             $('.stars_hover').css('width',0);
         });
         /*
-        * Вывод диалога оставить приглашение
-        */
+         * Вывод диалога оставить приглашение
+         */
         $('#rest_dating .invite').click(function(){
             $.showAjaxDialog('/'+site_city+'/dating/invitation/',400,{
                 'rest_id':current_rest_id,
                 'rest_title':current_rest_title
             },function(){
                 /*
-                * Оставить приглашение
-                */
+                 * Оставить приглашение
+                 */
                 $('#dating_submit').click(function(){
                     dating_topicality = $('#dating_topicality').val();
                     dating_time = $('#dating_time').val();
                     dating_target = $('#dating_target').val();
                     dating_text = $('#dating_text').val();
-                    $.post('/'+site_city+'/dating/invite/',{
-                        'rest_id':current_rest_id,
-                        'dating_topicality':dating_topicality,
-                        'dating_time':dating_time,
-                        'dating_target':dating_target,
-                        'dating_text':dating_text
-                    }, function(data){
-                        if (data=='OK') {
-                            $('#dating_message').html('Приглашение добавлено');
-                        }
-                        else if (data=='NO_LOGIN') {
-                            $('#dating_message').html('Вы должны войти на сайт, чтобы оставлять приглашения');
-                        }
-                        else if (data=='ALREADY') {
-                            $('#dating_message').html('Вы уже оставляли приглашение в данный ресторан');
-                        }
-                        else {
-                            $('#dating_message').html('Ошибка. Попробуйте еще раз');
-                        }
-                    });
-                    return false;
+                    if (dating_text != '') {
+                        $.post('/'+site_city+'/dating/invite/',{
+                            'rest_id':current_rest_id,
+                            'dating_topicality':dating_topicality,
+                            'dating_time':dating_time,
+                            'dating_target':dating_target,
+                            'dating_text':dating_text
+                        }, function(data){
+                            if (data=='OK') {
+                                $('#dating_message').html('Приглашение добавлено');
+                            }
+                            else if (data=='NO_LOGIN') {
+                                $('#dating_message').html('Вы должны войти на сайт, чтобы оставлять приглашения');
+                            }
+                            else if (data=='ALREADY') {
+                                $('#dating_message').html('Вы уже оставляли приглашение в данный ресторан');
+                            }
+                            else {
+                                $('#dating_message').html('Ошибка. Попробуйте еще раз');
+                            }
+                        });
+                        return false;
+                    } else {
+                        $('#dating_message').html('Заполните все поля');
+                    }
                 });
             });
             return false;
         });
         /*
-        * Вывод диалога принять приглашение
-        */
+         * Вывод диалога принять приглашение
+         */
         $('.rest_inviters .inviter').click(function(){
             invite_user_id =$(this).attr('rel');
             $.showAjaxDialog('/'+site_city+'/dating/following/',450,{
@@ -150,8 +154,8 @@ $(document).ready(function(){
                 'user_id':invite_user_id
             },function(){
                 /*
-                * Принять приглашение
-                */
+                 * Принять приглашение
+                 */
                 $('#dating_follow_submit').click(function(){
                     $.post('/'+site_city+'/dating/follow/',{
                         'rest_id':current_rest_id,
@@ -193,8 +197,8 @@ $(document).ready(function(){
             return false;
         });
         /*
-        * Инициализация превью фоток
-        */
+         * Инициализация превью фоток
+         */
         $('#restaurant_info .photos .mini').each(function(){
             restaurant_photo_count++;
             if (restaurant_photo_count<=restaurant_photo_visible) {
@@ -203,8 +207,8 @@ $(document).ready(function(){
             $(this).attr('pos',restaurant_photo_count);
         });
         /*
-        * Нажатие на превью фотки ресторана
-        */
+         * Нажатие на превью фотки ресторана
+         */
         $('#restaurant_info .photos .mini').click(function(){
             min = this;
             $('#restaurant_info .photos .mini.active').removeClass('active');
@@ -259,12 +263,12 @@ $(document).ready(function(){
         });
     }
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода меню (авктивирован калькулятор)
-    */
+     * Если находимся на странице вывода меню (авктивирован калькулятор)
+     */
     if (typeof(calс_activate)!='undefined') {
         /*
-        * Добавить блюдо в корзину
-        */
+         * Добавить блюдо в корзину
+         */
         $('.add_trash_item').click(function(){
             itogo = 0;
             $parent = $(this).parents('.dish_item');
@@ -280,7 +284,7 @@ $(document).ready(function(){
                 title = $parent.find('.title').html();
                 price = $parent.find('.price span').html();
                 $trash_item = $(
-                    '<tr class="trash_item" id="trash_'+dish+'">'+
+                '<tr class="trash_item" id="trash_'+dish+'">'+
                     '<td class="title">'+title+'</td>'+
                     '<td class="count">'+
                     '<div class="number">1</div>'+
@@ -295,7 +299,7 @@ $(document).ready(function(){
                     '</td>'+
                     '<td class="price">'+price+'</td>'+
                     '</tr>'
-                    );
+            );
                 $('.trash .items table#list_trash').append($trash_item);
                 trash_itogo();
                 $trash_item.find('.trash_add_item').click(function(){	
@@ -322,8 +326,8 @@ $(document).ready(function(){
             }
         });
         /*
-        * Удалить блюдо из корзины
-        */
+         * Удалить блюдо из корзины
+         */
         $('.remove_trash_item').click(function(){
             $parent = $(this).parents('.dish_item_l');
             dish = $parent.attr('rel');
@@ -343,8 +347,8 @@ $(document).ready(function(){
         });
     }
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода лиц фудфуд
-    */
+     * Если находимся на странице вывода лиц фудфуд
+     */
     if (typeof(person_page_activate)!='undefined') {
         persons_check_buttons ();
         $('#persons_list .item').click(function(){
@@ -355,17 +359,17 @@ $(document).ready(function(){
             $('#person').append($loader);
             $('#person #loader').show();
             $.post('/'+site_city+'/persons/view/'+id,
-                function (data) {
-                    $('#person').html(data);
-                    name = $('#person .name').html();
-                    $('#person_name_caption').html(name);
-                    $('.interview .quest').click(function(){
-                        $('.interview .quest.active').removeClass('active');
-                        $(this).addClass('active');
-                        $('.interview .answer').hide();
-                        $(this).parent('.int').find('.answer').show();
-                    });
+            function (data) {
+                $('#person').html(data);
+                name = $('#person .name').html();
+                $('#person_name_caption').html(name);
+                $('.interview .quest').click(function(){
+                    $('.interview .quest.active').removeClass('active');
+                    $(this).addClass('active');
+                    $('.interview .answer').hide();
+                    $(this).parent('.int').find('.answer').show();
                 });
+            });
             person_item_position = parseInt($(this).attr('pos'))-person_item_offset;
             if (person_item_position==person_item_visible &&
                 person_item_position+person_item_offset<person_item_count) {
@@ -388,17 +392,17 @@ $(document).ready(function(){
             }
         });
         $.post('/'+site_city+'/persons/view/'+person_id,
-            function (data) {
-                $('#person').html(data);
-                name = $('#person .name').html();
-                $('#person_name_caption').html(name);
-                $('.interview .quest').click(function(){
-                    $('.interview .quest.active').removeClass('active');
-                    $(this).addClass('active');
-                    $('.interview .answer').hide();
-                    $(this).parent('.int').find('.answer').show();
-                });
+        function (data) {
+            $('#person').html(data);
+            name = $('#person .name').html();
+            $('#person_name_caption').html(name);
+            $('.interview .quest').click(function(){
+                $('.interview .quest.active').removeClass('active');
+                $(this).addClass('active');
+                $('.interview .answer').hide();
+                $(this).parent('.int').find('.answer').show();
             });
+        });
     }
     $('.select_percent div').click(function(){
         per = $(this).attr('class');
@@ -410,8 +414,8 @@ $(document).ready(function(){
         }
     });
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода афиш
-    */
+     * Если находимся на странице вывода афиш
+     */
     if (typeof(poster_page_activate)!='undefined') {
         // Месяцы
         $("#mounth_list .back").click(function(){
@@ -492,8 +496,8 @@ $(document).ready(function(){
     }
 
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода скидок
-    */
+     * Если находимся на странице вывода скидок
+     */
     if (typeof(discount_page_activate)!='undefined') {
         $('.select_percent div').click(function(){
             per = $(this).attr('class');
@@ -521,9 +525,9 @@ $(document).ready(function(){
 
     $("a#getPromo").click(function(){
         $.post('/kazan/auth/getPromo',{
-            },function(data){
-                alert(data);
-            });
+        },function(data){
+            alert(data);
+        });
         return false;
     });
 
