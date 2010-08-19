@@ -823,10 +823,18 @@ body {
     max-width: 394px;
     margin-bottom: 10px;
 }
+#empty_dialog {
+    height:400px;
+}
+#empty_dialog .content_temp{
+    height:400px;
+}
 #reserving_submit,
 #auth_submit,
 #registration_submit,
 #callback_submit,
+#dating_submit,
+#dating_follow_submit,
 #passwd_submit{
     width:195px;
     height:55px;

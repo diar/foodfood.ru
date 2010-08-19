@@ -814,24 +814,6 @@ class MD_Restaurant extends Model {
     }
 
     /**
-     * Получить пользователей, которые оставили приглашения
-     * @return array
-     */
-    public static function getFollowers($rest_id,$params=null) {
-        $users = self::getAll('rest_id='.DB::quote($rest_id), null, array(
-                    'table' => Model::getPrefix().'rest_follow','no_prefix'=>true,
-                    'join' => 'user', 'left' => 'user_id', 'right' => 'user_id',
-                    'select' => 'user_profile_avatar,user_login'
-                ));
-        $followers = Array();
-        foreach($users as $user) {
-            $user['avatar'] = MD_User::getUserAvatar($user,48);
-            array_push($followers, $user);
-        }
-        return $followers;
-    }
-
-    /**
      * Получить отзывы ресторанов
      * @param $params Параметры
      * @return array
@@ -888,27 +870,6 @@ class MD_Restaurant extends Model {
         }
         $text = 'Вам перезвонят через 5 минут';
         MD_Sms::sendSms($phone, $text);
-        return 'OK';
-    }
-
-    /*
-     * Пошли со мной в ресторан
-     */
-    public static function follow($rest_id) {
-        $user = User::getParams();
-        if (!$user['is_auth'])
-            return 'NO_LOGIN';
-        $user_follow = DB::getRecord(
-                        Model::getPrefix() . 'rest_follow',
-                        'user_id=' . $user['user_id'] . ' AND rest_id=' . DB::quote($rest_id)
-        );
-        if (!empty($user_follow)) {
-            return 'ALREADY';
-        }
-        DB::insert(
-                        Model::getPrefix() . 'rest_follow',
-                        array('user_id' => $user['user_id'], 'rest_id' => $rest_id)
-        );
         return 'OK';
     }
 

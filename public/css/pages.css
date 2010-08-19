@@ -1250,22 +1250,56 @@ table.table_layout td {
     height:22px;
     float: left;
 }
-/* "Пошли сюда со мной"
+/* Знакомства
 --------------------------------------------------------------*/
-#rest_follow {
+#rest_dating {
     padding-top: 10px;
 }
-#rest_follow .rest_follow_caption{
+#rest_dating .dating_caption{
     font-size:18px;
     font-family: Arial;
     margin-bottom: 8px;
 }
-#rest_follow .follow{
+#rest_dating .invite{
     float: right;
     margin-top: 7px;
     margin-right: 13px;
 }
-#rest_follow .follower img{
+#rest_dating .inviter img{
     width:44px;
     margin-right: 3px;
+    cursor: pointer;
+}
+#dating_dialog{
+    padding:0 10px;
+    text-align: center;
+}
+#dating_dialog .caption {
+    height:auto;
+    font-size: 14px;
+}
+#dating_dialog .caption a {
+    color:#86A515;
+}
+#dating_dialog .option{
+    float: left;
+    width:130px;
+}
+#dating_dialog .option select{
+    width:120px;
+}
+#dating_dialog .option label{
+    font-size:12px;
+    display: block;
+}
+#dating_dialog .inp{
+    border:1px solid #86A515;
+    margin:5px;
+    text-align: left;
+    padding:4px;
+}
+#dating_dialog .text {
+    height:160px;
+    width:400px;
+    margin: 10px auto;
 }

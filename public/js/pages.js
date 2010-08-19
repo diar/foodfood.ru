@@ -12,6 +12,7 @@ var poster_day_position = 0;
 var poster_day_count = 0;
 var poster_day_visible = 0;
 var week_days = Array('вс','пн','вт','ср','чт','пт','сб');
+var invite_user_id = 0;
 $(document).ready(function(){
     // Проверка и обработка ширины экрана
     check_window_width ();
@@ -98,14 +99,80 @@ $(document).ready(function(){
             $('.stars_hover').css('width',0);
         });
         /*
-        * "Пошли сюда со мной"
+        * Вывод диалога оставить приглашение
         */
-        $('#rest_follow .follow').click(function(){
-            $.post('/'+site_city+'/restaurant/follow/'+current_rest_id, function(data){
-                if (data=='OK') $.alert('Приглашение добавлено',false);
-                else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять приглашения',true);
-                else if (data=='ALREADY') $.alert('Вы уже оставляли приглашение в данный ресторан',true);
-                else $.alert('Ошибка. Попробуйте еще раз',true);
+        $('#rest_dating .invite').click(function(){
+            title = $('.restaurant_header .title').html();
+            $.showAjaxDialog('/'+site_city+'/dating/invitation/',400,{
+                'rest_id':current_rest_id,
+                'rest_title':title
+            },function(){
+                /*
+                * Оставить приглашение
+                */
+                $('#dating_submit').click(function(){
+                    dating_topicality = $('#dating_topicality').val();
+                    dating_time = $('#dating_time').val();
+                    dating_target = $('#dating_target').val();
+                    dating_text = $('#dating_text').val();
+                    $.post('/'+site_city+'/dating/invite/',{
+                        'rest_id':current_rest_id,
+                        'dating_topicality':dating_topicality,
+                        'dating_time':dating_time,
+                        'dating_target':dating_target,
+                        'dating_text':dating_text
+                    }, function(data){
+                        if (data=='OK') {
+                            $('#dating_message').html('Приглашение добавлено');
+                        }
+                        else if (data=='NO_LOGIN') {
+                            $('#dating_message').html('Вы должны войти на сайт, чтобы оставлять приглашения');
+                        }
+                        else if (data=='ALREADY') {
+                            $('#dating_message').html('Вы уже оставляли приглашение в данный ресторан');
+                        }
+                        else {
+                            $('#dating_message').html('Ошибка. Попробуйте еще раз');
+                        }
+                    });
+                    return false;
+                });
+            });
+            return false;
+        });
+        /*
+        * Вывод диалога принять приглашение
+        */
+        $('.rest_inviters .inviter').click(function(){
+            invite_user_id =$(this).attr('rel');
+            title = $('.restaurant_header .title').html();
+            $.showAjaxDialog('/'+site_city+'/dating/following/',420,{
+                'rest_id':current_rest_id,
+                'rest_title':title,
+                'user_id':invite_user_id
+            },function(){
+                /*
+                * Принять приглашение
+                */
+                $('#dating_follow_submit').click(function(){
+                    title = $('.restaurant_header .title').html();
+                    $.post('/'+site_city+'/dating/follow/',{
+                        'rest_id':current_rest_id,
+                        'rest_title':title,
+                        'user_id':invite_user_id
+                    }, function(data){
+                        if (data=='OK') {
+                            $('#dating_message').html('Номер отправлен пользователю');
+                        }
+                        else if (data=='NO_LOGIN') {
+                            $('#dating_message').html('Вы должны войти на сайт, чтобы принимать приглашения');
+                        }
+                        else {
+                            $('#dating_message').html('Ошибка. Попробуйте еще раз');
+                        }
+                    });
+                    return false;
+                });
             });
             return false;
         });

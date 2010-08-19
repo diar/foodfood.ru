@@ -57,7 +57,7 @@ class restaurant_Page extends View {
         $title = 'Ресторан '.$restaurant['rest_title'].'. Меню, скидки, акции и заказ столиков на FoodFood.ru';
         $description = str_replace('"', '\'', $restaurant['rest_description']);
         $user_vote = MD_Rating::getUserVote($restaurant['id']);
-        $followers = MD_Restaurant::getFollowers($restaurant['id']);
+        $inviters = MD_Dating::getUsers($restaurant['id']);
 
         // Добавляем переменные xslt
              
@@ -81,7 +81,7 @@ class restaurant_Page extends View {
         self::$page['content']['restaurant']['have_menu'] = $have_menu;
         self::$page['content']['restaurant']['have_menu_map'] = $have_menu_map;
         self::$page['content']['restaurant']['user_vote'] = $user_vote;
-        self::$page['content']['restaurant']['followers'] = $followers;
+        self::$page['content']['restaurant']['inviters'] = $inviters;
         // Временное решение для баннера на страницах пяти ресторанов
         if ($restaurant['id'] == 96 || $restaurant['id'] == 196 || $restaurant['id'] == 207 ||
                 $restaurant['id'] == 191 || $restaurant['id'] == 200)
@@ -122,12 +122,5 @@ class restaurant_Page extends View {
         echo MD_Restaurant::reserv(
                 $_POST['rest_id'],$_POST['date'],$_POST['time'],$_POST['name'],$_POST['phone'],$_POST['count'],$_POST['text']
         );
-    }
-
-    /*
-     * Пошли со мной в ресторан
-    */
-    public static function followAjaxAction ($id) {
-        echo MD_Restaurant::follow($id);
     }
 }

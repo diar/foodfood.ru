@@ -417,12 +417,12 @@
                             </li>-->
                         </ul>
                     </div>
-                    <div id="rest_follow">
-                        <div class="rest_follow_caption">Пошли сюда со мной:</div>
-                        <div class="rest_followers">
-                            <xsl:apply-templates select="followers" />
+                    <div id="rest_dating">
+                        <div class="dating_caption">Пошли сюда со мной:</div>
+                        <div class="rest_inviters">
+                            <xsl:apply-templates select="inviters" />
                         </div>
-                        <a href="#" class="follow">
+                        <a href="#" class="invite">
                             <img src="/public/images/rest_follow.jpg" alt="Оставить приглашение" />
                         </a>
                     </div>
@@ -567,8 +567,8 @@
     </xsl:template>
 
     <!-- Список приглашений -->
-    <xsl:template match="restaurant/followers/item">
-        <a href="/blog/profile/{user_login}" class="follower">
+    <xsl:template match="restaurant/inviters/item">
+        <a class="inviter" rel="{user_id}">
             <img src="{avatar}" />
         </a>
     </xsl:template>

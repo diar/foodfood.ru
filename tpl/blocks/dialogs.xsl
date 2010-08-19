@@ -77,9 +77,9 @@
                 <div class="title">Забронировать столик</div>
                 <div class="message" id="reserving_message"></div>
                 <div id="reserving_form" class="ajax_form form_dialog">
-                	<div style="width:30%;float:left; margin-right:19px;">
-                    	<div class="label">Дата:</div>
-                    	<input type="text" name="date" id="reserving_date" class="form_input rounded" />
+                    <div style="width:30%;float:left; margin-right:19px;">
+                        <div class="label">Дата:</div>
+                        <input type="text" name="date" id="reserving_date" class="form_input rounded" />
                     </div>
                     <div style="width:30%;float:left; margin-right:19px;">
                         <div class="label">Время:</div>
@@ -94,7 +94,7 @@
                         <div class="label">Как Вас зовут?</div>
                         <input type="text" name="name" id="reserving_name" class="form_input rounded" />
                     </div>
-					<div style="width:48%;float:left;">
+                    <div style="width:48%;float:left;">
                         <div class="label">Контактный телефон:</div>
                         <input type="text" name="phone" id="reserving_phone" class="form_input rounded" value="+7"/>
                     </div>
@@ -126,7 +126,8 @@
                     <input type="text" class="form_input rounded" name="reg_mail" id="reg_mail" />
                     <div style="padding:15px 0">
                         <input type="checkbox" id="reg_rules" />
-                        <span >ознакомлен с </span><a href="/{//site/city}/content/rules">правилами</a>
+                        <span >ознакомлен с </span>
+                        <a href="/{//site/city}/content/rules">правилами</a>
                     </div>
                     <input type="button" id="registration_submit" value="Я — гурман!" />
                 </div>
@@ -139,7 +140,9 @@
         <div id="discount_dialog" class="dialog_box dialog box_shadow">
             <div class="left">
                 <div class="discount_percent">
-                    <div class="number">15<span>%</span></div>
+                    <div class="number">15
+                        <span>%</span>
+                    </div>
                     <div>скидка</div>
                 </div>
                 <div class="description_discount">описание</div>
@@ -175,16 +178,29 @@
             <div class="clear"></div>
             <div class="discount_dialog_footer">
                 <div class="name">кафе-галерея FLUER</div>
-                <div class="button"> <input type="button" id="discount_submit" value="Скидка!" /></div>
+                <div class="button">
+                    <input type="button" id="discount_submit" value="Скидка!" />
+                </div>
             </div>
-            <div style="text-align:center;font-size:10px; margin-bottom:5px;">Скидка бесплатна и действительна в течении 24 часов при предъявлении SMS официанту. 
-            <a href="/{//site/city}/content/rules">Правила</a>. Не действует на доставку.</div>
+            <div style="text-align:center;font-size:10px; margin-bottom:5px;">Скидка бесплатна и действительна в течении 24 часов при предъявлении SMS официанту.
+                <a href="/{//site/city}/content/rules">Правила</a>. Не действует на доставку.
+            </div>
         </div>
     </xsl:template>
 
     <xsl:template name="message_dialog">
         <div id="message_dialog" class="box_shadow rounded_bottom">
             <div class="text"></div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="empty_dialog">
+        <div id="empty_dialog" class="dialog_box dialog box_shadow">
+            <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" />
+            <div class="clear"></div>
+            <div class="content">
+                
+            </div>
         </div>
     </xsl:template>
 </xsl:stylesheet>

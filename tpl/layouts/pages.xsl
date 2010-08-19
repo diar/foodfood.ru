@@ -38,6 +38,7 @@
                     <xsl:call-template name="registration_dialog" />
                     <xsl:call-template name="passwd_dialog" />
                 </xsl:if>
+                <xsl:call-template name="empty_dialog" />
                 <xsl:call-template name="discount_dialog" />
                 <xsl:call-template name="message_dialog" />
                 <xsl:call-template name="callback_dialog" />
