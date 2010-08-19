@@ -18,7 +18,7 @@
                     <img src="{inviter/user_profile_avatar}" style="float:left;width:80px;" />
                     Принять приглашение <br />
                     в ресторан
-                    <xsl:value-of select="restaurant/title" /><br />
+                    "<xsl:value-of select="restaurant/title" />"<br />
                     от 
                     <a href="/blog/profile/{inviter/user_login}/">
                         <xsl:value-of select="inviter/user_login" />

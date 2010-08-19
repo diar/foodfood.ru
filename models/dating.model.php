@@ -80,6 +80,17 @@ class MD_Dating extends Model {
         $follower = User::getParams();
         if (!$follower['is_auth'])
             return 'NO_LOGIN';
+        $following = self::get(
+                'rest_id='.DB::quote($rest_id).' AND user_id='.DB::quote($user_id).
+                ' AND follower_id='.DB::quote($follower['user_id']), null, array(
+                    'table' => 'rest_dating_follower'
+                ));
+        if (!empty($following)) {
+            return 'ALREADY';
+        }
+        if ($user_id==$follower['user_id']) {
+            return 'YOURSELF';
+        }
         $inviter = self::get('rest_id='.DB::quote($rest_id).' AND user.user_id='.DB::quote($user_id), null, array(
                     'table' => Model::getPrefix().'rest_dating','no_prefix'=>true,
                     'join' => 'user', 'left' => 'user_id', 'right' => 'user_id',
@@ -88,6 +99,11 @@ class MD_Dating extends Model {
         if (empty($inviter)) {
             return 'NO_INVITE';
         }
+        DB::insert(Model::getPrefix().'rest_dating_follower', array(
+            'user_id'=>$user_id,
+            'rest_id'=>$rest_id,
+            'follower_id'=>$follower['user_id']
+        ));
         $text = $follower['user_login'].' хочет с тобой сходить в ресторан "'.$rest_title.'", его номер '.
                 $follower['user_phone'].', свяжись с ним, www.foodfood.ru';
         MD_Sms::sendSms($inviter['user_phone'], $text);

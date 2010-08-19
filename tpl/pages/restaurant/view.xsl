@@ -19,8 +19,10 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             rest_page_activate = true;
-            <xsl:text>current_rest_id =</xsl:text>
+            <xsl:text>current_rest_id = </xsl:text>
             <xsl:value-of select="restaurant/id" />;
+            <xsl:text>current_rest_title = "</xsl:text>
+            <xsl:value-of select="restaurant/rest_title" />";
             function map_init() {
             <xsl:text>x_coord = '</xsl:text>
             <xsl:value-of select="restaurant/rest_google_x" />

@@ -17,7 +17,7 @@
                 <div class="title">
                     Оставить приглашение
                     <br />в ресторан
-                    <xsl:value-of select="restaurant/title" />
+                    "<xsl:value-of select="restaurant/title" />"
                 </div>
                 <div class="message" id="dating_message"></div>
             </div>
@@ -47,7 +47,8 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <textarea class="text" id="dating_text"></textarea>
+            <label style="margin-top:10px;">Описание</label>
+            <textarea class="text" id="dating_text" style="margin-top:3px;" onclick="$('#dating_dialog .text').val('')">Познакомлюсь с блондинкой 20-25 лет</textarea>
             <input type="button" id="dating_submit" value="Оставить приглашение" />
         </div>
     </xsl:template>

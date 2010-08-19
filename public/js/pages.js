@@ -102,10 +102,9 @@ $(document).ready(function(){
         * Вывод диалога оставить приглашение
         */
         $('#rest_dating .invite').click(function(){
-            title = $('.restaurant_header .title').html();
             $.showAjaxDialog('/'+site_city+'/dating/invitation/',400,{
                 'rest_id':current_rest_id,
-                'rest_title':title
+                'rest_title':current_rest_title
             },function(){
                 /*
                 * Оставить приглашение
@@ -145,20 +144,18 @@ $(document).ready(function(){
         */
         $('.rest_inviters .inviter').click(function(){
             invite_user_id =$(this).attr('rel');
-            title = $('.restaurant_header .title').html();
-            $.showAjaxDialog('/'+site_city+'/dating/following/',420,{
+            $.showAjaxDialog('/'+site_city+'/dating/following/',450,{
                 'rest_id':current_rest_id,
-                'rest_title':title,
+                'rest_title':current_rest_title,
                 'user_id':invite_user_id
             },function(){
                 /*
                 * Принять приглашение
                 */
                 $('#dating_follow_submit').click(function(){
-                    title = $('.restaurant_header .title').html();
                     $.post('/'+site_city+'/dating/follow/',{
                         'rest_id':current_rest_id,
-                        'rest_title':title,
+                        'rest_title':current_rest_title,
                         'user_id':invite_user_id
                     }, function(data){
                         if (data=='OK') {
@@ -166,6 +163,12 @@ $(document).ready(function(){
                         }
                         else if (data=='NO_LOGIN') {
                             $('#dating_message').html('Вы должны войти на сайт, чтобы принимать приглашения');
+                        }
+                        else if (data=='ALREADY') {
+                            $('#dating_message').html('Вы уже оставили согласие на приглашение');
+                        }
+                        else if (data=='YOURSELF') {
+                            $('#dating_message').html('Вы не можете оставить согласие самому себе');
                         }
                         else {
                             $('#dating_message').html('Ошибка. Попробуйте еще раз');
