@@ -16,11 +16,6 @@
     padding:3px 13px;
     margin-left:10px;
 }
-
-#search_menu a:hover {
-    background:#fac213;
-    border-radius: 3px;
-}
 .rounded {
     border-radius: 3px;
     /*behavior: url(/public/css/border-radius.htc); */

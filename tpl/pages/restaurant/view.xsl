@@ -19,8 +19,10 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             rest_page_activate = true;
-            <xsl:text>current_rest_id =</xsl:text>
+            <xsl:text>current_rest_id = </xsl:text>
             <xsl:value-of select="restaurant/id" />;
+            <xsl:text>current_rest_title = "</xsl:text>
+            <xsl:value-of select="restaurant/rest_title" />";
             function map_init() {
             <xsl:text>x_coord = '</xsl:text>
             <xsl:value-of select="restaurant/rest_google_x" />
@@ -417,6 +419,15 @@
                             </li>-->
                         </ul>
                     </div>
+                    <div id="rest_dating">
+                        <div class="dating_caption">Пошли сюда со мной:</div>
+                        <div class="rest_inviters">
+                            <xsl:apply-templates select="inviters" />
+                        </div>
+                        <a href="#" class="invite">
+                            <img src="/public/images/rest_follow.jpg" alt="Оставить приглашение" />
+                        </a>
+                    </div>
                     <xsl:if test="tmp_banner = 1">
                         <div class="rest_banner" style="padding-top:20px;">
                             <img src="/upload/image/banners/5second.jpg" alt="5 секунд - ГЛАВНЫЙ ПО ДИСКОНТУ" />
@@ -555,6 +566,13 @@
                 <xsl:value-of select="title" />
             </div>
         </div>
+    </xsl:template>
+
+    <!-- Список приглашений -->
+    <xsl:template match="restaurant/inviters/item">
+        <a class="inviter" rel="{user_id}">
+            <img src="{avatar}" />
+        </a>
     </xsl:template>
 
 </xsl:stylesheet>

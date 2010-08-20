@@ -823,14 +823,22 @@ body {
     max-width: 394px;
     margin-bottom: 10px;
 }
+#empty_dialog {
+    height:400px;
+}
+#empty_dialog .content_temp{
+    height:400px;
+}
 #reserving_submit,
 #auth_submit,
 #registration_submit,
 #callback_submit,
+#dating_submit,
+#dating_follow_submit,
 #passwd_submit{
     width:195px;
     height:55px;
-    background:url(/public/images/auth_button);
+    background:url(/public/images/auth_button.jpg);
     border:none;
     cursor:pointer;
     color:#FFF;
@@ -841,7 +849,7 @@ body {
 }
 #auth_submit:active,#registration_submit:active,
 #callback_submit:active,#passwd_submit:active{
-    background:url(/public/images/auth_button_active);
+    background:url(/public/images/auth_button_active.jpg);
 }
 
 #body_fill {
@@ -860,7 +868,7 @@ body {
     width:592px;
     left:50%;
     margin-left:-296px;
-    background:url(/public/images/discount_dialog_bg.jpg) center 270px  no-repeat #ffffff;
+    background:url(/public/images/discount_dialog_bg.jpg) center 270px  no-repeat #fff;
 }
 #discount_dialog .form_dialog {padding:0;}
 

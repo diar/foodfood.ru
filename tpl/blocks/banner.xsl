@@ -33,9 +33,11 @@
     <xsl:template match="root/banner">
         <xsl:choose>
             <xsl:when test="type = 'image'">
-                <a href="/public/ajax/banner.php?redirect={href}&amp;banner={id}&amp;city=kazan" style="border:none;" target="_blank">
-                    <img src="/upload/image/banners/{src}" id="banner{id}" style="border:none;" />
-                </a>
+                <noindex>
+                    <a rel="nofollow" href="/public/ajax/banner.php?redirect={href}&amp;banner={id}&amp;city=kazan" style="border:none;" target="_blank">
+                        <img src="/upload/image/banners/{src}" id="banner{id}" style="border:none;" />
+                    </a>
+                </noindex>
             </xsl:when>
             <xsl:when test="type = 'flash'">
                 <div>

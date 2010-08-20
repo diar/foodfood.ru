@@ -12,6 +12,7 @@ var poster_day_position = 0;
 var poster_day_count = 0;
 var poster_day_visible = 0;
 var week_days = Array('вс','пн','вт','ср','чт','пт','сб');
+var invite_user_id = 0;
 $(document).ready(function(){
     // Проверка и обработка ширины экрана
     check_window_width ();
@@ -31,8 +32,8 @@ $(document).ready(function(){
     });
 
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода ресторана
-    */
+     * Если находимся на странице вывода ресторана
+     */
     if (typeof(rest_page_activate)!='undefined') {
         $('.main_container a').lightBox({
             imageLoading: '/public/js/libs/lightbox/images/lightbox-ico-loading.gif',
@@ -42,8 +43,9 @@ $(document).ready(function(){
             imageBlank:   '/public/js/libs/lightbox/images/lightbox-blank.gif',
             fixedNavigation:true
         });
-        /* Звездочки
-        ---------------------------------------------------------------------- */
+        /*
+         * Звездочки
+         */
         for (i=1;i<6;i++) {
             $('.stars').append('<div class="star'+i+' star"></div>');
         }
@@ -77,7 +79,10 @@ $(document).ready(function(){
                 rating_value = 5;
             }
             $.post('/'+site_city+'/restaurant/rating/'+current_rest_id,
-            {'rating_param':rating_param,'rating_value':rating_value},
+            {
+                'rating_param':rating_param,
+                'rating_value':rating_value
+            },
             function(data){
                 if (data=='OK') {
                     $.alert('Ваш голос учтен',false);
@@ -93,6 +98,97 @@ $(document).ready(function(){
         $('.rating-star').mouseleave(function(){
             $('.stars_hover').css('width',0);
         });
+        /*
+         * Вывод диалога оставить приглашение
+         */
+        $('#rest_dating .invite').click(function(){
+            $.showAjaxDialog('/'+site_city+'/dating/invitation/',400,{
+                'rest_id':current_rest_id,
+                'rest_title':current_rest_title
+            },function(){
+                /*
+                 * Оставить приглашение
+                 */
+                $('#dating_submit').click(function(){
+                    dating_topicality = $('#dating_topicality').val();
+                    dating_time = $('#dating_time').val();
+                    dating_target = $('#dating_target').val();
+                    dating_text = $('#dating_text').val();
+                    $('#dating_loader').fadeIn(500);
+                    if (dating_text != '') {
+                        $.post('/'+site_city+'/dating/invite/',{
+                            'rest_id':current_rest_id,
+                            'dating_topicality':dating_topicality,
+                            'dating_time':dating_time,
+                            'dating_target':dating_target,
+                            'dating_text':dating_text
+                        }, function(data){
+                            $('#dating_loader').fadeOut(500);
+                            if (data=='OK') {
+                                $.closeDialog('empty_dialog');
+                                $.alert('Приглашение добавлено',false);
+                            }
+                            else if (data=='NO_LOGIN') {
+                                $('#dating_message').html('Вы должны войти на сайт, чтобы оставлять приглашения');
+                            }
+                            else if (data=='ALREADY') {
+                                $('#dating_message').html('Вы уже оставляли приглашение в данный ресторан');
+                            }
+                            else {
+                                $('#dating_message').html('Ошибка. Попробуйте еще раз');
+                            }
+                        });
+                        return false;
+                    } else {
+                        $('#dating_message').html('Заполните все поля');
+                    }
+                });
+            });
+            return false;
+        });
+        /*
+         * Вывод диалога принять приглашение
+         */
+        $('.rest_inviters .inviter').click(function(){
+            invite_user_id =$(this).attr('rel');
+            $.showAjaxDialog('/'+site_city+'/dating/following/',450,{
+                'rest_id':current_rest_id,
+                'rest_title':current_rest_title,
+                'user_id':invite_user_id
+            },function(){
+                /*
+                 * Принять приглашение
+                 */
+                $('#dating_follow_submit').click(function(){
+                    $('#dating_loader').fadeIn(500);
+                    $.post('/'+site_city+'/dating/follow/',{
+                        'rest_id':current_rest_id,
+                        'rest_title':current_rest_title,
+                        'user_id':invite_user_id
+                    }, function(data){
+                        $('#dating_loader').fadeOut(500);
+                        if (data=='OK') {
+                            $.closeDialog('empty_dialog');
+                            $.alert('Номер отправлен пользователю',false);
+                        }
+                        else if (data=='NO_LOGIN') {
+                            $('#dating_message').html('Вы должны войти на сайт, чтобы принимать приглашения');
+                        }
+                        else if (data=='ALREADY') {
+                            $('#dating_message').html('Вы уже оставили согласие на приглашение');
+                        }
+                        else if (data=='YOURSELF') {
+                            $('#dating_message').html('Вы не можете оставить согласие самому себе');
+                        }
+                        else {
+                            $('#dating_message').html('Ошибка. Попробуйте еще раз');
+                        }
+                    });
+                    return false;
+                });
+            });
+            return false;
+        });
         $('#restaurant_info .photos .main').first().show().addClass('current');
         // Нажатие на кнопку со скидкой
         $('.link.discount_icon a').click(function(){
@@ -107,8 +203,8 @@ $(document).ready(function(){
             return false;
         });
         /*
-        * Инициализация превью фоток
-        */
+         * Инициализация превью фоток
+         */
         $('#restaurant_info .photos .mini').each(function(){
             restaurant_photo_count++;
             if (restaurant_photo_count<=restaurant_photo_visible) {
@@ -117,8 +213,8 @@ $(document).ready(function(){
             $(this).attr('pos',restaurant_photo_count);
         });
         /*
-        * Нажатие на превью фотки ресторана
-        */
+         * Нажатие на превью фотки ресторана
+         */
         $('#restaurant_info .photos .mini').click(function(){
             min = this;
             $('#restaurant_info .photos .mini.active').removeClass('active');
@@ -173,12 +269,12 @@ $(document).ready(function(){
         });
     }
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода меню (авктивирован калькулятор)
-    */
+     * Если находимся на странице вывода меню (авктивирован калькулятор)
+     */
     if (typeof(calс_activate)!='undefined') {
         /*
-        * Добавить блюдо в корзину
-        */
+         * Добавить блюдо в корзину
+         */
         $('.add_trash_item').click(function(){
             itogo = 0;
             $parent = $(this).parents('.dish_item');
@@ -211,7 +307,7 @@ $(document).ready(function(){
                     '</tr>'
                     );
                 $('.trash .items table#list_trash').append($trash_item);
-		trash_itogo();
+                trash_itogo();
                 $trash_item.find('.trash_add_item').click(function(){	
                     cn = parseInt($(this).parents('.trash_item').find('.number').html());
                     $(this).parents('.trash_item').find('.number').html(cn+1);
@@ -236,8 +332,8 @@ $(document).ready(function(){
             }
         });
         /*
-        * Удалить блюдо из корзины
-        */
+         * Удалить блюдо из корзины
+         */
         $('.remove_trash_item').click(function(){
             $parent = $(this).parents('.dish_item_l');
             dish = $parent.attr('rel');
@@ -257,8 +353,8 @@ $(document).ready(function(){
         });
     }
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода лиц фудфуд
-    */
+     * Если находимся на странице вывода лиц фудфуд
+     */
     if (typeof(person_page_activate)!='undefined') {
         persons_check_buttons ();
         $('#persons_list .item').click(function(){
@@ -324,8 +420,8 @@ $(document).ready(function(){
         }
     });
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода афиш
-    */
+     * Если находимся на странице вывода афиш
+     */
     if (typeof(poster_page_activate)!='undefined') {
         // Месяцы
         $("#mounth_list .back").click(function(){
@@ -406,8 +502,8 @@ $(document).ready(function(){
     }
 
     /* ---------------------------------------------------------------------
-    * Если находимся на странице вывода скидок
-    */
+     * Если находимся на странице вывода скидок
+     */
     if (typeof(discount_page_activate)!='undefined') {
         $('.select_percent div').click(function(){
             per = $(this).attr('class');
@@ -435,9 +531,9 @@ $(document).ready(function(){
 
     $("a#getPromo").click(function(){
         $.post('/kazan/auth/getPromo',{
-        },function(data){
-          alert(data);
-        });
+            },function(data){
+                alert(data);
+            });
         return false;
     });
 
@@ -565,8 +661,8 @@ function get_poster () {
     if (poster_day_position>poster_day_count) {
         poster_day_position = poster_day_count;
         $(".date_list .items").animate({
-        scrollLeft: (poster_day_position)*115
-    },250);
+            scrollLeft: (poster_day_position)*115
+        },250);
     }
     // заменяем дни недели на кнопках 
     $(".date_list .item").each(function(){
