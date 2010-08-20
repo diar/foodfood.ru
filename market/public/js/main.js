@@ -20,6 +20,8 @@ $(document).ready(function () {
     });
     // Выбираем первый тип меню
     $('.navigation .menu li').first().click();
+
+    
 });
 
 function search_start() {
@@ -30,7 +32,16 @@ function search_start() {
         $('#menu_list').html(data);
         tags_disable = false;
         actions_create();
+        $('.portion').click(function(){
+
+       $('.portions .portion').removeClass('active');
+       $(this).addClass('active');
+       price = $(this).attr('rel');
+       price = '<span>'+price+'</span> руб.';
+       $(this).parents('.item').find('.new').html(price);
     });
+    });
+    
 };
 
 function actions_create() {
@@ -55,7 +66,7 @@ function actions_create() {
 
     // Кнопка заказать
     $('.get .buy').click(function(){
-        price = parseInt ($(this).parents('.item').find('.price .new').html());
+        price = parseInt ($(this).parents('.item').find('.price .new span').html());
         dish_id = $(this).parents('.item').attr('id').replace('dish_','');
         rest_id = $(this).parents('.item').attr('rest_id');
         title = $(this).parents('.item').find('.title a').html();

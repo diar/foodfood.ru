@@ -31,7 +31,7 @@ class index_Page extends View {
                 $gen_price+=$item['price'];
                 $gen_count+=$item['count'];
             }
-            $description = 'Всего в корзине <span class="count">'.$gen_count.'</span> блюд по цене '.
+            $description = 'Всего в корзине <span class="count">'.$gen_count.'</span> блюд на сумму '.
                     '<span class="price">'.$gen_price.'</span> руб. '.
                     'Все доставим за 40 минут, если пробок не будет. '.
                     'Еще позвоним и все уточним, спасибо. ';
@@ -107,7 +107,7 @@ class index_Page extends View {
             $gen_price+=$item['price'];
             $gen_count+=$item['count'];
         }
-        $description = 'Всего в корзине <span class="count">'.$gen_count.'</span> блюд по цене '.
+        $description = 'Всего в корзине <span class="count">'.$gen_count.'</span> блюд на сумму '.
                 '<span class="price">'.$gen_price.'</span> руб. '.
                 'Все доставим за 40 минут, если пробок не будет. '.
                 'Еще позвоним и все уточним, спасибо. ';

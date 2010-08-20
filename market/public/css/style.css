@@ -234,7 +234,7 @@ table td {
 }
 
 .navigation .menu {
-    margin-left:20%;
+    margin-left:60px;
 }
 
 .navigation .menu li {
@@ -244,11 +244,17 @@ table td {
     color:#fff;
     font-weight:bold;
     margin-right:20px;
+    display: block;
+    padding: 3px 8px;
 }
 .navigation .menu li.active {
-    background: #fff;
+    background:#fff;
     color:#000;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
+.navigation .menu li.active a {text-decoration: none;}
 .navigation .next {
     background:url(/market/public/images/next.jpg) 0 -24px no-repeat;
     width:24px;
@@ -270,7 +276,7 @@ table td {
 }
 .tags {
     margin:0 40px;
-    padding:5px 0;
+    padding:5px 0 10px 0;
     height:30px;
     background:#EAEAEA;
 }
@@ -312,9 +318,9 @@ table td {
 }
 
 .echo .delivery_desc {
-    float: left;
     font-size:12px;
     margin-top:6px;
+    text-align: center;
 }
 
 .echo .status {
@@ -337,6 +343,9 @@ table td {
 .item .title {
     margin:3px 0;
 }
+.item .foto {
+    margin-top: 8px;
+}
 .item .foto img {
     width:183px;
 }
@@ -348,20 +357,41 @@ table td {
     float:left;
     margin:1px;
 }
-.item .reviews {float:right;font-size:10px;}
+.item .reviews {float:right;font-size:10px;color: #ff6600;}
+.item .reviews_number {float: left; color: #ff6600; font-size:10px;}
 .item .description {
     font-size:12px;
-    padding:3px 0;
+    padding:12px 0;
+    line-height: 15px;
 }
+.item .portions {
+   margin-bottom: 10px;
+   font-size: 12px;
+   color: #ff6600;
+}
+.item .portion {
+    cursor: pointer;
+}
+
+
+.item .portion.active {
+    color: #000000;
+}
+.item .active span  {color: #ff6600;}
+.item .portion.active span.s_portion {
+    display: block;
+}
+
+
+
 .item .price {
     float:left;
-    text-align:right;
-    padding-left:10px;
 }
 
 .item .price .new {
     color: #ff6600;
-    font-size:24px;
+    font-size:10px;
+    text-decoration:none;
 }
 
 .item .price .old {
@@ -370,20 +400,18 @@ table td {
 }
 
 .item .price span {
-    font-size:10px;
-    text-decoration:none;
+
+    font-size:25px;
+    
 }
 
 .item .get {float:right;}
 
 .item .buy {
-    background:0;
-    border:0;
-    background:url(/market/public/images/buy_bg.jpg) no-repeat;
     font-size:14px;
-    font-style:italic;
-    width:80px;
-    height:32px;
+    float: right;
+    font-style: italic;
+    line-height: 28px;
 }
 
 /******************************** CLASS *****************************/

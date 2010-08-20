@@ -30,6 +30,13 @@ class marketMenu extends AdminModule {
                 'css_class' => 'caption')
         );
 
+        $form->addfield(array('name' => 'second_portion',
+                'caption' => '2ой тип порции',
+                'pattern' => 'text',
+                'maxlength' => '255',
+                'css_class' => 'caption')
+        );
+
         $form->addfield(array('name' => 'price',
                 'caption' => 'Цена(руб.)',
                 'pattern' => 'text',
@@ -94,8 +101,17 @@ class marketMenu extends AdminModule {
         $form->addfield(array('name' => 'portion',
                 'caption' => 'Порция',
                 'pattern' => 'text',
+                'is_required' => true,
                 'maxlength' => '255',
                 'value' => $record['portion'],
+                'css_class' => 'caption')
+        );
+
+        $form->addfield(array('name' => 'second_portion',
+                'caption' => '2ой тип порции',
+                'pattern' => 'text',
+                'maxlength' => '255',
+                'value' => $record['second_portion'],
                 'css_class' => 'caption')
         );
 

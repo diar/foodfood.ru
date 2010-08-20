@@ -18,7 +18,7 @@
     <xsl:template match="content">
     	<div style="width:100%;text-align:center;font-size:32px; font-family:Tahoma,Arial;padding-top:40px;">
         	Наполняем прилавки...<br /><br />
-            <span style="color:#999999; font-style:italic;">Открытие 20 августа</span>
+            <span style="color:#999999; font-style:italic;">Открытие 1 сентября</span>
         </div>
     </xsl:template>
     
@@ -40,13 +40,12 @@
                             <div class="money">
                                 <div class="">Твой общий счет</div>
                                 <div class="rub"><xsl:value-of select="//trash/price" /><sup> руб.</sup></div>
-                                <div class="edit"><a href="#">Корректировать</a></div>
                             </div>
                             <div class="order">
                                 <xsl:if test="//trash/count=0">
                                     <xsl:attribute name="style">display:none;</xsl:attribute>
                                 </xsl:if>
-                                <a href="#">Оформить заказ</a>
+                                <a href="#">Корзина</a>
                             </div>
                         </div>
                     </td>

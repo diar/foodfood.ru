@@ -51,7 +51,21 @@ class MD_Menu extends Model {
             $dish_ids[]=$item['market_menu_id'];
         }
         foreach ($dish as $item) {
-            $item['price_old']=$item['price'] + 50;
+            $portions = explode('%', $item['portion']);
+            
+            $price = explode('%', $item['price']);
+            $second_portions = !empty($item['second_portion']) ? explode('%', $item['second_portion']) : null;
+            
+            if (count($portions) > 0 && count($price) == count($portions)) {
+                $z = 0;
+                foreach ($portions as $portion) {
+                    $f_protions['portion'] = $portion;
+                    $f_protions['price'] = $price[$z];
+                    if (isset ($second_portions[$z])) $f_protions['second_portion'] = $price[$z];
+                    $z++;
+                    $item['portions'][] = $f_protions;
+                }
+            }
             $partners[$item['rest_id']]['dish'][] = $item;
             $partners[$item['rest_id']]['title'] = $item['rest_title'];
         }

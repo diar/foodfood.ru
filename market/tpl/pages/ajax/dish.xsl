@@ -17,14 +17,15 @@
         <div class="echo">
             <div class="caption green">
                 <div class="title text_shadow">
-                    <a href="#"><xsl:value-of select="title" /></a>
+                    <a href="#">
+                        <xsl:value-of select="title" />
+                    </a>
                 </div>
             </div>
             <div class="delivery_desc">
                 Доставка заказа от 500 руб. — бесплатно, при заказе до 500 руб.
                 стоимость  доставки составляет 90 руб.
             </div>
-            <div class="status green">Работаем, всё нормально.</div>
             <div class="clear"></div>
             <div class="list">
                 <xsl:apply-templates select="dish/item" />
@@ -39,6 +40,13 @@
     <!-- Список блюд -->
     <xsl:template match="dish/item">
         <div class="item" id="dish_{market_menu_id}" rest_id="{rest_id}">
+            <div class="reviews_number">
+                <a href="#">7 отзывов</a>
+            </div>
+            <div class="reviews">
+                <a href="#">нет отзывов</a>
+            </div>
+            <div class="clear"></div>
             <div class="foto">
                 <xsl:choose>
                     <xsl:when test="img=''">
@@ -49,26 +57,32 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
-            <div class="title"><a href="#"><xsl:value-of select="title" /></a></div>
-            <div class="item_tags">
-                <div class="tag_item"></div>
-                <div class="tag_item"></div>
-                <div class="tag_item"></div>
-                <div class="tag_item"></div>
+            <div class="title">
+                <a href="#">
+                    <xsl:value-of select="title" />
+                </a>
             </div>
-            <div class="reviews">нет отзывов</div>
             <div class="clear"></div>
-            <div class="description"><xsl:value-of select="description" /></div>
+            <div class="description">
+                <xsl:value-of select="description" />
+            </div>
+            <div class="portions">
+                <xsl:apply-templates select="portions/item" /> гр.
+
+            </div>
             <div class="price">
                 <div class="new">
-                    <xsl:value-of select="price" />
-                    <span> руб</span>
+                    <span><xsl:value-of select="portions/item[1]/price" /></span>
+                     руб
                 </div>
-                <div class="old"><xsl:value-of select="price_old" /><span> руб</span></div>
             </div>
             <div class="get">
-                <input type="button" class="buy" value="Заказать" />
+                <div class="buy">
+                    <a href="#">Заказать</a>
+                </div>
             </div>
+
+            
         </div>
     </xsl:template>
 
@@ -80,5 +94,26 @@
             </xsl:if>
             <xsl:value-of select="title" />
         </a>
+    </xsl:template>
+
+    <!-- Порции -->
+    <xsl:template match="portions/item">
+        
+        <span class='portion' rel='{price}'>
+            <xsl:if test="position() = 1">
+                <xsl:attribute name="class">
+                    portion active
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="portion" />
+            <xsl:if test="second_portion !=''">
+                <span class="s_portion">
+                       (<xsl:value-of select="second_portion" />)
+                </span>
+                
+            </xsl:if>
+            <xsl:if test="position() != count(../item)"> <span> / </span></xsl:if>
+        </span>
+        
     </xsl:template>
 </xsl:stylesheet>
