@@ -14,6 +14,7 @@
     <xsl:template match="content">
         <div id="dating_dialog">
             <div class="caption">
+                <img class="form_loader" id="dating_loader" src="/public/images/loader.gif" alt="загрузка.."></img>
                 <div class="title">
                     Оставить приглашение
                     <br />в ресторан
@@ -43,6 +44,9 @@
                     <label>Цель знакомства</label>
                     <select id="dating_target">
                         <option>дружба</option>
+                        <option>отношения</option>
+                        <option>любовь</option>
+                        <option>секс</option>
                     </select>
                 </div>
                 <div class="clear"></div>

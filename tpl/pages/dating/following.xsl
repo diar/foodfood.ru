@@ -16,6 +16,8 @@
             <div class="caption">
                 <div class="title">
                     <img src="{inviter/user_profile_avatar}" style="float:left;width:80px;" />
+                    <img class="form_loader" id="dating_loader" style="margin-top:40px;"
+                        src="/public/images/loader.gif" alt="загрузка.." />
                     Принять приглашение <br />
                     в ресторан
                     "<xsl:value-of select="restaurant/title" />"<br />

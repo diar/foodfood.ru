@@ -114,6 +114,7 @@ $(document).ready(function(){
                     dating_time = $('#dating_time').val();
                     dating_target = $('#dating_target').val();
                     dating_text = $('#dating_text').val();
+                    $('#dating_loader').fadeIn(500);
                     if (dating_text != '') {
                         $.post('/'+site_city+'/dating/invite/',{
                             'rest_id':current_rest_id,
@@ -122,8 +123,10 @@ $(document).ready(function(){
                             'dating_target':dating_target,
                             'dating_text':dating_text
                         }, function(data){
+                            $('#dating_loader').fadeOut(500);
                             if (data=='OK') {
-                                $('#dating_message').html('Приглашение добавлено');
+                                $.closeDialog('empty_dialog');
+                                $.alert('Приглашение добавлено',false);
                             }
                             else if (data=='NO_LOGIN') {
                                 $('#dating_message').html('Вы должны войти на сайт, чтобы оставлять приглашения');
@@ -157,13 +160,16 @@ $(document).ready(function(){
                  * Принять приглашение
                  */
                 $('#dating_follow_submit').click(function(){
+                    $('#dating_loader').fadeIn(500);
                     $.post('/'+site_city+'/dating/follow/',{
                         'rest_id':current_rest_id,
                         'rest_title':current_rest_title,
                         'user_id':invite_user_id
                     }, function(data){
+                        $('#dating_loader').fadeOut(500);
                         if (data=='OK') {
-                            $('#dating_message').html('Номер отправлен пользователю');
+                            $.closeDialog('empty_dialog');
+                            $.alert('Номер отправлен пользователю',false);
                         }
                         else if (data=='NO_LOGIN') {
                             $('#dating_message').html('Вы должны войти на сайт, чтобы принимать приглашения');
@@ -284,7 +290,7 @@ $(document).ready(function(){
                 title = $parent.find('.title').html();
                 price = $parent.find('.price span').html();
                 $trash_item = $(
-                '<tr class="trash_item" id="trash_'+dish+'">'+
+                    '<tr class="trash_item" id="trash_'+dish+'">'+
                     '<td class="title">'+title+'</td>'+
                     '<td class="count">'+
                     '<div class="number">1</div>'+
@@ -299,7 +305,7 @@ $(document).ready(function(){
                     '</td>'+
                     '<td class="price">'+price+'</td>'+
                     '</tr>'
-            );
+                    );
                 $('.trash .items table#list_trash').append($trash_item);
                 trash_itogo();
                 $trash_item.find('.trash_add_item').click(function(){	
@@ -359,17 +365,17 @@ $(document).ready(function(){
             $('#person').append($loader);
             $('#person #loader').show();
             $.post('/'+site_city+'/persons/view/'+id,
-            function (data) {
-                $('#person').html(data);
-                name = $('#person .name').html();
-                $('#person_name_caption').html(name);
-                $('.interview .quest').click(function(){
-                    $('.interview .quest.active').removeClass('active');
-                    $(this).addClass('active');
-                    $('.interview .answer').hide();
-                    $(this).parent('.int').find('.answer').show();
+                function (data) {
+                    $('#person').html(data);
+                    name = $('#person .name').html();
+                    $('#person_name_caption').html(name);
+                    $('.interview .quest').click(function(){
+                        $('.interview .quest.active').removeClass('active');
+                        $(this).addClass('active');
+                        $('.interview .answer').hide();
+                        $(this).parent('.int').find('.answer').show();
+                    });
                 });
-            });
             person_item_position = parseInt($(this).attr('pos'))-person_item_offset;
             if (person_item_position==person_item_visible &&
                 person_item_position+person_item_offset<person_item_count) {
@@ -392,17 +398,17 @@ $(document).ready(function(){
             }
         });
         $.post('/'+site_city+'/persons/view/'+person_id,
-        function (data) {
-            $('#person').html(data);
-            name = $('#person .name').html();
-            $('#person_name_caption').html(name);
-            $('.interview .quest').click(function(){
-                $('.interview .quest.active').removeClass('active');
-                $(this).addClass('active');
-                $('.interview .answer').hide();
-                $(this).parent('.int').find('.answer').show();
+            function (data) {
+                $('#person').html(data);
+                name = $('#person .name').html();
+                $('#person_name_caption').html(name);
+                $('.interview .quest').click(function(){
+                    $('.interview .quest.active').removeClass('active');
+                    $(this).addClass('active');
+                    $('.interview .answer').hide();
+                    $(this).parent('.int').find('.answer').show();
+                });
             });
-        });
     }
     $('.select_percent div').click(function(){
         per = $(this).attr('class');
@@ -525,9 +531,9 @@ $(document).ready(function(){
 
     $("a#getPromo").click(function(){
         $.post('/kazan/auth/getPromo',{
-        },function(data){
-            alert(data);
-        });
+            },function(data){
+                alert(data);
+            });
         return false;
     });
 
