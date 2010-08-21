@@ -314,6 +314,7 @@
             	Присоединяйся к нам!
                 <br />
                 <br />
+                <noindex>
                 <a href="http://www.facebook.com/profile.php?id=100001264771648" class="social fb" title="Мы в FaceBook">
                 </a>
                 <a href="http://foodfoodru.livejournal.com/" class="social lj" title="Мы в ЖЖ">
