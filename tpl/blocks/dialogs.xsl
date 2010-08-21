@@ -13,7 +13,7 @@
                 <img class="form_loader" id="auth_loader" src="/public/images/loader.gif" alt="загрузка.."></img>
                 <div class="title">Войти на кухню</div>
                 <div class="message" id="auth_message"></div>
-                <div id="auth_form" class="ajax_form form_dialog">
+                <div id="auth_form" class="ajax_form form_dialog" style="text-align:center;font-size:14px;">
                     <div class="label">e-mail (номер мобильного телефона):</div>
                     <input type="text" name="login" id="auth_login" class="form_input rounded" />
                     <div class="label">пароль:</div>
@@ -117,7 +117,7 @@
                 <img class="form_loader" id="reg_loader" src="/public/images/loader.gif" alt="загрузка.." />
                 <div class="title">Регистрация нового гурмана</div>
                 <div class="message" id="reg_message"></div>
-                <div id="registration_form" class="ajax_form form_dialog">
+                <div id="registration_form" class="ajax_form form_dialog" style="text-align:center;font-size:14px;">
                     <div class="label">имя:</div>
                     <input type="text" class="form_input rounded" name="reg_name" id="reg_name" />
                     <div class="label">номер мобильного телефона:</div>
@@ -130,8 +130,8 @@
                         <a href="/{//site/city}/content/rules">правилами</a>
                     </div>
                     <input type="button" id="registration_submit" value="Я — гурман!" />
+                    <img src="/public/images/dorozhka.png" style="margin-top:-3px;margin-left:-10px;" alt="дорожка" />
                 </div>
-                <img src="/public/images/dorozhka.png" style="margin-top:-3px;" alt="дорожка" />
             </div>
         </div>
     </xsl:template>

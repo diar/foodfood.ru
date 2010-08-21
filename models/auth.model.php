@@ -77,6 +77,7 @@ class MD_Auth extends Model {
         if(trim($login)=='' || trim($password)=='') {
             return "SPACE";
         }
+        $remember = $remember=='true' ? true : false;
         if (String::isEmail($login) or String::toPhone($login)) {
             $auth = Array (
                     'login'=>$login,
