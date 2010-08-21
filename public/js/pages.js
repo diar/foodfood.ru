@@ -125,7 +125,7 @@ $(document).ready(function(){
                         }, function(data){
                             $('#dating_loader').fadeOut(500);
                             if (data=='OK') {
-                                $.closeDialog('empty_dialog');
+                                $.hideDialog('empty_dialog');
                                 $.alert('Приглашение добавлено',false);
                             }
                             else if (data=='NO_LOGIN') {
@@ -168,7 +168,7 @@ $(document).ready(function(){
                     }, function(data){
                         $('#dating_loader').fadeOut(500);
                         if (data=='OK') {
-                            $.closeDialog('empty_dialog');
+                            $.hideDialog('empty_dialog');
                             $.alert('Номер отправлен пользователю',false);
                         }
                         else if (data=='NO_LOGIN') {

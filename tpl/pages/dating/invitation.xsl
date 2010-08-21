@@ -51,7 +51,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <label style="margin-top:10px;">Описание</label>
+            <label style="margin-top:10px;">Мои пожелания к собеседнику</label>
             <textarea class="text" id="dating_text" style="margin-top:3px;" onclick="$('#dating_dialog .text').val('')">Познакомлюсь с блондинкой 20-25 лет</textarea>
             <input type="button" id="dating_submit" value="Оставить приглашение" />
         </div>

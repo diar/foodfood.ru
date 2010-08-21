@@ -315,14 +315,15 @@
                 <br />
                 <br />
                 <noindex>
-                <a href="http://www.facebook.com/profile.php?id=100001264771648" class="social fb" title="Мы в FaceBook">
-                </a>
-                <a href="http://foodfoodru.livejournal.com/" class="social lj" title="Мы в ЖЖ">
-                </a>
-                <a href="http://vkontakte.ru/club16013362 " class="social vk" title="Мы Вконтакте">
-                </a>
-                <a href="http://twitter.com/foodfoodru" class="social tw"  title="Мы в Twitter">
-                </a>
+                    <a href="http://www.facebook.com/profile.php?id=100001264771648" class="social fb" title="Мы в FaceBook"></a>
+                </noindex>
+                <noindex>
+                    <a href="http://foodfoodru.livejournal.com/" class="social lj" title="Мы в ЖЖ"></a>
+                </noindex>
+                <a href="http://vkontakte.ru/club16013362 " class="social vk" title="Мы Вконтакте"></a>
+                <noindex>
+                    <a href="http://twitter.com/foodfoodru" class="social tw"  title="Мы в Twitter"></a>
+                </noindex>
             </div>
         </div>
     </xsl:template>
