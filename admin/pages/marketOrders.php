@@ -29,7 +29,16 @@ class marketOrders extends AdminModule {
     }
 
     public static function showText() {
-        
+        $id = ELEMENT_ID;
+        $text = DBP::getValue('market_orders', 'text',"id = '$id'");
+        $listLink = self::getLink(PAGE, 'showList', $record['id']);
+        $text = "
+            <div style='margin:0 auto; width: 50%'>
+                $text
+            </div>
+            <div style='text-align:center'><a href='$listLink'>Вернутся к списку</a></div>
+            ";
+        self::showTemplate($text);
     }
 
     public static function showList() {
@@ -40,6 +49,7 @@ class marketOrders extends AdminModule {
                 'table'=>'gridlist','pager'=>'gridpager','width'=>'800','height'=>'240'
                 ),
                 array(
+                    array('title'=>'id','width'=>50, 'align'=>'center'),
                     array('title'=>'Адрес'),
                     array('title'=>'Стоимость'),
                     array('title'=>'Время получения заказа'),
@@ -59,7 +69,7 @@ class marketOrders extends AdminModule {
         $page = $_POST['page'];
         $limit = $_POST['rows'];
         $records = DB::fetchAll(
-                'SELECT address,price,start_time FROM '.DBP::getPrefix().self::getDbTable().
+                'SELECT id,address,phone,start_time FROM '.DBP::getPrefix().self::getDbTable().
                 ' WHERE rest_id='.self::getRestId()
         );
         //Вычисляем кол-во страниц
