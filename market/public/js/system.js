@@ -60,6 +60,9 @@ $(document).ready(function () {
     $('.trash .order a').click(function(){
         $.post('/market/'+site_city+'/index/order/',function(data){
             $('#dish_order_table').html(data);
+            $('#dish_order_items .remove_item').click(function(){
+                alert(1);
+            });
         });
         $.showDialog('order_dialog');
         return false;

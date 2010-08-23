@@ -33,13 +33,12 @@ function search_start() {
         tags_disable = false;
         actions_create();
         $('.portion').click(function(){
-
-       $('.portions .portion').removeClass('active');
-       $(this).addClass('active');
-       price = $(this).attr('rel');
-       price = '<span>'+price+'</span> руб.';
-       $(this).parents('.item').find('.new').html(price);
-    });
+            $('.portions .portion').removeClass('active');
+            $(this).addClass('active');
+            price = $(this).attr('rel');
+            price = '<span>'+price+'</span> руб.';
+            $(this).parents('.item').find('.new').html(price);
+        });
     });
     
 };
@@ -83,7 +82,7 @@ function actions_create() {
             $('.trash_description').html(data);
             $('.trash .rub').html(
                 $('.trash_description .price').html()+'<sup> руб.</sup>'
-                );
+            );
         });
     });
 }

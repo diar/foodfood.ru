@@ -99,7 +99,6 @@ class index_Page extends View {
     /*
      * Добавить блюдо в корзину
      */
-
     public static function addAjaxAction($id) {
         // Это пиздец
         $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : Array();
@@ -134,6 +133,22 @@ class index_Page extends View {
                 'Все доставим за 40 минут, если пробок не будет. ' .
                 'Еще позвоним и все уточним, спасибо. ';
         echo $description;
+    }
+
+    /*
+     * Удалить блюдо из корзины
+     */
+    public static function removeAjaxAction($id) {
+        $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : Array();
+        $dish_id = intval($_POST['dish_id']);
+        $portion = intval($_POST['portion']);
+        if (!empty ($trash[$dish_id]['items'][$portion])) {
+            unset($trash[$dish_id]['items'][$portion]);
+        }
+        if (!empty ($trash[$dish_id]['items'])) {
+            unset($trash[$dish_id]);
+        }
+        echo "OK";
     }
 
 }

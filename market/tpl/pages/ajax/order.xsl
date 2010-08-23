@@ -21,12 +21,14 @@
     </xsl:template>
     
     <xsl:template match="//trash/item/items/item">
-        <tr>
+        <tr class="item">
             <td><xsl:value-of select="../../title" /></td>
-            <td><xsl:value-of select="portion" /> гр</td>
-            <td><xsl:value-of select="count" /></td>
-            <td><xsl:value-of select="price" /></td>
-            <td>x</td>
+            <td class="portion"><xsl:value-of select="portion" /> гр</td>
+            <td class="count"><xsl:value-of select="count" /></td>
+            <td class="price"><xsl:value-of select="price" /></td>
+            <td>
+                <a href="#" class="remove_item">x</a>
+            </td>
         </tr>
     </xsl:template>
 

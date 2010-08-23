@@ -149,6 +149,7 @@ class marketMenu extends AdminModule {
         $form->addfield(array('name' => 'description',
                 'caption' => 'Описание',
                 'pattern' => 'textarea',
+                'value' => $record['description']
                 )
         );
 
