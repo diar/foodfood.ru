@@ -34,7 +34,7 @@ class MD_Market extends Model {
         if (!empty($error)) return $error;
         // Если все верно оформляем заказ
         $sms_user_text = 'Ваш заказ принят. Скоро вам позвонит менеджер ресторана';
-        $result=Sms::sendSms($phone, $sms_user_text);
+        MD_Sms::sendSms($phone, $sms_user_text);
         
         return '<span style="color:green">Ваш заказ принят</span>';
     }

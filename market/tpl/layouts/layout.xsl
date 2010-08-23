@@ -43,6 +43,42 @@
                 <script type="text/javascript" src="/market/public/js/libs/libs.js"></script>
                 <script type="text/javascript" src="/market/public/js/system.js"></script>
                 <script type="text/javascript" src="/market/public/js/main.js"></script>
+                <!--LiveInternet counter-->
+                <script type="text/javascript"><!--
+                    document.write("<a href='http://www.liveinternet.ru/click' "+
+                    "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
+                    escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                    ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                    screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                    ";"+Math.random()+
+                    "' alt='' title='LiveInternet' "+
+                    "border='0' width='31' height='31'><\/a>")
+                //-->
+                </script><!--/LiveInternet-->
+                <script type="text/javascript">
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-13029839-2']);
+                    _gaq.push(['_trackPageview']);
+
+                    (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();
+                </script>
+                <!-- Yandex.Metrika -->
+                <script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script>
+                <div style="display:none;">
+                    <script type="text/javascript">
+                    try { var yaCounter1192696 = new Ya.Metrika(1192696); } catch(e){}
+                    </script>
+                </div>
+                <noscript>
+                    <div style="position:absolute">
+                        <img src="//mc.yandex.ru/watch/1192696" alt="" />
+                    </div>
+                </noscript>
+                <!-- /Yandex.Metrika -->
             </body>
         </html>
     </xsl:template>
@@ -56,7 +92,7 @@
                 </a>
             </div>
         </div>
-        <div id="menu_top">
+        <div id="topMenu">
             <xsl:apply-templates select="../menu/item" />
         </div>
     </xsl:template >

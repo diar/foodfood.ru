@@ -1,22 +1,50 @@
 //----------------- Системные функции ----------
-$loader = '<div id="loader"><img src="/public/images/loader.gif" alt="Загрузка..." /></div>';
-$loader_gray = '<div id="loader"><img src="/public/images/loader_gray.gif" alt="Загрузка..." /></div>';
+$loader = '<div class="loader"><img src="/public/images/loader.gif" alt="Загрузка..." /></div>';
+$loader_gray = '<div class="loader"><img src="/public/images/loader_gray.gif" alt="Загрузка..." /></div>';
 
 // Показать диалог
 $.showDialog = function (id) {
-    if(!$.browser.msie) {
-        scroll = $(document).scrollTop()+200;
-    } else {
-        scroll = document.documentElement.scrollTop + 150;
+    $body_fill = $('#body_fill');
+    // Показываем затемнение
+    if ($('#body_fill').length==0) {
+        $body_fill = $('<div id="body_fill"></div>');
+        $('body').append($body_fill);
     }
-    $('#'+id).css('top',scroll);
-    $('.dialog:not(#'+id+')').fadeOut(500);
-    $('#'+id).fadeIn(500);
+    $body_fill.css('opacity',0).show().animate({
+        'opacity':0.5
+    },300);
+    // Показываем диалог
+    $('#'+id).css('top',100);
+    $('.dialog:not(#'+id+')').fadeOut(300,function(){
+        $('#'+id).fadeIn(300);
+    });
+};
+
+// Показать диалог, содержимое которого загружается через ajax
+$.showAjaxDialog = function (url,height,params,func) {
+    $('#empty_dialog').css('height',height).find('.content').html($loader).find('.loader').css('marginTop',150);
+    $.showDialog('empty_dialog');
+    $.post(url,params, function(data){
+        $('#empty_dialog .content').html(data);
+        func();
+    });
 };
 
 // Показать диалог
 $.hideDialog = function (id) {
-    $('#'+id).fadeOut(500);
+    $('#body_fill').animate({
+        'opacity':0
+    },300).hide();
+    $('#'+id).fadeOut(300);
+};
+
+// Изменить диалог
+$.toggleDialog = function (id) {
+    // Показываем диалог
+    $('#'+id).css('top',100);
+    $('.dialog:not(#'+id+')').fadeOut(300,function(){
+        $('#'+id).fadeIn(300);
+    });
 };
 
 // Показать сообщение

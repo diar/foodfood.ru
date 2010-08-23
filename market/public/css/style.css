@@ -104,24 +104,33 @@ table td {
     padding:40px 20px 0 0;
 }
 
-#menu_top {
-    height:18px;
-    background: #FF6600;
+/* Меню сайта
+-------------------------------------------------------------------*/
+#topMenu {
+    height:26px;
+    background:url(/public/images/caption_orange_bg.jpg) repeat-x;
     padding:7px 0 0 30px;
 }
 
-#menu_top a {
-    padding:3px 13px;
+#topMenu a {
+    font-size:14px;
+    color:#000;
     margin-right:20px;
+    padding:4px 14px;
+    height:21px;
+    display:block;
+    float:left;
+    color:#fff;
 }
-#menu_top a.active {
+
+#topMenu a:hover,#topMenu a.current {
     font-size:14px;
     background:#fff;
     -moz-border-radius:3px 3px 0 0;
     -webkit-border-radius:3px 3px 0 0 ;
     border-radius:3px 3px 0 0;
     text-decoration:none;
-    padding:4px 13px;
+    color:#000;
 }
 
 #info_block {
@@ -345,6 +354,9 @@ table td {
 }
 .item .foto {
     margin-top: 8px;
+    height: 180px;
+    display: table-cell;
+    vertical-align: middle;
 }
 .item .foto img {
     width:183px;
@@ -426,7 +438,7 @@ table td {
     clear:both;
 }
 
-
+.loader {width:48px;height:48px;margin:200px auto auto;}
 
 .rounded {
     -moz-border-radius:3px;
@@ -473,7 +485,7 @@ table td {
 /* Диалоги
 - ---------------------------------------------------------------------*/
 .dialog_box {
-    position:absolute;
+    position:fixed;
     left:50%;
     margin-left:-220px;
     top:200px;
@@ -572,7 +584,16 @@ table td {
     display:block;
     margin:0 auto;
 }
-
+#body_fill {
+    display:none;
+    width:100%;
+    height:100%;
+    background: #000;
+    position:fixed;
+    z-index:9999;
+    top:0;
+    left:0;
+}
 #auth_dialog #auth_submit:active,
 #registration_dialog #registration_submit:active,
 #passwd_dialog #passwd_submit:active{
