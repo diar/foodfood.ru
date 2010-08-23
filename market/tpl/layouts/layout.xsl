@@ -20,7 +20,8 @@
                 <link rel="stylesheet" type="text/css" href="/market/public/css/main.css" />
                 <xsl:comment><![CDATA[[if IE]>
                 <link href="/public/css/ie.css" rel="stylesheet" type="text/css" />
-                <![endif]]]></xsl:comment>
+                <![endif]]]>
+                </xsl:comment>
             </head>
             <body>
                 <div id="container">
@@ -33,19 +34,13 @@
                     <xsl:call-template name="message_dialog" />
                     <xsl:call-template name="passwd_dialog" />
                 </div>
-                <script type="text/javascript" src="http://www.google.com/jsapi"></script>
                 <script type="text/javascript">
-                    google.load("jquery", "1.4.2");
-                    google.load("swfobject", "2.2");
-                    site_city = '<xsl:value-of select="site/city" />';
-                    user_auth = '<xsl:value-of select="//user/is_auth" />';
+                    <xsl:text>site_city = '</xsl:text>
+                    <xsl:value-of select="site/city" />';
+                    <xsl:text>user_auth = '</xsl:text>
+                    <xsl:value-of select="//user/is_auth" />';
                 </script>
-                <script type="text/javascript" src="/market/public/js/libs/jquery.corner.js"></script>
-                <script type="text/javascript" src="/market/public/js/libs/jquery.mousewheel.js"></script>
-                <script type="text/javascript" src="/market/public/js/libs/jquery.dropshadow.js"></script>
-                <script type="text/javascript" src="/market/public/js/libs/jquery.keyboard.js"></script>
-                <script type="text/javascript" src="/market/public/js/libs/jquery.noselect.js"></script>
-                <script type="text/javascript" src="/market/public/js/libs/md5.js"></script>
+                <script type="text/javascript" src="/market/public/js/libs/libs.js"></script>
                 <script type="text/javascript" src="/market/public/js/system.js"></script>
                 <script type="text/javascript" src="/market/public/js/main.js"></script>
             </body>

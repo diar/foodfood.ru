@@ -60,8 +60,25 @@ $(document).ready(function () {
     $('.trash .order a').click(function(){
         $.post('/market/'+site_city+'/index/order/',function(data){
             $('#dish_order_table').html(data);
+            // Нажатие на кнопку удаления блюда
             $('#dish_order_items .remove_item').click(function(){
-                alert(1);
+                portion = parseInt ($(this).parents('.trash_item').find('.trash_portion').html());
+                dish_id = $(this).parents('.trash_item').attr('rel');
+                $.post('/market/'+site_city+'/index/remove/',
+                {
+                    'dish_id':dish_id,
+                    'portion':portion
+                },function(data){
+                    $('.trash .order a').click();
+                    $('.trash_description').html(data);
+                    $('.trash .rub').html(
+                        $('.trash_description .price').html()+'<sup> руб.</sup>'
+                        );
+                    var count = parseInt($('.trash .rub').html());
+                    if (count==0) {
+                        $('.trash .order').hide();
+                    }
+                });
             });
         });
         $.showDialog('order_dialog');

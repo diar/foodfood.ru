@@ -99,6 +99,7 @@ class index_Page extends View {
     /*
      * Добавить блюдо в корзину
      */
+
     public static function addAjaxAction($id) {
         // Это пиздец
         $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : Array();
@@ -109,13 +110,15 @@ class index_Page extends View {
         $title = $_POST['title'];
         if (empty($trash[$dish_id])) {
             $trash[$dish_id] = Array(
-                'rest_id' => $rest_id, 'title' => $title,
+                'rest_id' => $rest_id, 
+                'title' => $title,
+                'dish_id' => $dish_id,
                 'items' => array(
-                    $portion => array('count' => 1, 'price' => $price,'portion'=>$portion)
+                    $portion => array('count' => 1, 'price' => $price, 'portion' => $portion)
                 )
             );
         } elseif (empty($trash[$dish_id]['items'][$portion])) {
-            $trash[$dish_id]['items'][$portion] = array('count' => 1, 'price' => $price,'portion'=>$portion);
+            $trash[$dish_id]['items'][$portion] = array('count' => 1, 'price' => $price, 'portion' => $portion);
         } else {
             $trash[$dish_id]['items'][$portion]['count'] += 1;
         }
@@ -138,17 +141,31 @@ class index_Page extends View {
     /*
      * Удалить блюдо из корзины
      */
+
     public static function removeAjaxAction($id) {
         $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : Array();
         $dish_id = intval($_POST['dish_id']);
         $portion = intval($_POST['portion']);
-        if (!empty ($trash[$dish_id]['items'][$portion])) {
+        if (!empty($trash[$dish_id]['items'][$portion])) {
             unset($trash[$dish_id]['items'][$portion]);
         }
-        if (!empty ($trash[$dish_id]['items'])) {
+        if (empty($trash[$dish_id]['items'])) {
             unset($trash[$dish_id]);
         }
-        echo "OK";
+        $_SESSION['trash'] = $trash;
+        $gen_price = 0;
+        $gen_count = 0;
+        foreach ($trash AS $dish) {
+            foreach ($dish['items'] as $item) {
+                $gen_price+=$item['price'] * $item['count'];
+                $gen_count+=$item['count'];
+            }
+        }
+        $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+                '<span class="price">' . $gen_price . '</span> руб. ' .
+                'Все доставим за 40 минут, если пробок не будет. ' .
+                'Еще позвоним и все уточним, спасибо. ';
+        echo $description;
     }
 
 }
