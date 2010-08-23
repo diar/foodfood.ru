@@ -80,6 +80,10 @@ class AdminAuth {
             'main' => 7,
             'discounts' => 7,
             'discountLog' => 7,
+            'marketSettings' => 7,
+            'marketMenu' => 7,
+            'marketOrders' => 7,
+            'marketTags' => 7,
             'restaurants' => 3,
         );
         return $array;
