@@ -18,7 +18,7 @@ class poster_Page extends View {
 
         self::$page['site']['city'] = CityPlugin::getCity();
         self::$page['site']['title'] = "Доставка еды и пиво Казань";
-        self::$page['site']['keywords'] = " пицца Казань, суши Казань, роллы Казань, доставка суши Казань, доставка ролл Казань, автосуши Казань, японская кухня Казань";
+        self::$page['site']['keywords'] = "еда казань, доставка еды казань, пиво казань, доставка пиво казань";
         self::$page['site']['description'] = '';
         self::$page['content']['moods']=$moods;
         self::$page['content']['tags']=$tags;
