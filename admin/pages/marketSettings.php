@@ -1,9 +1,9 @@
 <?php
 require_once "adminModule.class.php";
 
-class Restaurants extends AdminModule {
+class marketSettings extends AdminModule {
 
-    protected static $_title = "Ресторан";
+    protected static $_title = "Настройка доставки";
     protected static $_DB_table = 'market_partner';
 
     public static function initModule () {
@@ -16,60 +16,28 @@ class Restaurants extends AdminModule {
         $id = $_SESSION['admin']['restaurant_id'];
         if (!empty($_POST)) {
             $record = $_POST;
-            $record['in_market']=!empty($record['in_market']) ? 1 : 0;
-            // Работа с координатами google Maps
-            $google_location = str_replace(')', '', $record['google_location']);
-            $google_location = str_replace('(', '', $google_location);
-            $google_location = explode (',',$google_location);
-            if (!empty($google_location[1])) {
-                $record['rest_google_x'] = $google_location[0];
-                $record['rest_google_y'] = $google_location[1];
-            } else {
-                $record['rest_google_x'] = 0;
-                $record['rest_google_y'] = 0;
-            }
         } else {
-            $record = DBP::getRecord(self::getDbTable(),"id =".$id);
+            $record = DBP::getRecord(self::getDbTable(),"rest_id =".$id);
+            if (empty($record)) {
+                DBP::insert(self::getDbTable(), array("rest_id"=>$id));
+                $record = DBP::getRecord(self::getDbTable(),"rest_id =".$id);
+            }
         }
-        $form = Form::newForm('restaurants','restForm',DBP::getPrefix().self::getDbTable());
+        $form = Form::newForm('market_partner','restForm',DBP::getPrefix().self::getDbTable());
 
-        $form->addfield(array('name' => 'rest_address',
-                'caption' => 'Адрес',
+        $form->addfield(array('name' => 'partner_email',
+                'caption' => 'E-mail',
                 'pattern' => 'text',
                 'maxlength' => '255',
-                'value' => $record['rest_address'],
+                'value' => $record['partner_email'],
                 'css_class' => 'caption')
         );
 
-        $form->addfield(array('name' => 'rest_ostanovka',
-                'caption' => 'Остановка',
+        $form->addfield(array('name' => 'partner_phones',
+                'caption' => 'Номера телефонов',
                 'pattern' => 'text',
                 'maxlength' => '255',
-                'value' => $record['rest_ostanovka'],
-                'css_class' => 'caption')
-        );
-
-        $form->addfield(array('name' => 'rest_metro',
-                'caption' => 'Ближайшая станция метро',
-                'pattern' => 'text',
-                'maxlength' => '255',
-                'value' => $record['rest_metro'],
-                'css_class' => 'caption')
-        );
-
-        $form->addfield(array('name' => 'rest_site',
-                'caption' => 'Сайт',
-                'pattern' => 'text',
-                'maxlength' => '255',
-                'value' => $record['rest_site'],
-                'css_class' => 'caption')
-        );
-
-        $form->addfield(array('name' => 'rest_phone',
-                'caption' => 'Телефон',
-                'pattern' => 'phone',
-                'maxlength' => '255',
-                'value' => $record['rest_phone'],
+                'value' => $record['partner_phones'],
                 'css_class' => 'caption')
         );
 
@@ -84,7 +52,7 @@ class Restaurants extends AdminModule {
 
     public static function saveEdit() {
         $data = $_POST;
-        DBP::update('rest',$data,'id ='.self::getRestId());
+        DBP::update(self::getDbTable(),$data,'rest_id ='.self::getRestId());
     }
 
 }

@@ -26,6 +26,7 @@ class index_Page extends View {
         $menu_types = MD_Menu::getMenuTypes();
         // Формируем описание корзины
         $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : null;
+
         if (sizeof($trash) > 0) {
             $gen_price = 0;
             $gen_count = 0;
