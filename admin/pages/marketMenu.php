@@ -141,7 +141,8 @@ class marketMenu extends AdminModule {
                 'multiple' => false,
                 'size' => '1',
                 'options' => array_merge(array( 0 => "Укажите тип меню"),
-                Form::array_combine(DB::fetchAll('SELECT id,title FROM `list_market_menu_type`')))
+                Form::array_combine(DB::fetchAll('SELECT id,title FROM `list_market_menu_type`'))),
+                'selected'=>$record['type_id']
                 )
         );
 

@@ -67,6 +67,7 @@ function actions_create() {
     // Кнопка заказать
     $('.get .buy').click(function(){
         price = parseInt ($(this).parents('.item').find('.price .new span').html());
+        portion = parseInt ($(this).parents('.item').find('.portion.active').html());
         dish_id = $(this).parents('.item').attr('id').replace('dish_','');
         rest_id = $(this).parents('.item').attr('rest_id');
         title = $(this).parents('.item').find('.title a').html();
@@ -75,6 +76,7 @@ function actions_create() {
             'dish_id':dish_id,
             'price':price,
             'title':title,
+            'portion':portion,
             'rest_id':rest_id
         },function(data){
             $('.trash .order').show();

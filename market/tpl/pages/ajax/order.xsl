@@ -10,19 +10,23 @@
         <table id="dish_order_items">
             <tr>
                 <td>Название</td>
+                <td>Порция</td>
                 <td>Количество</td>
                 <td>Цена</td>
+                <td></td>
             </tr>
-            <xsl:apply-templates select="//trash/item" />
+            <xsl:apply-templates select="//trash/item/items/item" />
         </table>
         <div class="gen_price">Итого: <xsl:value-of select="//trash/price" /></div>
     </xsl:template>
     
-    <xsl:template match="trash/item">
+    <xsl:template match="//trash/item/items/item">
         <tr>
-            <td><xsl:value-of select="title" /></td>
+            <td><xsl:value-of select="../../title" /></td>
+            <td><xsl:value-of select="portion" /> гр</td>
             <td><xsl:value-of select="count" /></td>
             <td><xsl:value-of select="price" /></td>
+            <td>x</td>
         </tr>
     </xsl:template>
 
