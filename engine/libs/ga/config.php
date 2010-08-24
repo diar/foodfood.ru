@@ -42,6 +42,6 @@ $cityCSV="city.csv";
 $addFile=false;
 
 //полный пусть к директории со скриптом (слэш в конце обязателен!)
-$path="/var/www/foodfood/ga/";
+$path="/var/www/foodfood/engine/libs/ga/";
 
 ?>
