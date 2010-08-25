@@ -20,13 +20,13 @@
 
 
 
-        <div id="city" align="center" style="padding-bottom:30px">
-            <strong><strong>Требуется Adobe Flash Player</strong> Adobe Flash Player</strong>
+        <div id="city" align="center" style="padding-bottom:30px; float:left;">
+            <strong>Требуется Adobe Flash Player</strong>
         </div>
 
         <script type="text/javascript">
             // <![CDATA[
-            var so = new SWFObject("ampie.swf", "ampie_chart", "800", "300", "8", "#FFFFFF");
+            var so = new SWFObject("ampie.swf", "ampie_chart", "450", "400", "8", "#FFFFFF");
             so.addVariable("path", "./ampie/");
             so.addVariable("settings_file", escape("country_settings.xml?<?php echo mktime(); ?>"));
             so.addVariable("data_file", escape("city.csv?<?php echo mktime(); ?>"));
@@ -35,6 +35,22 @@
             // ]]>
 
         </script>
+
+        <div id="flashcontent">
+		<strong>Требуется Adobe Flash Player</strong>
+	</div>
+
+	<script type="text/javascript">
+		// <![CDATA[
+		var so = new SWFObject("./ammap/ammap.swf", "ammap", "450", "400", "8", "#FFFFFF");
+                so.addVariable("path", "./ammap/");
+		so.addVariable("data_file", escape("./ammap/ammap_data.xml"));
+                so.addVariable("settings_file", escape("./ammap/ammap_settings.xml"));
+		so.addVariable("preloader_color", "#999999");
+		so.write("flashcontent");
+		// ]]>
+	</script>
+
     </body>
 </html>
 
