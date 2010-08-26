@@ -10,14 +10,16 @@ $.showDialog = function (id) {
         $body_fill = $('<div id="body_fill"></div>');
         $('body').append($body_fill);
     }
-    $body_fill.css('opacity',0).show().animate({
-        'opacity':0.5
-    },300);
-    // Показываем диалог
-    $('#'+id).css('top',100);
-    $('.dialog:not(#'+id+')').fadeOut(300,function(){
-        $('#'+id).fadeIn(300);
-    });
+    if ($('#'+id+':hidden').length>0) {
+        $body_fill.css('opacity',0).show().animate({
+            'opacity':0.5
+        },300);
+        // Показываем диалог
+        $('#'+id).css('top',100);
+        $('.dialog:not(#'+id+')').fadeOut(300,function(){
+            $('#'+id).fadeIn(300);
+        });
+    }
 };
 
 // Показать диалог, содержимое которого загружается через ajax
@@ -107,6 +109,50 @@ $(document).ready(function () {
                         $('.trash .order').hide();
                     }
                 });
+                return false;
+            });
+
+            // Нажатие на кнопку уменьшения кол-ва блюда
+            $('#dish_order_items .minus_item').click(function(){
+                portion = parseInt ($(this).parents('.trash_item').find('.trash_portion').html());
+                dish_id = $(this).parents('.trash_item').attr('rel');
+                $.post('/market/'+site_city+'/index/minus/',
+                {
+                    'dish_id':dish_id,
+                    'portion':portion
+                },function(data){
+                    $('.trash .order a').click();
+                    $('.trash_description').html(data);
+                    $('.trash .rub').html(
+                        $('.trash_description .price').html()+'<sup> руб.</sup>'
+                        );
+                    var count = parseInt($('.trash .rub').html());
+                    if (count==0) {
+                        $('.trash .order').hide();
+                    }
+                });
+                return false;
+            });
+            // Нажатие на кнопку увеличения кол-ва блюда
+            $('#dish_order_items .plus_item').click(function(){
+                portion = parseInt ($(this).parents('.trash_item').find('.trash_portion').html());
+                dish_id = $(this).parents('.trash_item').attr('rel');
+                $.post('/market/'+site_city+'/index/plus/',
+                {
+                    'dish_id':dish_id,
+                    'portion':portion
+                },function(data){
+                    $('.trash .order a').click();
+                    $('.trash_description').html(data);
+                    $('.trash .rub').html(
+                        $('.trash_description .price').html()+'<sup> руб.</sup>'
+                        );
+                    var count = parseInt($('.trash .rub').html());
+                    if (count==0) {
+                        $('.trash .order').hide();
+                    }
+                });
+                return false;
             });
         });
         $.showDialog('order_dialog');

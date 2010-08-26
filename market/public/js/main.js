@@ -20,8 +20,6 @@ $(document).ready(function () {
     });
     // Выбираем первый тип меню
     $('.navigation .menu li').first().click();
-
-    
 });
 
 function search_start() {

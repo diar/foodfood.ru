@@ -135,7 +135,7 @@
                 <div class="title">Ваш заказ</div>
             </div>
             <div class="message" id="order_message"></div>
-            <div clasd="description">
+            <div class="description">
                 Проверьте, пожалуйста, правильность введенных данных
             </div>
             <div id="order_form" class="ajax_form form_dialog">
@@ -149,7 +149,8 @@
                 <div class="label">адрес:</div>
                 <input type="text" class="form_input rounded"
                        name="order_address" id="order_address" />
-                <input type="button" id="order_submit" value="Оформить" />
+                <a href="#" id="order_submit"></a>
+                <div class="clear"></div>
             </div>
         </div>
     </xsl:template>
