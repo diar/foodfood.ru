@@ -8,7 +8,6 @@ $id="30747095";
 //текущая дата
 $currentdate=date("Ymd");
 //дата, начиная с которой необходимо получить данные из GA для отчета. Формат YYYY-MM-DD
-$datestart="2010-05-01";
 //дата, заканчивая которой
 //$datefinish="";
 //или вычисляем дату - конец предыдущего месяца
@@ -18,6 +17,8 @@ $datefinish=date("Y-m-d",mktime(0,0,0,$currentmonth,0,$currentyear));
 //дата 3 месяца назад
 $date3MonthStart=date("Y-m-d",mktime(0,0,0,$currentmonth-3,$currentday-1,$currentyear));
 $date3MonthFinish=date("Y-m-d",mktime(0,0,0,$currentmonth,$currentday-1,$currentyear));
+
+$datestart=$date3MonthStart;
 
 //дата месяц назад
 $date1MonthStart=date("Y-m-d",mktime(0,0,0,$currentmonth-1,$currentday-1,$currentyear));
@@ -42,6 +43,6 @@ $cityCSV="city.csv";
 $addFile=false;
 
 //полный пусть к директории со скриптом (слэш в конце обязателен!)
-$path="/var/www/foodfood/engine/libs/ga/";
+$path="/var/www/foodfood.ru/engine/libs/ga/";
 
 ?>
