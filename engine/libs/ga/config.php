@@ -1,8 +1,8 @@
 <?
 //учетная запись GA
-$u="gvalmon@gmail.com";
-$p="mypilot@";
-$id="30893638";
+$u="arhipov.art@gmail.com";
+$p="qwerty321";
+$id="30747095";
 
 
 //текущая дата

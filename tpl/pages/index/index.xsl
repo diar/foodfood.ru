@@ -148,7 +148,7 @@
                 <td class="additional_center" id="restaurant_article">
                     <!-- Статьи -->
                     <div class="caption rounded">
-                        <a href="/blog/restaurant/foodfood/">За чашкой кофе</a>
+                        <a href="/blog/restaurant/foodfood/">Популярные блоги</a>
                     </div>
                     <xsl:apply-templates select="blogs/item" />
                 </td>
