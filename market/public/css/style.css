@@ -573,7 +573,7 @@ table td {
 #passwd_dialog #passwd_submit{
     width:195px;
     height:55px;
-    background:url(/public/images/auth_button);
+    background:url(/public/images/auth_button.jpg);
     border:none;
     cursor:pointer;
     color:#FFF;
@@ -595,7 +595,7 @@ table td {
 #auth_dialog #auth_submit:active,
 #registration_dialog #registration_submit:active,
 #passwd_dialog #passwd_submit:active{
-    background:url(/public/images/auth_button_active);
+    background:url(/public/images/auth_button_active.jpg);
 }
 #order_dialog {
     width:600px;
@@ -688,4 +688,62 @@ table td {
     -webkit-border-bottom-right-radius:5px;
     -moz-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
+}
+
+/******************************** Вывод блюда *****************************/
+.dish_header {
+    line-height:59px;
+    height:59px;
+    background:#000;
+    font-size:16px;
+    color:#FFF;
+}
+.dish_header {
+    line-height:59px;
+    height:59px;
+    background:#000;
+    font-size:16px;
+    color:#FFF;
+}
+
+.dish_header .nav {
+    width:12px;
+    margin-bottom:-5px;
+}
+
+.dish_header .back {
+    float:left;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/show_rest_back.jpg) no-repeat 0 0;
+    margin:18px 0 0 20px;
+}
+
+.dish_header .next {
+    float:right;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/show_rest_next.jpg) no-repeat 0 0;
+    margin:18px 20px 0 0;
+}
+
+.dish_header .next.active {
+    background-position: 0 -24px;
+
+}
+.dish_header .next.active:active {
+    margin:19px 20px 0 0;
+}
+.dish_header .back.active {
+    background-position: 0 -24px;
+
+}
+.dish_header .back.active:active {
+    margin:19px 0 0 20px;
+}
+.dish_header .caption {
+    color:#FFF;
+    font-size:24px;
+    padding-left:20px;
+    float:left;
 }

@@ -21,7 +21,6 @@ class index_Page extends View {
     /*
      * Главная страница сайта
      */
-
     public static function indexAction($id) {
         $locations = MD_Market::getLocations();
         $menu_types = MD_Menu::getMenuTypes();
