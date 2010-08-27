@@ -12,7 +12,7 @@
     <xsl:template match="root">
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
             <head>
-                <title>FoodFood Market</title>
+                <title> Доставка пиццы суши и ролл в Казани</title>
                 <meta name="keywords" content="{site/keywords}" />
                 <meta name="description" content="{site/description}" />
                 <link rel="icon" type="image/vnd.microsoft.icon"  href="/public/images/favicon.ico" />
