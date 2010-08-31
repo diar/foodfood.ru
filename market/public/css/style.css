@@ -348,6 +348,7 @@ table td {
     float:left;
     margin:10px 30px 5px 0;
     width:205px;
+    height: 344px;
 }
 .item .title {
     margin:3px 0;
@@ -391,7 +392,7 @@ table td {
 }
 .item .active span  {color: #ff6600;}
 .item .portion.active span.s_portion {
-    display: block;
+    display: inline;
 }
 
 .item .price {
