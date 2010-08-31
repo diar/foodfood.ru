@@ -82,7 +82,6 @@ class index_Page extends View {
     /*
      * Вывод списка меню
      */
-
     public static function menuAjaxAction($id) {
         if (!empty($_POST['menu_tags'])) {
             $current_tags = unserialize($_POST['menu_tags']);
@@ -91,7 +90,6 @@ class index_Page extends View {
         }
         $menu_tags = MD_Menu::getMenuTags($current_tags);
         $partners = MD_Menu::getDishByType($_POST['menu_type_id']);
-
         self::$page['partners'] = $partners;
         self::$page['menu_tags'] = $menu_tags;
         self::showXSLT('pages/ajax/dish');

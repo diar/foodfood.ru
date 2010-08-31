@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package PapipuEngine
  * @author valmon, z-mode
@@ -11,10 +12,10 @@ class MD_Menu extends Model {
      * Инициализация модели
      * @return null
      */
-    public static function initModel () {
+    public static function initModel() {
         self::setModelTable('market_menu');
         self::setJoinTable(
-                Array('join'=>'rest','left'=>'rest_id','right'=>'id')
+                        Array('join' => 'rest', 'left' => 'rest_id', 'right' => 'id')
         );
     }
 
@@ -22,7 +23,7 @@ class MD_Menu extends Model {
      * Получить список типов меню
      * @return array
      */
-    public static function getMenuTypes () {
+    public static function getMenuTypes() {
         return DB::getRecords('list_market_menu_type');
     }
 
@@ -30,9 +31,9 @@ class MD_Menu extends Model {
      * Получить список типов меню
      * @return array
      */
-    public static function getMenuTags ($current_tags,$type=null) {
+    public static function getMenuTags($current_tags, $type=null) {
         $tags = DB::getRecords('list_market_menu_tag');
-        foreach($tags as &$tag) {
+        foreach ($tags as &$tag) {
             if (in_array($tag['uri'], $current_tags))
                 $tag['current'] = 1;
         }
@@ -43,25 +44,24 @@ class MD_Menu extends Model {
      * Получить список типов меню
      * @return array
      */
-    public static function getDishByType ($type_id,$tags=null) {
-        $dish = self::getAll('type_id='.self::quote($type_id).' AND in_market=1');
+    public static function getDishByType($type_id, $tags=null) {
+        $dish = self::getAll('type_id=' . self::quote($type_id) . ' AND in_market=1');
         $partners = Array();
-        $dish_ids = Array ();
-        foreach ($dish as $item) {
-            $dish_ids[]=$item['market_menu_id'];
-        }
         foreach ($dish as $item) {
             $portions = explode('%', $item['portion']);
-            
+            if (mb_strlen($item['description'], 'UTF-8')) {
+                $item['description'] = mb_substr($item['description'], 0, 80, 'UTF-8') . '...';
+            }
             $price = explode('%', $item['price']);
             $second_portions = !empty($item['second_portion']) ? explode('%', $item['second_portion']) : null;
-            
+
             if (count($portions) > 0 && count($price) == count($portions)) {
                 $z = 0;
                 foreach ($portions as $portion) {
                     $f_protions['portion'] = $portion;
                     $f_protions['price'] = $price[$z];
-                    if (isset ($second_portions[$z])) $f_protions['second_portion'] = $price[$z];
+                    if (isset($second_portions[$z]))
+                        $f_protions['second_portion'] = $price[$z];
                     $z++;
                     $item['portions'][] = $f_protions;
                 }
@@ -84,4 +84,5 @@ class MD_Menu extends Model {
         $photos = self::getAll("dish_id = " . DB::quote($id), null, array('table' => 'market_photo'));
         return $photos;
     }
+
 }
