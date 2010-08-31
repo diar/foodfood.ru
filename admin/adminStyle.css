@@ -32,6 +32,12 @@ table td {
     padding:0;
 }
 
+td.caption {
+    width:230px;
+    text-align: right;
+    padding-right: 15px;
+}
+
 /******** - Список ресторанов - ****************/
 #rest_list {
     position: absolute;

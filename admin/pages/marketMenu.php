@@ -31,14 +31,14 @@ class marketMenu extends AdminModule {
         );
 
         $form->addfield(array('name' => 'second_portion',
-                'caption' => '2ой тип порции',
+                'caption' => '2-ой тип порции',
                 'pattern' => 'text',
                 'maxlength' => '255',
                 'css_class' => 'caption')
         );
 
         $form->addfield(array('name' => 'price',
-                'caption' => 'Цена(руб.)',
+                'caption' => 'Цена (руб)',
                 'pattern' => 'text',
                 'is_required' => true,
                 'maxlength' => '255',
@@ -108,7 +108,7 @@ class marketMenu extends AdminModule {
         );
 
         $form->addfield(array('name' => 'second_portion',
-                'caption' => '2ой тип порции',
+                'caption' => '2-ой тип порции',
                 'pattern' => 'text',
                 'maxlength' => '255',
                 'value' => $record['second_portion'],
@@ -116,7 +116,7 @@ class marketMenu extends AdminModule {
         );
 
         $form->addfield(array('name' => 'price',
-                'caption' => 'Цена(руб.)',
+                'caption' => 'Цена (руб)',
                 'pattern' => 'text',
                 'is_required' => true,
                 'maxlength' => '255',
@@ -148,6 +148,7 @@ class marketMenu extends AdminModule {
 
         $form->addfield(array('name' => 'description',
                 'caption' => 'Описание',
+                'css_class' => 'caption',
                 'pattern' => 'textarea',
                 'value' => $record['description']
                 )
@@ -211,11 +212,11 @@ class marketMenu extends AdminModule {
                 'table'=>'gridlist','pager'=>'gridpager','width'=>'800','height'=>'240'
                 ),
                 array(
-                array('title'=>'id'),
+                array('title'=>'id', 'width' => '50'),
                 array('title'=>'Название'),
                 array('title'=>'Порция'),
                 array('title'=>'Цена'),
-                array('title'=>'Управление')
+                array('title'=>'Управление', 'width' => '250')
                 )
         );
         self::showTemplate($list);
@@ -246,9 +247,10 @@ class marketMenu extends AdminModule {
         foreach ($records as &$record) {
             $editLink = self::getLink(PAGE, 'edit', $record['id']);
             $delLink = self::getLink(PAGE,'delete', $record['id']);
+            $photoLink = self::getLink('marketPhotos','showList', $record['id']);
             $tagLink = self::getLink('marketTags','showList', $record['id']);
-            $record['control']="<a href='$tagLink'>Тэги</a> |".
-                    "<a href='$delLink'>Удалить</a> | <a href='$editLink'>Редактировать</a>";
+            $record['control']="<a href='$tagLink'>тэги</a> | <a href='$photoLink'>фото</a> | ".
+                    "<a href='$delLink'>удалить</a> | <a href='$editLink'>редактировать</a>";
         }
 
         echo Form::arrayToJqGrid($records, $total_pages, $page, $count);
