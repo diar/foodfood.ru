@@ -12,5 +12,8 @@ class Market {
         Config::setValue('path', 'layouts', $_SERVER['DOCUMENT_ROOT'].'/market/tpl/layouts/');
         Config::setValue('path', 'pages', $_SERVER['DOCUMENT_ROOT'].'/market/pages/');
         Config::setValue('path', 'tpl', $_SERVER['DOCUMENT_ROOT'].'/market/tpl/');
+        Router::setRouteConfig('action', array(
+            'index'=>'index','dish'=>'view'
+        ));
     }
 }

@@ -33,10 +33,13 @@ class MD_Market extends Model {
         if (!$phone = String::toPhone($phone))
             $error = "Введите номер телефона в правильном формате";
 
+        if (empty($_SESSION['trash']) || sizeof($_SESSION['trash'])==0)
+            $error = "Вы должны добавить в корзину хотя бы 1 блюдо";
+
         if (!empty($error))
             return $error;
 
-        $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : Array();
+        $trash = $_SESSION['trash'];
 
         // Отправляем сообщение администраторам
         $partners = array();

@@ -15,64 +15,14 @@
 
     <!-- Код страницы -->
     
-    <xsl:template match="content">
+    <xsl:template match="content_old">
     	<div style="width:100%;text-align:center;font-size:32px; font-family:Tahoma,Arial;padding-top:40px;">
         	Наполняем прилавки...<br /><br />
             <span style="color:#999999; font-style:italic;">Открытие 1 сентября</span>
         </div>
     </xsl:template>
     
-    <xsl:template match="content_old">
-        <div id="info_block">
-            <table>
-                <tr>
-                    <td class="first_col">
-                        <div class="font21px">Выбери район доставки</div>
-                        <div class="font12px">Обратите внимание, что от района доставки зависит меню блюд.</div>
-                        <div class="select"><xsl:value-of select="locations/item[1]/title" /></div>
-                        <select id="locate_select" class="clear_opacity">
-                            <xsl:apply-templates select="locations/item" />
-                        </select>
-                        <div class="remember"><input type="checkbox" /> запомнить район</div>
-                    </td>
-                    <td>
-                        <div class="trash">
-                            <div class="money">
-                                <div class="">Твой общий счет</div>
-                                <div class="rub"><xsl:value-of select="//trash/price" /><sup> руб.</sup></div>
-                            </div>
-                            <div class="order">
-                                <xsl:if test="//trash/count=0">
-                                    <xsl:attribute name="style">display:none;</xsl:attribute>
-                                </xsl:if>
-                                <a href="#">Корзина</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="trash_description">
-                            <xsl:value-of select="//trash/description" disable-output-escaping="yes" />
-                        </div>
-                    </td>
-                    <td>
-                        <div id="login_block">
-                            <xsl:choose>
-                                <xsl:when test="//user/is_auth=1">
-                                    <a href="/blog/profile/"><xsl:value-of select="//user/user_login" /></a>
-                                    <xsl:text> (</xsl:text>
-                                    <a href="/{//site/city}/auth/logout" style="text-decoration:none;">выход</a>
-                                    <xsl:text>) </xsl:text><br /><xsl:text>Настройки </xsl:text>
-                                    <a href="/blog/settings/profile/">профиля</a>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <a href="#" id="login">Войти</a> / <a href="#" id="registration">Регистрация</a>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <xsl:template match="content">
         <div class="navigation rounded">
             <div class="back"></div>
             <div class="menu">

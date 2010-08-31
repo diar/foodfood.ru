@@ -7,7 +7,7 @@
                 doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
 
     <xsl:template match="/">
-        <iframe src="/engine/libs/ga/" style="width:850px;height:700px;border:none;"></iframe>
+        <iframe src="/engine/libs/ga/" style="width:950px;height:800px;border:none;"></iframe>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -1,14 +1,13 @@
 <?
 //учетная запись GA
-$u="gvalmon@gmail.com";
-$p="mypilot@";
-$id="30893638";
+$u="arhipov.art@gmail.com";
+$p="qwerty321";
+$id="30747095";
 
 
 //текущая дата
 $currentdate=date("Ymd");
 //дата, начиная с которой необходимо получить данные из GA для отчета. Формат YYYY-MM-DD
-$datestart="2010-05-01";
 //дата, заканчивая которой
 //$datefinish="";
 //или вычисляем дату - конец предыдущего месяца
@@ -18,6 +17,8 @@ $datefinish=date("Y-m-d",mktime(0,0,0,$currentmonth,0,$currentyear));
 //дата 3 месяца назад
 $date3MonthStart=date("Y-m-d",mktime(0,0,0,$currentmonth-3,$currentday-1,$currentyear));
 $date3MonthFinish=date("Y-m-d",mktime(0,0,0,$currentmonth,$currentday-1,$currentyear));
+
+$datestart=$date3MonthStart;
 
 //дата месяц назад
 $date1MonthStart=date("Y-m-d",mktime(0,0,0,$currentmonth-1,$currentday-1,$currentyear));

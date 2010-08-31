@@ -573,7 +573,7 @@ table td {
 #passwd_dialog #passwd_submit{
     width:195px;
     height:55px;
-    background:url(/public/images/auth_button);
+    background:url(/public/images/auth_button.jpg);
     border:none;
     cursor:pointer;
     color:#FFF;
@@ -595,24 +595,85 @@ table td {
 #auth_dialog #auth_submit:active,
 #registration_dialog #registration_submit:active,
 #passwd_dialog #passwd_submit:active{
-    background:url(/public/images/auth_button_active);
+    background:url(/public/images/auth_button_active.jpg);
 }
 #order_dialog {
     width:600px;
     margin-left:-300px;
     padding:10px;
 }
+#order_dialog .description {
+    padding: 0px 25px;
+}
+#dish_order_table .caption {
+    border:none;
+    height:15px;
+}
+#dish_order_table .caption td{
+    text-align: center;
+    padding:8px;
+    font-weight: bold;
+}
 #order_dialog #dish_order_items{
     width:100%;
-    margin: 20px 0;
+}
+#order_dialog .caption{
+    height:45px;
 }
 #order_dialog #dish_order_items td{
-    border: 1px solid gray;
+    border-bottom:1px solid gray;
     padding:8px;
+    text-align: center;
+}
+#dish_order_table .caption td.trash_title,
+#order_dialog #dish_order_items td.trash_title{
+    text-align: left;
+    font-weight: bold;
+}
+#order_dialog #dish_order_items .last td{
+    border:0;
 }
 #order_dialog .gen_price {
     margin-bottom: 10px;
-    font-size:22px;
+    font-size:14px;
+    float:right;
+}
+#order_dialog .gen_price td {
+    padding-right: 25px;
+    padding-bottom: 6px;
+    font-weight: bold;
+}
+#order_dialog #order_submit {
+    width:77px;
+    height:27px;
+    float:right;
+    margin-top:15px;
+    background: url(/public/images/icons/trash_submit.jpg);
+    display:block;
+}
+#dish_order_table .rounded {
+    padding:10px;
+    border: 2px solid gray;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    margin-bottom: 20px;
+}
+#dish_order_table .remove_item,
+#dish_order_table .plus_item,
+#dish_order_table .minus_item{
+    width:13px;
+    height:13px;
+    display: block;
+    text-decoration: none;
+    background: url(/public/images/icons/trash_controll.jpg) 0 -26px;
+    float:left;
+}
+#dish_order_table .minus_item {
+    background: url(/public/images/icons/trash_controll.jpg) 0 0;
+}
+#dish_order_table .plus_item {
+    background: url(/public/images/icons/trash_controll.jpg) 0 -13px;
 }
 /******************************** Вывод сообщения *****************************/
 #message_dialog {
@@ -627,4 +688,62 @@ table td {
     -webkit-border-bottom-right-radius:5px;
     -moz-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
+}
+
+/******************************** Вывод блюда *****************************/
+.dish_header {
+    line-height:59px;
+    height:59px;
+    background:#000;
+    font-size:16px;
+    color:#FFF;
+}
+.dish_header {
+    line-height:59px;
+    height:59px;
+    background:#000;
+    font-size:16px;
+    color:#FFF;
+}
+
+.dish_header .nav {
+    width:12px;
+    margin-bottom:-5px;
+}
+
+.dish_header .back {
+    float:left;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/show_rest_back.jpg) no-repeat 0 0;
+    margin:18px 0 0 20px;
+}
+
+.dish_header .next {
+    float:right;
+    width:24px;
+    height:24px;
+    background:url(/public/images/icons/show_rest_next.jpg) no-repeat 0 0;
+    margin:18px 20px 0 0;
+}
+
+.dish_header .next.active {
+    background-position: 0 -24px;
+
+}
+.dish_header .next.active:active {
+    margin:19px 20px 0 0;
+}
+.dish_header .back.active {
+    background-position: 0 -24px;
+
+}
+.dish_header .back.active:active {
+    margin:19px 0 0 20px;
+}
+.dish_header .caption {
+    color:#FFF;
+    font-size:24px;
+    padding-left:20px;
+    float:left;
 }

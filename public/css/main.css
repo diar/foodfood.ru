@@ -347,22 +347,12 @@
     display:none;
     width:270px;
 }
-#restaurant_article .date {
+#restaurant_article .img {
     background: #fff;
     border:1px solid #fff;
     float:left;
-    width:44px;
-    padding-top: 5px;
+    width:48px;
     text-align:center;
-    font-size:11px;
-}
-#restaurant_article .date .number{font-size:24px;color:#333;}
-#restaurant_article .date .month{
-    font-size:9px;
-    background:#090;
-    margin-top:4px;
-    color:#fff;
-    padding:2px 0;
 }
 #restaurant_article .article_description {font-size:9px;}
 #restaurant_article .article_title {

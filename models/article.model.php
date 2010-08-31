@@ -57,4 +57,36 @@ class MD_Article extends Model {
             return $article_blocks;
         } else return false;
     }
+
+    /** Получить блоги по блокам (для главной)
+     * @return array
+     */
+    public static function getBlogBlocks ($params) {
+        // Получаем список статей
+        $blogs = DB::getRecords(
+                'blog_blog', 'blog_type="open"', 'blog_rating DESC'
+        );
+        // Заворачиваем элементы статей в блоки
+        $i = 0;
+        if (!empty ($blogs)) {
+            foreach ($blogs as $blog) {
+                $blog['title'] = $blog['blog_title'];
+                $blog['blog_id'] = $blog['blog_id'];
+                $blog_text = preg_replace('/<[^>]*>/i','',$blog['blog_description']);
+                preg_match('/^(.*?)[\.|\?|!]/is', $blog_text,$blog_text_r);
+                if (!empty($blog_text_r[1])) {
+                    $blog['text'] = $blog_text_r[1].'...';
+                } else {
+                    $blog['text'] = strlen($blog_text)<200 ? $blog_text : '...';
+                }
+                $block[$i%3] = $blog;
+                $i++;
+                if ($i%3==0 || count($blogs)==$i) {
+                    $blog_blocks[]=$block;
+                    $block=array();
+                }
+            }
+            return $blog_blocks;
+        } else return false;
+    }
 }

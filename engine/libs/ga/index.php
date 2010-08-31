@@ -20,8 +20,8 @@
 
 
 
-        <div id="city" align="center" style="padding-bottom:30px">
-            <strong><strong>Требуется Adobe Flash Player</strong> Adobe Flash Player</strong>
+        <div id="city" align="center" style="padding-bottom:30px; float:left;">
+            <strong>Требуется Adobe Flash Player</strong>
         </div>
 
         <script type="text/javascript">
@@ -35,6 +35,7 @@
             // ]]>
 
         </script>
+
     </body>
 </html>
 

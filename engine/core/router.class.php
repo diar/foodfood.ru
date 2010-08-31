@@ -79,12 +79,22 @@ class Router {
     /**
      * Получить настройки роутинга
      * @param $section раздел параметров
-     * @param $value название параметра
+     * @param $param название параметра
      * @return string
      */
-    public static function getRouteConfig ($section,$value) {
-        if (isset (self::$_route[$section][$value])) return self::$_route[$section][$value];
+    public static function getRouteConfig ($section,$param) {
+        if (isset (self::$_route[$section][$param])) return self::$_route[$section][$param];
         else return false;
+    }
+
+    /**
+     * Задать настройки роутинга
+     * @param $section раздел параметров
+     * @param $params массив параметра
+     * @return null
+     */
+    public static function setRouteConfig ($section,$params) {
+        self::$_route[$section] = $params;
     }
 
     /**

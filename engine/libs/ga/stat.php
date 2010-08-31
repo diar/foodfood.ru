@@ -17,8 +17,6 @@ $ga->requestReportData($id,array('month','year'),array('visitors','pageviews'),'
 $output="";
 if($addFile) {$add=file_get_contents($path.$addFile); $output.=trim($add)."\n";}
 
-
-
 //получаем и обрабатываем результаты
 foreach($ga->getResults() as $result)
 {
