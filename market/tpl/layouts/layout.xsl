@@ -101,9 +101,9 @@
                     <td class="first_col">
                         <div class="font21px">Выбери район доставки</div>
                         <div class="font12px">Обратите внимание, что от района доставки зависит меню блюд.</div>
-                        <div class="select"><xsl:value-of select="locations/item[1]/title" /></div>
+                        <div class="select"><xsl:value-of select="//content/locations/item[1]/title" /></div>
                         <select id="locate_select" class="clear_opacity">
-                            <xsl:apply-templates select="locations/item" />
+                            <xsl:apply-templates select="//content/locations/item" />
                         </select>
                         <div class="remember"><input type="checkbox" /> запомнить район</div>
                     </td>
