@@ -766,7 +766,8 @@ body {
     font-size:24px;
     border:1px solid #000;
     text-align:center;
-    height:44px;
+    height:30px;
+    padding:7px 0;
 }
 .dialog .form_loader {
     display:none;
