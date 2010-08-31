@@ -302,15 +302,15 @@ table td {
 .echo {
     margin:0 20px;
 }
-.echo .caption.green {
+ .caption.green {
     margin-top:15px;
     border-bottom:2px solid #009900;
 }
-.echo .caption.orange {
+ .caption.orange {
     margin-top:15px;
     border-bottom:2px solid #FF6600;
 }
-.echo .caption .title {
+ .caption .title_rest {
     width:300px;
     margin:0 auto;
     text-align:center;
@@ -319,29 +319,29 @@ table td {
     background:#ffffff;
 }
 
-.echo .caption.green .title a{
+ .caption.green .title_rest a{
     color:#009900;
 }
-.echo .caption.orange .title a{
+ .caption.orange .title_rest a{
     color:#ff6600;
 }
 
-.echo .delivery_desc {
+ .delivery_desc {
     font-size:12px;
     margin-top:6px;
     text-align: center;
 }
 
-.echo .status {
+ .status {
     margin-top:6px;
     float: right;
     font-size:12px;
     color: #009900;
 }
 
-.echo .status.green {color: #009900;}
-.echo .status.orange {color: #ff6600;}
-.echo .list {margin-top:10px;}
+ .status.green {color: #009900;}
+.status.orange {color: #ff6600;}
+ .list {margin-top:10px;}
 /********************************* ITEM ******************************/
 
 .item  {
@@ -423,7 +423,102 @@ table td {
     font-style: italic;
     line-height: 28px;
 }
+/******************************** INNER *****************************/
+.des_item {
+    clear: both;
+    font-family: Arial;
+    font-size: 13px;
+    padding-top: 5px;
+}
 
+.des_item .name {
+    float: left;
+    width: 150px;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+}
+.des_item .text {
+    float: left;
+    width: 300px;
+}
+
+#restaurant_info .left_col {
+    float: left;
+    width: 360px;
+}
+
+#restaurant_info .center_col {
+    float: left;
+}
+
+#to_trash {
+    background: 0;
+    border: 0;
+    width: 77px;
+    height: 27px;
+    background: url(/market/public/images/to_trash.jpg) no-repeat;
+    color: #fff;
+}
+
+.rest_reviews {
+margin:20px 0 10px;
+}
+.rest_reviews .caption {
+background:url("/public/images/icons/reviews_icon.jpg") no-repeat scroll 0 0 transparent;
+color:#FF6600;
+font-size:18px;
+font-style:italic;
+height:32px;
+line-height:30px;
+padding-left:50px;
+vertical-align:bottom;
+}
+.rest_reviews .review {
+}
+.rest_reviews .review {
+margin:10px 0;
+}
+.rest_reviews .review .user {
+background:url("/public/images/icons/user_icon.gif") no-repeat scroll 0 0 transparent;
+font-size:11px;
+font-weight:bold;
+line-height:15px;
+padding-left:20px;
+}
+.rest_reviews .review .text {
+color:#000000;
+font-size:12px;
+font-style:italic;
+line-height:15px;
+margin-top:3px;
+padding-left:30px;
+width:315px;
+}
+.rest_reviews .form {
+}
+.rest_reviews .form textarea {
+border:1px solid #000000;
+height:120px;
+padding:5px;
+width:97%;
+}
+.rest_reviews .form input {
+background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 0 0 transparent;
+border:0 none;
+color:#FFFFFF;
+float:right;
+font-family:Tahoma,Arial;
+font-size:12px;
+height:22px;
+margin-bottom:10px;
+margin-left:10px;
+margin-top:5px;
+width:71px;
+}
+.rest_reviews .form input:active {
+background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 1px 1px transparent;
+}
 /******************************** CLASS *****************************/
 .font21px {
     font-size:21px;

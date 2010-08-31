@@ -40,7 +40,18 @@
                 </div>
             </div>
             <div class="clear"></div>
-            <div class="clear marginTop20px"></div>
+            <div class="clear marginTop20px"></div><div class="caption green">
+                <div class="title_rest">
+                    <a href="#">
+                        <xsl:value-of select="title" />
+                    </a>
+                </div>
+            </div>
+            <div class="delivery_desc">
+                Доставка заказа от 500 руб. — бесплатно, при заказе до 500 руб.
+                стоимость  доставки составляет 90 руб.
+            </div>
+            <div class="clear"></div>
             <!-- Вывод  информации по ресторану -->
             <div id="restaurant_info">
                 <!-- Левая колонка -->
@@ -71,6 +82,29 @@
                 </div>
                 <!-- Средняя колонка -->
                 <div class="center_col">
+                    <div class="description">
+                        <div class="des_item">
+                            <div class="name">Описание:</div>
+                            <div class="text">Ветчина, куриное филе, шампиньоны, томаты, маслины, оливки, болгарский, перец, лук порей, ананас, креветки, семга с/с, раковые шейки, сыр «Моцарелла», соус «Цезарь», соус «Неаполитано», сыр «Пармезан», сыр «Дор-Блю», сыр «Маасдам», вешенки, морской коктейль, колбаса «Пепперони», ростбиф, колбаса «Наполи».</div>
+                        </div>
+                        <div class="des_item">
+                            <div class="name">Порция:</div>
+                            <div class="text">25 см.(290 гр.) / 32 см.(460 гр.)</div>
+                        </div>
+                        <div class="des_item">
+                            <div class="name">кКал:</div>
+                            <div class="text">10,5 кКал</div>
+                        </div>
+                        <div class="des_item">
+                            <div class="name">Цена:</div>
+                            <div class="text">500 руб. / 600 руб.</div>
+                        </div>
+                        <div class="des_item">
+                            <div class="name">&#160; </div>
+                            <div class="text"><input type="button" value="В корзину" id="to_trash" /></div>
+                        </div>
+                    </div>
+                        <div class="clear"></div>
                     <div class="rest_reviews">
                         <div class="caption">Отзывы</div>
                         <div class="reviews">
