@@ -131,7 +131,7 @@
             <div class="caption">
                 <img class="close_button" src="/public/images/icons/close_icon.jpg" alt="закрыть" />
                 <div class="clear"></div>
-                <img class="form_loader" id="reg_loader" src="/public/images/loader.gif" alt="загрузка.." />
+                <img class="form_loader" id="order_loader" src="/public/images/loader.gif" alt="загрузка.." />
                 <div class="title">Ваш заказ</div>
             </div>
             <div class="message" id="order_message"></div>

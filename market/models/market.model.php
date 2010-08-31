@@ -33,13 +33,21 @@ class MD_Market extends Model {
         if (!$phone = String::toPhone($phone))
             $error = "Введите номер телефона в правильном формате";
 
-        if (empty($_SESSION['trash']) || sizeof($_SESSION['trash'])==0)
+        if (empty($_SESSION['trash']) || sizeof($_SESSION['trash']) == 0)
             $error = "Вы должны добавить в корзину хотя бы 1 блюдо";
 
         if (!empty($error))
             return $error;
 
         $trash = $_SESSION['trash'];
+
+        $fmin = DB::getRecord(
+            Model::getPrefix () . 'market_orders',
+            'ip=' . DB::quote(Router::getClientIp()) .
+            ' AND start_time > NOW() - INTERVAL 5 MINUTE'
+        );
+        if ($fmin)
+            return 'С важего ip уже был отправлен заказ. Подождите 5 мин.';
 
         // Отправляем сообщение администраторам
         $partners = array();
@@ -62,13 +70,14 @@ class MD_Market extends Model {
 
             // Добавляем заказ в логи
             DB::insert(Model::getPrefix() . 'market_orders', array(
-                        'rest_id'=>DB::quote($rest_id),
-                        'text'=>DB::quote($dishes_text),
-                        'status'=>DB::quote('Принят'),
-                        'start_time'=>'NOW()',
-                        'address'=>DB::quote($address),
-                        'phone'=>DB::quote($phone)
-                    ),false);
+                        'rest_id' => DB::quote($rest_id),
+                        'text' => DB::quote($dishes_text),
+                        'status' => DB::quote('Принят'),
+                        'start_time' => 'NOW()',
+                        'address' => DB::quote($address),
+                        'ip' => DB::quote(Router::getClientIp()),
+                        'phone' => DB::quote($phone)
+                            ), false);
 
             $admin = DB::getRecord(Model::getPrefix() . 'market_partner', 'rest_id=' . DB::quote($rest_id));
             $text = 'Заказ пользователя ' . $name . ' на номер ' . $phone . ' по адресу ' . $address . ': ' . $dishes_text;

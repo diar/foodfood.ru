@@ -163,13 +163,14 @@ $(document).ready(function () {
         name = $('#order_name').val();
         phone = $('#order_phone').val();
         address = $('#order_address').val();
+        $('#order_loader').show();
         $.post('/market/'+site_city+'/index/orderSubmit/',
         {
             'name':name,
             'phone':phone,
             'address':address
         },function(data){
-            $('#order_message').html('');
+            $('#order_loader').hide();
             $('#order_message').html(data);
         });
     });
