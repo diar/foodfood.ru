@@ -1,6 +1,11 @@
 var current_menu_type_id = 0;
 var tags_disable = false;
 var current_tags = '';
+
+var dish_photo_count = 0;
+var dish_photo_visible = 6;
+var dish_photo_offset = 0;
+var dish_photo_position = 0;
 // Выполнение после загрузки на всех страницах
 $(document).ready(function () {
     // Выбор локации
@@ -20,6 +25,74 @@ $(document).ready(function () {
     });
     // Выбираем первый тип меню
     $('.navigation .menu li').first().click();
+
+    /* ---------------------------------------------------------------------
+     * Если находимся на странице вывода блюда
+     */
+    if (typeof(dish_page_activate)!='undefined') {
+        $("#review_textarea").keyup(function(){
+
+            var length = $(this).val().length;
+
+            $("#reviews_comment_lenght").html(length);
+            if (length > 2000) return false;
+        });
+
+        $('.main_container a').lightBox({
+            imageLoading: '/public/js/libs/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnClose:'/public/js/libs/lightbox/images/lightbox-btn-close.gif',
+            imageBtnPrev: '/public/js/libs/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext: '/public/js/libs/lightbox/images/lightbox-btn-next.gif',
+            imageBlank:   '/public/js/libs/lightbox/images/lightbox-blank.gif',
+            fixedNavigation:true
+        });
+        $('#dish_info .photos .main').first().show().addClass('current');
+        /*
+         * Инициализация превью фоток
+         */
+        $('#dish_info .photos .mini').each(function(){
+            dish_photo_count++;
+            if (dish_photo_count<=dish_photo_visible) {
+                $(this).show();
+            }
+            $(this).attr('pos',dish_photo_count);
+        });
+        /*
+         * Нажатие на превью фотки ресторана
+         */
+        $('#dish_info .photos .mini').click(function(){
+            min = this;
+            $('#dish_info .photos .mini.active').removeClass('active');
+            $(min).addClass('active');
+            $('#dish_info .photos .main.current').removeClass('current').fadeOut(300,function(){
+                $('#dish_info .photos .main[src="'+$(min).attr('rel')+'"]').fadeIn(300).addClass('current');
+                $('#dish_info .photos .main[src="'+$(min).attr('rel')+'"] a').attr('href',$(min).attr('rel'));
+            });
+            dish_photo_position = parseInt($(min).attr('pos'))-dish_photo_offset;
+            if (dish_photo_position==dish_photo_visible &&
+                dish_photo_position+dish_photo_offset<dish_photo_count) {
+                dish_photo_offset++;
+                show_pos = dish_photo_offset+dish_photo_visible;
+                $('#dish_info .photos .mini[pos='+dish_photo_offset+']').animate({
+                    'width':'hide'
+                },200);
+                $('#dish_info .photos .mini[pos='+show_pos+']').animate({
+                    'width':'show'
+                },200);
+            } else if (dish_photo_position==1 &&
+                dish_photo_offset>0) {
+                dish_photo_offset--;
+                show_pos = dish_photo_offset+1;
+                hide_pos = dish_photo_offset+dish_photo_visible+1;
+                $('#dish_info .photos .mini[pos='+hide_pos+']').animate({
+                    'width':'hide'
+                },200);
+                $('#dish_info .photos .mini[pos='+show_pos+']').animate({
+                    'width':'show'
+                },200);
+            }
+        });
+    }
 });
 
 function search_start() {
@@ -83,4 +156,28 @@ function actions_create() {
             );
         });
     });
+}
+
+/*
+ * Добавить комментарий к блюду
+ */
+function comment_dish(rest_id,text,to_admin){
+    return false;
+    if(user_auth!='1') {
+        $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
+    } else {
+        $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/' ,{
+            'text':text,
+            'to_admin':to_admin,
+            'target':0
+        },function (data) {
+            if (data=='OK') $.alert('Отзыв добавлен',false);
+            else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
+            else if (data=='ALREADY') $.alert('Вы уже оставляли отзыв для данного ресторана',true);
+            else if (data=='LENGTH') $.alert('Длина отзыва не должна превышать 500 символов',true);
+            else if (data=='MAT') $.alert('Ваш отзыв не принят из-за мата',true);
+            else if (data=='FMIN') $.alert('Вы не можете оставлять более 1 отзыва ресторану за 5 минут',true);
+            else $.alert('Ошибка. Попробуйте еще раз',true);
+        });
+    }
 }

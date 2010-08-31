@@ -71,4 +71,17 @@ class MD_Menu extends Model {
         }
         return $partners;
     }
+
+    /**
+     * Получить фотографии блюда
+     * @param $params Параметры
+     * @return array
+     */
+    public static function getDishPhotos($id, $params=null) {
+        empty($params['count']) ? $count = 20 : $count = $params['count'];
+        empty($params['offset']) ? $offset = 0 : $offset = $params['offset'];
+        self::setJoinTable(null);
+        $photos = self::getAll("dish_id = " . DB::quote($id), null, array('table' => 'market_photo'));
+        return $photos;
+    }
 }

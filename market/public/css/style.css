@@ -84,8 +84,8 @@ table td {
 /* Основные блоки
 -------------------------------------------------------------------*/
 
-#container {W
-            width: 100%;
+#container {
+    width: 100%;
 }
 
 #header {
@@ -443,12 +443,12 @@ table td {
     width: 300px;
 }
 
-#restaurant_info .left_col {
+#dish_info .left_col {
     float: left;
     width: 360px;
 }
 
-#restaurant_info .center_col {
+#dish_info .center_col {
     float: left;
 }
 
@@ -461,10 +461,10 @@ table td {
     color: #fff;
 }
 
-.rest_reviews {
+.dish_reviews {
 margin:20px 0 10px;
 }
-.rest_reviews .caption {
+.dish_reviews .caption {
 background:url("/public/images/icons/reviews_icon.jpg") no-repeat scroll 0 0 transparent;
 color:#FF6600;
 font-size:18px;
@@ -474,19 +474,19 @@ line-height:30px;
 padding-left:50px;
 vertical-align:bottom;
 }
-.rest_reviews .review {
+.dish_reviews .review {
 }
-.rest_reviews .review {
+.dish_reviews .review {
 margin:10px 0;
 }
-.rest_reviews .review .user {
+.dish_reviews .review .user {
 background:url("/public/images/icons/user_icon.gif") no-repeat scroll 0 0 transparent;
 font-size:11px;
 font-weight:bold;
 line-height:15px;
 padding-left:20px;
 }
-.rest_reviews .review .text {
+.dish_reviews .review .text {
 color:#000000;
 font-size:12px;
 font-style:italic;
@@ -495,15 +495,15 @@ margin-top:3px;
 padding-left:30px;
 width:315px;
 }
-.rest_reviews .form {
+.dish_reviews .form {
 }
-.rest_reviews .form textarea {
+.dish_reviews .form textarea {
 border:1px solid #000000;
 height:120px;
 padding:5px;
 width:97%;
 }
-.rest_reviews .form input {
+.dish_reviews .form input {
 background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 0 0 transparent;
 border:0 none;
 color:#FFFFFF;
@@ -516,7 +516,7 @@ margin-left:10px;
 margin-top:5px;
 width:71px;
 }
-.rest_reviews .form input:active {
+.dish_reviews .form input:active {
 background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 1px 1px transparent;
 }
 /******************************** CLASS *****************************/
@@ -841,4 +841,34 @@ background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 1px 
     font-size:24px;
     padding-left:20px;
     float:left;
+}
+
+/* Фото блюда
+-------------------------------------------------------------------*/
+#dish_info .photos{
+    width:420px;
+}
+#dish_info .photos .main_container{
+    width:360px;
+    height:260px;
+    overflow:hidden;
+    background:url(/public/images/loader.gif) no-repeat center;
+}
+#dish_info .photos .main{
+    width:360px;
+    margin-bottom: 6px;
+    display: none;
+}
+#dish_info .photos .mini{
+    width:55px;
+    height:55px;
+    float:left;
+    margin-top:2px;
+    margin-right:6px;
+    cursor:pointer;
+    display:none;
+}
+#dish_info .photos .mini.active{
+    margin: 0 4px 0 -2px;
+    border:2px #ff6600 solid;
 }

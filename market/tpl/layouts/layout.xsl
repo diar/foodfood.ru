@@ -18,6 +18,7 @@
                 <link rel="icon" type="image/vnd.microsoft.icon"  href="/public/images/favicon.ico" />
                 <link rel="stylesheet" type="text/css" href="/market/public/css/style.css" />
                 <link rel="stylesheet" type="text/css" href="/market/public/css/main.css" />
+                <link rel="stylesheet" type="text/css" href="/public/js/libs/lightbox/css/jquery.lightbox.css" />
                 <xsl:comment><![CDATA[[if IE]>
                 <link href="/public/css/ie.css" rel="stylesheet" type="text/css" />
                 <![endif]]]>
@@ -41,6 +42,7 @@
                     <xsl:value-of select="//user/is_auth" />';
                 </script>
                 <script type="text/javascript" src="/market/public/js/libs/libs.js"></script>
+                <script type="text/javascript" src="/public/js/libs/lightbox/js/jquery.lightbox.pack.js"></script>
                 <script type="text/javascript" src="/market/public/js/system.js"></script>
                 <script type="text/javascript" src="/market/public/js/main.js"></script>
                 <!--LiveInternet counter-->

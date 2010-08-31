@@ -44,12 +44,15 @@ class dish_Page extends View {
             $gen_count = 0;
             $gen_price = 0;
         }
+        // Получаем дополнительные параметры
+        $photos = MD_Menu::getDishPhotos($id);
         // Показываем страницу
         self::$page['trash']['description'] = $description;
         self::$page['trash']['count'] = $gen_count;
         self::$page['trash']['price'] = $gen_price;
         self::$page['content']['locations'] = $locations;
         self::$page['content']['dish'] = MD_Menu::get(2);
+        self::$page['content']['dish']['photos'] = $photos;
         self::showXSLT('pages/dish/view');
     }
 

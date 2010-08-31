@@ -15,6 +15,9 @@
 
     <!-- Код страницы -->
     <xsl:template match="content">
+        <script type="text/javascript">
+            dish_page_activate = true;
+        </script>
         <xsl:apply-templates select="dish" />
     </xsl:template >
 
@@ -53,7 +56,7 @@
             </div>
             <div class="clear"></div>
             <!-- Вывод  информации по ресторану -->
-            <div id="restaurant_info">
+            <div id="dish_info">
                 <!-- Левая колонка -->
                 <div class="left_col">
                     <div class="photos">
@@ -105,7 +108,7 @@
                         </div>
                     </div>
                         <div class="clear"></div>
-                    <div class="rest_reviews">
+                    <div class="dish_reviews">
                         <div class="caption">Отзывы</div>
                         <div class="reviews">
                             <xsl:if test="count(reviews/item)=0">
@@ -153,14 +156,14 @@
         <xsl:param name="big" />
         <xsl:choose>
             <xsl:when test="$big=1">
-                <a href="http://uploads.foodfood.ru/image/rest_photo/{../../id}/{src}">
-                    <img src="http://uploads.foodfood.ru/image/rest_photo/{../../id}/{src}"
+                <a href="/upload/image/market_photo/{../../id}/{src}">
+                    <img src="/upload/image/market_photo/{../../id}/{src}"
                          class="main" alt="{rest_title}" />
                 </a>
             </xsl:when>
             <xsl:when test="$big=0">
-                <img src="http://uploads.foodfood.ru/image/rest_photo/{../../id}/mini-{src}"
-                     rel="http://uploads.foodfood.ru/image/rest_photo/{../../id}/{src}" class="mini" />
+                <img src="/upload/image/market_photo/{../../id}/mini-{src}"
+                     rel="/upload/image/market_photo/{../../id}/{src}" class="mini" />
             </xsl:when>
         </xsl:choose>
     </xsl:template>

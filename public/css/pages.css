@@ -5,8 +5,6 @@
     Description : CSS файл для всех страниц, отличных от главной
 */
 
-
-
 #restaurant {
     margin:0 16px 0 20px;
 }
@@ -61,12 +59,8 @@
     float:right;
     margin-right:20px;
 }
-
-
-
-/****************************/
-#restaurant_info {}
-
+/* Фото ресторана
+-------------------------------------------------------------------*/
 #restaurant_info .photos{
     width:420px;
 }
