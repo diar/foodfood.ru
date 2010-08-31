@@ -16,6 +16,13 @@ class banners extends AdminModule {
     public static function add() {
         $form = Form::newForm('banners', 'bannersForm', DBP::getPrefix() . self::getDbTable());
 
+        $form->addfield(array('name' => 'title',
+            'caption' => 'Название',
+            'pattern' => 'text',
+            'maxlength' => '50',
+            'css_class' => 'caption')
+        );
+
         $form->addfield(array('name' => 'href',
             'caption' => 'Ссылка при клике',
             'pattern' => 'text',
@@ -30,25 +37,19 @@ class banners extends AdminModule {
             'css_class' => 'caption')
         );
 
+        $form->addfield(array('name' => 'target_id',
+            'caption' => 'Id элемента',
+            'pattern' => 'text',
+            'maxlength' => '20',
+            'css_class' => 'caption')
+        );
+
         $form->addfield(array('name' => 'src',
             'caption' => 'Баннер',
             'pattern' => 'file',
             'formats' => array('jpg', 'png', 'jpeg', 'gif','swf'),
             'maxlength' => '255',
             'css_class' => 'caption')
-        );
-
-        $form->addfield(array('name' => 'type',
-                'caption' => 'Тип баннера',
-                'pattern' => 'select',
-                'css_class' => 'caption',
-                'multiple' => false,
-                'size' => '1',
-                'options' => array( 
-                    'image'=>'Изображение',
-                    'flash'=>'Флеш'
-                    )
-                )
         );
 
         $form->addfield(array('name' => 'position',
@@ -58,8 +59,10 @@ class banners extends AdminModule {
                 'multiple' => false,
                 'size' => '1',
                 'options' => array(
-                    'main_h'=>'На главной гориз',
-                    'flash'=>'Флеш'
+                    'main_h'=>'На главной горизонтальная',
+                    'rest_h'=>'У ресторана горизонтальная',
+                    'main_v'=>'На главной вертикальная',
+                    'rest_v'=>'У ресторана вертикальная'
                     )
                 )
         );
@@ -77,92 +80,68 @@ class banners extends AdminModule {
         $id = ELEMENT_ID;
         if (!empty($_POST)) {
             $record = $_POST;
-            $record['repeat_week'] = !empty($record['repeat_week']) ? 1 : 0;
         } else {
             $record = DBP::getRecord(self::getDbTable(), "id =" . $id);
-            switch ($record['poster_type']) {
-                case 'action' : $record['poster_type'] = 1;
-                    break;
-                case 'poster' : $record['poster_type'] = 2;
-                    break;
-                case 'news' : $record['poster_type'] = 3;
-                    break;
-            }
         }
 
-        $form = Form::newForm('rest_poster', 'posterForm', DBP::getPrefix() . self::getDbTable());
+        $form = Form::newForm('banners', 'bannersForm', DBP::getPrefix() . self::getDbTable());
 
-        $form->addfield(array(
-            'name' => 'title',
+        $form->addfield(array('name' => 'title',
             'caption' => 'Название',
             'pattern' => 'text',
-            'is_required' => true,
+            'maxlength' => '50',
+            'value' => $record['title'],
+            'css_class' => 'caption')
+        );
+
+        $form->addfield(array('name' => 'href',
+            'caption' => 'Ссылка при клике',
+            'pattern' => 'text',
             'maxlength' => '255',
-            'css_class' => 'caption',
-            'value' => $record['title']
-        ));
-        $form->addfield(array(
-            'name' => 'img',
-            'caption' => 'Изображение',
+            'value' => $record['href'],
+            'css_class' => 'caption')
+        );
+
+        $form->addfield(array('name' => 'count',
+            'caption' => 'Количество показов',
+            'pattern' => 'text',
+            'maxlength' => '20',
+            'value' => $record['count'],
+            'css_class' => 'caption')
+        );
+
+        $form->addfield(array('name' => 'target_id',
+            'caption' => 'Id элемента',
+            'pattern' => 'text',
+            'maxlength' => '20',
+            'value' => $record['target_id'],
+            'css_class' => 'caption')
+        );
+
+        $form->addfield(array('name' => 'src',
+            'caption' => 'Баннер',
             'pattern' => 'file',
-            'formats' => array('jpg', 'png', 'jpeg', 'gif'),
+            'formats' => array('jpg', 'png', 'jpeg', 'gif','swf'),
+            'value' => $record['src'],
             'maxlength' => '255',
-            'css_class' => 'caption'
-        ));
-        $form->addfield(array(
-            'name' => 'date',
-            'caption' => 'Дата начала (гггг-мм-дд)',
-            'pattern' => 'text',
-            'maxlength' => '255',
-            'is_required' => true,
-            'css_class' => 'caption datepicker',
-            'value' => $record['date']
-        ));
+            'css_class' => 'caption')
+        );
 
-        $form->addfield(array(
-            'name' => 'date_description',
-            'pattern' => 'description',
-            'value' => 'Описание использования даты'
-        ));
-
-        $form->addfield(array(
-            'name' => 'date_end',
-            'caption' => 'Дата окончания',
-            'pattern' => 'text',
-            'maxlength' => '255',
-            'css_class' => 'caption datepicker',
-            'value' => $record['date_end']
-        ));
-        $form->addfield(array(
-            'name' => 'repeat_week',
-            'caption' => 'Повторять каждую неделю',
-            'pattern' => 'checkbox',
-            'css_class' => 'caption',
-            'checked' => $record['repeat_week']
-        ));
-        $form->addfield(array(
-            'name' => 'poster_type',
-            'caption' => 'Тип',
-            'pattern' => 'select',
-            'selected' => $record['poster_type'],
-            'options' => array(1 => 'акция', 2 => 'афиша', 3 => 'новость'),
-            'css_class' => 'caption'
-        ));
-
-        $form->addfield(array(
-            'name' => 'anounce',
-            'caption' => 'Краткий текст',
-            'pattern' => 'textarea',
-            'is_required' => true,
-            'value' => $record['anounce']
-        ));
-
-        $form->addfield(array(
-            'name' => 'text',
-            'caption' => 'Описание',
-            'pattern' => 'editor',
-            'value' => $record['text']
-        ));
+        $form->addfield(array('name' => 'position',
+                'caption' => 'Расположение',
+                'pattern' => 'select',
+                'css_class' => 'caption',
+                'multiple' => false,
+                'selected' => $record['position'],
+                'size' => '1',
+                'options' => array(
+                    'main_h'=>'На главной горизонтальная',
+                    'rest_h'=>'У ресторана горизонтальная',
+                    'main_v'=>'На главной вертикальная',
+                    'rest_v'=>'У ресторана вертикальная'
+                    )
+                )
+        );
 
         $form->addfield(array('name' => 'edit',
             'caption' => 'Сохранить',
@@ -175,83 +154,49 @@ class banners extends AdminModule {
 
     public static function save() {
         $data = $_POST;
-        switch ($data['poster_type']) {
-            case 1 : $data['poster_type'] = 'action';
-                break;
-            case 2 : $data['poster_type'] = 'poster';
-                break;
-            case 3 : $data['poster_type'] = 'news';
-                break;
-        }
-        $data['repeat_week'] = !empty($data['repeat_week']) ? 1 : 0;
-
-        $date_start = explode('-', $data['date']);
-        $date_start = mktime(0, 0, 0, $date_start[1], $date_start[2], $date_start[0]);
-        $data['repeat_week_start'] = date('w', $date_start);
-
-        if ($data['date_end'] != '' && $data['date_end'] != '0000-00-00') {
-            $date_end = explode('-', $data['date_end']);
-            $date_end = mktime(0, 0, 0, $date_end[1], $date_end[2], $date_end[0]);
-            $data['repeat_week_end'] = date('w', $date_end);
+        if (end(explode('.',$_FILES['src']['name']))=='swf') {
+            $data['type'] = 'flash';
+            $file_path = 'flash/banners/';
         } else {
-            $data['repeat_week_end'] = -1;
+            $data['type'] = 'image';
+            $file_path = 'image/banners/';
         }
-
-        if (!empty($_FILES['img']['name'])) {
-            $file = File::saveFile('img', null, Config::getValue('path', 'upload') . 'image/poster/');
+        if (!empty($_FILES['src']['name'])) {
+            $file = File::saveFile('src', null, Config::getValue('path', 'upload') . 'image/banners/');
             if (!empty($file)) {
-                $file_path = Config::getValue('path', 'upload') . 'image/poster/';
-                Image::resizeImage($file_path . $file, 76);
-                $data['img'] = $file;
+                $data['src'] = $file;
             } else {
-                echo "Ошибка в загрузке фото.";
+                echo "Ошибка при загрузке баннера.";
                 return false;
             }
         } else {
             $data['img'] = null;
         }
-        $data['rest_id'] = self::getRestId();
-        DBP::insert('rest_poster', $data);
+        DBP::insert(self::getDbTable(), $data);
     }
 
     public static function saveEdit() {
         $id = ELEMENT_ID;
         $data = $_POST;
-        switch ($data['poster_type']) {
-            case 1 : $data['poster_type'] = 'action';
-                break;
-            case 2 : $data['poster_type'] = 'poster';
-                break;
-            case 3 : $data['poster_type'] = 'news';
-                break;
-        }
-        $data['repeat_week'] = !empty($data['repeat_week']) ? 1 : 0;
 
-        $date_start = explode('-', $data['date']);
-        $date_start = mktime(0, 0, 0, $date_start[1], $date_start[2], $date_start[0]);
-        $data['repeat_week_start'] = date('w', $date_start);
-
-        if ($data['date_end'] != '' && $data['date_end'] != '0000-00-00') {
-            $date_end = explode('-', $data['date_end']);
-            $date_end = mktime(0, 0, 0, $date_end[1], $date_end[2], $date_end[0]);
-            $data['repeat_week_end'] = date('w', $date_end);
+        if (end(explode('.',$_FILES['src']['name']))=='swf') {
+            $data['type'] = 'flash';
+            $file_path = 'flash/banners/';
         } else {
-            $data['repeat_week_end'] = -1;
+            $data['type'] = 'image';
+            $file_path = 'image/banners/';
         }
 
-        if (!empty($_FILES['img']['name'])) {
-            $file = File::saveFile('img', null, Config::getValue('path', 'upload') . 'image/poster/');
+        if (!empty($_FILES['src']['name'])) {
+            $file = File::saveFile('src', null, Config::getValue('path', 'upload') . 'image/banners/');
             if (!empty($file)) {
-                $file_path = Config::getValue('path', 'upload') . 'image/poster/';
-                Image::resizeImage($file_path . $file, 76);
                 $data['img'] = $file;
             } else {
-                echo "Ошибка в загрузке фото.";
+                echo "Ошибка при загрузке баннера.";
                 return false;
             }
         }
-        $data['rest_id'] = self::getRestId();
-        DBP::update('rest_poster', $data, 'id =' . $id);
+        DBP::update(self::getDbTable(), $data, 'id =' . $id);
     }
 
     public static function delete() {
@@ -261,17 +206,14 @@ class banners extends AdminModule {
     }
 
     public static function showList() {
-
         $list = Form::showJqGrid(
                         array(
-                            'url' => '/admin/admin.php?page=restPoster&action=showJSON',
+                            'url' => '/admin/admin.php?page=banners&action=showJSON',
                             'table' => 'gridlist', 'pager' => 'gridpager', 'width' => '600', 'height' => '400'
                         ),
                         array(
                             array('title' => 'id'),
-                            array('title' => 'Название'),
-                            array('title' => 'Дата'),
-                            array('title' => 'Управление')
+                            array('title' => 'Название')
                         )
         );
         self::showTemplate($list);
@@ -282,7 +224,7 @@ class banners extends AdminModule {
         $limit = $_POST['rows'];
         //Получаем количество афиш
         $records = DB::fetch(
-                        "SELECT COUNT(*) FROM " . DBP::getPrefix() . "rest_poster WHERE rest_id=" . self::getRestId()
+                        "SELECT COUNT(*) FROM " . DBP::getPrefix() . self::getDbTable()
         );
         //Вычисляем кол-во страниц
         $count = $records['COUNT(*)'];
@@ -291,7 +233,7 @@ class banners extends AdminModule {
             $page = $total_pages;
         $start = $limit * $page - $limit;
         $records = DB::fetchAll(
-                        "SELECT id,title,date FROM " . DBP::getPrefix() . "rest_poster WHERE rest_id=" . self::getRestId() .
+                        "SELECT id, title FROM " . DBP::getPrefix() .self::getDbTable().
                         ' LIMIT ' . $start . ' , ' . $limit
         );
 
