@@ -92,6 +92,32 @@
                     </div>
                 </noscript>
                 <!-- /Yandex.Metrika -->
+                <!-- Оставить отзыв -->
+                <script type="text/javascript">
+                reformal_wdg_w    = "713";
+                reformal_wdg_h    = "450";
+                reformal_wdg_domain    = "foodfood";
+                reformal_wdg_mode    = 0;
+                reformal_wdg_title   = "Все рестораны и кафе Казани.";
+                reformal_wdg_ltitle  = "Оставить отзыв";
+                reformal_wdg_lfont   = "Verdana, Geneva, sans-serif";
+                reformal_wdg_lsize   = "12px";
+                reformal_wdg_color   = "#ff6600";
+                reformal_wdg_bcolor  = "#ff8c00";
+                reformal_wdg_tcolor  = "#ffffff";
+                reformal_wdg_align   = "left";
+                reformal_wdg_charset = "utf-8";
+                reformal_wdg_waction = 0;
+                reformal_wdg_vcolor  = "#24bd2e";
+                reformal_wdg_cmline  = "#d6d6d6";
+                reformal_wdg_glcolor  = "#105895";
+                reformal_wdg_tbcolor  = "#ffffff";
+                reformal_wdg_tcolor_aw4  = "#3F4543";
+
+                reformal_wdg_bimage = "e0b49558fe389cd8e05070da698f48c4.png";
+                </script>
+
+                <script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tabn2v3.js"></script><noscript><a href="http://foodfood.reformal.ru">Все рестораны и кафе Казани. feedback</a> <a href="http://reformal.ru">на платформе <img src="http://widget.reformal.ru/i/reformal_ru.png" /></a></noscript>
             </body>
         </html>
     </xsl:template>
