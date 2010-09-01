@@ -139,6 +139,7 @@ class Restaurants extends AdminModule {
             'name' => 'rest_description',
             'caption' => 'Описание',
             'pattern' => 'editor',
+            'css_class' => 'caption'
         ));
 
         $form->addfield(array(
@@ -175,6 +176,12 @@ class Restaurants extends AdminModule {
             'css_class' => 'caption'
         ));
         $form->addfield(array(
+            'name' => 'rest_order',
+            'caption' => 'Новое место',
+            'pattern' => 'checkbox',
+            'css_class' => 'caption'
+        ));
+        $form->addfield(array(
             'name' => 'submit',
             'caption' => 'Добавить',
             'css_class' => 'ui_button',
@@ -190,6 +197,7 @@ class Restaurants extends AdminModule {
         if (!empty($_POST)) {
             $record = $_POST;
             $record['in_market'] = !empty($record['in_market']) ? 1 : 0;
+            $record['rest_order'] = !empty($record['rest_order']) ? 1 : 0;
             // Работа с координатами google Maps
             $google_location = str_replace(')', '', $record['google_location']);
             $google_location = str_replace('(', '', $google_location);
@@ -338,7 +346,8 @@ class Restaurants extends AdminModule {
             'name' => 'rest_description',
             'caption' => 'Описание',
             'pattern' => 'editor',
-            'value' => $record['rest_description'],
+            'css_class' => 'caption',
+            'value' => $record['rest_description']
         ));
         $google_map_text = '<script type="text/javascript" ' .
                 'src="http://maps.google.com/maps/api/js?sensor=false"></script>' .
@@ -367,6 +376,13 @@ class Restaurants extends AdminModule {
             'checked' => $record['in_market']
         ));
         $form->addfield(array(
+            'name' => 'rest_order',
+            'caption' => 'Новое место',
+            'pattern' => 'checkbox',
+            'css_class' => 'caption',
+            'checked' => $record['rest_order']
+        ));
+        $form->addfield(array(
             'name' => 'edit',
             'caption' => 'Сохранить',
             'css_class' => 'ui_button',
@@ -391,6 +407,7 @@ class Restaurants extends AdminModule {
         $data['rest_uri'] = str_replace('-', '_', $data['rest_uri']);
         $data['rest_uri'] = str_replace(' ', '_', $data['rest_uri']);
         $data['in_market'] = !empty($data['in_market']) ? 1 : 0;
+        $data['rest_order'] = !empty($data['rest_order']) ? 1 : 0;
         $data['rest_reserv_phone'] = String::toPhone($data['rest_reserv_phone']);
         // Работа с координатами google Maps
         $google_location = str_replace(')', '', $data['google_location']);
@@ -436,6 +453,7 @@ class Restaurants extends AdminModule {
     public static function saveEdit() {
         $data = $_POST;
         $data['in_market'] = !empty($data['in_market']) ? 1 : 0;
+        $data['rest_order'] = !empty($data['rest_order']) ? 1 : 0;
         $data['rest_reserv_phone'] = String::toPhone($data['rest_reserv_phone']);
         // Работа с координатами google Maps
         $google_location = str_replace(')', '', $data['google_location']);

@@ -30,7 +30,7 @@ class MD_Service extends Model {
 
         //
         $text = 'Обратная связь ['.$mail.']: '.$text;
-        $mail = Mail::newMail($text,'support@foodfood.ru','foodfood.ru');
+        $mail = Mail::newMail($text,'support@foodfood.ru','foodfood.ru',$mail);
         $mail->Send();
         echo "OK";
     }
