@@ -20,28 +20,9 @@ class banner_Page extends View {
     /*
      * Показ баннера по умолчанию
     */
-    public static function indexAction ($id) {
-        self::$page['banner'] = MD_Banner::getRecordRand(array('vertical'=>0));
-        self::showXSLT('blocks/banner');
-    }
-
-    /*
-     * Показ вертикального баннера
-    */
-    public static function verticalAction ($id) {
-        self::$page['banner'] = MD_Banner::getRecordRand(array('vertical'=>1));
-        self::$page['banner']['width']='240';
-        self::$page['banner']['height']='350';
-        self::showXSLT('blocks/banner');
-    }
-
-    /*
-     * Показ горизонтального баннера
-    */
-    public static function horizontalAction ($id) {
-        self::$page['banner'] = MD_Banner::getRecordRand(array('vertical'=>0));
-        self::$page['banner']['width']='770';
-        self::$page['banner']['height']='160';
+    public static function viewAction ($type) {
+        $tid = Router::getRequest('tid');
+        self::$page['banner'] = MD_Banner::getRecord($type,$tid);
         self::showXSLT('blocks/banner');
     }
 }

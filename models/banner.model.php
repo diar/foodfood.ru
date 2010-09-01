@@ -39,8 +39,19 @@ class MD_Banner extends Model {
         if (empty($banner)) {
             $banner = self::get('position=' . DB::quote($target_type) . ' AND count>0', 'RAND()');
         }
+        if (empty($banner)) {
+            $banner = self::get('position="main_h" AND count>0', 'RAND()');
+        }
         if (!empty($banner)) {
             self::upd(array('count' => 'count-1'), 'id=' . $banner['id'], false);
+            switch ($banner['position']) {
+                case 'main_h' :
+                    $banner['width'] = 770;
+                    $banner['height']= 160;
+                case 'main_v' :
+                    $banner['width'] = 240;
+                    $banner['height']= 350;
+            }
             $banner['city'] = CityPlugin::getCity();
             return $banner;
         } else {

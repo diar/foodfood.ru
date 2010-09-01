@@ -30,18 +30,17 @@ class index_Page extends View {
         self::$page['person'] = MD_Person::getPerson();
         self::$page['content']['moods'] = $moods;
         self::$page['content']['tags'] = $tags;
-        self::$page['header']['banner']['type'] = 'horizontal';
+        self::$page['header']['banner']['type'] = 'main_h';
         self::$page['header']['banner']['class'] = 'banner770';
     }
 
     /*
      * Главная страница сайта
      */
-
     public static function indexAction($id) {
         // Получаем рекомендуемые рестораны
         $recomended = MD_Restaurant::getRecomended ();
-        $recomended['banner']['type'] = 'vertical';
+        $recomended['banner']['type'] = 'main_v';
         $recomended['banner']['class'] = 'banner240n320';
         // Получаем новый ресторан
         $new_rest = MD_Restaurant::getNew();

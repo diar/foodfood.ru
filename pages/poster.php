@@ -23,7 +23,7 @@ class poster_Page extends View {
 ';
         self::$page['content']['moods']=$moods;
         self::$page['content']['tags']=$tags;
-        self::$page['header']['banner']['type'] = 'horizontal';
+        self::$page['header']['banner']['type'] = 'main_h';
         self::$page['header']['banner']['class'] = 'banner770';
     }
 

@@ -88,6 +88,7 @@
                         <img src="//mc.yandex.ru/watch/1192696" alt="" />
                     </div>
                 </noscript>
+                <!-- Оставить отзыв -->
                 <script type="text/javascript">
                 reformal_wdg_w    = "713";
                 reformal_wdg_h    = "450";
