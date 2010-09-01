@@ -61,7 +61,7 @@ class MD_Menu extends Model {
                     $f_protions['portion'] = $portion;
                     $f_protions['price'] = $price[$z];
                     if (isset($second_portions[$z]))
-                        $f_protions['second_portion'] = $price[$z];
+                        $f_protions['second_portion'] = $second_portions[$z];
                     $z++;
                     $item['portions'][] = $f_protions;
                 }

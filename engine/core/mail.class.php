@@ -19,13 +19,10 @@ class Mail {
      * Создание класса отправки e-mail
      * @return PHPMailer
      */
-    public static function newMail ($body,$address,$subject,$from=null) {
+    public static function newMail ($body,$address,$subject) {
         $mail = new PHPMailer ();
         $mail->IsMail();
-        if ($from==null) {
-            $from=Config::getValue('site','email');
-        }
-        $mail->SetFrom($from, Config::getValue('site','name'));
+        $mail->SetFrom('noreply@foodfood.ru', Config::getValue('site','name'));
         $mail->AddAddress($address);
         $mail->Subject = $subject;
         $mail->MsgHTML($body);
