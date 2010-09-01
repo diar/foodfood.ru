@@ -22,7 +22,9 @@ class Mail {
     public static function newMail ($body,$address,$subject,$from=null) {
         $mail = new PHPMailer ();
         $mail->IsMail();
-        if ($from==null) $from=Config::getValue('site','email');
+        if ($from==null) {
+            $from=Config::getValue('site','email');
+        }
         $mail->SetFrom($from, Config::getValue('site','name'));
         $mail->AddAddress($address);
         $mail->Subject = $subject;

@@ -104,7 +104,7 @@ function search_start() {
         tags_disable = false;
         actions_create();
         $('.portion').click(function(){
-            $('.portions .portion').removeClass('active');
+            $(this).parents('.portions').find('.portion').removeClass('active');
             $(this).addClass('active');
             price = $(this).attr('rel');
             price = '<span>'+price+'</span> руб.';

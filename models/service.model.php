@@ -28,7 +28,6 @@ class MD_Service extends Model {
         }
         if (!String::isEmail($mail)) return "NOT_MAIL";
 
-        //
         $text = 'Обратная связь ['.$mail.']: '.$text;
         $mail = Mail::newMail($text,'support@foodfood.ru','foodfood.ru',$mail);
         $mail->Send();
