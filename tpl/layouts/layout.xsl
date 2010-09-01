@@ -89,6 +89,31 @@
                     </div>
                 </noscript>
                 <!-- /Yandex.Metrika -->
+                <!-- Отзывы -->
+                <script type="text/javascript">
+                reformal_wdg_w    = "713";
+                reformal_wdg_h    = "450";
+                reformal_wdg_domain    = "foodfood";
+                reformal_wdg_mode    = 0;
+                reformal_wdg_title   = "Все рестораны и кафе Казани.";
+                reformal_wdg_ltitle  = "Оставьте свой отзыв по работе сайта foodfood.ru";
+                reformal_wdg_lfont   = "";
+                reformal_wdg_lsize   = "";
+                reformal_wdg_color   = "#ffa200";
+                reformal_wdg_bcolor  = "#007a12";
+                reformal_wdg_tcolor  = "#ffffff";
+                reformal_wdg_align   = "left";
+                reformal_wdg_charset = "utf-8";
+                reformal_wdg_waction = 0;
+                reformal_wdg_vcolor  = "#96e812";
+                reformal_wdg_cmline  = "#E0E0E0";
+                reformal_wdg_glcolor  = "#105895";
+                reformal_wdg_tbcolor  = "#FFFFFF";
+                reformal_wdg_tcolor_aw4  = "#3F4543";
+
+                reformal_wdg_bimage = "18442d6d8b4925a641a767fd1de9ee23.png";
+                </script>
+                <script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tabn2v3.js"></script><noscript><a href="http://foodfood.reformal.ru">Все рестораны и кафе Казани. feedback</a> <a href="http://reformal.ru">на платформе <img src="http://widget.reformal.ru/i/reformal_ru.png" /></a></noscript>
             </body>
         </html>
     </xsl:template>
