@@ -99,7 +99,7 @@
                 reformal_wdg_domain    = "foodfood";
                 reformal_wdg_mode    = 0;
                 reformal_wdg_title   = "Все рестораны и кафе Казани.";
-                reformal_wdg_ltitle  = "Оставить отзыв";
+                reformal_wdg_ltitle  = "Оставить идею";
                 reformal_wdg_lfont   = "Verdana, Geneva, sans-serif";
                 reformal_wdg_lsize   = "12px";
                 reformal_wdg_color   = "#ff6600";
@@ -114,10 +114,11 @@
                 reformal_wdg_tbcolor  = "#ffffff";
                 reformal_wdg_tcolor_aw4  = "#3F4543";
 
-                reformal_wdg_bimage = "e0b49558fe389cd8e05070da698f48c4.png";
+                reformal_wdg_bimage = "0677f2596844ebe744ed2aea55bec6ef.png";
+
                 </script>
 
-                <script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tabn2v3.js"></script><noscript><a href="http://foodfood.reformal.ru">Все рестораны и кафе Казани. feedback</a> <a href="http://reformal.ru">на платформе <img src="http://widget.reformal.ru/i/reformal_ru.png" /></a></noscript>
+<script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tabn2v3.js"></script><noscript><a href="http://foodfood.reformal.ru">Все рестораны и кафе Казани. feedback</a> <a href="http://reformal.ru">на платформе <img src="http://widget.reformal.ru/i/reformal_ru.png" /></a></noscript>
             </body>
         </html>
     </xsl:template>
