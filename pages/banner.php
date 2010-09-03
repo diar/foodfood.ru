@@ -23,6 +23,6 @@ class banner_Page extends View {
     public static function viewAction ($type) {
         $tid = Router::getRequest('tid');
         self::$page['banner'] = MD_Banner::getRecord($type,$tid);
-        self::showXSLT('blocks/banner');
+        self::showXSLT('pages/banner/view');
     }
 }

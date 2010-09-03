@@ -10,6 +10,7 @@
     <xsl:include href="../blocks/dialogs.xsl" />
     <xsl:include href="../blocks/by_mood.xsl" />
     <xsl:include href="../blocks/char_list.xsl" />
+    <xsl:include href="../blocks/banner.xsl" />
     <!-- Макет -->
     <xsl:template match="root">
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
@@ -302,11 +303,6 @@
                 </noindex>
             </div>
         </div>
-    </xsl:template>
-
-    <!-- Вывод баннера -->
-    <xsl:template match="banner">
-        <iframe class="{class}" src="/{//site/city}/banner/{type}/" frameborder="no" scrolling="no"></iframe>
     </xsl:template>
 
     <!-- Ссылка для ресторана -->

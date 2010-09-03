@@ -10,6 +10,7 @@
     <xsl:include href="../blocks/dialogs.xsl" />
     <xsl:include href="../blocks/by_mood.xsl" />
     <xsl:include href="../blocks/char_list.xsl" />
+    <xsl:include href="../blocks/banner.xsl" />
     <!-- Макет -->
     <xsl:template match="root">
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
@@ -112,9 +113,9 @@
 
                     reformal_wdg_bimage = "0677f2596844ebe744ed2aea55bec6ef.png";
 
-</script>
+                </script>
 
-<script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tabn2v3.js"></script><noscript><a href="http://foodfood.reformal.ru">Все рестораны и кафе Казани. feedback</a> <a href="http://reformal.ru">на платформе <img src="http://widget.reformal.ru/i/reformal_ru.png" /></a></noscript>
+                <script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tabn2v3.js"></script><noscript><a href="http://foodfood.reformal.ru">Все рестораны и кафе Казани. feedback</a> <a href="http://reformal.ru">на платформе <img src="http://widget.reformal.ru/i/reformal_ru.png" /></a></noscript>
             </body>
         </html>
     </xsl:template>
@@ -352,11 +353,6 @@
                 </noindex>
             </div>
         </div>
-    </xsl:template>
-
-    <!-- Вывод баннера -->
-    <xsl:template match="banner">
-        <iframe class="{class}" src="/{//site/city}/banner/{type}/" frameborder="0" scrolling="no"></iframe>
     </xsl:template>
 
     <xsl:template match="//news/item">

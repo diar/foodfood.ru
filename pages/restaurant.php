@@ -19,7 +19,7 @@ class restaurant_Page extends View {
         self::$page['site']['city'] = CityPlugin::getCity();
         self::$page['content']['moods']=$moods;
         self::$page['content']['tags']=$tags;
-        self::$page['header']['banner']['type'] = 'main_h';
+        self::$page['header']['banner']['type'] = 'rest_h';
         self::$page['header']['banner']['class'] = 'banner770';
     }
 
@@ -89,6 +89,9 @@ class restaurant_Page extends View {
         if ($restaurant['id'] == 133 || $restaurant['id'] == 156 || $restaurant['id'] == 66 ||
                 $restaurant['id'] == 152 || $restaurant['id'] == 110 || $restaurant['id'] == 111)
             self::$page['content']['restaurant']['tmp_banner2'] = true;
+        self::$page['content']['restaurant']['banner']['type'] = 'rest_v';
+        self::$page['content']['restaurant']['banner']['tid'] = $restaurant['id'];
+        self::$page['content']['restaurant']['banner']['class'] = 'banner770';
         self::$page['content']['navigate']['next'] = $next;
         self::$page['content']['navigate']['prev'] = $prev;
         self::$page['content']['navigate']['mood'] = $mood;

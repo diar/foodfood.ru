@@ -5,50 +5,15 @@
     <xsl:output method="xml" indent="yes" encoding="utf-8"
                 doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
                 doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
-
-    <xsl:template match="/">
-        <html>
-        <body style="margin:0">
-        <xsl:apply-templates select="root/banner" />
-        <script type="text/javascript" src="/public/js/libs/libs.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-            $('.swfobject').each(function(){
-                src = $(this).find('.src').html();
-                id = $(this).find('.id').html();
-                width = $(this).find('.width').html();
-                height = $(this).find('.height').html();
-                $(this).html('');
-                var params = {
-                    wmode:"opaque"
-                };
-                swfobject.embedSWF("/upload/flash/banners/"+src, "banner"+id, width, height, "9.0.0",false,false,params);
-            }).show();
-            });
-        </script>
-        </body>
-        </html>
-    </xsl:template>
-
-    <xsl:template match="root/banner">
+    <!-- Вывод баннера -->
+    <xsl:template match="banner">
         <xsl:choose>
-            <xsl:when test="type = 'image'">
-                <noindex>
-                    <a rel="nofollow" href="/public/ajax/banner.php?redirect={href}&amp;banner={id}&amp;city=kazan" style="border:none;" target="_blank">
-                        <img src="/upload/image/banners/{src}" id="banner{id}" style="border:none;" />
-                    </a>
-                </noindex>
+            <xsl:when test="tid!=''">
+                <iframe class="{class}" src="/{//site/city}/banner/{type}/?tid={tid}" frameborder="0" scrolling="no"></iframe>
             </xsl:when>
-            <xsl:when test="type = 'flash'">
-                <div>
-                    <div id="banner{id}" class="swfobject" style="display:none">
-                        <div class="src"><xsl:value-of select="src" /></div>
-                        <div class="width"><xsl:value-of select="width" /></div>
-                        <div class="height"><xsl:value-of select="height" /></div>
-                        <div class="id"><xsl:value-of select="id" /></div>
-                    </div>
-                </div>
-            </xsl:when>
+            <xsl:otherwise>
+                <iframe class="{class}" src="/{//site/city}/banner/{type}/" frameborder="0" scrolling="no"></iframe>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
