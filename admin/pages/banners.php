@@ -84,6 +84,9 @@ class banners extends AdminModule {
             $record = DBP::getRecord(self::getDbTable(), "id =" . $id);
         }
 
+        $record['target_id'] = str_replace('|', ',', $record['target_id']);
+        $record['target_id'] = preg_replace('/^,(.*),$/i', '$1', $record['target_id']);
+
         $form = Form::newForm('banners', 'bannersForm', DBP::getPrefix() . self::getDbTable());
 
         $form->addfield(array('name' => 'title',
@@ -154,6 +157,7 @@ class banners extends AdminModule {
 
     public static function save() {
         $data = $_POST;
+        $data['target_id'] = '|'.str_replace(',', '|', $data['target_id']).'|';
         if (end(explode('.',$_FILES['src']['name']))=='swf') {
             $data['type'] = 'flash';
             $file_path = 'flash/banners/';
@@ -178,7 +182,7 @@ class banners extends AdminModule {
     public static function saveEdit() {
         $id = ELEMENT_ID;
         $data = $_POST;
-
+        $data['target_id'] = '|'.str_replace(',', '|', $data['target_id']).'|';
         if (end(explode('.',$_FILES['src']['name']))=='swf') {
             $data['type'] = 'flash';
             $file_path = 'flash/banners/';
@@ -213,7 +217,8 @@ class banners extends AdminModule {
                         ),
                         array(
                             array('title' => 'id'),
-                            array('title' => 'Название')
+                            array('title' => 'Название'),
+                            array('title' => 'Управление')
                         )
         );
         self::showTemplate($list);
