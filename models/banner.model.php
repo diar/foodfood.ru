@@ -32,7 +32,7 @@ class MD_Banner extends Model {
         if (!empty($target_id)) {
             $banner = self::get(
                             'position=' . DB::quote($target_type) .
-                            ' target_id=' . DB::quote($target_type) . ' AND count>0',
+                            ' target_id LIKE %|' . DB::quote($target_id) . '|% AND count>0',
                             'RAND()'
             );
         }
@@ -45,9 +45,11 @@ class MD_Banner extends Model {
         if (!empty($banner)) {
             self::upd(array('count' => 'count-1'), 'id=' . $banner['id'], false);
             switch ($banner['position']) {
+                case 'rest_h' :
                 case 'main_h' :
                     $banner['width'] = 770;
                     $banner['height']= 160;
+                case 'rest_v' :
                 case 'main_v' :
                     $banner['width'] = 240;
                     $banner['height']= 350;

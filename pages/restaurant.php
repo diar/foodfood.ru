@@ -91,7 +91,7 @@ class restaurant_Page extends View {
             self::$page['content']['restaurant']['tmp_banner2'] = true;
         self::$page['content']['restaurant']['banner']['type'] = 'rest_v';
         self::$page['content']['restaurant']['banner']['tid'] = $restaurant['id'];
-        self::$page['content']['restaurant']['banner']['class'] = 'banner770';
+        self::$page['content']['restaurant']['banner']['class'] = 'rest_banner';
         self::$page['content']['navigate']['next'] = $next;
         self::$page['content']['navigate']['prev'] = $prev;
         self::$page['content']['navigate']['mood'] = $mood;

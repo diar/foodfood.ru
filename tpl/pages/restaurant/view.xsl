@@ -428,18 +428,7 @@
                             <img src="/public/images/rest_follow.jpg" alt="Оставить приглашение" />
                         </a>
                     </div>
-                    <xsl:if test="tmp_banner = 1">
-                        <div class="rest_banner" style="padding-top:20px;">
-                            <img src="/upload/image/banners/5second.jpg" alt="5 секунд - ГЛАВНЫЙ ПО ДИСКОНТУ" />
-                            <br />
-                            <div style="font-weight: bold; font-size: 15px; text-align: center;">ГЛАВНЫЙ ПО ДИСКОНТУ</div>
-                        </div>
-                    </xsl:if>
-                    <xsl:if test="tmp_banner2 = 1">
-                        <div class="rest_banner" style="padding-top:20px;margin-left:-30px;">
-                            <img src="/upload/image/banners/dlq.gif" alt="Dlq" />
-                        </div>
-                    </xsl:if>
+                    <xsl:apply-templates select="banner" />
                 </div>
             </div>
             <div class="clear"></div>
