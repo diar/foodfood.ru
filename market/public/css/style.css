@@ -361,6 +361,7 @@ table td {
 }
 .item .foto img {
     width:183px;
+    margin-top: 5px;
 }
 .item .item_tags {float:left;}
 .item .item_tags .tag_item {

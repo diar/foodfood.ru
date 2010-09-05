@@ -17,7 +17,7 @@
         <div class="echo">
             <div class="caption green">
                 <div class="title text_shadow">
-                    <a href="#">
+                    <a href="/{//site/city}/restaurant/{dish/item[1]/rest_uri}">
                         <xsl:value-of select="title" />
                     </a>
                 </div>
@@ -67,8 +67,7 @@
                 <xsl:value-of select="description" />
             </div>
             <div class="portions">
-                <xsl:apply-templates select="portions/item" /> гр.
-
+                <xsl:apply-templates select="portions/item" />
             </div>
             <div class="price">
                 <div class="new">
