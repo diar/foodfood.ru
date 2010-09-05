@@ -158,7 +158,7 @@
                     </div>
                     <div class="clear"></div>
                     <ul>
-                        <xsl:call-template name="dostavka" />
+                        <xsl:apply-templates select="orders/item" />
                     </ul>
                 </td>
             </tr>
@@ -380,10 +380,10 @@
     </xsl:template>
 
     <!-- Список Доставки -->
-    <xsl:template name="dostavka">
+    <xsl:template match="orders/item">
         <li class="dostavka_li">
-            <span>15.07</span>
-            <a href="">Суши Маки</a>
+            <span><xsl:value-of select="date_format" /></span>
+            <a href=""><xsl:value-of select="text_small" /></a>
         </li>
     </xsl:template>
 

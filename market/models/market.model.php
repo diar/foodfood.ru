@@ -59,19 +59,23 @@ class MD_Market extends Model {
         }
         foreach ($partners as $rest_id => $partner) {
             $dishes = array();
+            $dishes_small = array();
             foreach ($partner as $dish) {
                 $portions_text = '';
                 foreach ($dish['portions'] as $portion) {
                     $portions_text.=$portion['portion'] . ' гр. - ' . $portion['count'] . ' шт.; ';
                 }
                 $dishes[] = $dish['title'] . ' (' . $portions_text . ') ';
+                $dishes_small[] = $dish['title'];
             }
             $dishes_text = implode(', ', $dishes);
+            $dishes_small_text = implode(', ', $dishes_small);
 
             // Добавляем заказ в логи
             DB::insert(Model::getPrefix() . 'market_orders', array(
                         'rest_id' => DB::quote($rest_id),
                         'text' => DB::quote($dishes_text),
+                        'text_small' => DB::quote($dishes_small_text),
                         'status' => DB::quote('Принят'),
                         'start_time' => 'NOW()',
                         'address' => DB::quote($address),

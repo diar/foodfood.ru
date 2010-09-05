@@ -46,16 +46,19 @@ class index_Page extends View {
         $new_rest = MD_Restaurant::getNew();
         // Получаем список последних новостей
         $news = MD_News::getAll(null, 'id DESC LIMIT 0,5');
-        // Получаем список статей и афиш
+        // Получаем список блогов и афиш
         $blogs = MD_Article::getBlogBlocks(array('count' => 20));
         $posters = MD_Poster::getPosterBlocksWeek(array('count' => 15));
         // Получаем список скидок
         $discounts = MD_Discount::getDiscountBlock(array('count' => 7));
         // Получаем список отзывов
         $reviews = MD_Restaurant::getRestaurantsReviews(array('count' => 4));
+        // Получаем список последних заказов
+        $orders = MD_Market::getOrders(array('count' => 4));
         // Добавляем переменные xslt
         self::$page['content']['reviews'] = $reviews;
         self::$page['content']['blogs'] = $blogs;
+        self::$page['content']['orders'] = $orders;
         self::$page['content']['discounts'] = $discounts;
         self::$page['content']['posters'] = $posters;
         self::$page['content']['recomended'] = $recomended;
