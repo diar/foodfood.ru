@@ -262,12 +262,12 @@ $(document).ready(function () {
     // Получить скидку
     $('#discount_submit').click(function(){
         name = $('#discount_name').val();
-        phone = $('#discount_phone').val();
+     	phone_number = $('#discount_phone').val();
         email = $('#discount_mail').val();
         $('#discount_loader').show();
         $.post('/'+site_city+'/discount/get/'+$(this).attr('partner')+'/',{
             'name':name,
-            'phone':phone,
+            'phone':phone_number,
             'email':email
         }, function (data) {
             $('#discount_loader').hide();
