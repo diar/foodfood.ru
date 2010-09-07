@@ -22,6 +22,7 @@ class MD_Sms extends Model {
      */
     public static function sendSms($phone, $text) {
         $result = Sms::sendSms($phone, $text);
+        echo $result;
         if (!empty($result) && !empty($result['status'])) {
             self::add(array(
                         'sms_phone' => $phone,

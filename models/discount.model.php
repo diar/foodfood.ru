@@ -134,9 +134,10 @@ class MD_Discount extends Model {
         );
 
         self::upd(array('discount_count' => 'discount_count-1'),'rest_id='.DB::quote($rest_id),false);
-
+        
         $sms_text = $partner_uri.', скидка '.$partner['discount_percent'].'%. До '.
                 date('d.m.Y',time()+60*60*24).'. № '.$sms_code['discount_counter'].' код '.$code;
+
         $result=MD_Sms::sendSms($phone, $sms_text);
 
         if ($result) {

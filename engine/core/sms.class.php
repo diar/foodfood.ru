@@ -91,6 +91,7 @@ class Sms {
      * @return array
      */
     public static function sendSmsByPost ($phone,$text) {
+ 
         $text=$text;
         $phone=$phone;
         $login=self::$_login;
@@ -105,8 +106,8 @@ class Sms {
             <to number='$phone'></to>
             <source>$sender</source>
         </data>";
-        $curl = curl_init();
 
+        $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_URL, 'https://transport.sms-pager.com:7214/send.xml');
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
