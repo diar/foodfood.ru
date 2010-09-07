@@ -37,7 +37,7 @@ class Sms {
      * @return array
      */
     public static function sendSms ($phone,$text) {
-        return self::sendSmsByGet ($phone,$text);
+        return self::sendSmsByPost ($phone,$text);
     }
 
     /**
@@ -81,6 +81,49 @@ class Sms {
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * Отправляет текстовое сообщение, с помощью POST
+     * @param string $phone номер телефона
+     * @param string $text текст сообщения
+     * @param string $sender отправитель
+     * @return array
+     */
+    public static function sendSmsByPost ($phone,$text) {
+        $text=$text;
+        $phone=$phone;
+        $login=self::$_login;
+        $password=self::$_password;
+        $sender=self::$_sender;
+
+        $xmlCode = "<?xml version='1.0' encoding='UTF-8'?><data>
+            <login>$login</login>
+            <password>$password</password>
+            <action>send</action>
+            <text>$text</text>
+            <to number='$phone'></to>
+            <source>$sender</source>
+        </data>";
+        $curl = curl_init();
+
+
+        curl_setopt($curl, CURLOPT_URL, 'https://transport.sms-pager.com:7214/send.xml');
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $xmlCode);
+        $res = curl_exec($curl);
+        if (!$res) {
+            $error = curl_error($curl) . '(' . curl_errno($curl) . ')';
+            $response['status'] == $error;
+            return $response;
+        } else {
+            $response['status'] == 'accepted';
+            return $response;
+        }
+        
     }
 
     /**

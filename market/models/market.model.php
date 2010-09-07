@@ -93,7 +93,7 @@ class MD_Market extends Model {
             if (!empty($admin['partner_phones'])) {
                 $phones = explode(',', $admin['partner_phones']);
                 foreach ($phones as $admin_phone) {
-                    MD_Sms::sendSms($admin_phone, $sms_text);
+                    MD_Sms::sendSms($admin_phone, $text);
                 }
             }
         }
