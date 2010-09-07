@@ -91,6 +91,7 @@ class Sms {
      * @return array
      */
     public static function sendSmsByPost ($phone,$text) {
+        
         $text=$text;
         $phone=$phone;
         $login=self::$_login;
@@ -115,13 +116,14 @@ class Sms {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $xmlCode);
         $res = curl_exec($curl);
+      
         if (!$res) {
             $error = curl_error($curl) . '(' . curl_errno($curl) . ')';
-            $response['status'] == $error;
-            return $response;
+            $return['status'] == $error;
+            return $return;
         } else {
-            $response['status'] == 'accepted';
-            return $response;
+            $return['status'] = 'accepted';
+            return $return;
         }
         
     }
