@@ -35,7 +35,6 @@
           <a class="item {if $sMenuHeadItemSelect=='blog'}current{/if}" href="/blog">Блоги</a>
           <a class="item" href="/market/">Доставка</a>
           <a class="item" href="/kazan/persons">FF люди</a>
-          <a class="item" href="/kazan/auth/">Конкурс</a>
         </div>
 		<div style="clear:both;">
 		<div class="nav-main">

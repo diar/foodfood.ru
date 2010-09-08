@@ -91,7 +91,7 @@ class Sms {
      * @return array
      */
     public static function sendSmsByPost ($phone,$text) {
- 
+
         $text=$text;
         $phone=$phone;
         $login=self::$_login;
@@ -106,8 +106,8 @@ class Sms {
             <to number='$phone'></to>
             <source>$sender</source>
         </data>";
-
         $curl = curl_init();
+
 
         curl_setopt($curl, CURLOPT_URL, 'https://transport.sms-pager.com:7214/send.xml');
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
@@ -116,15 +116,16 @@ class Sms {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $xmlCode);
         $res = curl_exec($curl);
+
         if (!$res) {
             $error = curl_error($curl) . '(' . curl_errno($curl) . ')';
-            $response['status'] == $error;
-            return $response;
+            $return['status'] == $error;
+            return $return;
         } else {
-            $response['status'] == 'accepted';
-            return $response;
+            $return['status'] = 'accepted';
+            return $return;
         }
-        
+
     }
 
     /**

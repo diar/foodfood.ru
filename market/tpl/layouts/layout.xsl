@@ -89,10 +89,12 @@
     <xsl:template match="header">
         <div id="header">
             <div id="logo">
-                <a href="/market/">
-                    <img src="/market/public/images/logo.png" />
+                <a href="/"  title="Кафе и рестораны Казани">
+                    <img src="/public/images/logo.png" alt="Настроение есть!" />
                 </a>
             </div>
+           
+            <div class="clear"></div>
         </div>
         <div id="topMenu">
             <xsl:apply-templates select="../menu/item" />
