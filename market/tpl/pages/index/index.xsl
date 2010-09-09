@@ -24,23 +24,31 @@
     
     <xsl:template match="content">
         <div class="navigation rounded">
-            <div class="back"></div>
-            <div class="menu">
-                <ul>
-                    <xsl:apply-templates select="menu_types/item" />
-                </ul>
-            </div>
-            <div class="pages">Страничка 1 из 5</div>
-            <div class="next"></div>
+            
         </div>
-        <div id="menu_list">
-            <!-- Сюда загружается страница с блюдами -->
-        </div>
-        <div class="navigation rounded">
-            <div class="back"></div>
-            <div class="pages">Страничка 1 из 5</div>
-            <div class="next"></div>
-        </div>
+        <table id="main_table">
+            <tr>
+                <td class="menu_col">
+                    <div class="menu">
+                        <h3>Категории</h3>
+                        <ul id="menu_types">
+                                <xsl:apply-templates select="menu_types/item" />
+                        </ul>
+                        <h3>Рестораны</h3>
+                        <ul id="rest_menu">
+                            <xsl:apply-templates select="rest_menu/item" />
+                        </ul>
+                    </div>
+                </td>
+                <td class="dish_col">
+                    <div id="menu_list">
+                        <!-- Сюда загружается страница с блюдами -->
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+        
     </xsl:template >
 
     <xsl:template match="locations/item">
@@ -49,6 +57,10 @@
 
     <xsl:template match="menu_types/item">
         <li id="{id}"><a href="#" ><xsl:value-of select="title" /></a></li>
+    </xsl:template>
+
+    <xsl:template match="rest_menu/item">
+        <li><a href="#" rel="{id}"><xsl:value-of select="rest_title"  /></a></li>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -17,14 +17,15 @@ $(document).ready(function () {
     });
 
     // Выбор типа меню
-    $('.navigation .menu li').click(function(){
-        $('.navigation .menu li.active').removeClass('active');
+    $('#menu_types li').click(function(){
+        $('#menu_types li.active').removeClass('active');
         $(this).addClass('active');
         current_menu_type_id = $(this).attr('id');
         search_start();
+        return false;
     });
     // Выбираем первый тип меню
-    $('.navigation .menu li').first().click();
+    $('#menu_types li').first().click();
 
     /* ---------------------------------------------------------------------
      * Если находимся на странице вывода блюда
@@ -91,6 +92,37 @@ $(document).ready(function () {
                     'width':'show'
                 },200);
             }
+        });
+        // Ставим цену в зависимости от порции
+
+        current_portion = $('#portions input[checked=checked]').val();
+        $('#price_text').html($('#portions input[checked=checked]').attr('rel'));
+        $('#to_trash_portion').html(current_portion);
+        $('#portions input').click(function(){
+           $('#price_text').html( $(this).attr('rel'));
+           $('#to_trash_portion').html($(this).val());
+        });
+        $("#to_trash").click(function(){
+                portion = $("#to_trash_portion").html();
+                dish_id = $("#to_trash_dish_id").html();
+                price = $('#price_text').html();
+                title = $('h1.title').html();
+                rest_id = $('#to_trash_rest_id').html();
+                $.post('/market/'+site_city+'/index/add/',
+                {
+                    'dish_id':dish_id,
+                    'price':price,
+                    'title':title,
+                    'portion':portion,
+                    'rest_id':rest_id
+                },function(data){
+                    $('.trash .order').show();
+                    $('.trash_description').html(data);
+                    $('.trash .rub').html(
+                        $('.trash_description .price').html()+'<sup> руб.</sup>'
+                    );
+                });
+                        return false;
         });
     }
 });

@@ -339,13 +339,10 @@ table td {
 /********************************* ITEM ******************************/
 
 .item  {
-    float:left;
-    margin:10px 30px 5px 0;
-    width:205px;
-    height: 344px;
+
 }
 .item .title {
-    margin:3px 0;
+   
 }
 .item .foto {
     margin-top: 8px;
@@ -357,14 +354,7 @@ table td {
     width:183px;
     margin-top: 5px;
 }
-.item .item_tags {float:left;}
-.item .item_tags .tag_item {
-    width:18px;
-    height:18px;
-    background:#999999;
-    float:left;
-    margin:1px;
-}
+
 .item .reviews {float:right;font-size:10px;color: #ff6600;}
 .item .reviews_number {float: left; color: #ff6600; font-size:10px;}
 .item .description {
@@ -390,26 +380,7 @@ table td {
     display: inline;
 }
 
-.item .price {
-    float:left;
-}
 
-.item .price .new {
-    color: #ff6600;
-    font-size:10px;
-    text-decoration:none;
-}
-
-.item .price .old {
-    font-size:12px;
-    text-decoration:line-through;
-}
-
-.item .price span {
-
-    font-size:25px;
-    
-}
 
 .item .get {float:right;}
 
@@ -428,26 +399,23 @@ table td {
 }
 
 .des_item .name {
-    float: left;
-    width: 150px;
-    text-align: right;
+    display: inline;
     font-weight: bold;
     padding-right: 10px;
 }
 .des_item .text {
-    float: left;
-    width: 300px;
+   display: inline;
+}
+#dish {
+    margin: 0 20px;
 }
 
-#dish_info .left_col {
-    float: left;
-    width: 360px;
+#dish_info .description {
+    width: 60%;
+    font-size: 16px;
+    line-height: 20px;
+    min-width: 400px;
 }
-
-#dish_info .center_col {
-    float: left;
-}
-
 #to_trash {
     background: 0;
     border: 0;
@@ -455,10 +423,12 @@ table td {
     height: 27px;
     background: url(/market/public/images/to_trash.jpg) no-repeat;
     color: #fff;
+    font-size: 15px;
 }
 
 .dish_reviews {
 margin:20px 0 10px;
+width: 400px;
 }
 .dish_reviews .caption {
 background:url("/public/images/icons/reviews_icon.jpg") no-repeat scroll 0 0 transparent;
@@ -470,8 +440,7 @@ line-height:30px;
 padding-left:50px;
 vertical-align:bottom;
 }
-.dish_reviews .review {
-}
+
 .dish_reviews .review {
 margin:10px 0;
 }
@@ -515,6 +484,135 @@ width:71px;
 .dish_reviews .form input:active {
 background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 1px 1px transparent;
 }
+
+
+
+/************************NEW
+    Оранжевый : #FF6600;
+    Зелёный : #009900;
+**************************/
+.menu {
+    padding: 20px;
+}
+.menu h3{
+color: #ff6600;
+font-size: 18px;
+font-family: Tahoma, Arial;
+
+}
+
+.menu ul {
+    padding: 10px;
+}
+
+.menu ul li {
+    padding: 3px 0;
+}
+.menu ul li a {
+    line-height: 18px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px #666 dashed;
+}
+.menu ul li a:hover {
+    border-bottom: 0;
+}
+
+#main_table {
+    width: 100%;
+}
+#main_table .menu_col {
+    width: 200px;
+    vertical-align: top;
+}
+#main_table .price_col {
+   
+    vertical-align: top;
+}
+
+#menu_list {
+    position: relative;
+}
+#menu_list .item{
+    display:inline;
+    float:left;
+    margin:3em 0 0 2em;
+    min-width:200px;
+    position:relative;
+    width:12.5em;
+    height: 290px;
+}
+#menu_list .item .foto{
+    width: 200px;
+}
+#menu_list .foto img {
+    width: 200px;
+    height: 200px;
+}
+#menu_list .item .title {
+    color: #009900;
+    font-size: 14px;
+}
+#menu_list .item .partner {
+    font-size: 10px;
+    line-height: 12px;
+    color: #999;
+}
+#menu_list .item .description {
+    
+}
+#menu_list .item .portion{
+    color: #999;
+}
+
+#menu_list .item .price {
+    font-size: 14px;
+}
+
+#portions {
+    padding-bottom: 20px;
+}
+#portions .name,#price .name {
+    font-size: 18px;
+    padding-bottom: 5px;
+    line-height: 32px;
+}
+#portions .text {
+    color: #333;
+    font-size: 16px;
+    line-height: 32px;
+}
+#portions .portion {
+    padding: 3px;
+}
+#price .name, #price .text {
+    float: left;
+    line-height: 32px;
+}
+#price .text {
+    padding-left: 10px;
+    color: #666;
+}
+#price .text span{
+    font-size: 18px;
+    color: #ff6600;
+}
+
+.dostavka_info {
+   font-size: 14px;
+   line-height: 20px;
+   width: 80%;
+   padding: 20px 0;
+}
+div.price_col {
+    padding: 20px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/*****************************************************/
 /******************************** CLASS *****************************/
 .font21px {
     font-size:21px;

@@ -26,39 +26,33 @@
         <div id="dish">
             <div class="dish_header rounded">
                 <!-- Ссылка на предыдущий ресторан -->
-                <div style="margin:0 auto; max-width:1600px;">
-                    <a href="#">
-                        <div class="back"></div>
-                    </a>
-                    <div>
-                        <div class="caption">
+                <div style="margin:0 auto; max-width:1600px;" class="caption">
                             <h1 class="title">
                                 <xsl:value-of select="title" />
                             </h1>
-                        </div>
-                        <a href="#">
-                            <div class="next"></div>
-                        </a>
+                </div>
+            </div>
+         </div>
+         <table id="main_table">
+            <tr>
+                <td class="menu_col" width="16%">
+                    <div class="menu">
+                        <h3>Категории</h3>
+                        <ul id="menu_types">
+                                <xsl:apply-templates select="menu_types/item" />
+                        </ul>
+                        <h3>Рестораны</h3>
+                        <ul id="rest_menu">
+                            <xsl:apply-templates select="rest_menu/item" />
+                        </ul>
                     </div>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <div class="clear marginTop20px"></div><div class="caption green">
-                <div class="title_rest">
-                    <a href="#">
-                        <xsl:value-of select="title" />
-                    </a>
-                </div>
-            </div>
-            <div class="delivery_desc">
-                Доставка заказа от 500 руб. — бесплатно, при заказе до 500 руб.
-                стоимость  доставки составляет 90 руб.
-            </div>
-            <div class="clear"></div>
+                </td>
+                <td class="dish_col" width="51%">
+                   <div class="clear"></div>
             <!-- Вывод  информации по ресторану -->
             <div id="dish_info">
                 <!-- Левая колонка -->
-                <div class="left_col">
+                
                     <div class="photos">
                         <div class="main_container">
                             <xsl:choose>
@@ -82,31 +76,16 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                </div>
+                
                 <!-- Средняя колонка -->
-                <div class="center_col">
+                
                     <div class="description">
-                        <div class="des_item">
-                            <div class="name">Описание:</div>
-                            <div class="text">Ветчина, куриное филе, шампиньоны, томаты, маслины, оливки, болгарский, перец, лук порей, ананас, креветки, семга с/с, раковые шейки, сыр «Моцарелла», соус «Цезарь», соус «Неаполитано», сыр «Пармезан», сыр «Дор-Блю», сыр «Маасдам», вешенки, морской коктейль, колбаса «Пепперони», ростбиф, колбаса «Наполи».</div>
-                        </div>
-                        <div class="des_item">
-                            <div class="name">Порция:</div>
-                            <div class="text">25 см.(290 гр.) / 32 см.(460 гр.)</div>
-                        </div>
-                        <div class="des_item">
-                            <div class="name">кКал:</div>
-                            <div class="text">10,5 кКал</div>
-                        </div>
-                        <div class="des_item">
-                            <div class="name">Цена:</div>
-                            <div class="text">500 руб. / 600 руб.</div>
-                        </div>
-                        <div class="des_item">
-                            <div class="name">&#160; </div>
-                            <div class="text"><input type="button" value="В корзину" id="to_trash" /></div>
-                        </div>
+                           <div class="text"><xsl:value-of select="description" /></div>
                     </div>
+                        
+                       
+                        
+                    
                         <div class="clear"></div>
                     <div class="dish_reviews">
                         <div class="caption">Отзывы</div>
@@ -130,10 +109,60 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="clear"></div>
-        </div>
+             </div>
+
+                </td>
+                <td width="33%" class="price_col">
+                        <div class="price_col">
+                            <xsl:choose>
+                              <xsl:when test="count(portion/item) = 1">
+                                <div id="portions">
+                                    <div class="name" style="float:left;">Порция:</div>
+                                    <div class="text" style="float:left;padding-left:10px;"><xsl:value-of select="portion" /></div>
+                                </div>
+                                <div class="clear"></div>
+                                <div id="price">
+                                    <div class="name">Цена:</div>
+                                    <div class="text"><span id="price_text"><xsl:value-of select="price" /></span> руб.</div>
+                                </div>
+                              </xsl:when>
+                              <xsl:otherwise>
+                                <div id="portions">
+                                    <div class="name">Порция</div>
+                                    <div class="text"><xsl:apply-templates select="portion/item" /></div>
+                                </div>
+                                <div id="price">
+                                    <div class="name">Цена:</div>
+                                    <div class="text"><span id="price_text"><xsl::value-of select="price" /></span> руб.</div>
+                                </div>
+                              </xsl:otherwise>
+                            </xsl:choose>
+                            <div class="clear"></div>
+                            <xsl:if test="calories != ''">
+                            <div class="des_item">
+                                <div class="name">кКал:</div>
+                                <div class="text"><xsl:value-of select="calories" /></div>
+                            </div>
+                            </xsl:if>
+                            <div class="clear"></div>
+                            <div class="hidden">
+                                <div id="to_trash_dish_id"><xsl:value-of select="market_menu_id" /></div>
+                                <div id="to_trash_portion"><xsl:value-of select="portion" /></div>
+                                <div id="to_trash_rest_id"><xsl:value-of select="rest_id" /></div>
+                            </div>
+                            <div class="text"><input type="button" value="В корзину" id="to_trash" /></div>
+
+                            <div class="dostavka_info">
+                                Доставка заказа от 500 руб. — бесплатно. <br />
+                                При заказе до 500 руб. стоимость  доставки составляет 90 руб.
+                            </div>
+                        </div>
+                </td>
+
+            </tr>
+        </table>
+            
+  
     </xsl:template>
 
     <!-- Список отзывов -->
@@ -167,5 +196,27 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
+
+    <xsl:template match="locations/item">
+        <option value="{id}"><xsl:value-of select="title" /></option>
+    </xsl:template>
+    
+    <xsl:template match="menu_types/item">
+        <li id="{id}"><a href="#" ><xsl:value-of select="title" /></a></li>
+    </xsl:template>
+
+    <xsl:template match="rest_menu/item">
+        <li><a href="#" rel="{id}"><xsl:value-of select="rest_title"  /></a></li>
+    </xsl:template>
+
+    <xsl:template match="portion/item">
+        <xsl:param name="pos" select="position()" />
+        <div class="portion"><input type="radio" name="portion" value="{.}" rel="{../../price/item[$pos]}" >
+            <xsl:if test="$pos = 1">
+                <xsl:attribute name="checked" value="checked" />
+            </xsl:if>
+        </input><xsl:value-of select="."  /> (<xsl:value-of select="../../second_portion/item[$pos]"  />)</div>
+    </xsl:template>
+
 
 </xsl:stylesheet>

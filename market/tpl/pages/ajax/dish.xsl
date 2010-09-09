@@ -7,68 +7,47 @@
                 doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
                 doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
     <xsl:template match="/">
-        <div class="tags">
-            <xsl:apply-templates select="//menu_tags/item" />
-        </div>
-        <xsl:apply-templates select="root/partners/item" />
+
+            <xsl:apply-templates select="root/dishes/item" />
+            <div class="clear"></div>
     </xsl:template>
 
-    <xsl:template match="partners/item">
-        <div class="echo">
-            <div class="caption green">
-                <div class="title text_shadow">
-                    <a href="/{//site/city}/restaurant/{dish/item[1]/rest_uri}">
-                        <xsl:value-of select="title" />
-                    </a>
-                </div>
-            </div>
-            <div class="delivery_desc">
-                Доставка заказа от 500 руб. — бесплатно, при заказе до 500 руб.
-                стоимость  доставки составляет 90 руб.
-            </div>
-            <div class="clear"></div>
-            <div class="list">
-                <xsl:apply-templates select="dish/item" />
-                <div class="clear"></div>
-            </div>
-        </div>
-        <div class="page_count" style="display:none;">
-            <xsl:value-of select="root/page_count" />
-        </div>
-    </xsl:template>
 
     <!-- Список блюд -->
-    <xsl:template match="dish/item">
+    <xsl:template match="dishes/item">
         <div class="item" id="dish_{market_menu_id}" rest_id="{rest_id}">
-            <div class="reviews_number">
-                <a href="#">7 отзывов</a>
-            </div>
-            <div class="reviews">
-                <a href="#">нет отзывов</a>
-            </div>
-            <div class="clear"></div>
             <div class="foto">
                 <xsl:choose>
                     <xsl:when test="img=''">
-                        <img src="/market/public/images/pizza.jpg" alt="{title}" />
+                        <img src="/public/images/rest_icon.jpg" alt="{title}" />
                     </xsl:when>
                     <xsl:otherwise>
+                        <img src="/public/images/rest_icon.jpg" alt="{title}" />
+                        <xsl:comment>
                         <img src="/upload/image/menu/{img}" alt="{title}" />
+                        </xsl:comment>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
             <div class="title">
-                <a href="#">
+                <a href="/market/{//site/city}/dish/{market_menu_id}">
                     <xsl:value-of select="title" />
                 </a>
+            </div>
+            <div class="partner">
+                <a href="/{//site/city}/restaurant/{rest_uri}">
+                        <xsl:value-of select="rest_title" />
+                    </a>
             </div>
             <div class="clear"></div>
             <div class="description">
                 <xsl:value-of select="description" />
             </div>
+            <xsl:comment>
             <div class="portions">
                 <xsl:apply-templates select="portions/item" />
             </div>
+            
             <div class="price">
                 <div class="new">
                     <span><xsl:value-of select="portions/item[1]/price" /></span>
@@ -80,6 +59,7 @@
                     <a href="#">Заказать</a>
                 </div>
             </div>
+            </xsl:comment>
 
             
         </div>
@@ -98,21 +78,15 @@
     <!-- Порции -->
     <xsl:template match="portions/item">
         
-        <span class='portion' rel='{price}'>
-            <xsl:if test="position() = 1">
-                <xsl:attribute name="class">
-                    portion active
-                </xsl:attribute>
-            </xsl:if>
+        <span class='portion'>
             <xsl:value-of select="portion" />
             <xsl:if test="second_portion !=''">
                 <span class="s_portion">
                        (<xsl:value-of select="second_portion" />)
                 </span>
-                
             </xsl:if>
-            <xsl:if test="position() != count(../item)"> <span> / </span></xsl:if>
+            -
         </span>
-        
+         <span class="price"><xsl:value-of select="price" /> р.</span><br />
     </xsl:template>
 </xsl:stylesheet>
