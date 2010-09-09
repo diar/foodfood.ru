@@ -113,19 +113,50 @@
 
                 </td>
                 <td width="33%" class="price_col">
-                        <div class="des_item">
-                            <div class="name">Порция:</div>
-                            <div class="text"><xsl:value-of select="portion" /></div>
+                        <div class="price_col">
+                            <xsl:choose>
+                              <xsl:when test="count(portion/item) = 1">
+                                <div id="portions">
+                                    <div class="name" style="float:left;">Порция:</div>
+                                    <div class="text" style="float:left;padding-left:10px;"><xsl:value-of select="portion" /></div>
+                                </div>
+                                <div class="clear"></div>
+                                <div id="price">
+                                    <div class="name">Цена:</div>
+                                    <div class="text"><span id="price_text"><xsl:value-of select="price" /></span> руб.</div>
+                                </div>
+                              </xsl:when>
+                              <xsl:otherwise>
+                                <div id="portions">
+                                    <div class="name">Порция</div>
+                                    <div class="text"><xsl:apply-templates select="portion/item" /></div>
+                                </div>
+                                <div id="price">
+                                    <div class="name">Цена:</div>
+                                    <div class="text"><span id="price_text"><xsl::value-of select="price" /></span> руб.</div>
+                                </div>
+                              </xsl:otherwise>
+                            </xsl:choose>
+                            <div class="clear"></div>
+                            <xsl:if test="calories != ''">
+                            <div class="des_item">
+                                <div class="name">кКал:</div>
+                                <div class="text"><xsl:value-of select="calories" /></div>
+                            </div>
+                            </xsl:if>
+                            <div class="clear"></div>
+                            <div class="hidden">
+                                <div id="to_trash_dish_id"><xsl:value-of select="market_menu_id" /></div>
+                                <div id="to_trash_portion"><xsl:value-of select="portion" /></div>
+                                <div id="to_trash_rest_id"><xsl:value-of select="rest_id" /></div>
+                            </div>
+                            <div class="text"><input type="button" value="В корзину" id="to_trash" /></div>
+
+                            <div class="dostavka_info">
+                                Доставка заказа от 500 руб. — бесплатно. <br />
+                                При заказе до 500 руб. стоимость  доставки составляет 90 руб.
+                            </div>
                         </div>
-                        <div class="des_item">
-                            <div class="name">Цена:</div>
-                            <div class="text"><xsl:value-of select="price" /></div>
-                        </div>
-                        <div class="des_item">
-                            <div class="name">кКал:</div>
-                            <div class="text"><xsl:value-of select="calories" /></div>
-                        </div>
-                        <div class="text"><input type="button" value="В корзину" id="to_trash" /></div>
                 </td>
 
             </tr>
@@ -177,5 +208,15 @@
     <xsl:template match="rest_menu/item">
         <li><a href="#" rel="{id}"><xsl:value-of select="rest_title"  /></a></li>
     </xsl:template>
+
+    <xsl:template match="portion/item">
+        <xsl:param name="pos" select="position()" />
+        <div class="portion"><input type="radio" name="portion" value="{.}" rel="{../../price/item[$pos]}" >
+            <xsl:if test="$pos = 1">
+                <xsl:attribute name="checked" value="checked" />
+            </xsl:if>
+        </input><xsl:value-of select="."  /> (<xsl:value-of select="../../second_portion/item[$pos]"  />)</div>
+    </xsl:template>
+
 
 </xsl:stylesheet>

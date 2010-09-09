@@ -44,17 +44,26 @@ class dish_Page extends View {
             $gen_count = 0;
             $gen_price = 0;
         }
-        // Получаем дополнительные параметры
-        $photos = MD_Menu::getDishPhotos($id);
+        //получаем меню.. Нужно вывести его layout
         $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1');
         $menu_types = MD_Menu::getMenuTypes();
+
+        // Подготавливаем вывод блюда
+        $dish = MD_Menu::get($id);
+        $dish['portion'] = explode("%", $dish['portion']);
+        $dish['price'] = explode("%", $dish['price']);
+        $dish['second_portion'] = explode("%", $dish['second_portion']);
+        // Получаем дополнительные параметры
+        $photos = MD_Menu::getDishPhotos($id);
+
         // Показываем страницу
         self::$page['trash']['description'] = $description;
         self::$page['trash']['count'] = $gen_count;
         self::$page['trash']['price'] = $gen_price;
         self::$page['content']['locations'] = $locations;
-        self::$page['content']['dish'] = MD_Menu::get($id);
-        Debug::dump(MD_Menu::get($id));
+        self::$page['content']['dish'] = $dish;
+
+        Debug::dump($dish);
         self::$page['content']['dish']['photos'] = $photos;
         self::$page['content']['dish']['menu_types'] = $menu_types;
         self::$page['content']['dish']['rest_menu'] = $rest_menu;

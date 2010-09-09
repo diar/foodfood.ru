@@ -423,6 +423,7 @@ table td {
     height: 27px;
     background: url(/market/public/images/to_trash.jpg) no-repeat;
     color: #fff;
+    font-size: 15px;
 }
 
 .dish_reviews {
@@ -491,7 +492,7 @@ background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 1px 
     Зелёный : #009900;
 **************************/
 .menu {
-    padding-left: 20px;
+    padding: 20px;
 }
 .menu h3{
 color: #ff6600;
@@ -567,6 +568,50 @@ font-family: Tahoma, Arial;
 #menu_list .item .price {
     font-size: 14px;
 }
+
+#portions {
+    padding-bottom: 20px;
+}
+#portions .name,#price .name {
+    font-size: 18px;
+    padding-bottom: 5px;
+    line-height: 32px;
+}
+#portions .text {
+    color: #333;
+    font-size: 16px;
+    line-height: 32px;
+}
+#portions .portion {
+    padding: 3px;
+}
+#price .name, #price .text {
+    float: left;
+    line-height: 32px;
+}
+#price .text {
+    padding-left: 10px;
+    color: #666;
+}
+#price .text span{
+    font-size: 18px;
+    color: #ff6600;
+}
+
+.dostavka_info {
+   font-size: 14px;
+   line-height: 20px;
+   width: 80%;
+   padding: 20px 0;
+}
+div.price_col {
+    padding: 20px 0;
+}
+
+.hidden {
+    display: none;
+}
+
 /*****************************************************/
 /******************************** CLASS *****************************/
 .font21px {
