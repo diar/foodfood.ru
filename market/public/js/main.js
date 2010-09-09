@@ -17,14 +17,15 @@ $(document).ready(function () {
     });
 
     // Выбор типа меню
-    $('.navigation .menu li').click(function(){
-        $('.navigation .menu li.active').removeClass('active');
+    $('#menu_types li').click(function(){
+        $('#menu_types li.active').removeClass('active');
         $(this).addClass('active');
         current_menu_type_id = $(this).attr('id');
         search_start();
+        return false;
     });
     // Выбираем первый тип меню
-    $('.navigation .menu li').first().click();
+    $('#menu_types li').first().click();
 
     /* ---------------------------------------------------------------------
      * Если находимся на странице вывода блюда

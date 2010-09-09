@@ -17,7 +17,6 @@
                 <meta name="description" content="{site/description}" />
                 <link rel="icon" type="image/vnd.microsoft.icon"  href="/public/images/favicon.ico" />
                 <link rel="stylesheet" type="text/css" href="/market/public/css/style.css" />
-                <link rel="stylesheet" type="text/css" href="/market/public/css/main.css" />
                 <link rel="stylesheet" type="text/css" href="/public/js/libs/lightbox/css/jquery.lightbox.css" />
                 <xsl:comment><![CDATA[[if IE]>
                 <link href="/public/css/ie.css" rel="stylesheet" type="text/css" />

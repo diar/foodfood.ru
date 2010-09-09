@@ -45,12 +45,14 @@ class index_Page extends View {
             $gen_count = 0;
             $gen_price = 0;
         }
+        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1');
         // Показываем страницу
         self::$page['trash']['description'] = $description;
         self::$page['trash']['count'] = $gen_count;
         self::$page['trash']['price'] = $gen_price;
         self::$page['content']['locations'] = $locations;
         self::$page['content']['menu_types'] = $menu_types;
+        self::$page['content']['rest_menu'] = $rest_menu;
         self::showXSLT('pages/index/index');
     }
 
@@ -89,9 +91,10 @@ class index_Page extends View {
             $current_tags = Array();
         }
         $menu_tags = MD_Menu::getMenuTags($current_tags);
-        $partners = MD_Menu::getDishByType($_POST['menu_type_id']);
+        
+        $dishes = MD_Menu::getDishByType($_POST['menu_type_id']);
         self::$page['site']['city'] = CityPlugin::getCity();
-        self::$page['partners'] = $partners;
+        self::$page['dishes'] = $dishes;
         self::$page['menu_tags'] = $menu_tags;
         self::showXSLT('pages/ajax/dish');
     }

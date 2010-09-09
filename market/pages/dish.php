@@ -46,13 +46,18 @@ class dish_Page extends View {
         }
         // Получаем дополнительные параметры
         $photos = MD_Menu::getDishPhotos($id);
+        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1');
+        $menu_types = MD_Menu::getMenuTypes();
         // Показываем страницу
         self::$page['trash']['description'] = $description;
         self::$page['trash']['count'] = $gen_count;
         self::$page['trash']['price'] = $gen_price;
         self::$page['content']['locations'] = $locations;
-        self::$page['content']['dish'] = MD_Menu::get(2);
+        self::$page['content']['dish'] = MD_Menu::get($id);
+        Debug::dump(MD_Menu::get($id));
         self::$page['content']['dish']['photos'] = $photos;
+        self::$page['content']['dish']['menu_types'] = $menu_types;
+        self::$page['content']['dish']['rest_menu'] = $rest_menu;
         self::showXSLT('pages/dish/view');
     }
 
