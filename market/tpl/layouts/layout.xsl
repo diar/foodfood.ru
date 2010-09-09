@@ -186,4 +186,8 @@
             <xsl:value-of select="$title" />
         </a>
     </xsl:template>
+
+    <xsl:template match="locations/item">
+        <option value="{id}"><xsl:value-of select="title" /></option>
+    </xsl:template>
 </xsl:stylesheet>

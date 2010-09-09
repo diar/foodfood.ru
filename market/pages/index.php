@@ -91,8 +91,7 @@ class index_Page extends View {
             $current_tags = Array();
         }
         $menu_tags = MD_Menu::getMenuTags($current_tags);
-        
-        $dishes = MD_Menu::getDishByType($_POST['menu_type_id']);
+        $dishes = MD_Menu::getDishByType($_POST['menu_type_id'],$_POST['location']);
         self::$page['site']['city'] = CityPlugin::getCity();
         self::$page['dishes'] = $dishes;
         self::$page['menu_tags'] = $menu_tags;

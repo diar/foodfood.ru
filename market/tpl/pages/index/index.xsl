@@ -48,11 +48,6 @@
             </tr>
         </table>
         
-        
-    </xsl:template >
-
-    <xsl:template match="locations/item">
-        <option value="{id}"><xsl:value-of select="title" /></option>
     </xsl:template>
 
     <xsl:template match="menu_types/item">

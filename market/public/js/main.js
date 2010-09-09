@@ -1,6 +1,7 @@
 var current_menu_type_id = 0;
 var tags_disable = false;
 var current_tags = '';
+var current_location = 1;
 
 var dish_photo_count = 0;
 var dish_photo_visible = 6;
@@ -14,6 +15,7 @@ $(document).ready(function () {
     });
     $('#locate_select').change( function(){
         $('.first_col .select').html($(this).find(':selected').html());
+        search_start();
     });
 
     // Выбор типа меню
@@ -128,9 +130,11 @@ $(document).ready(function () {
 });
 
 function search_start() {
+    current_location = $('#locate_select').val();
     $.post('/market/'+site_city+'/index/menu/',{
         'menu_type_id':current_menu_type_id,
-        'menu_tags':current_tags
+        'menu_tags':current_tags,
+        'location':current_location
     },function(data){
         $('#menu_list').html(data);
         tags_disable = false;

@@ -27,9 +27,9 @@
             <div class="dish_header rounded">
                 <!-- Ссылка на предыдущий ресторан -->
                 <div style="margin:0 auto; max-width:1600px;" class="caption">
-                            <h1 class="title">
-                                <xsl:value-of select="title" />
-                            </h1>
+                    <h1 class="title">
+                        <xsl:value-of select="title" />
+                    </h1>
                 </div>
             </div>
          </div>
@@ -83,10 +83,7 @@
                            <div class="text"><xsl:value-of select="description" /></div>
                     </div>
                         
-                       
-                        
-                    
-                        <div class="clear"></div>
+                    <div class="clear"></div>
                     <div class="dish_reviews">
                         <div class="caption">Отзывы</div>
                         <div class="reviews">
@@ -195,10 +192,6 @@
                      rel="/upload/image/market_photo/{../../id}/{src}" class="mini" />
             </xsl:when>
         </xsl:choose>
-    </xsl:template>
-
-    <xsl:template match="locations/item">
-        <option value="{id}"><xsl:value-of select="title" /></option>
     </xsl:template>
     
     <xsl:template match="menu_types/item">
