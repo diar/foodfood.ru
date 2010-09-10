@@ -108,6 +108,7 @@
                             <xsl:value-of select="//content/locations/item[1]/title" />
                         </div>
                         <select id="locate_select" class="clear_opacity">
+                            <option value="0">Выберите район</option>
                             <xsl:apply-templates select="//content/locations/item" />
                         </select>
                         <div class="remember">
