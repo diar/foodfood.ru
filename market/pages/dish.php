@@ -45,10 +45,9 @@ class dish_Page extends View {
             $gen_price = 0;
         }
         //получаем меню.. Нужно вывести его layout
-        $location_id = DB::escape($_COOKIE['market_location']);
-        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1 AND rest_location_id ='.$location_id);
         $menu_types = MD_Menu::getMenuTypes();
-        $current_location = !empty($_COOKIE['market_location']) ? $_COOKIE['market_location'] : 0;
+        $current_location = !empty($_COOKIE['market_location']) ? intval($_COOKIE['market_location']) : 0;
+        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1 AND rest_location_id ='.$current_location);
         // Подготавливаем вывод блюда
         $dish = MD_Menu::get($id);
         $dish['portion'] = explode("%", $dish['portion']);

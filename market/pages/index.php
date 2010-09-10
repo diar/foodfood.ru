@@ -45,9 +45,9 @@ class index_Page extends View {
             $gen_count = 0;
             $gen_price = 0;
         }
-        $location_id = DB::escape($_COOKIE['market_location']);
-        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1 AND rest_location_id ='.$location_id);
-        $current_location = !empty($_COOKIE['market_location']) ? $_COOKIE['market_location'] : 0;
+        $current_location = !empty($_COOKIE['market_location']) ? intval($_COOKIE['market_location']) : 0;
+        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1 AND rest_location_id ='.$current_location);
+        
         // Показываем страницу
         self::$page['trash']['description'] = $description;
         self::$page['trash']['count'] = $gen_count;
