@@ -230,7 +230,15 @@ class index_Page extends View {
     }
 
     public static function set_locationAjaxAction($id){
+<<<<<<< HEAD
         setcookie("market_location", $_POST['location'],time()+3600*24*20,"/");
+=======
+        if ($_POST['remember']=='true') {
+            setcookie("market_location", $_POST['location'],time()+3600*24*20,'/');
+        }else {
+            setcookie("market_location",null,time() - 3600,'/');
+        }
+>>>>>>> 563d4ea8b469312a0de5819c3f2f6dccfa9c11c0
     }
 
 }

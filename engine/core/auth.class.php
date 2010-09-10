@@ -87,7 +87,7 @@ class Auth {
             User::createSession_ls($sesssion,$key,$params['user_id']);
             // Записываем в куки
             if ($remember) {
-                setcookie('key',$key);
+                setcookie('key',$key,time()+3600*24*10,'/');
             }
             Session::set('user_id',$params['user_id']);
             unset($params['user_password']);
@@ -103,7 +103,7 @@ class Auth {
      * @return bool
      */
     public static function logout_ls () {
-        setcookie('key');
+        setcookie('key',$key,time()-3600,'/');
         Session::drop('user_id');
         return true;
     }
