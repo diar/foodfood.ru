@@ -63,7 +63,7 @@ class dish_Page extends View {
         self::$page['content']['locations'] = $locations;
         self::$page['content']['dish'] = $dish;
 
-        Debug::dump($dish);
+        //Debug::dump($_COOKIE);
         self::$page['content']['dish']['photos'] = $photos;
         self::$page['content']['dish']['menu_types'] = $menu_types;
         self::$page['content']['dish']['rest_menu'] = $rest_menu;

@@ -45,7 +45,8 @@ class index_Page extends View {
             $gen_count = 0;
             $gen_price = 0;
         }
-        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1');
+        $location_id = DB::escape($_COOKIE['market_location']);
+        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1 AND rest_location_id ='.$location_id);
         $current_location = !empty($_COOKIE['market_location']) ? $_COOKIE['market_location'] : 0;
         // Показываем страницу
         self::$page['trash']['description'] = $description;
@@ -229,7 +230,7 @@ class index_Page extends View {
     }
 
     public static function set_locationAjaxAction($id){
-        setcookie("market_location", $_POST['location'],time()+3600*24*20);
+        setcookie("market_location", $_POST['location'],time()+3600*24*20,"/");
     }
 
 }

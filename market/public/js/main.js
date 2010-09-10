@@ -15,6 +15,14 @@ $(document).ready(function () {
     });
     $('#locate_select').change( function(){
         $('.first_col .select').html($(this).find(':selected').html());
+        if ($('#remember_location').attr('checked') == true) {
+            current_location = $('#locate_select').val();
+            $.post('/market/'+site_city+'/index/set_location/',{
+                'location':current_location
+            },function(data){
+                //alert(data);
+            });
+        }
         search_start();
     });
 

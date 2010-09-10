@@ -514,8 +514,9 @@ font-family: Tahoma, Arial;
     color: #333;
     border-bottom: 1px #666 dashed;
 }
-.menu ul li a:hover {
+.menu ul li a:hover,.menu ul li.active a{
     border-bottom: 0;
+    color: #009900;
 }
 
 #main_table {

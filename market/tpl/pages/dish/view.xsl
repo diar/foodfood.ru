@@ -130,7 +130,7 @@
                                 </div>
                                 <div id="price">
                                     <div class="name">Цена:</div>
-                                    <div class="text"><span id="price_text"><xsl::value-of select="price" /></span> руб.</div>
+                                    <div class="text"><span id="price_text"><xsl:value-of select="price" /></span> руб.</div>
                                 </div>
                               </xsl:otherwise>
                             </xsl:choose>
