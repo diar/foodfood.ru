@@ -14,6 +14,13 @@
     </xsl:template >
 
     <!-- Код страницы -->
+    <!-- Код страницы -->
+    <xsl:template match="content">
+        <script type="text/javascript">
+            dish_page_activate = false;
+        </script>
+        <xsl:apply-templates select="dish" />
+    </xsl:template >
     
     <xsl:template match="content_old">
     	<div style="width:100%;text-align:center;font-size:32px; font-family:Tahoma,Arial;padding-top:40px;">
