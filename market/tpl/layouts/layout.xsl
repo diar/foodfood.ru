@@ -104,11 +104,20 @@
                     <td class="first_col">
                         <div class="font21px">Выбери район доставки</div>
                         <div class="font12px">Обратите внимание, что от района доставки зависит меню блюд.</div>
-                        <div class="select"><xsl:value-of select="//content/locations/item[1]/title" /></div>
+                        <div class="select">
+                            <xsl:value-of select="//content/locations/item[1]/title" />
+                        </div>
                         <select id="locate_select" class="clear_opacity">
                             <xsl:apply-templates select="//content/locations/item" />
                         </select>
-                        <div class="remember"><input type="checkbox" /> запомнить район</div>
+                        <div class="remember">
+                            <input id="remember_location" type="checkbox">
+                                <xsl:if test="//content/current_location!=0">
+                                    <xsl:attribute name="checked">true</xsl:attribute>
+                                </xsl:if>
+                            </input>
+                            запомнить район
+                        </div>
                     </td>
                     <td>
                         <div class="trash">
@@ -188,6 +197,11 @@
     </xsl:template>
 
     <xsl:template match="locations/item">
-        <option value="{id}"><xsl:value-of select="title" /></option>
+        <option value="{id}">
+            <xsl:if test="//content/current_location=id">
+                <xsl:attribute name="selected">true</xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="title" />
+        </option>
     </xsl:template>
 </xsl:stylesheet>

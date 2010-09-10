@@ -46,11 +46,13 @@ class index_Page extends View {
             $gen_price = 0;
         }
         $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1');
+        $current_location = !empty($_COOKIE['market_location']) ? $_COOKIE['market_location'] : 0;
         // Показываем страницу
         self::$page['trash']['description'] = $description;
         self::$page['trash']['count'] = $gen_count;
         self::$page['trash']['price'] = $gen_price;
         self::$page['content']['locations'] = $locations;
+        self::$page['content']['current_location'] = $current_location;
         self::$page['content']['menu_types'] = $menu_types;
         self::$page['content']['rest_menu'] = $rest_menu;
         self::showXSLT('pages/index/index');
@@ -224,6 +226,10 @@ class index_Page extends View {
                 'Все доставим за 40 минут, если пробок не будет. ' .
                 'Еще позвоним и все уточним, спасибо. ';
         echo $description;
+    }
+
+    public static function set_locationAjaxAction($id){
+        setcookie("market_location", $_POST['location'],time()+3600*24*20);
     }
 
 }
