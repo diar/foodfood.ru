@@ -135,7 +135,12 @@ class index_Page extends View {
                 $gen_count+=$item['count'];
             }
         }
-        $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+        if ($gen_price < 300)
+                $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+                '<span class="price">' . $gen_price . '</span> руб. ';
+
+        else
+             $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
                 '<span class="price">' . $gen_price . '</span> руб. ' .
                 'Все доставим за 40 минут, если пробок не будет. ' .
                 'Еще позвоним и все уточним, спасибо. ';
@@ -164,11 +169,17 @@ class index_Page extends View {
                 $gen_count+=$item['count'];
             }
         }
-        $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+        if ($gen_price < 300)
+                $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+                '<span class="price">' . $gen_price . '</span> руб. ';
+               
+        else
+             $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
                 '<span class="price">' . $gen_price . '</span> руб. ' .
                 'Все доставим за 40 минут, если пробок не будет. ' .
                 'Еще позвоним и все уточним, спасибо. ';
         echo $description;
+        
     }
 
     /*
@@ -190,7 +201,12 @@ class index_Page extends View {
                 $gen_count+=$item['count'];
             }
         }
-        $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+        if ($gen_price < 300)
+                $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+                '<span class="price">' . $gen_price . '</span> руб. ';
+
+        else
+             $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
                 '<span class="price">' . $gen_price . '</span> руб. ' .
                 'Все доставим за 40 минут, если пробок не будет. ' .
                 'Еще позвоним и все уточним, спасибо. ';
@@ -222,7 +238,12 @@ class index_Page extends View {
                 $gen_count+=$item['count'];
             }
         }
-        $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+        if ($gen_price < 300)
+                $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
+                '<span class="price">' . $gen_price . '</span> руб. ';
+
+        else
+             $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
                 '<span class="price">' . $gen_price . '</span> руб. ' .
                 'Все доставим за 40 минут, если пробок не будет. ' .
                 'Еще позвоним и все уточним, спасибо. ';

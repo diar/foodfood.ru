@@ -45,7 +45,7 @@ $(document).ready(function () {
         return false;
     });
     // Выбираем первый тип меню
-    $('#menu_types li').first().click();
+    if (!dish_page_activate)  $('#menu_types li').first().click();
 
     /* ---------------------------------------------------------------------
      * Если находимся на странице вывода блюда
@@ -148,6 +148,9 @@ $(document).ready(function () {
 });
 
 function search_start() {
+    $("#main_table td").removeAttr('width');
+    $("#main_table td.price_col").detach();
+    $("#main_table td.dish_col").empty().append("<div id='menu_list'></div>");
     current_location = $('#locate_select').val();
     $.post('/market/'+site_city+'/index/menu/',{
         'menu_type_id':current_menu_type_id,

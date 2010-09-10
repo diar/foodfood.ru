@@ -41,10 +41,12 @@
                         <ul id="menu_types">
                                 <xsl:apply-templates select="menu_types/item" />
                         </ul>
-                        <h3>Рестораны</h3>
-                        <ul id="rest_menu">
-                            <xsl:apply-templates select="rest_menu/item" />
-                        </ul>
+                        <xsl:if test="count(rest_menu/item)>1">
+                            <h3>Рестораны</h3>
+                            <ul id="rest_menu">
+                                <xsl:apply-templates select="rest_menu/item" />
+                            </ul>
+                        </xsl:if>
                     </div>
                 </td>
                 <td class="dish_col" width="51%">
