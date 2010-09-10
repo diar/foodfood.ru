@@ -9,6 +9,7 @@ var dish_photo_offset = 0;
 var dish_photo_position = 0;
 // Выполнение после загрузки на всех страницах
 $(document).ready(function () {
+
     // Выбор локации
     $('.first_col .select').click( function(){
         $('#locate_select').click();
@@ -16,6 +17,7 @@ $(document).ready(function () {
     $('#locate_select').change( function(){
         $('.first_col .select').html($(this).find(':selected').html());
         search_start();
+        change_location_remember ();
     });
 
     $('#locate_select option:selected').each(function(){
@@ -23,12 +25,7 @@ $(document).ready(function () {
     });
 
     $('#remember_location').click(function(){
-        current_location = $('#locate_select').val();
-        $.post('/market/'+site_city+'/index/set_location/',{
-            'location':current_location
-        },function(data){
-            //alert(data);
-        });
+        change_location_remember ();
     });
 
     // Выбор типа меню
@@ -229,4 +226,13 @@ function comment_dish(rest_id,text,to_admin){
             else $.alert('Ошибка. Попробуйте еще раз',true);
         });
     }
+}
+
+
+function change_location_remember () {
+    current_location = $('#locate_select').val();
+    $.post('/market/'+site_city+'/index/set_location/',{
+        'location':current_location,
+        'remember':$('#remember_location').attr('checked')
+    });
 }
