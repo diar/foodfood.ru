@@ -45,7 +45,7 @@ $(document).ready(function () {
         return false;
     });
     // Выбираем первый тип меню
-    if (!dish_page_activate)  $('#menu_types li').first().click();
+    if (typeof(dish_page_activate) == 'undefined')  $('#menu_types li').first().click();
 
     /* ---------------------------------------------------------------------
      * Если находимся на странице вывода блюда
