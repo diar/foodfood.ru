@@ -22,10 +22,9 @@
                         <img src="/public/images/rest_icon.jpg" alt="{title}" />
                     </xsl:when>
                     <xsl:otherwise>
-                        <img src="/public/images/rest_icon.jpg" alt="{title}" />
-                        <xsl:comment>
+                        
                         <img src="/upload/image/menu/{img}" alt="{title}" />
-                        </xsl:comment>
+                      
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
