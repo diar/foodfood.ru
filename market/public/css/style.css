@@ -139,7 +139,7 @@ table td {
     vertical-align:top;
 }
 #info_block .first_col {
-    padding-left:20px;
+    padding-left:40px;
 
 }
 .select {
@@ -493,6 +493,7 @@ background:url("/public/images/submit_button_reviews.jpg") no-repeat scroll 1px 
 **************************/
 .menu {
     padding: 20px;
+    padding-left: 40px;
 }
 .menu h3{
 color: #ff6600;
@@ -553,7 +554,7 @@ font-family: Tahoma, Arial;
 #menu_list .item .title {
     color: #009900;
     font-size: 14px;
-    padding: 2px 0;
+    padding: 3px 0;
 }
 #menu_list .item .partner {
     font-size: 10px;
