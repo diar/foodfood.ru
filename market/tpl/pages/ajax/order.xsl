@@ -26,7 +26,16 @@
         <table class="gen_price">
             <tr>
                 <td style="text-align:right;">Доставка :</td>
-                <td style="font-weight:normal;">бесплатно</td>
+                <td style="font-weight:normal;">
+                            <xsl:choose>
+                                <xsl:when test='//trash/price > 500'>
+                                    Бесплатно
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    90 рублей
+                                </xsl:otherwise>
+                            </xsl:choose>
+                </td>
             </tr>
             <tr>
                 <td style="text-align:right;">Итого :</td>

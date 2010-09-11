@@ -71,6 +71,7 @@ class index_Page extends View {
                 $gen_price+=$item['price'] * $item['count'];
             }
         }
+        if ($gen_price < 500) $gen_price += 90;
         self::$page['trash'] = $trash;
         self::$page['trash']['price'] = $gen_price;
         self::showXSLT('pages/ajax/order');
