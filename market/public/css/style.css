@@ -139,8 +139,7 @@ table td {
     vertical-align:top;
 }
 #info_block .first_col {
-    padding-left:20px;
-
+    padding-left:40px;
 }
 .select {
     background:url(/market/public/images/select_new.jpg) no-repeat;
