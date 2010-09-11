@@ -319,31 +319,9 @@ function remove_anchor () {
 
 function check_anchor () {
     anchor = get_anchor ();
-    if (anchor.match(/mood-.*/i)) {
-        current_mood = anchor.replace(/mood-/,'');
-        $('.restaurant_navigate .caption').html(
-            'Настроение : '+$("#moods .icon[uri='"+current_mood+"'] .caption").html()
-            );
-        $("#moods .icon[uri='"+current_mood+"']").addClass('active');
-        current_search = 'moods';
-        search_start();
-    }else if (anchor.match(/char-.*/i)) {
-        current_char = anchor.replace(/char-/,'');
-        $('#moods_container, #search_container, #random_container, #all_container').animate({
-            'height':'hide'
-        },200);
-        $('#chars_container').animate({
-            'height':'show'
-        },200);
-        $('.restaurant_navigate .caption').html(
-            'Поиск по букве : '+current_char
-            );
-        $("#chars .item").each(function(){
-            if ($(this).html()==current_char) {
-                $(this).addClass('current').addClass('rounded');
-            }
-        });
-        current_search = 'chars';
+    if (anchor.match(/category-.*/i)) {
+        current_menu_type_id = anchor.replace(/category-/,'');
+        $('#menu_types #cat-'+current_menu_type_id).addClass('active');
         search_start();
     }
 }

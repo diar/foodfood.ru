@@ -28,12 +28,16 @@ $(document).ready(function () {
     $('#menu_types li').click(function(){
         $('#menu_types li.active').removeClass('active');
         $(this).addClass('active');
-        current_menu_type_id = $(this).attr('id');
+        current_menu_type_id = $(this).attr('id').replace('cat-','');
+        set_anchor('category-'+current_menu_type_id);
         search_start();
         return false;
     });
     // Выбираем первый тип меню
-    if (typeof(dish_page_activate) == 'undefined' || dish_page_activate=='')  $('#menu_types li').first().click();
+    if (typeof(dish_page_activate) == 'undefined' || dish_page_activate=='')  {
+        if (current_menu_type_id==0)
+            $('#menu_types li').first().click();
+    }
 
     /* ---------------------------------------------------------------------
      * Если находимся на странице вывода блюда

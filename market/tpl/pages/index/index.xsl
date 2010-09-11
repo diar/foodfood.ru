@@ -51,7 +51,7 @@
     </xsl:template>
 
     <xsl:template match="menu_types/item">
-        <li id="{id}"><a href="#" ><xsl:value-of select="title" /></a></li>
+        <li id="cat-{id}"><a href="#" ><xsl:value-of select="title" /></a></li>
     </xsl:template>
 
     <xsl:template match="rest_menu/item">
