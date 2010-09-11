@@ -16,24 +16,12 @@ $(document).ready(function () {
     });
     $('#locate_select').change( function(){
         $('.first_col .select').html($(this).find(':selected').html());
-        if ($('#remember_location').attr('checked') == true) {
-            current_location = $('#locate_select').val();
-            $.post('/market/'+site_city+'/index/set_location/',{
-                'location':current_location
-            },function(data){
-                //alert(data);
-            });
-        }
-        search_start();
         change_location_remember ();
+        search_start();
     });
 
     $('#locate_select option:selected').each(function(){
         $('.first_col div.select').html($(this).html());
-    });
-
-    $('#remember_location').click(function(){
-        change_location_remember ();
     });
 
     // Выбор типа меню
@@ -45,7 +33,7 @@ $(document).ready(function () {
         return false;
     });
     // Выбираем первый тип меню
-    if (typeof(dish_page_activate) == 'undefined')  $('#menu_types li').first().click();
+    if (typeof(dish_page_activate) == 'undefined' || dish_page_activate=='')  $('#menu_types li').first().click();
 
     /* ---------------------------------------------------------------------
      * Если находимся на странице вывода блюда
@@ -243,7 +231,6 @@ function comment_dish(rest_id,text,to_admin){
 function change_location_remember () {
     current_location = $('#locate_select').val();
     $.post('/market/'+site_city+'/index/set_location/',{
-        'location':current_location,
-        'remember':$('#remember_location').attr('checked')
+        'location':current_location
     });
 }

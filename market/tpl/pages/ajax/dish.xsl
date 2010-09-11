@@ -17,16 +17,16 @@
     <xsl:template match="dishes/item">
         <div class="item" id="dish_{market_menu_id}" rest_id="{rest_id}">
             <div class="foto">
-                <xsl:choose>
-                    <xsl:when test="img=''">
-                        <img src="/public/images/rest_icon.jpg" alt="{title}" />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        
-                        <img src="/upload/image/menu/{img}" alt="{title}" />
-                      
-                    </xsl:otherwise>
-                </xsl:choose>
+                <a href="/market/{//site/city}/dish/{market_menu_id}">
+                    <xsl:choose>
+                        <xsl:when test="img=''">
+                            <img src="/public/images/rest_icon.jpg" alt="{title}" />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <img src="/upload/image/menu/{img}" alt="{title}" />
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </a>
             </div>
             <div class="title">
                 <a href="/market/{//site/city}/dish/{market_menu_id}">

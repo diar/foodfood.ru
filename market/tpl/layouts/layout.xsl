@@ -111,14 +111,6 @@
                             <option value="0">Выберите район</option>
                             <xsl:apply-templates select="//content/locations/item" />
                         </select>
-                        <div class="remember">
-                            <input id="remember_location" type="checkbox">
-                                <xsl:if test="//content/current_location!=0">
-                                    <xsl:attribute name="checked">true</xsl:attribute>
-                                </xsl:if>
-                            </input>
-                            запомнить район
-                        </div>
                     </td>
                     <td>
                         <div class="trash">

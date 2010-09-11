@@ -553,6 +553,7 @@ font-family: Tahoma, Arial;
 #menu_list .item .title {
     color: #009900;
     font-size: 14px;
+    padding: 2px 0;
 }
 #menu_list .item .partner {
     font-size: 10px;
