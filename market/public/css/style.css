@@ -139,7 +139,7 @@ table td {
     vertical-align:top;
 }
 #info_block .first_col {
-    padding-left:40px;
+    padding-left:20px;
 
 }
 .select {
@@ -346,7 +346,7 @@ table td {
 }
 .item .foto {
     margin-top: 8px;
-    height: 180px;
+    height: 220px;
     display: table-cell;
     vertical-align: middle;
 }
