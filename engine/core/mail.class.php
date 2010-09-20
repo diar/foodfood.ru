@@ -16,10 +16,25 @@ class Mail {
     }
 
     /**
+     * Отправка стандартными средствами через mail()
+     * return mail();
+     */
+    public static function newMail ($message,$to,$subject) {
+        // To send HTML mail, the Content-type header must be set
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+
+        // Additional headers
+        $headers .= 'To: '.$to. "\r\n";
+        $headers .= 'From: FoodFood <noreply@foodfood.ru>' . "\r\n";
+        mail($to, $subject, $message, $headers);
+    }
+
+    /**
      * Создание класса отправки e-mail
      * @return PHPMailer
      */
-    public static function newMail ($body,$address,$subject) {
+    public static function newMailWithMailer ($body,$address,$subject) {
         $mail = new PHPMailer ();
         $mail->IsMail();
         $mail->SetFrom('noreply@foodfood.ru', Config::getValue('site','name'));
