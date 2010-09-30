@@ -348,8 +348,15 @@ class AdminModule {
     public static function showTemplate($html=null) {
 
         $tree = DBP::getRecords('market_tree');
+                //Начинаем с начальной строки
+        mysql_connect('localhost','root','150878');
+        mysql_select_db('foodfood');
+
+         self::get_tree();
+
+        //echo $tree_items;
         Debug::dump($tree);
-        self::tree($tree, 0);
+        //self::tree($tree, 0);
         //self::prepareTree(& $tree);
         View::assign('tree', $tree);
         View::assign('pageTitle', self::getTitle());
@@ -358,29 +365,27 @@ class AdminModule {
         View::display('admin.tpl');
     }
 
-    public static function tree(&$data, $node_id, $lvl = 0) {
-        switch ($lvl) {
-            // для каждой категории может быть действие (напр. присвоить id)
-            case 0:
-                $html = '<option style="font-weight:bolder;" disabled>- КОРЕНЬ -</strong>' . "\n";
-                break;
-            default:
-                // str_repeat делает отступ слева, в зависимости от уровня кат-ии. Это наглядно показывает юзеру родителя категории и его дочерний элемент. А если кат-я самая "верхняя", она выделяется стилем font-weight:bold
-                $html = '<option ' . ($data[$node_id]['parent_id'] == 0 ? 'style="font-weight:bold;' : '') . ' value="' . $data[$node_id]['id'] . '">' . str_repeat('&nbsp;&nbsp;', $lvl) . $data[$node_id]['title'] . '</option>' . "\n";
-        }
-        echo $html;
+    
 
-        // рекурсия
-        foreach ($data as $row)
-            if ($row['parent_id'] == $node_id)
-                self::tree($data, $row['id'], $lvl + 1);
+    public static  function get_tree($parent_id = 0) {
+      $query = "SELECT * FROM kazan_market_tree WHERE parent_id = '$parent_id'";
+      echo $query."<br>";
+
+      echo "<ul>";
+      $result = mysql_query($query);
+      while ($row = mysql_fetch_array($result)) {
+            echo "<li>".$row['title'];
+            self::get_tree($row['id']);  //идём дальше "внутрь" если
+//есть у данного id подуровни
+            echo "</li>";
+      }
+      echo "</ul>";
+      
+//Не хватает только начальной строки и конечной
     }
 
-    public static function prepareTree(& $array) {
-        foreach ($array as $k => $v) {
-            echo $k . '=>' . $v;
-        }
-    }
+
+
 
     public static function getActions() {
         return isset(static::$_actions) ? static::$_actions : self::$_actions;
