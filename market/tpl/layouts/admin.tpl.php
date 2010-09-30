@@ -3,7 +3,7 @@
     <head>
         <title><?=self::get('pageTitle');?> | Панель администратора</title>
         <link rel="stylesheet" type="text/css" href="/public/css/jquery-ui/flick/jquery-ui.css" />
-        <link rel="stylesheet" type="text/css" href="/admin/adminStyle.css" />
+        <link rel="stylesheet" type="text/css" href="/admin/admin.css" />
         <link rel="stylesheet" type="text/css" href="/public/js/libs/grid/jquery.jqGrid.css" />
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
@@ -19,101 +19,56 @@
         <script type="text/javascript" src="/engine/libs/filemanager/ajex.js"></script>
         <script type="text/javascript" src="/public/js/libs/grid/jquery.jqGrid.ru.js"></script>
         <script type="text/javascript" src="/public/js/libs/grid/jquery.jqGrid.min.js"></script>
+        <script type="text/javascript" src="/public/js/libs/jquery.ui.nestedSortable.js"></script>
+
     </head>
     <body>
+ <table>
+	<tr class="header">
+    	<td class="left">
+        	<div class="logo">
+				FF Market / CMS
+            </div>
+        </td>
+        <td class="margin"></td>
+        <td class="right">
+	       <div class="menu">
+				<a href="#">Настройки сайта</a><a href="#">Структура сайта</a><a href="#">Заказы</a><a href="#">Статистика</a>
+            </div>
+        </td>
+    </tr>
+    <tr class="menu">
+    	<td></td>
+        <td></td>
         <?php $admin = self::get('admin');?>
-        <div id="logout"><?=$admin['login']?>
-            <a href="admin.php?logout">Выйти</a>
+        <div id="logout">
         </div>
-        <table id="main_table">
-            <tr	id="header">
-                <td class="left"><img src="images/logo.png" /></td>
-                <td class="right" colspan="2">
-                    <div id="menu">
-                        <ul>
-                            <? $menu = self::get('menu');
-                            $z = 0;
-                            foreach ($menu as $item) : $z++;?>
+        <td class="lk_menu"><?=$admin['login']?>, <a href="admin.php?logout">Выйти</a></td>
+    </tr>
+    <tr class="body">
+    	<td class="left">
 
-                            <li><a href="#menu-<?=$z?>"><?=$item['title']?></a></li>
-
-                            <?endforeach;?>
-                        </ul>
-
-                        <? $z = 0;
-                        foreach ($menu as $item) : $z++; ?>
-
-                        <div id="menu-<?=$z?>" class="submenu">
-                            <ul>
-                                    <? foreach ($item['childs'] as $child) :?>
-                                <li class="item" rel="<?= $child['page'] ?>">
-                                    <a class="ui_button" href="<?=AdminModule::getLink($child['page'], $child['action'])?>"><?=$child['title']?></a>
-                                </li>
-                                    <? endforeach;?>
-                            </ul>
-                        </div>
-
-                        <? endforeach;?>
-                    </div>
-                </td>
-            </tr>
-            <tr id="content">
-                <td class="left">
-                    <div id="rest_change<?php if($admin['access'] != 'superadmin') echo'_non_modify';?>" class="rest_change">
-                        <?=!$admin['restaurant']['rest_title'] ? "Выберите ресторан" : $admin['restaurant']['rest_title'] ;?>
-                    </div>
-                    <?php if ($admin['access'] == 'superadmin') : ?>
-                    <ul id="pageMenu">
-                        <li><a href="<?=AdminModule::getLink('restaurants','showList') ?>">Список ресторанов</a> </li>
-                        <li><a href="<?=AdminModule::getLink('restaurants','add') ?>">Добавить ресторан</a> </li>
-                            <?php if ($pageMenu = self::get('pageMenu')) : ?>
-                                <? foreach ($pageMenu as $action => $title) : ?>
-                        <li><a href="<?=AdminModule::getLink(PAGE,$action) ?>"><?=$title?></a> </li>
-                                <? endforeach;?>
-                            <?endif;?>
-                    </ul>
-                    <?endif;?>
-                </td>
-                <td class="right">
-                    <div id="divToUpdate"></div>
-                    <?=self::get('html');?>
-                </td>
-            </tr>
-            <tr id="footer">
-                <td ></td>
-                <td ></td>
-            </tr>
-        </table>
-        <div id="rest_list">
-            <ul>
-                <?php
-                if ($admin['access'] == 'superadmin') {
-                    $list = self::get('rest_list');
-                    $z = 1;
-                    $s = '';
-                    foreach ($list as $rest) {
-
-                        $utf8string = mb_substr($rest['rest_title'],0,1,'UTF-8');
-                        //Если новая буква то выводим эту букву
-                        if ($s != $utf8string) {
-                            echo "<li class='liter'>$utf8string</li>";
-                            $z+=1.5;
-                        }
-                        $link = AdminModule::getLink('system','setRestaurant',$rest['id']);
-                        echo "<li><a href='$link'>$rest[rest_title] ($rest[rest_address])</a></li>";
-                        $z++;
-                        $s = $utf8string;
-                        if ($z / 90 > 1) {
-                            echo '</ul><ul>';
-                            $z = 0;
-                        }
-
-                    }
-                }
-                ?>
+            <ul class="menu">
+            	<li><a href="#" class="add_to_tree" rel="0">Добавить раздел</a></li>
             </ul>
-        </div>
 
+            <ul class="tree_menu" id="tree_menu">
+                <? $tree = self::get('tree');?>
+                <?foreach ($tree as $item):?>
+                <li rel="<?=$item['id']?>"><a href="#"><?=$item['title']?></a>
+                    <a href="#" class="add_to_tree" rel="<?=$item['id']?>"><img src="images/1.jpg" alt="Добавить раздел" /></a>
+                    <ul></ul></li>
+                <?endforeach; ?>
+            	</ul>
+        </td>
+        <td class="margin"></td>
+        <td class="right">
+        <div class="html">
+          <?=self::get('html');?>
+        </div>
+        </td>
+    </tr>
+</table>
 
     </body>
 </html>

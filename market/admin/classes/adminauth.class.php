@@ -33,17 +33,8 @@ class AdminAuth {
             $_SESSION['admin']['is_auth'] = true;
             $_SESSION['admin']['city_id'] = $admin['city_id'] == 0 ? $city_id : $admin['city_id'];
             $_SESSION['admin']['city_latin'] = DB::getValue('city_list', 'city_latin',"id = ".$_SESSION['admin']['city_id']);
-            $_SESSION['admin']['restaurant_id'] = DB::getValue(ADMIN_GROUP_TABLE,'restaurant_id','id = '.$admin['group_id']);
-            $_SESSION['admin']['restaurant'] = DBP::getRecord('rest','id='.$_SESSION['admin']['restaurant_id']);
-            $admin_access = self::getAdminAccessList($admin['group_id']);
-            if (!empty($admin_access) and sizeof($admin_access)>0) {
-                self::$_access=$admin_access;
-                $_SESSION['admin']['access']=$admin_access;
-            }
-            if ($_SESSION['admin']['access']=='superadmin') {
-               $_SESSION['admin']['restaurant_id'] = 1;
-                $_SESSION['admin']['restaurant'] = DBP::getRecord('rest','id=1');
-            }
+            $_SESSION['admin']['access'] = $_SESSION['admin']['group'];
+           
             return true;
         } else return false;
     }
