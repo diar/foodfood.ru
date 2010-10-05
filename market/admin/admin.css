@@ -1,0 +1,529 @@
+@charset "utf-8";
+/* CSS Document */
+
+:focus {outline:0;}
+ol,ul {list-style:none;}
+table {
+    border-collapse:collapse;border:none;
+    empty-cells:show;border-spacing:0;width:100%;
+}
+
+blockquote:before,blockquote:after,q:before,q:after {content:"";}
+blockquote,q {quotes:"" "";}
+a {text-decoration:underline;color:#000;font-size:inherit;color:inherit;}
+a:hover,a.no_decoration {text-decoration:none;}
+table td {margin:0;padding:0;}
+img {border:0;}
+img.es {padding:3px 15px 0 0;}
+body {
+	margin:0;
+	padding:0;
+	font-size:12px;
+	font-family:"Trebuchet MS", Tahoma;
+	min-width:1000px
+}
+
+
+
+/******************** BLOCKS ***********************/
+td.margin {
+	width:40px;
+}
+td.left {
+	width:220px;
+}
+
+.header td {
+	background:#000;
+}
+
+.header .logo{
+	color:#FFFFFF;
+	font-size:16px;
+	text-align:center;
+	width:161px;
+	padding-left:30px;
+}
+.header td.right {
+	text-align:right;
+}
+.header .banner {
+	margin-right:40px;	
+}
+.header .telephone {
+	margin-right:40px;	
+	padding:10px 0;
+}
+.header .telephone {
+	color:#fff;
+	font-size:14px;
+}
+
+.header .menu {
+	width:600px;
+	margin-right:40px;
+	padding:30px 0 30px 0;
+	float:right;
+	text-align:left;
+}
+.header .menu a{
+	color:#FFFFFF;
+	margin-right:10px;
+	font-size:14px;
+}
+
+
+tr.menu {
+	height:50px;
+}
+
+tr.body {
+}
+
+.body td.left,.body td.right {
+	vertical-align:top;
+}
+
+
+.left .leftPadding {
+	padding-left:30px;
+}
+.left #reg_enter {
+	color:#FFFFFF;
+	font-size:14px;
+	background:url(images/reg_enter_bg.jpg);
+	width:164px;
+	height:25px;
+	text-align:center;
+	padding-top:3px;
+	margin-left:13px;
+}
+
+.left #trash {
+	font-size:14px;
+	background:url(images/trash_icon.jpg) no-repeat 0 3px;
+	padding-left:40px;
+	display:none;
+}
+
+.left .lk {
+	padding-bottom:20px;
+	border-bottom:3px solid #86ae19;
+}
+
+ul.menu {
+	color: #86ae19;
+	padding-left:30px;
+	font-size:14px;
+	margin-bottom:9px;
+}
+ul.menu li {
+padding-bottom:6px;
+}
+
+ul.tree_menu {
+	font-size:14px;
+	margin:0;
+}
+ul.tree_menu li{
+	margin-left:-10px;
+	float:left;
+	clear:both;
+}
+ul.tree_menu li a.active {
+	padding: 0 20px 4px 0px;	
+	color:#666;
+	text-decoration:none;
+	cursor:default;
+}
+ul.tree_menu li ul {
+	font-size:12px;
+}
+ul.tree_menu li ul li {
+	padding:1px 0;
+}
+
+ul.tree_menu li ul a.active {
+	text-decoration:none;
+	cursor:default;
+	background:none;
+}
+
+/********************MAIN OUTPUT **********************/
+
+#list {
+    position: relative;
+}
+#list .item{
+    display:inline;
+    float:left;
+    margin:3em 0 0 2em;
+    min-width:200px;
+    position:relative;
+    width:12.5em;
+    height: 290px;
+}
+#list .item .foto{
+    width: 200px;
+}
+#list .foto img {
+    width: 200px;
+    height: 200px;
+}
+#list .item .title {
+    font-size: 14px;
+    padding: 3px 0;
+}
+
+#list .item .description {
+    font-size:12px;
+}
+#list .item .portion{
+    color: #999;
+}
+
+#list .item .price {
+    font-size: 14px;
+}
+#list .item .sale {
+	font-size:14px;
+	color:#ff6600;
+}
+#list .item .sale span {
+	color:#000000;
+	text-decoration:line-through;
+	padding-right:10px;
+}
+/*********************PRODUCT*********************/
+
+#product {
+}
+#product div.left {
+	width:70%;	
+	float:left;
+}
+
+#product div.left .text {
+	width:85%;	
+	font-size:14px;
+	padding:20px 0;
+}
+#product div.left .image img {
+	max-height: 312px;
+	max-width: 469px;
+	width:85%;
+}
+#product div.right {
+	width:30%;	
+	float:right;
+	max-width:350px;
+}
+#product div.right .es {
+	padding:0px 10px 5px 10px;
+}
+#product div.right .buy {
+	background:#f5f5ea;
+}
+
+.buy span.bold {
+	font-weight:bold;
+}
+.buy .price {
+	font-size:18px;
+	padding:5px 20px;
+}
+
+.buy .number {
+	font-size:14px;
+	padding:5px 20px;
+}
+
+.buy .number input {
+	width:40px;
+	font-size:14px;
+	text-align:center;
+}
+
+.buy .size {
+	padding:5px 20px;
+	font-size:14px;
+}
+
+.buy .size ul {
+	padding:0;
+}
+
+.buy .present {
+	font-size:14px;
+	padding:5px 20px;
+}
+
+.buy .order {
+	padding: 10px 20px;
+}
+
+.tech_info {
+	font-size:14px;
+	padding:20px;
+}
+
+#order {
+	border:0;
+	background:0;
+	background:url(images/order_button.jpg) no-repeat;
+	font-size:18px;
+	color:#fff;
+	width:100px;
+	height:36px;
+}
+
+/**********************TRASH************************/
+.to_magaz a{
+	background:url(images/to_magaz_bg.jpg) no-repeat;
+	width:130px;
+	height:22px;
+	display:block;
+	color:#FFFFFF;
+	font-size:14px;
+	padding-left:20px;
+	margin: 20px 0 10px 10px;
+}
+
+.trash_link_menu {
+	width:105px;
+	display:block;
+}
+
+.pay_mode,.trash_form,.trash_list {
+	font-size:14px;
+	background:#f5f5ea;
+	width:80%;
+	padding:20px;
+}
+.pay_mode ul {
+	padding:0;
+}
+.pay_mode .disabled {
+	color:#666666;
+}
+
+.phone,.address,.time,.get_myself {
+	padding:3px 0;
+}
+#phone {
+	width:100px;
+	font-size:14px;
+	font-family:"Trebuchet MS",Arial;
+}
+#address {
+	width:430px;
+	height:100px;
+	max-width:430px;
+	min-width:430px;
+	max-height:100px;
+	min-height:100px;
+	font-size:14px;
+	font-family:"Trebuchet MS",Arial;
+}
+#day {
+	width:37px;
+	font-size:14px;
+	font-family:"Trebuchet MS",Arial;
+	text-align:center;
+}
+#month{
+	font-size:14px;
+	padding:1px 5px;
+	font-family:"Trebuchet MS",Arial;
+}
+#month option{
+	font-size:14px;
+	padding:1px 5px;
+	font-family:"Trebuchet MS",Arial;
+}
+#time {
+	width:57px;
+	font-size:14px;
+	font-family:"Trebuchet MS",Arial;
+	text-align:center;
+}
+.trash_list td {
+	vertical-align:top;
+	border-bottom:1px solid #000;
+	padding:15px 0;
+}
+
+.trash_list tr.last td {
+	border-bottom:0;
+}
+
+.trash_list td.image {
+	width:106px;
+	height:106px;
+	padding-right:15px;
+}
+.trash_list td.description {
+	line-height:25px;
+}
+
+.trash_list td.number input {
+	width:52px;	
+	font-size:14px;
+	font-family:"Trebuchet MS",Arial;
+}
+.trash_itogo {
+	font-size:18px;
+	width:80%;
+	text-align:center;
+	padding:15px 0;
+}
+
+.trash_rules {
+	padding:30px 0;
+	text-align:center;
+	width:80%;
+	font-size:14px;
+}
+.trash_buy_button {
+	width:80%;
+	text-align:center;
+	padding:10px 0 50px 0;
+}
+#buy {
+	background:0;
+	border:0;
+	background:url(images/order_button.jpg) no-repeat;
+	font-size:18px;
+	width:100px;
+	height:36px;
+	color:#FFFFFF;
+	margin:0 auto;
+}
+.delete {
+	cursor:pointer;
+}
+
+
+/********************ORDER*************************/
+.order_sort_form {
+	background:#f5f5ea;
+	font-size:14px;
+	padding:20px;
+}
+
+.order_sort_form label{
+	width:20px;
+}
+
+.period_sort .caption {
+	width:20px;
+	padding-left:5px;
+	height:30px;
+}
+
+.sort_menu {
+	font-size:14px;
+}
+
+.sort_menu a{
+	margin-right:15px;
+	padding:2px 5px;
+	text-decoration:none;
+}
+.sort_menu a.active{
+	background:#DDDDDD;
+}
+
+/***************************************************/
+.title {
+	font-size:24px;
+	padding:10px 0;
+}
+
+.title span{
+	font-size:14px;
+	padding-left:20px;
+}
+
+.lk_menu {
+	text-align:center;
+	font-size:14px;
+}
+
+.clear {
+	clear:both;
+}
+
+/*************************** FORM **************************/
+.form {float:left;margin-right:30px;}
+.form  th {
+	font-weight:normal;
+	text-align:left;
+}
+.form td {
+	width:150px;
+}
+.form {
+	width:400px;
+	font-size:14px;
+}
+
+.form label{
+	display:block;
+}
+.form input[type=text]{
+	width:100%;
+	font-family:"Trebuchet MS",arial;
+	font-size:14px;
+}
+.form textarea{
+	width:100%;
+	font-family:"Trebuchet MS",arial;
+	font-size:14px;
+}
+.form .help {
+	color:#808080;
+	font-size:12px;
+}
+
+.form .additional {
+	background:#f5f5ea;
+	margin:20px 0;
+	padding:10px;
+}
+.form .additional label {
+display:inline;
+}
+
+.form .field {
+	padding-top:10px;
+}
+
+.form .function_line{
+	border: 1px solid #000000;
+	width:10px;
+	font-size:20px;
+	height:10px;
+	line-height:10px;
+	margin-left:10px;
+	cursor:pointer;
+	text-align:center
+}
+.form td input[type=text] {
+	width:80%;
+}
+
+.additional_block {
+	background:#f5f5ea;
+	float:left;
+	font-size:14px;
+	padding:20px;
+}
+
+.additional_block .field {
+	padding:2px 0;
+}
+
+.field.submit {
+	text-align:right;
+}
