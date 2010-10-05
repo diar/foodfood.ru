@@ -348,16 +348,9 @@ class AdminModule {
     public static function showTemplate($html=null) {
 
         $tree = DBP::getRecords('market_tree');
-                //Начинаем с начальной строки
-        mysql_connect('localhost','root','150878');
+        //Начинаем с начальной строки
+        mysql_connect('localhost', 'root', '150878');
         mysql_select_db('foodfood');
-
-         self::get_tree();
-
-        //echo $tree_items;
-        Debug::dump($tree);
-        //self::tree($tree, 0);
-        //self::prepareTree(& $tree);
         View::assign('tree', $tree);
         View::assign('pageTitle', self::getTitle());
         View::assign('admin', $_SESSION['admin']);
@@ -365,27 +358,28 @@ class AdminModule {
         View::display('admin.tpl');
     }
 
-    
-
-    public static  function get_tree($parent_id = 0) {
-      $query = "SELECT * FROM kazan_market_tree WHERE parent_id = '$parent_id'";
-      echo $query."<br>";
-
-      echo "<ul>";
-      $result = mysql_query($query);
-      while ($row = mysql_fetch_array($result)) {
-            echo "<li>".$row['title'];
-            self::get_tree($row['id']);  //идём дальше "внутрь" если
-//есть у данного id подуровни
-            echo "</li>";
-      }
-      echo "</ul>";
-      
-//Не хватает только начальной строки и конечной
+    public static function get_tree($parent_id = 0) {
+        if (DBP::getCount('market_tree', "parent_id = '$parent_id'") > 0) {
+            $query = "SELECT * FROM kazan_market_tree WHERE parent_id = '$parent_id'";
+            $result = mysql_query($query);
+            if ($parent_id == 0) $class = 'class="tree_menu" id="tree_menu"'; else  $class = '';
+            echo '<ul ' . $class . '>';
+            while ($row = mysql_fetch_array($result)) {
+                echo "<li rel='$row[id]'><a href='#'>$row[title]</a>";
+                if ($row['doc_id'] > 0)
+                echo "<a href='admin.php?page=product&action=edit&id=$row[doc_id]' ><img src='images/4.jpg' alt='редактировать' /></a>
+                <a href='admin.php?page=product&action=delete&id=$row[doc_id]'><img src='images/5.jpg' alt='удалить' /></a>
+                ";
+                else
+                echo "<a href='#' class='add_to_tree' rel='$row[id]'><img src='images/1.jpg' alt='Добавить раздел' /></a>
+                <a href='admin.php?page=product&action=add&parent_id=$row[id]'><img src='images/add_product.jpg' alt='Добавить раздел' /></a>
+                ";
+                self::get_tree($row['id']); //recursive
+                echo "<ul></ul></li>";
+            }
+            echo "</ul>";
+        }
     }
-
-
-
 
     public static function getActions() {
         return isset(static::$_actions) ? static::$_actions : self::$_actions;

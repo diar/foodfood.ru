@@ -1,12 +1,11 @@
 $(document).ready(
     function() {
 
-	$('.add_to_tree').click(function(){
+	$('.add_to_tree').live('click',function(){
 		level = parseInt($(this).attr('rel'));
-		
 		new_el = '<li rel='+level+'><input type="text" name="title" maxlength="150" size="10" id="input_el_title" /> <input type="button" value="ok" id="add_to_tree_el"/></li>'
 		if (level == 0) $('#tree_menu').append(new_el);
-		else $('li[rel='+level+'] ul',$('#tree_menu')).append(new_el);
+		else $('li[rel='+level+'] ul:last',$('#tree_menu')).append(new_el);
 		$('#tree_menu input').focus();
 		return false;
 	});
@@ -33,7 +32,7 @@ $(document).ready(
 				} else {
 					ul = $("#add_to_tree_el").parent().parent();
 					$("#add_to_tree_el").parent().remove();
-					ul.append('<li rel="'+data+'"><a href="#">'+title+'</a></li>');
+					ul.append('<li rel="'+data+'"><a href="#">'+title+'</a><a href="#" class="add_to_tree" rel="'+data+'"><img src="images/1.jpg" alt="Добавить раздел" /><a href="admin.php?page=product&action=add&parent_id='+data+'"><img src="images/add_product.jpg" alt="Добавить раздел" /></li>');
 				}
 		});
 		

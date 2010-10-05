@@ -15,47 +15,40 @@
 
     <!-- Код страницы -->
     
-    <xsl:template match="content_old">
-    	<div style="width:100%;text-align:center;font-size:32px; font-family:Tahoma,Arial;padding-top:40px;">
-        	Наполняем прилавки...<br /><br />
-            <span style="color:#999999; font-style:italic;">Открытие 1 сентября</span>
-        </div>
-    </xsl:template>
-    
+
     <xsl:template match="content">
-        <div class="navigation rounded">
-            
-        </div>
-        <table id="main_table">
-            <tr>
-                <td class="menu_col">
-                    <div class="menu">
-                        <h3>Категории</h3>
-                        <ul id="menu_types">
-                                <xsl:apply-templates select="menu_types/item" />
-                        </ul>
-                        <h3>Рестораны</h3>
-                        <ul id="rest_menu">
-                            <xsl:apply-templates select="rest_menu/item" />
-                        </ul>
-                    </div>
-                </td>
-                <td class="dish_col">
-                    <div id="menu_list">
-                        <!-- Сюда загружается страница с блюдами -->
-                    </div>
-                </td>
-            </tr>
-        </table>
-        
+		<div class="title" style="margin-left:1em;"><xsl:value-of select="title" /></div>
+        <div id="list">
+        	<xsl:apply-templates select="products/item" />
+        </div>	
+        <div class="clear"></div>
     </xsl:template>
 
-    <xsl:template match="menu_types/item">
-        <li id="cat-{id}"><a href="#" ><xsl:value-of select="title" /></a></li>
+    <xsl:template match="products/item"> 
+        <div class="item" id="dish_{id}" >
+                    <div class="foto">
+                        <a href="/product/view/{url}">
+                            <img src="/upload/images/products/tmb/{tmb_image}" alt="Ортаги э карни" />
+                        </a>
+                    </div>
+                    <div class="title">
+                        <a href="/product/view/{url}"><xsl:value-of select="title" /></a>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    <div class="description"><xsl:value-of select="description" /></div>
+                    <xsl:choose>
+                    	<xsl:when test="discount > 0">
+                        <div class="sale"><span><xsl:value-of select="price" /></span> <xsl:value-of select="discount_price" /> Р</div>
+                        </xsl:when>
+                        <xsl:otherwise>
+                        <div class="price"><xsl:value-of select="price" /> Р</div>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
+		</div>
     </xsl:template>
 
-    <xsl:template match="rest_menu/item">
-        <li><a href="#" rel="{id}"><xsl:value-of select="rest_title"  /></a></li>
-    </xsl:template>
+
 
 </xsl:stylesheet>

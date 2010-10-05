@@ -51,15 +51,10 @@
             <ul class="menu">
             	<li><a href="#" class="add_to_tree" rel="0">Добавить раздел</a></li>
             </ul>
-
+            <?php AdminModule::get_tree();?>
             <ul class="tree_menu" id="tree_menu">
-                <? $tree = self::get('tree');?>
-                <?foreach ($tree as $item):?>
-                <li rel="<?=$item['id']?>"><a href="#"><?=$item['title']?></a>
-                    <a href="#" class="add_to_tree" rel="<?=$item['id']?>"><img src="images/1.jpg" alt="Добавить раздел" /></a>
-                    <ul></ul></li>
-                <?endforeach; ?>
-            	</ul>
+
+            </ul>
         </td>
         <td class="margin"></td>
         <td class="right">

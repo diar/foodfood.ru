@@ -14,48 +14,14 @@ class index_Page extends View {
     public static function initController($action) {
         self::$page['site']['city'] = CityPlugin::getCity();
         self::$page['site']['keywords'] = 'пицца, суши, роллы, доставка пиццы, доставка суши и роллы Казань';
-        self::$page['header']['banner']['type'] = 'horizontal';
-        self::$page['header']['banner']['class'] = 'banner770';
+
     }
 
     /*
      * Главная страница сайта
      */
     public static function indexAction($id) {
-        $locations = MD_Market::getLocations();
-        $menu_types = MD_Menu::getMenuTypes();
-        // Формируем описание корзины
-        $trash = !empty($_SESSION['trash']) ? $_SESSION['trash'] : null;
-
-        if (sizeof($trash) > 0) {
-            $gen_price = 0;
-            $gen_count = 0;
-            foreach ($trash AS $dish) {
-                foreach ($dish['items'] as $item) {
-                    $gen_price+=$item['price'] * $item['count'];
-                    $gen_count+=$item['count'];
-                }
-            }
-            $description = 'Всего в корзине <span class="count">' . $gen_count . '</span> блюд на сумму ' .
-                    '<span class="price">' . $gen_price . '</span> руб. ' .
-                    'Все доставим за 40 минут, если пробок не будет. ' .
-                    'Еще позвоним и все уточним, спасибо. ';
-        } else {
-            $description = '';
-            $gen_count = 0;
-            $gen_price = 0;
-        }
-        $current_location = !empty($_COOKIE['market_location']) ? intval($_COOKIE['market_location']) : 0;
-        $rest_menu = DB::getRecords(MD_Menu::getPrefix().'rest','in_market = 1 AND rest_location_id ='.$current_location);
-        
-        // Показываем страницу
-        self::$page['trash']['description'] = $description;
-        self::$page['trash']['count'] = $gen_count;
-        self::$page['trash']['price'] = $gen_price;
-        self::$page['content']['locations'] = $locations;
-        self::$page['content']['current_location'] = $current_location;
-        self::$page['content']['menu_types'] = $menu_types;
-        self::$page['content']['rest_menu'] = $rest_menu;
+        self::$page['header']['content']['products'] = MD_Menu::getProducts();
         self::showXSLT('pages/index/index');
     }
 

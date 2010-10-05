@@ -1,187 +1,45 @@
-var current_menu_type_id = 0;
-var tags_disable = false;
-var current_tags = '';
-var current_location = 1;
 
-var dish_photo_count = 0;
-var dish_photo_visible = 6;
-var dish_photo_offset = 0;
-var dish_photo_position = 0;
 // Выполнение после загрузки на всех страницах
 $(document).ready(function () {
 
-    // Выбор локации
-    $('.first_col .select').click( function(){
-        $('#locate_select').click();
-    });
-    $('#locate_select').change( function(){
-        $('.first_col .select').html($(this).find(':selected').html());
-        change_location_remember ();
-        search_start();
-    });
-
-    $('#locate_select option:selected').each(function(){
-        $('.first_col div.select').html($(this).html());
-    });
-
-    // Выбор типа меню
-    $('#menu_types li').click(function(){
-        $('#menu_types li.active').removeClass('active');
-        $(this).addClass('active');
-        current_menu_type_id = $(this).attr('id').replace('cat-','');
-        set_anchor('category-'+current_menu_type_id);
-        search_start();
-        return false;
-    });
-    // Выбираем первый тип меню
-    if (typeof(dish_page_activate) == 'undefined' || dish_page_activate=='')  {
-        if (current_menu_type_id==0)
-            $('#menu_types li').first().click();
-    }
-
-    /* ---------------------------------------------------------------------
-     * Если находимся на странице вывода блюда
-     */
-    if (typeof(dish_page_activate)!='undefined') {
-        $("#review_textarea").keyup(function(){
-
-            var length = $(this).val().length;
-
-            $("#reviews_comment_lenght").html(length);
-            if (length > 2000) return false;
-        });
-
-        $('.main_container a').lightBox({
-            imageLoading: '/public/js/libs/lightbox/images/lightbox-ico-loading.gif',
-            imageBtnClose:'/public/js/libs/lightbox/images/lightbox-btn-close.gif',
-            imageBtnPrev: '/public/js/libs/lightbox/images/lightbox-btn-prev.gif',
-            imageBtnNext: '/public/js/libs/lightbox/images/lightbox-btn-next.gif',
-            imageBlank:   '/public/js/libs/lightbox/images/lightbox-blank.gif',
-            fixedNavigation:true
-        });
-        $('#dish_info .photos .main').first().show().addClass('current');
-        /*
-         * Инициализация превью фоток
-         */
-        $('#dish_info .photos .mini').each(function(){
-            dish_photo_count++;
-            if (dish_photo_count<=dish_photo_visible) {
-                $(this).show();
-            }
-            $(this).attr('pos',dish_photo_count);
-        });
-        /*
-         * Нажатие на превью фотки ресторана
-         */
-        $('#dish_info .photos .mini').click(function(){
-            min = this;
-            $('#dish_info .photos .mini.active').removeClass('active');
-            $(min).addClass('active');
-            $('#dish_info .photos .main.current').removeClass('current').fadeOut(300,function(){
-                $('#dish_info .photos .main[src="'+$(min).attr('rel')+'"]').fadeIn(300).addClass('current');
-                $('#dish_info .photos .main[src="'+$(min).attr('rel')+'"] a').attr('href',$(min).attr('rel'));
-            });
-            dish_photo_position = parseInt($(min).attr('pos'))-dish_photo_offset;
-            if (dish_photo_position==dish_photo_visible &&
-                dish_photo_position+dish_photo_offset<dish_photo_count) {
-                dish_photo_offset++;
-                show_pos = dish_photo_offset+dish_photo_visible;
-                $('#dish_info .photos .mini[pos='+dish_photo_offset+']').animate({
-                    'width':'hide'
-                },200);
-                $('#dish_info .photos .mini[pos='+show_pos+']').animate({
-                    'width':'show'
-                },200);
-            } else if (dish_photo_position==1 &&
-                dish_photo_offset>0) {
-                dish_photo_offset--;
-                show_pos = dish_photo_offset+1;
-                hide_pos = dish_photo_offset+dish_photo_visible+1;
-                $('#dish_info .photos .mini[pos='+hide_pos+']').animate({
-                    'width':'hide'
-                },200);
-                $('#dish_info .photos .mini[pos='+show_pos+']').animate({
-                    'width':'show'
-                },200);
-            }
-        });
-        // Ставим цену в зависимости от порции
-
-        current_portion = $('#portions input[checked=checked]').val();
-        $('#price_text').html($('#portions input[checked=checked]').attr('rel'));
-        $('#to_trash_portion').html(current_portion);
-        $('#portions input').click(function(){
-            $('#price_text').html( $(this).attr('rel'));
-            $('#to_trash_portion').html($(this).val());
-        });
-        $("#to_trash").click(function(){
-            portion = $("#to_trash_portion").html();
-            dish_id = $("#to_trash_dish_id").html();
-            price = $('#price_text').html();
-            title = $('h1.title').html();
-            rest_id = $('#to_trash_rest_id').html();
-            $.post('/market/'+site_city+'/index/add/',
+		$("#size_price input").click (function(){
+		   	preparePrice ();			
+		});
+		
+		$("#present").change(function () {
+			preparePrice ();
+		});
+		//При изменении количевста
+		$("#count").keyup(function () {
+			preparePrice ();
+		});
+		//Добавление в корзину    
+        $("#order").click(function(){
+            portion = $("#size_price input:checked").attr('alt');
+            item_id = $("#item_id").val();
+            price = $("#size_price input:checked").val();
+            title = $('#title').html();
+			count = $('#count').val();
+			is_present = $('#present:checked').val();
+            $.post('/product/trashAdd/',
             {
-                'dish_id':dish_id,
+                'item_id':item_id,
                 'price':price,
                 'title':title,
-                'portion':portion,
-                'rest_id':rest_id
+                'size':portion,
+                'count':count,
+				'is_present':is_present
             },function(data){
-                $('.trash .order').show();
-                $('.trash_description').html(data);
-                $('.trash .rub').html(
-                    $('.trash_description .price').html()+'<sup> руб.</sup>'
-                    );
+                //$("#trash_gen_price").html(data);
             });
             return false;
         });
-    }
+    
 });
 
-function search_start() {
-    $("#main_table td").removeAttr('width');
-    $("#main_table td.price_col").detach();
-    $("#main_table td.dish_col").empty().append("<div id='menu_list'></div>");
-    current_location = $('#locate_select').val();
-    $.post('/market/'+site_city+'/index/menu/',{
-        'menu_type_id':current_menu_type_id,
-        'menu_tags':current_tags,
-        'location':current_location
-    },function(data){
-        $('#menu_list').html(data);
-        tags_disable = false;
-        actions_create();
-        $('.portion').click(function(){
-            $(this).parents('.portions').find('.portion').removeClass('active');
-            $(this).addClass('active');
-            price = $(this).attr('rel');
-            price = '<span>'+price+'</span> руб.';
-            $(this).parents('.item').find('.new').html(price);
-        });
-    });
-    
-};
 
-function actions_create() {
-    // Нажатие на тэг
-    $('#menu_list .menu_tag').click(function(){
-        if (tags_disable) return false;
-        tags_disable = true;
-        if (!$(this).hasClass('current')) {
-            $(this).addClass('current');
-        } else {
-            $(this).removeClass('current');
-        }
-        tags = Array();
-        i = 0;
-        $('#menu_list .menu_tag.current').each(function(){
-            tags[i]=$(this).attr('tag');
-            i++;
-        });
-        current_tags = serialize (tags);
-        search_start();
-    });
+
+	
 
     // Кнопка заказать
     $('.get .buy').click(function(){
@@ -205,36 +63,44 @@ function actions_create() {
                 );
         });
     });
+
+
+
+function getCount () {
+	count = parseInt($("#count").val());
+	if (isNaN(count)) count = 1;
+	return count;	
 }
 
-/*
- * Добавить комментарий к блюду
- */
-function comment_dish(rest_id,text,to_admin){
-    return false;
-    if(user_auth!='1') {
-        $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
-    } else {
-        $.post('/'+site_city+'/restaurant/comment/'+rest_id+'/' ,{
-            'text':text,
-            'to_admin':to_admin,
-            'target':0
-        },function (data) {
-            if (data=='OK') $.alert('Отзыв добавлен',false);
-            else if (data=='NO_LOGIN') $.alert('Вы должны войти на сайт, чтобы оставлять отзывы',true);
-            else if (data=='ALREADY') $.alert('Вы уже оставляли отзыв для данного ресторана',true);
-            else if (data=='LENGTH') $.alert('Длина отзыва не должна превышать 500 символов',true);
-            else if (data=='MAT') $.alert('Ваш отзыв не принят из-за мата',true);
-            else if (data=='FMIN') $.alert('Вы не можете оставлять более 1 отзыва ресторану за 5 минут',true);
-            else $.alert('Ошибка. Попробуйте еще раз',true);
-        });
-    }
+function getOldPrice () {
+	old_price = parseInt($("#size_price input:checked").attr('rel'));
+	if (isNaN(old_price)) return false;
+	return old_price;
+}
+
+function getPrice () {
+	price = parseInt($("#size_price input:checked").val());
+	return price;
+}
+
+function isPresent () {
+	if ($("#present").attr('checked')) {
+		return true;
+	}
+	else return false;
 }
 
 
-function change_location_remember () {
-    current_location = $('#locate_select').val();
-    $.post('/market/'+site_city+'/index/set_location/',{
-        'location':current_location
-    });
+function preparePrice () {
+	p_count = getCount();
+	p_price = getPrice()*p_count;
+	p_present = isPresent();
+	if (getOldPrice () > 0) {
+		p_old_price = getOldPrice ()*p_count;
+		if (p_present) p_old_price = p_old_price + 200;
+		$("#old_price").html(p_old_price);
+	}
+	
+	if (p_present) p_price = p_price+200; 
+	$("#price").html(p_price);
 }

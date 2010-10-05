@@ -105,4 +105,21 @@ class MD_Market extends Model {
         return '<span style="color:green">Ваш заказ принят</span>';
     }
 
+    public static function getTree($parent_id = 0,$out = '') {
+        if (DB::getCount('kazan_market_tree', "parent_id = '$parent_id'") > 0) {
+            $query = "SELECT * FROM kazan_market_tree WHERE parent_id = '$parent_id'";
+            $result = mysql_query($query);
+            if ($parent_id == 0) $class = 'class="tree_menu" id="tree_menu"'; else  $class = '';
+            $out .=  '<ul ' . $class . '>';
+            while ($row = mysql_fetch_array($result)) {
+                $out .= "<li><a href='/product/list/category/$row[id]'>$row[title]</a>";
+                self::get_tree($row['id'],$out); //recursive
+                $out .= "</li>";
+            }
+            $out .= "</ul>";
+        }
+        return $out;
+    }
+    
+
 }

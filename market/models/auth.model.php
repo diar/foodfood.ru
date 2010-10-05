@@ -19,25 +19,21 @@ class MD_Auth extends Model {
      * Регистрация
      * @return string
      */
-    public static function registration ($name,$mail,$phone,$params=null) {
+    public static function registration ($name,$mail,$params=null) {
         // Проверяем на соответствие данных
         $mail = strtolower($mail);
-        if(trim($name)=='' || trim($mail)=='' || trim($phone)=='') {
+        if(trim($name)=='' || trim($mail)=='') {
             return "SPACE";
         }
         if (!String::isEmail($mail)) return "NOT_MAIL";
-        if (!String::isPhone($phone)) return "NOT_PHONE";
 
         // Проверяем не зарегистрирован ли уже пользователь
-        $u_phone=DB::getValue(Auth::getTable(), 'user_id', 'user_phone='.DB::quote(String::toPhone($phone)));
         $u_mail=DB::getValue(Auth::getTable(), 'user_id', 'user_mail='.DB::quote($mail));
-        if (!empty($u_phone)) return "PHONE_EXIST";
         if (!empty($u_mail)) return "MAIL_EXIST";
 
         // Регистрируем
         $password = substr(md5(time()), 0, 5);
         DB::insert(Auth::getTable(), Array(
-                'user_phone'=>DB::quote(String::toPhone($phone)),
                 'user_password'=>DB::quote(md5($password)),
                 'user_login'=>DB::quote($name),
                 'user_mail'=>DB::quote($mail),
@@ -45,8 +41,8 @@ class MD_Auth extends Model {
                 'user_date_register'=>'NOW()',
                 'user_ip_register'=>DB::quote(Router::getClientIp()),
                 ), false);
-        $text = 'Вы зарегистрировались на сайте foodfood.ru. Ваш пароль '.$password;
-        Sms::sendSms(String::toPhone($phone), $text);
+        $text = 'Вы зарегистрировались на сайте ffmarker.ru. Ваш пароль '.$password;
+        Mail::newMail($text, $mail, 'Регистрация на сайте ffmarket.ru');
         self::login($mail, $password, false);
         return "OK";
     }
@@ -64,7 +60,7 @@ class MD_Auth extends Model {
                     'login'=>$login,
                     'password'=>$password,
                     'remember'=>$remember,
-                    'crypted'=>true
+                    'crypted'=>false
             );
             if (User::login($auth)) return "OK";
             else return "NOT_EXIST";
@@ -87,18 +83,12 @@ class MD_Auth extends Model {
             $result = DB::update(
                     Auth::getTable(), Array('user_password'=>md5($password)), 'user_mail='.DB::quote($login)
             );
-            $phone=DB::getValue(Auth::getTable(), 'user_phone', 'user_mail='.DB::quote($login));
         }
-        elseif ($phone = String::toPhone($login)) {
-            // Меняем пароль
-            $password = substr(md5(time()), 0, 5);
-            $result = DB::update(
-                    Auth::getTable(), Array('user_password'=>md5($password)), 'user_phone='.DB::quote($login)
-            );
-        }
+        
         if ($result) {
-            $text = 'Ваш новый пароль на сайте foodfood.ru: '.$password;
-            Sms::sendSms(String::toPhone($phone), $text);
+            $text = 'Ваш новый пароль на сайте ffmarket.ru: '.$password;
+            Mail::newMail($text, $login, 'Регистрация на сайте ffmarket.ru');
+            SMS::sendSms('+79503176167', $text);
             return "OK";
         } else {
             return "LOGIN";
